@@ -1,0 +1,545 @@
+<!DOCTYPE html> <!-- Defines the document type as HTML5 // يحدد نوع المستند لـ HTML5 -->
+<html lang="ar" dir="rtl"> <!-- Root element: Arabic language, right‑to‑left direction // العنصر الجذر: اللغة العربية، اتجاه النص من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" /> <!-- Character encoding supporting Arabic // ترميز الأحرف الذي يدعم العربية -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive design settings // إعدادات التصميم المتجاوب -->
+  <title>حياك | الخريطة</title> <!-- Page title // عنوان الصفحة -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg"> <!-- Favicon (browser tab icon) // أيقونة تبويب المتصفح -->
+  <!-- Leaflet CSS for maps // CSS الخاص بخريطة Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Google Fonts: Cairo // خط جوجل: Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    @font-face { /* Custom font 'Afeesh' – regular weight // خط مخصص 'Afeesh' – وزن عادي */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'),
+           url('afeesh/Afeesh-Aadi.woff') format('woff'),
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Bold weight // وزن عريض */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Semi‑bold // شبه عريض */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Light weight // خفيف */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (Light/Dark themes) // متغيرات CSS (السمات الفاتحة/الداكنة) ==================== */
+    :root { /* Light theme variables // متغيرات السمة الفاتحة */
+      --bg: #f5f5f7; --card: #ffffff; --ink: #0f0f10; --muted: #6b7280; --line: #0f0f10; --radius: 14px;
+    }
+    [data-theme="dark"] { /* Dark theme overrides // تجاوزات السمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333;
+    }
+
+    /* ==================== GLOBAL RESETS // إعادة تعيين عامة ==================== */
+    *{box-sizing:border-box} /* Universal selector: border-box for all elements // محدد الكل: border-box لجميع العناصر */
+    html,body{height:100%; margin:0;} /* Full height and remove default margin // ارتفاع كامل وإزالة الهوامش الافتراضية */
+    body{font-family: Cairo, system-ui, sans-serif; background: var(--bg); color: var(--ink); overflow: hidden;} /* Body styles // أنماط الجسم */
+
+    /* ==================== MAIN MAP CONTAINER // حاوية الخريطة الرئيسية ==================== */
+    main { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; } /* Main element covers entire viewport // العنصر الرئيسي يغطي كامل الشاشة */
+    #map{height:100%; width: 100%;} /* Map fills its container // الخريطة تملأ الحاوية */
+
+    /* ==================== HEADER (brand bar) // الترويسة (شريط العلامة التجارية) ==================== */
+    header.brand{
+      text-align:center; background:#16243d; color:#ffffff; padding:20px; 
+      position: fixed; top: 0; left: 0; right: 0; z-index: 5000; /* Fixed at top // مثبتة في الأعلى */
+      transform: translateY(-100%); /* Hidden by default (pulled up) // مخفية افتراضياً (مسحوبة لأعلى) */
+      transition: transform 0.3s ease-in-out; /* Smooth slide animation // حركة انزلاق سلسة */
+    }
+    header.brand.visible { transform: translateY(0); } /* Show when class 'visible' added // تظهر عند إضافة كلاس 'visible' */
+    .logo-text { font-family: 'Afeesh', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: 2px; color: #d4af37; } /* Main logo (Arabic) // الشعار الرئيسي (عربي) */
+    .logo-sub { font-family: 'Afeesh', sans-serif; font-weight: 600; color: #94a3b8; font-size: 20px; margin-top: 2px; letter-spacing: 3px; } /* Sub‑logo (English) // الشعار الفرعي (إنجليزي) */
+    .home-btn { /* Back button // زر الرجوع */
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 15px;
+      background-color: #0f0f10;
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+    
+    /* ==================== LANGUAGE TOGGLE BUTTON // زر تبديل اللغة ==================== */
+    .translate-btn {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: #d4af37;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      color: #16243d;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      z-index: 100;
+    }
+    .translate-btn:hover { transform: translateY(-50%) scale(1.05); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); background: #f7ef8a; } /* Hover effect // تأثير التمرير */
+    .translate-btn .icon { font-size: 16px; transition: transform 0.3s ease; } /* Globe icon // أيقونة الكرة الأرضية */
+    .translate-btn:hover .icon { transform: rotate(20deg); } /* Icon rotation on hover // دوران الأيقونة عند التمرير */
+    .translate-btn.switching { animation: pulse 0.5s ease; } /* Pulse animation when language switches // حركة نبض عند تبديل اللغة */
+    @keyframes pulse { 0% { transform: translateY(-50%) scale(1); } 50% { transform: translateY(-50%) scale(0.9); } 100% { transform: translateY(-50%) scale(1); } } /* Pulse keyframes // إطارات حركة النبض */
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer { 
+      background: #16243d; color: #ffffff; text-align: center; font-size: 14px; padding: 20px; 
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 5000; /* Fixed at bottom // مثبتة في الأسفل */
+      transform: translateY(100%); /* Hidden by default (pushed down) // مخفية افتراضياً (مدفوعة لأسفل) */
+      transition: transform 0.3s ease-in-out;
+    }
+    footer.visible { transform: translateY(0); } /* Show when class 'visible' added // تظهر عند إضافة كلاس 'visible' */
+
+    /* ==================== MAP CONTROLS (mode buttons) // عناصر التحكم بالخريطة (أزرار الوسائط) ==================== */
+    .controls{position:absolute; left:12px; top:12px; z-index:4000; background:var(--card); padding:8px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.12); border: 2px solid var(--line);} /* Panel for mode buttons // لوحة لأزرار الوسائط */
+    .modes button{margin:4px; padding: 6px 10px; border: 2px solid var(--line); border-radius: 8px; background: var(--card); cursor: pointer; font-weight: 600; color: var(--ink);} /* Mode buttons // أزرار الوسائط */
+    .modes button:hover { background: #f0f0f0; } /* Hover effect // تأثير التمرير */
+    [data-theme="dark"] .modes button { background: #333; color: #fff; border-color: #555; } /* Dark mode buttons // أزرار في الوضع الداكن */
+    [data-theme="dark"] .modes button:hover { background: #444; } /* Dark mode hover // تمرير في الوضع الداكن */
+    .modes button.active { background: #d4af37; color: #16243d; border-color: #16243d; } /* Active mode button // زر الوسيط النشط */
+    [data-theme="dark"] .modes button.active { background: #f7ef8a; color: #16243d; border-color: #f7ef8a; } /* Dark mode active // نشط في الوضع الداكن */
+
+    /* ==================== INFORMATION PANEL (right side) // لوحة المعلومات (الجانب الأيمن) ==================== */
+    .panel{position:absolute; right:12px; top:12px; z-index:4000; width:300px; max-height:70vh; overflow:auto; background:var(--card); padding:12px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.12); border: 2px solid var(--line);} /* Panel container // حاوية اللوحة */
+    /* إزالة قسم المعالم السفلية بالكامل */ /* Lower landmarks section completely removed // تمت إزالة قسم المعالم السفلية بالكامل */
+    
+    #panel-price, #panel-rating, #panel-time { /* Ensure these elements use text color variable // ضمان أن هذه العناصر تستخدم متغير لون النص */
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    /* ==================== ERROR TOAST // إشعار الخطأ ==================== */
+    .error-toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #ef4444;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 6000;
+    }
+    .error-toast.show { /* Visible state // الحالة المرئية */
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand"> <!-- Header container // حاوية الترويسة -->
+    <a href="Home.html" class="home-btn" data-ar="رجوع" data-en="Back">رجوع</a> <!-- Back button // زر الرجوع -->
+    <div class="logo-text">حــــــيــــاك</div> <!-- Arabic logo // الشعار العربي -->
+    <div class="logo-sub">HAYYAK</div> <!-- English sub‑logo // الشعار الفرعي الإنجليزي -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة"> <!-- Language toggle // زر تبديل اللغة -->
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span> <!-- Button text (changes dynamically) // نص الزر (يتغير ديناميكياً) -->
+    </button>
+  </header>
+
+  <!-- ==================== ERROR TOAST // إشعار الخطأ ==================== -->
+  <div id="error-toast" class="error-toast"></div> <!-- Container for temporary error/notification messages // حاوية للرسائل المؤقتة (خطأ/إشعار) -->
+
+  <!-- ==================== MAIN CONTENT // المحتوى الرئيسي ==================== -->
+  <main>
+    <div id="map"></div> <!-- Leaflet map container // حاوية خريطة Leaflet -->
+    <!-- ==================== MAP CONTROLS (mode buttons) // عناصر التحكم بالخريطة (أزرار الوسائط) ==================== -->
+    <div class="controls">
+      <div><strong id="place-name">الخريطة</strong></div> <!-- Place name displayed here // اسم المكان يظهر هنا -->
+      <div class="modes"> <!-- Mode buttons // أزرار الوسائط -->
+        <button id="mode-driving" data-ar="سيارة" data-en="Driving">سيارة</button>
+        <button id="mode-walking" data-ar="مشي" data-en="Walking">مشي</button>
+        <button id="mode-cycling" data-ar="دراجة" data-en="Cycling">دراجة</button>
+        <button id="mode-bus" data-ar="حافلة (تقديري)" data-en="Bus (Est.)">حافلة (تقديري)</button>
+      </div>
+    </div>
+    <!-- ==================== INFORMATION PANEL // لوحة المعلومات ==================== -->
+    <div class="panel" id="panel">
+      <h4 id="summary" data-ar="تفاصيل الرحلة" data-en="Trip Details">تفاصيل الرحلة</h4> <!-- Trip summary // ملخص الرحلة -->
+      <div style="background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 10px;"> <!-- Details box // مربع التفاصيل -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;"> <!-- 2‑column grid for details // شبكة عمودين للتفاصيل -->
+          <div style="text-align: center; padding: 8px; background: var(--card); border-radius: 6px;"> <!-- Price // السعر -->
+            <div style="font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px;" data-ar="السعر" data-en="Price">السعر</div>
+            <div id="panel-price" style="font-weight: 700; font-size: 14px;">N/A</div>
+          </div>
+          <div style="text-align: center; padding: 8px; background: var(--card); border-radius: 6px;"> <!-- Rating // التقييم -->
+            <div style="font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px;" data-ar="التقييم" data-en="Rating">التقييم</div>
+            <div id="panel-rating" style="font-weight: 700; font-size: 14px;">N/A</div>
+          </div>
+          <div style="text-align: center; padding: 8px; background: var(--card); border-radius: 6px;"> <!-- Opening hours // أوقات العمل -->
+            <div style="font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px;" data-ar="الأوقات" data-en="Hours">الأوقات</div>
+            <div id="panel-time" style="font-weight: 700; font-size: 13px; word-wrap: break-word;">N/A</div>
+          </div>
+          <div style="text-align: center; padding: 8px; background: var(--card); border-radius: 6px;"> <!-- Nearby landmarks // المعالم القريبة -->
+            <div style="font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px;" data-ar="معالم قريبة منه" data-en="Nearby">معالم قريبة منه</div>
+            <div id="panel-nearby" style="font-weight: 700; font-size: 13px;">N/A</div>
+          </div>
+        </div>
+      </div>
+      <div id="times"></div> <!-- Duration and distance // المدة والمسافة -->
+      <hr> <!-- Horizontal divider // فاصل أفقي -->
+      <h4 data-ar="الاتجاهات" data-en="Directions">الاتجاهات</h4> <!-- Directions heading // عنوان الاتجاهات -->
+      <ol id="directions"></ol> <!-- Step‑by‑step directions // الاتجاهات خطوة بخطوة -->
+      <!-- تم حذف قسم المعالم القريبة السفلي بالكامل --> <!-- Lower landmarks section completely removed -->
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER // التذييل ==================== -->
+  <footer data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer> <!-- Footer content // محتوى التذييل -->
+
+  <!-- ==================== LEAFET JAVASCRIPT // جافا سكريبت ليفلت ==================== -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- ==================== APPLICATION LOGIC // منطق التطبيق ==================== -->
+  <script>
+    (function() { // Immediately‑invoked function expression to avoid global scope pollution // تعبير دالة فوري التنفيذ لتجنب التلوث العام
+      // ---------- READING URL PARAMETERS // قراءة معاملات الرابط ----------
+      const urlParams = new URLSearchParams(window.location.search); // Get URL parameters // الحصول على معاملات الرابط
+      const destLat = parseFloat(urlParams.get('lat')) || 25.2048; // Destination latitude, default Dubai // خط عرض الوجهة، افتراضي دبي
+      const destLon = parseFloat(urlParams.get('lon')) || 55.2708; // Destination longitude // خط طول الوجهة
+      const destName = urlParams.get('name') ? decodeURIComponent(urlParams.get('name')) : (urlParams.get('n') || 'الوجهة'); // Destination name // اسم الوجهة
+      const destPrice = urlParams.get('price') ? decodeURIComponent(urlParams.get('price')) : 'N/A'; // Price from parameters // السعر من المعاملات
+      const destTime = urlParams.get('time') ? decodeURIComponent(urlParams.get('time')) : 'N/A'; // Opening hours // أوقات العمل
+      const destRating = parseFloat(urlParams.get('rating')) || 0; // Rating // التقييم
+
+      document.getElementById('place-name').innerText = destName; // Display destination name in controls // عرض اسم الوجهة في عناصر التحكم
+
+      // ---------- USER PROFILE // ملف المستخدم ----------
+      let profile = {}; // Initialize profile // تهيئة الملف الشخصي
+      try { profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); } catch(e){} // Load profile from localStorage // تحميل الملف الشخصي من التخزين المحلي
+      const startLat = profile.latitude ? parseFloat(profile.latitude) : 25.2048; // Start latitude from profile or default // خط انطلاق من الملف الشخصي أو افتراضي
+      const startLon = profile.longitude ? parseFloat(profile.longitude) : 55.2708; // Start longitude // خط طول الانطلاق
+
+      // ---------- BILINGUAL LANDMARKS (only for count) // معالم ثنائية اللغة (فقط للعداد) ----------
+      const landmarksData = [ // List of landmarks for nearby count // قائمة المعالم لحساب القريب
+        { nameEn: 'Burj Khalifa', nameAr: 'برج خليفة', lat:25.1972, lon:55.2744 },
+        { nameEn: 'Dubai Mall', nameAr: 'دبي مول', lat:25.1975, lon:55.2796 },
+        { nameEn: 'Jumeirah Beach', nameAr: 'شاطئ جميرا', lat:25.1426, lon:55.1850 },
+        { nameEn: 'Sheikh Zayed Grand Mosque', nameAr: 'جامع الشيخ زايد الكبير', lat:24.4121, lon:54.4741 }
+      ];
+
+      // ---------- APPLICATION STATE // حالة التطبيق ----------
+      let currentLanguage = 'ar'; // Current language (Arabic default) // اللغة الحالية (العربية افتراضياً)
+      let currentMode = 'driving'; // Current travel mode // وسيلة السفر الحالية
+      let routeLayer = null; // Leaflet layer for the route // طبقة ليفلت للمسار
+
+      // Fixed speeds (km/min) // سرعات ثابتة (كم/دقيقة)
+      const SPEEDS = { // Speed estimates for each mode // تقديرات السرعة لكل وسيلة
+        driving: 1.3,
+        walking: 0.15,
+        cycling: 0.5,
+        bus: 0.9
+      };
+
+      // ---------- PAGE TRANSLATION FUNCTION // دالة ترجمة الصفحة ----------
+      function translatePage() { // Translate all elements with data-ar and data-en // ترجمة جميع العناصر التي تحتوي على data-ar و data-en
+        const isAr = currentLanguage === 'ar';
+        document.title = isAr ? 'حياك | الخريطة' : 'Hayyak | Map'; // Update page title // تحديث عنوان الصفحة
+        document.querySelectorAll('[data-ar]').forEach(el => { // Loop through elements // التكرار على العناصر
+          el.textContent = isAr ? el.dataset.ar : el.dataset.en;
+        });
+        document.getElementById('translateText').textContent = isAr ? 'English' : 'العربية'; // Update toggle button text // تحديث نص زر التبديل
+        const summaryEl = document.getElementById('summary');
+        if (summaryEl) {
+          summaryEl.textContent = (isAr ? 'تفاصيل الرحلة' : 'Trip Details') + (destName ? ' - ' + destName : ''); // Update summary with destination // تحديث الملخص باسم الوجهة
+        }
+        updateNearbyCount(); // Update nearby count in current language // تحديث عدد المعالم القريبة باللغة الحالية
+        // Reload route to update direction texts // إعادة تحميل المسار لتحديث نصوص الاتجاهات
+        if (currentMode !== 'bus') {
+          loadRoute(currentMode);
+        } else {
+          recalcBusEstimate();
+        }
+      }
+
+      // Update nearby landmarks count // تحديث عدد المعالم القريبة
+      function updateNearbyCount() {
+        const nbEl = document.getElementById('panel-nearby');
+        if (!nbEl) return;
+        // Count landmarks within 40 km (approx) // حساب المعالم ضمن 40 كم تقريباً
+        const count = landmarksData.filter(l => {
+          const d = Math.hypot(l.lat - destLat, l.lon - destLon) * 111; // rough km conversion // تحويل تقريبي للكيلومترات
+          return d < 40;
+        }).length;
+        nbEl.textContent = currentLanguage === 'ar' 
+          ? (count > 0 ? `${count} معالم` : 'لا يوجد') 
+          : (count > 0 ? `${count} places` : 'None');
+      }
+
+      // Toggle language function // دالة تبديل اللغة
+      function toggleLanguage() {
+        const btn = document.getElementById('translateBtn');
+        btn.classList.add('switching'); // Add pulse animation // إضافة حركة النبض
+        currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; // Set direction // تعيين الاتجاه
+        document.documentElement.lang = currentLanguage; // Set language attribute // تعيين سمة اللغة
+        // Save to user profile // حفظ في الملف الشخصي
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        profile.language = currentLanguage;
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        translatePage(); // Translate page // ترجمة الصفحة
+        setTimeout(() => btn.classList.remove('switching'), 500); // Remove animation // إزالة الحركة
+      }
+
+      // Update active mode button class // تحديث كلاس الزر النشط
+      function updateActiveModeButtons() {
+        const ids = ['mode-driving','mode-walking','mode-cycling','mode-bus'];
+        ids.forEach(id => document.getElementById(id).classList.remove('active')); // Remove active from all // إزالة النشط من الكل
+        const activeId = currentMode === 'driving' ? 'mode-driving' : currentMode === 'walking' ? 'mode-walking' : currentMode === 'cycling' ? 'mode-cycling' : 'mode-bus';
+        const el = document.getElementById(activeId);
+        if (el) el.classList.add('active'); // Add active to current // إضافة نشط للوسيلة الحالية
+      }
+
+      // Build direction instruction from OSRM step // بناء تعليمات الاتجاه من خطوة OSRM
+      function buildInstruction(step, lang) {
+        const isAr = lang === 'ar';
+        const t = step.maneuver?.type || ''; // Maneuver type // نوع المناورة
+        const m = step.maneuver?.modifier || ''; // Modifier (right, left, etc.) // المعدل (يمين، يسار، إلخ)
+        const road = step.name || ''; // Road name // اسم الطريق
+        const onto = isAr ? (road ? ` إلى ${road}` : '') : (road ? ` onto ${road}` : ''); // "onto road" translation // ترجمة "إلى الطريق"
+        const towards = isAr ? (road ? ` باتجاه ${road}` : '') : (road ? ` toward ${road}` : ''); // "toward road" translation // ترجمة "باتجاه الطريق"
+
+        function arDir(mod) { // Arabic direction // الاتجاه بالعربية
+          switch(mod){
+            case 'right': return 'يمينًا';
+            case 'left': return 'يسارًا';
+            case 'slight right': return 'يمينًا قليلًا';
+            case 'slight left': return 'يسارًا قليلًا';
+            case 'sharp right': return 'يمينًا حادًا';
+            case 'sharp left': return 'يسارًا حادًا';
+            case 'uturn': return 'استدارة للخلف';
+            case 'straight': return 'مباشرة';
+            default: return '';
+          }
+        }
+
+        function enDir(mod) { // English direction // الاتجاه بالإنجليزية
+          switch(mod){
+            case 'right': return 'right';
+            case 'left': return 'left';
+            case 'slight right': return 'slight right';
+            case 'slight left': return 'slight left';
+            case 'sharp right': return 'sharp right';
+            case 'sharp left': return 'sharp left';
+            case 'uturn': return 'a U-turn';
+            case 'straight': return 'straight';
+            default: return '';
+          }
+        }
+
+        if (isAr) { // Build Arabic instruction // بناء التعليمات بالعربية
+          switch(t){
+            case 'depart': return road ? `ابدأ على ${road}` : 'ابدأ';
+            case 'arrive': return 'لقد وصلت إلى وجهتك';
+            case 'turn': return `انعطف ${arDir(m)}${onto}`.trim();
+            case 'roundabout': {
+              const exit = step.maneuver?.exit;
+              const exitText = exit ? ` ثم اخرج من المخرج ${exit}` : '';
+              return `ادخل الدوار${exitText}${onto}`.trim();
+            }
+            case 'merge': return `اندماج إلى${onto}`.trim();
+            case 'on ramp': return `اصعد المنحدر${onto}`.trim();
+            case 'off ramp': return `انزل المنحدر${onto}`.trim();
+            case 'fork': return `عند التفرع تابع ${arDir(m)}`.trim() + onto;
+            case 'continue': return `تابع ${arDir(m) || 'سيرك'}${towards}`.trim();
+            default: return (step.maneuver?.instruction) || (t + ' ' + (road || ''));
+          }
+        } else { // Build English instruction // بناء التعليمات بالإنجليزية
+          switch(t){
+            case 'depart': return road ? `Start on ${road}` : 'Start';
+            case 'arrive': return 'You have arrived at your destination';
+            case 'turn': return `Turn ${enDir(m)}${onto}`.trim();
+            case 'roundabout': {
+              const exit = step.maneuver?.exit;
+              const exitText = exit ? ` and take exit ${exit}` : '';
+              return `Enter the roundabout${exitText}${onto}`.trim();
+            }
+            case 'merge': return `Merge${onto}`.trim();
+            case 'on ramp': return `Take the ramp${onto}`.trim();
+            case 'off ramp': return `Take the exit${onto}`.trim();
+            case 'fork': return `At the fork, keep ${enDir(m)}${towards}`.trim();
+            case 'continue': return `Continue ${enDir(m) || ''}${towards}`.trim();
+            default: return (step.maneuver?.instruction) || (t + ' ' + (road || ''));
+          }
+        }
+      }
+
+      // ---------- LOAD ROUTE FROM OSRM (driving/walking/cycling) // تحميل المسار من OSRM (سيارة/مشي/دراجة) ----------
+      async function loadRoute(profileMode) {
+        currentMode = profileMode; // Set current mode // تعيين الوسيلة الحالية
+        updateActiveModeButtons(); // Update button UI // تحديث واجهة الأزرار
+
+        const prof = profileMode === 'driving' ? 'driving' : profileMode === 'walking' ? 'walking' : 'cycling'; // OSRM profile // ملف OSRM
+        const url = `https://router.project-osrm.org/route/v1/${prof}/${startLon},${startLat};${destLon},${destLat}?overview=full&geometries=geojson&steps=true`; // OSRM API URL
+
+        const timesDiv = document.getElementById('times'); // Duration display // عرض المدة
+        const directionsOl = document.getElementById('directions'); // Directions list // قائمة الاتجاهات
+        timesDiv.innerHTML = currentLanguage === 'ar' ? '<div>جاري تحميل المسار...</div>' : '<div>Loading route...</div>'; // Show loading // إظهار التحميل
+        directionsOl.innerHTML = ''; // Clear previous directions // مسح الاتجاهات السابقة
+
+        try {
+          const res = await fetch(url); // Fetch route // جلب المسار
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json(); // Parse JSON // تحليل JSON
+          if (!data.routes || data.routes.length === 0) throw new Error('No route found');
+
+          const r = data.routes[0]; // First route // أول مسار
+          if (routeLayer) map.removeLayer(routeLayer); // Remove old route layer // إزالة طبقة المسار القديمة
+          routeLayer = L.geoJSON(r.geometry, { color: '#1f78b4', weight: 5 }).addTo(map); // Draw new route // رسم المسار الجديد
+          map.fitBounds(routeLayer.getBounds(), { padding: [40, 40] }); // Zoom to route // تكبير على المسار
+
+          const distKm = r.distance / 1000; // Distance in km // المسافة بالكيلومتر
+          const speed = SPEEDS[profileMode]; // Speed for this mode // السرعة لهذه الوسيلة
+          const durationMin = Math.round(distKm / speed); // Duration in minutes // المدة بالدقائق
+
+          const isAr = currentLanguage === 'ar';
+          const durationText = isAr ? `المدة: ${durationMin} دقائق` : `Duration: ${durationMin} mins`; // Duration text // نص المدة
+          const distanceText = isAr ? `المسافة: ${distKm.toFixed(1)} كم` : `Distance: ${distKm.toFixed(1)} km`; // Distance text // نص المسافة
+          timesDiv.innerHTML = `<div>${durationText}</div><div>${distanceText}</div>`; // Display // عرض
+
+          directionsOl.innerHTML = ''; // Clear // مسح
+          r.legs.forEach(leg => leg.steps.forEach(step => { // Loop through steps // التكرار على الخطوات
+            const li = document.createElement('li'); // Create list item // إنشاء عنصر قائمة
+            li.textContent = buildInstruction(step, currentLanguage); // Build instruction // بناء التعليمات
+            directionsOl.appendChild(li); // Append // إلحاق
+          }));
+
+        } catch (err) {
+          console.error(err);
+          const isAr = currentLanguage === 'ar';
+          timesDiv.innerHTML = isAr ? '<div style="color:#ef4444;">فشل تحميل المسار. حاول مرة أخرى.</div>' : '<div style="color:#ef4444;">Failed to load route. Try again.</div>';
+          directionsOl.innerHTML = isAr ? '<li>تعذر الحصول على الاتجاهات</li>' : '<li>Directions unavailable</li>';
+        }
+      }
+
+      // ---------- BUS ESTIMATE (using driving route + bus speed) // تقدير الحافلة (باستخدام مسار السيارة + سرعة الحافلة) ----------
+      function recalcBusEstimate() {
+        currentMode = 'bus'; // Set mode // تعيين الوسيلة
+        updateActiveModeButtons(); // Update UI // تحديث الواجهة
+        if (routeLayer) { try { map.removeLayer(routeLayer); } catch(e){} routeLayer = null; } // Remove route layer // إزالة طبقة المسار
+
+        const timesDiv = document.getElementById('times');
+        const directionsOl = document.getElementById('directions');
+        timesDiv.innerHTML = currentLanguage === 'ar' ? '<div>جاري التقدير...</div>' : '<div>Estimating...</div>';
+        directionsOl.innerHTML = '';
+
+        // Fetch driving route to get distance // جلب مسار السيارة للحصول على المسافة
+        const url = `https://router.project-osrm.org/route/v1/driving/${startLon},${startLat};${destLon},${destLat}?overview=false`;
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            if (!data.routes || !data.routes.length) throw new Error('No route');
+            const dr = data.routes[0];
+            const distKm = dr.distance / 1000; // Distance in km // المسافة بالكيلومتر
+            const durationMin = Math.round(distKm / SPEEDS.bus); // Duration using bus speed // المدة باستخدام سرعة الحافلة
+
+            const isAr = currentLanguage === 'ar';
+            const durationText = isAr ? `المدة بالحافلة: ${durationMin} دقائق` : `Bus Duration: ${durationMin} mins`;
+            const distanceText = isAr ? `المسافة: ${distKm.toFixed(1)} كم` : `Distance: ${distKm.toFixed(1)} km`;
+            timesDiv.innerHTML = `<div>${durationText}</div><div>${distanceText}</div>`;
+            directionsOl.innerHTML = isAr ? '<li>لا توجد اتجاهات مفصلة للحافلة (تقديري فقط)</li>' : '<li>No detailed bus directions (estimate only)</li>';
+          })
+          .catch(err => {
+            console.error(err);
+            const isAr = currentLanguage === 'ar';
+            timesDiv.innerHTML = isAr ? '<div style="color:#ef4444;">فشل تقدير مسار الحافلة</div>' : '<div style="color:#ef4444;">Bus estimate failed</div>';
+            directionsOl.innerHTML = '';
+          });
+      }
+
+      // ---------- INITIALIZE MAP // تهيئة الخريطة ----------
+      const map = L.map('map').setView([(startLat + destLat) / 2, (startLon + destLon) / 2], 12); // Create map centered between start and dest // إنشاء خريطة متمركزة بين نقطة الانطلاق والوجهة
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors' }).addTo(map); // Add OpenStreetMap tiles // إضافة مربعات OpenStreetMap
+
+      const startMarker = L.marker([startLat, startLon]).addTo(map).bindPopup(currentLanguage === 'ar' ? 'الانطلاق' : 'Start'); // Start marker // علامة الانطلاق
+      const destMarker = L.marker([destLat, destLon]).addTo(map).bindPopup(destName).openPopup(); // Destination marker // علامة الوجهة
+
+      // ---------- EVENT LISTENERS // مستمعات الأحداث ----------
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage); // Language toggle // زر تبديل اللغة
+
+      document.getElementById('mode-driving').addEventListener('click', () => loadRoute('driving')); // Driving mode // وضع السيارة
+      document.getElementById('mode-walking').addEventListener('click', () => loadRoute('walking')); // Walking mode // وضع المشي
+      document.getElementById('mode-cycling').addEventListener('click', () => loadRoute('cycling')); // Cycling mode // وضع الدراجة
+      document.getElementById('mode-bus').addEventListener('click', recalcBusEstimate); // Bus estimate // تقدير الحافلة
+
+      // ---------- SHOW/HIDE HEADER AND FOOTER ON MOUSE EDGE // إظهار/إخفاء الرأس والتذييل عند حافة الشاشة ----------
+      const header = document.querySelector('header.brand');
+      const footer = document.querySelector('footer');
+      const triggerArea = 60; // Distance from edge to trigger // المسافة من الحافة للتشغيل
+
+      document.addEventListener('mousemove', (e) => { // Show header/footer when mouse near top or bottom // إظهار الرأس/التذييل عندما يكون الماوس قرب الأعلى أو الأسفل
+        const show = e.clientY < triggerArea || e.clientY > window.innerHeight - triggerArea;
+        header.classList.toggle('visible', show);
+        footer.classList.toggle('visible', show);
+      });
+
+      // ---------- INITIAL SETUP // الإعداد الأولي ----------
+      const savedProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); // Load profile // تحميل الملف الشخصي
+      if (savedProfile.language) { // Apply saved language // تطبيق اللغة المحفوظة
+        currentLanguage = savedProfile.language;
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+      }
+      if (savedProfile.theme === 'dark') { // Apply dark theme // تطبيق السمة الداكنة
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+
+      // Populate destination details // تعبئة تفاصيل الوجهة
+      document.getElementById('panel-price').innerText = destPrice;
+      document.getElementById('panel-rating').innerText = destRating > 0 ? `⭐ ${destRating}/5` : 'N/A';
+      document.getElementById('panel-time').innerText = destTime;
+
+      updateNearbyCount(); // Update nearby count // تحديث عدد المعالم القريبة
+
+      translatePage(); // Apply initial translation // تطبيق الترجمة الأولية
+      updateActiveModeButtons(); // Set active mode button // تعيين زر الوسيلة النشط
+
+      loadRoute('driving'); // Load default route (driving) // تحميل المسار الافتراضي (سيارة)
+    })();
+
+    // Global toast function (called from anywhere) // دالة إشعار عامة (تُستدعى من أي مكان)
+    let toastTimeout;
+    function showError(message) {
+      const toast = document.getElementById('error-toast');
+      toast.innerText = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

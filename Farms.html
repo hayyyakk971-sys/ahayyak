@@ -1,0 +1,814 @@
+﻿<!DOCTYPE html> <!-- Defines the document type as HTML5 // يحدد نوع المستند لـ HTML5 -->
+<html lang="ar" dir="rtl"> <!-- Root element: Arabic language, right‑to‑left direction // العنصر الجذر: اللغة العربية، اتجاه النص من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" /> <!-- Character encoding supporting Arabic // ترميز الأحرف الذي يدعم العربية -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive design settings // إعدادات التصميم المتجاوب -->
+  <title>HAYYAK | Agritourism</title> <!-- Page title // عنوان الصفحة -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg"> <!-- Favicon (browser tab icon) // أيقونة تبويب المتصفح -->
+  <meta name="description" content="أماكن الترفيه في دبي - مع تصفية حسب الموقع والتقييم والسعر والمسافة" /> <!-- SEO description // وصف لمحركات البحث -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Preconnect to Google Fonts // اتصال مسبق بـ Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Preconnect with CORS // اتصال مسبق مع CORS -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" /> <!-- Load Cairo font // تحميل خط Cairo -->
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    @font-face { /* Custom font 'Afeesh' – regular weight // خط مخصص 'Afeesh' – وزن عادي */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'),
+           url('afeesh/Afeesh-Aadi.woff') format('woff'),
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Bold weight // وزن عريض */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Semi‑bold // شبه عريض */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Light weight // خفيف */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    /* ==================== GLOBAL VARIABLES & RESET // المتغيرات العامة وإعادة التعيين ==================== */
+    :root { /* Light theme CSS variables // متغيرات CSS للسمة الفاتحة */
+      --bg: #f5f5f7; --card: #ffffff; --ink: #0f0f10; --muted: #6b7280; --line: #0f0f10; --radius: 14px;
+    }
+    [data-theme="dark"] { /* Dark theme overrides // تجاوزات السمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333;
+    }
+    *{box-sizing:border-box} /* Universal selector: border-box for all elements // محدد الكل: border-box لجميع العناصر */
+    html,body{height:100%; background:var(--bg)} /* Full height and background from variable // ارتفاع كامل وخلفية من المتغير */
+    body{margin:0; font-family:'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink)} /* Body reset // إعادة تعيين الجسم */
+
+    /* ==================== LAYOUT COMPONENTS // مكونات التخطيط ==================== */
+    .shell{width:100%; max-width:420px; margin:0 auto; padding:16px} /* Centered container with max width // حاوية مركزية بعرض أقصى */
+    .card{background:var(--card); border:2px solid var(--line); border-radius:var(--radius); box-shadow:0 2px 0 #0f0f10} /* Reusable card style // نمط بطاقة قابل لإعادة الاستخدام */
+
+    /* ==================== HEADER // الترويسة ==================== */
+    header.brand{text-align:center; background:#16243d; color:#ffffff; padding:20px; position:relative} /* Header bar // شريط الترويسة */
+    .logo-text { /* Main logo (Arabic) // الشعار الرئيسي (عربي) */
+      font-family: 'Afeesh', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      letter-spacing: 2px;
+      color: #d4af37;
+    }
+    .logo-sub { /* Sub‑logo (English) // الشعار الفرعي (إنجليزي) */
+      font-family: 'Afeesh', sans-serif;
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 20px;
+      margin-top: 2px;
+      letter-spacing: 3px;
+    }
+    .home-btn { /* Back button // زر الرجوع */
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 15px;
+      background-color: #0f0f10;
+      padding: 9px 12px;
+      border-radius: 999px;
+    }
+    .translate-btn { /* Language toggle button // زر تبديل اللغة */
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: #d4af37;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      color: #16243d;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      z-index: 100;
+    }
+    .translate-btn:hover { /* Hover effect for language button // تأثير التمرير لزر اللغة */
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+      background: #f7ef8a;
+    }
+    .translate-btn .icon { font-size: 16px; transition: transform 0.3s ease; } /* Globe icon // أيقونة الكرة الأرضية */
+    .translate-btn:hover .icon { transform: rotate(20deg); } /* Icon rotation on hover // دوران الأيقونة عند التمرير */
+    .translate-btn.switching { animation: pulse 0.5s ease; } /* Pulse animation when language switches // حركة نبض عند تبديل اللغة */
+    @keyframes pulse { /* Keyframes for pulse animation // إطارات حركة النبض */
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    /* ==================== MAP // الخريطة ==================== */
+    .map{height:180px; border-radius:var(--radius); overflow:hidden; position:relative; border:2px solid var(--line)} /* Map container // حاوية الخريطة */
+    .map iframe{width:100%; height:100%; border:0} /* Embedded map fills container // الخريطة المضمنة تملأ الحاوية */
+
+    /* ==================== SECTION TITLES // عناوين الأقسام ==================== */
+    .section-title{display:flex; align-items:center; justify-content:center; gap:10px; margin:14px 0 10px; font-weight:700; font-size:20px} /* Section title style // نمط عنوان القسم */
+    .section-title .emoji{font-size:22px} /* Emoji inside title // رمز تعبيري داخل العنوان */
+
+    /* ==================== PLACE LIST ITEMS // عناصر قائمة الأماكن ==================== */
+    .list{display:grid; gap:10px} /* Grid for list items // شبكة لعناصر القائمة */
+    .item{ /* Individual place item // عنصر مكان فردي */
+      display:grid;
+      grid-template-columns: 36px 1fr;  /* removed the 80px image column // تم إزالة عمود الصورة 80px */
+      align-items:center;
+      gap:10px;
+      border:2px solid var(--line);
+      border-radius:999px;
+      background:var(--card);
+      padding:8px 12px;
+      cursor:pointer;
+      transition:background 0.2s
+    }
+    .item:hover{background:#f5f5f7} /* Hover effect // تأثير التمرير */
+    [data-theme="dark"] .item:hover{background:#2a2a2a;} /* Dark mode hover // التمرير في الوضع الداكن */
+    .pin{display:grid; place-items:center; font-size:22px} /* Pin icon column // عمود أيقونة الموقع */
+    .label{font-weight:700; display:flex; flex-direction:column; gap:4px} /* Text label // تسمية النص */
+    .label span{color:var(--ink)} /* Name color // لون الاسم */
+    .distance-badge{font-size:12px; color:var(--muted); font-weight:400} /* Distance text // نص المسافة */
+    .rating-badge{font-size:12px; background:#fbbf24; color:#000; padding:2px 6px; border-radius:6px; width:fit-content} /* Rating badge // شارة التقييم */
+
+    /* ==================== CONTROLS (FILTERS & SORT) // عناصر التحكم (التصفية والترتيب) ==================== */
+    .controls{display:grid; gap:10px; margin:14px 0; padding:16px; background:var(--card); border:2px solid var(--line); border-radius:var(--radius);} /* Control panel // لوحة التحكم */
+    .filter-group{display:grid; gap:8px} /* Group for a filter // مجموعة لفلتر واحد */
+    .filter-label{font-weight:700; font-size:14px; color:var(--ink)} /* Filter label // تسمية الفلتر */
+    .city-select{width:100%; padding:10px 12px; border:2px solid var(--line); border-radius:var(--radius); background:var(--card); color:var(--ink); font:inherit; cursor:pointer} /* City dropdown // قائمة منسدلة للمدن */
+    .sort-buttons{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px} /* Three sort buttons // ثلاثة أزرار ترتيب */
+    .sort-btn{padding:10px 8px; border:2px solid var(--line); border-radius:var(--radius); background:var(--card); color:var(--ink); cursor:pointer; font:inherit; font-weight:600; font-size:12px; transition:all 0.2s} /* Sort button // زر الترتيب */
+    .sort-btn.active{background:#d4af37; color:#16243d; border-color:#16243d} /* Active sort state // حالة الترتيب النشط */
+    .sort-btn:hover{background:#f5f5f7} /* Hover effect // تأثير التمرير */
+    [data-theme="dark"] .sort-btn:hover{background:#2a2a2a; color:var(--ink)} /* Dark mode hover // التمرير في الوضع الداكن */
+
+    /* ==================== INFO PANEL // لوحة المعلومات ==================== */
+    .info-panel{display:none; margin-top:10px; padding:14px; animation:fade 0.4s} /* Hidden by default, shown when active // مخفي افتراضيًا، يظهر عند التنشيط */
+    .info-panel.active{display:block} /* Show panel // إظهار اللوحة */
+    .info-panel h3{margin:0 0 8px; color:var(--ink)} /* Panel title // عنوان اللوحة */
+    .info-desc{font-size:14px; line-height:1.6; color:var(--muted); margin-bottom:16px} /* Description text // نص الوصف */
+    .info-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px} /* 2‑column grid for details // شبكة عمودين للتفاصيل */
+    .info-box{background:var(--bg); padding:12px; border-radius:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:4px} /* Each detail box // كل مربع تفصيل */
+    .ib-icon{font-size:24px; margin-bottom:4px} /* Icon in detail box // أيقونة في مربع التفاصيل */
+    .ib-label{font-size:12px; color:var(--muted); font-weight:600} /* Label under icon // تسمية تحت الأيقونة */
+    .ib-val{font-size:14px; font-weight:700; color:var(--ink)} /* Value // القيمة */
+    @keyframes fade{from{opacity:0; transform:translateY(-10px)}to{opacity:1; transform:translateY(0)}} /* Fade animation for panel // حركة تلاشي للوحة */
+
+    /* ==================== SEARCH BAR // شريط البحث ==================== */
+    .bottom-search{padding:12px 0 18px; position:relative} /* Search container // حاوية البحث */
+    .search{display:grid; grid-template-columns:28px 1fr; align-items:center; gap:8px; border:2px solid var(--line); border-radius:999px; padding:10px 12px; background:var(--card)} /* Search box // مربع البحث */
+    .glass{text-align:center} /* Magnifier icon container // حاوية أيقونة العدسة */
+    .search input{appearance:none; border:0; outline:0; background:transparent; width:100%; font:inherit; color:var(--ink)} /* Search input // حقل الإدخال */
+    .search input::placeholder{color:var(--muted)} /* Placeholder color // لون النص التوجيهي */
+
+    /* ==================== AUTOCOMPLETE DROPDOWN // القائمة المنسدلة للإكمال التلقائي ==================== */
+    .autocomplete-list{display:none; position:absolute; top:100%; left:0; right:0; background:var(--card); border:2px solid var(--line); border-top:0; border-radius:0 0 var(--radius) var(--radius); max-height:200px; overflow-y:auto; z-index:100} /* Dropdown container // حاوية القائمة المنسدلة */
+    .autocomplete-list.active{display:block} /* Show when active // تظهر عند التنشيط */
+    .autocomplete-item{padding:12px; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.2s} /* Each autocomplete item // كل عنصر في القائمة */
+    .autocomplete-item:hover{background:#f5f5f7} /* Hover effect // تأثير التمرير */
+    [data-theme="dark"] .autocomplete-item:hover{background:#2a2a2a;} /* Dark mode hover // التمرير في الوضع الداكن */
+    .autocomplete-item:last-child{border-bottom:none} /* Remove border from last item // إزالة الحدود من آخر عنصر */
+    .autocomplete-item-name{font-weight:700; color:var(--ink)} /* Place name in autocomplete // اسم المكان في القائمة */
+    .autocomplete-item-desc{font-size:12px; color:var(--muted); margin-top:2px} /* Description in autocomplete // الوصف في القائمة */
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer {
+      background: #16243d;
+      color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    /* ==================== RESPONSIVE // تجاوب ==================== */
+    @media (min-width:768px){.shell{padding:24px} .map{height:220px}} /* Larger screens // شاشات أكبر */
+
+    /* ==================== ERROR TOAST // إشعار الخطأ ==================== */
+    .error-toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #ef4444;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .error-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; } /* Visible state // الحالة المرئية */
+    
+    /* ==================== CUSTOM BUTTONS (MAP & PLAN) // الأزرار المخصصة (الخريطة والمخطط) ==================== */
+    .map-btn { /* Map button inside info panel // زر الخريطة داخل لوحة المعلومات */
+      padding: 8px 12px !important;
+      border-radius: 8px !important;
+      border: 2px solid #d4af37 !important;
+      background: linear-gradient(135deg, #d4af37 0%, #f7ef8a 100%) !important;
+      color: #0f0f10 !important;
+      cursor: pointer !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      transition: all 0.3s ease !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3) !important;
+    }
+    .map-btn:hover {
+      transform: scale(1.08) !important;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5) !important;
+      background: linear-gradient(135deg, #f7ef8a 0%, #d4af37 100%) !important;
+    }
+    .map-btn:active { transform: scale(0.96) !important; }
+
+    .plan-btn { /* Plan button inside info panel // زر المخطط داخل لوحة المعلومات */
+      padding: 8px 12px !important;
+      border-radius: 8px !important;
+      border: 2px solid #3b82f6 !important;
+      background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%) !important;
+      color: #ffffff !important;
+      cursor: pointer !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      transition: all 0.3s ease !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3) !important;
+    }
+    .plan-btn:hover {
+      transform: scale(1.08) !important;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5) !important;
+      background: linear-gradient(135deg, #2dd4bf 0%, #3b82f6 100%) !important;
+    }
+    .plan-btn:active { transform: scale(0.96) !important; }
+  </style>
+
+  <script src="JS/Auth.js"></script>
+  <script src="JS/Places_data.js"></script>
+</head>
+<body>
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand"> <!-- Header container // حاوية الترويسة -->
+    <a href="Home.html" class="home-btn" aria-label="الرئيسية">الرجوع</a> <!-- Back button // زر الرجوع -->
+    <div class="logo-text">حــــــيــــاك</div> <!-- Arabic logo // الشعار العربي -->
+    <div class="logo-sub">HAYYAK</div> <!-- English sub‑logo // الشعار الفرعي الإنجليزي -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة"> <!-- Language toggle // زر تبديل اللغة -->
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span> <!-- Button text (changes dynamically) // نص الزر (يتغير ديناميكياً) -->
+    </button>
+  </header>
+
+  <!-- ==================== ERROR TOAST // إشعار الخطأ ==================== -->
+  <div id="error-toast" class="error-toast"></div> <!-- Container for temporary error/notification messages // حاوية للرسائل المؤقتة (خطأ/إشعار) -->
+
+  <!-- ==================== MAIN CONTENT // المحتوى الرئيسي ==================== -->
+  <main class="shell"></main>
+
+  <!-- ==================== FOOTER // التذييل ==================== -->
+  <footer data-ar="© عبدالله بن ناصر-حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر-حياك</footer> <!-- Footer content // محتوى التذييل -->
+
+  <!-- ==================== JAVASCRIPT LOGIC // منطق الجافا سكريبت ==================== -->
+  <script>
+    (function() { // Immediately‑invoked function expression to avoid global scope pollution // تعبير دالة فوري التنفيذ لتجنب التلوث العام
+      // ---------- DATA (merged + Khorfakkan) ---------- // بيانات (مدمجة + خورفكان)
+      const rawPlaces = { // Raw places data organized by city // بيانات الأماكن الأولية منظمة حسب المدينة
+        dubai: [
+          {city:'dubai', name:'Arabian Horse Farm', nameAr:'مزرعة الخيول العربية', lat:25.1120, lon:55.1430, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج وتدريب الخيول العربية'},
+          {city:'dubai', name:'Al Reem Farm', nameAr:'مزرعة الريم', lat:25.1200, lon:55.1500, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لتربية الأغنام والإبل'},
+          {city:'dubai', name:'Tropical Fruits Farm', nameAr:'مزرعة الفواكه الاستوائية', lat:25.1180, lon:55.1480, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة تنتج المانجو والبابايا والأناناس'},
+          {city:'dubai', name:'Gulf Flower Farm', nameAr:'مزرعة الخليج للزهور', lat:25.1170, lon:55.1520, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات الجميلة'},
+          {city:'dubai', name:'Organic Agriculture Farm', nameAr:'مزرعة الزراعة العضوية', lat:25.1150, lon:55.1490, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة تنتج الخضروات والفواكه العضوية'},
+          {city:'dubai', name:'Falcon Farm', nameAr:'مزرعة الصقور', lat:25.1165, lon:55.1515, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لتربية الصقور وعروضها'},
+          {city:'dubai', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.1190, lon:55.1500, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة بها أنواع متعددة من الطيور'},
+          {city:'dubai', name:'Hydroponic Vegetable Farm', nameAr:'مزرعة الخضار المائية', lat:25.1210, lon:55.1550, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة تستخدم تقنيات الزراعة المائية'},
+          {city:'dubai', name:'Camel Farm', nameAr:'مزرعة الإبل', lat:25.1230, lon:55.1570, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لتربية الإبل وركوبها'},
+          {city:'dubai', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.1240, lon:55.1580, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة مخصصة لزراعة الفراولة'},
+          {city:'dubai', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.1250, lon:55.1590, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لزراعة نخيل التمر'},
+          {city:'dubai', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.1260, lon:55.1600, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'dubai', name:'Wild Flowers Farm', nameAr:'مزرعة الزهور البرية', lat:25.1270, lon:55.1610, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور البرية والتصوير'},
+          {city:'dubai', name:'Watermelon Farm', nameAr:'مزرعة البطيخ', lat:25.1280, lon:55.1620, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة البطيخ الصيفي'},
+          {city:'dubai', name:'Organic Carrot Farm', nameAr:'مزرعة الجزر العضوية', lat:25.1290, lon:55.1630, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الجزر والخضروات العضوية'},
+          {city:'dubai', name:'Pumpkin Farm', nameAr:'مزرعة القرع', lat:25.1300, lon:55.1640, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للقرع والخضروات الموسمية'},
+          {city:'dubai', name:'Mint Farm', nameAr:'مزرعة النعناع', lat:25.1310, lon:55.1650, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب والنعناع الطازج'},
+          {city:'dubai', name:'Winter Vegetable Farm', nameAr:'مزرعة الخضار الشتوية', lat:25.1320, lon:55.1660, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الخضار الشتوية'},
+          {city:'dubai', name:'Olive Farm', nameAr:'مزرعة الزيتون', lat:25.1330, lon:55.1670, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لزراعة أشجار الزيتون وإنتاج الزيت'},
+          {city:'dubai', name:'Grains Farm', nameAr:'مزرعة الحبوب', lat:25.1340, lon:55.1680, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة القمح والشعير'}
+        ],
+        abudhabi: [
+          {city:'abudhabi', name:'Al Wathba Farm', nameAr:'مزرعة الوثبة', lat:24.4760, lon:54.3680, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الخضروات والفواكه الطازجة'},
+          {city:'abudhabi', name:'Arabian Horses Farm', nameAr:'مزرعة الخيول العربية', lat:24.4700, lon:54.3620, rating:4.8, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لتربية الخيول العربية الأصيلة'},
+          {city:'abudhabi', name:'Al Maha Farm', nameAr:'مزرعة المها', lat:24.4650, lon:54.3700, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لتربية الأغنام والإبل'},
+          {city:'abudhabi', name:'Organic Fruits Farm', nameAr:'مزرعة الفواكه العضوية', lat:24.4720, lon:54.3650, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الفواكه العضوية المختلفة'},
+          {city:'abudhabi', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:24.4680, lon:54.3670, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للطيور والحمام'},
+          {city:'abudhabi', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:24.4740, lon:54.3690, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور'},
+          {city:'abudhabi', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:24.4765, lon:54.3720, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات'},
+          {city:'abudhabi', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:24.4780, lon:54.3740, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة'},
+          {city:'abudhabi', name:'Watermelon and Summer Fruits Farm', nameAr:'مزرعة البطيخ والفواكه الصيفية', lat:24.4800, lon:54.3760, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطيخ والفاكهة الموسمية'},
+          {city:'abudhabi', name:'Olive Farm', nameAr:'مزرعة الزيتون', lat:24.4820, lon:54.3780, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الزيتون والزيت الطبيعي'},
+          {city:'abudhabi', name:'Honey Farm', nameAr:'مزرعة العسل', lat:24.4840, lon:54.3800, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'abudhabi', name:'Pumpkin and Vegetable Farm', nameAr:'مزرعة القرع والخضار', lat:24.4860, lon:54.3820, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار الموسمية'},
+          {city:'abudhabi', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:24.4880, lon:54.3840, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة مخصصة لزراعة الفراولة'},
+          {city:'abudhabi', name:'Organic Tomato Farm', nameAr:'مزرعة الطماطم العضوية', lat:24.4900, lon:54.3860, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الطماطم العضوية'},
+          {city:'abudhabi', name:'Apple Farm', nameAr:'مزرعة التفاح', lat:24.4920, lon:54.3880, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج التفاح والفواكه الأخرى'},
+          {city:'abudhabi', name:'Wadi Al Hasn Farm', nameAr:'مزرعة وادي الحصن', lat:24.4940, lon:54.3900, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة طبيعية للرحلات العائلية'},
+          {city:'abudhabi', name:'Potato Farm', nameAr:'مزرعة البطاطس', lat:24.4960, lon:54.3920, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطاطس العضوية'},
+          {city:'abudhabi', name:'Pepper and Vegetable Farm', nameAr:'مزرعة الفلفل والخضروات', lat:24.4980, lon:54.3940, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للخضروات والفلفل العضوي'},
+          {city:'abudhabi', name:'Ancient Palm Farm', nameAr:'مزرعة النخيل القديمة', lat:24.5000, lon:54.3960, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة نخيل تقليدية للإنتاج المحلي'},
+          {city:'abudhabi', name:'Organic Carrot Farm', nameAr:'مزرعة الجزر العضوية', lat:24.5020, lon:54.3980, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الجزر والخضروات العضوية'}
+        ],
+        sharjah: [
+          {city:'sharjah', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.3600, lon:55.3800, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور والنخيل'},
+          {city:'sharjah', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:25.3620, lon:55.3820, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات المزخرفة'},
+          {city:'sharjah', name:'Tropical Fruits Farm', nameAr:'مزرعة الفواكه الاستوائية', lat:25.3640, lon:55.3840, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج المانجو والبابايا والأناناس'},
+          {city:'sharjah', name:'Organic Vegetable Farm', nameAr:'مزرعة الخضار العضوية', lat:25.3660, lon:55.3860, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار العضوية المختلفة'},
+          {city:'sharjah', name:'Falcon Farm', nameAr:'مزرعة الصقور', lat:25.3680, lon:55.3880, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لتربية الصقور وعروضها'},
+          {city:'sharjah', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.3700, lon:55.3900, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للطيور المختلفة والحمام'},
+          {city:'sharjah', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:25.3720, lon:55.3920, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة'},
+          {city:'sharjah', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.3740, lon:55.3940, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الفراولة'},
+          {city:'sharjah', name:'Watermelon Farm', nameAr:'مزرعة البطيخ', lat:25.3760, lon:55.3960, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطيخ الصيفي'},
+          {city:'sharjah', name:'Pumpkin and Seasonal Vegetable Farm', nameAr:'مزرعة القرع والخضار الموسمية', lat:25.3780, lon:55.3980, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار الموسمية'},
+          {city:'sharjah', name:'Olive Farm', nameAr:'مزرعة الزيتون', lat:25.3800, lon:55.4000, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الزيتون والزيت الطبيعي'},
+          {city:'sharjah', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.3820, lon:55.4020, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'sharjah', name:'Apple and Fruits Farm', nameAr:'مزرعة التفاح والفواكه', lat:25.3840, lon:55.4040, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج التفاح والفواكه المختلفة'},
+          {city:'sharjah', name:'Potato and Vegetables Farm', nameAr:'مزرعة البطاطس والخضروات', lat:25.3860, lon:55.4060, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطاطس والخضروات'},
+          {city:'sharjah', name:'Al Majaz Oasis Farm', nameAr:'مزرعة واحة المجاز', lat:25.3880, lon:55.4080, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة طبيعية للرحلات العائلية'}
+        ],
+        ajman: [
+          {city:'ajman', name:'Al Marjan Farm', nameAr:'مزرعة المرجان', lat:25.4140, lon:55.4450, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار والفواكه الطازجة'},
+          {city:'ajman', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.4160, lon:55.4470, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور وأشجار النخيل'},
+          {city:'ajman', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:25.4180, lon:55.4490, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات المزخرفة'},
+          {city:'ajman', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.4200, lon:55.4510, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للطيور والحمام'},
+          {city:'ajman', name:'Tropical Fruits Farm', nameAr:'مزرعة الفواكه الاستوائية', lat:25.4220, lon:55.4530, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج المانجو والبابايا والأناناس'},
+          {city:'ajman', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.4240, lon:55.4550, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الفراولة'},
+          {city:'ajman', name:'Pumpkin and Vegetable Farm', nameAr:'مزرعة القرع والخضار', lat:25.4260, lon:55.4570, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للخضار الموسمية'},
+          {city:'ajman', name:'Olive Farm', nameAr:'مزرعة الزيتون', lat:25.4280, lon:55.4590, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الزيتون والزيت الطبيعي'},
+          {city:'ajman', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.4300, lon:55.4610, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'ajman', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:25.4320, lon:55.4630, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة والنعناع'}
+        ],
+        rak: [
+          {city:'rak', name:'Jebel Jais Farm', nameAr:'مزرعة جبل جيس', lat:25.9530, lon:56.1600, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة طبيعية قرب جبل جيس للرحلات العائلية'},
+          {city:'rak', name:'Arabian Horses Farm', nameAr:'مزرعة الخيول العربية', lat:25.9500, lon:56.1550, rating:4.8, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لتربية الخيول العربية الأصيلة'},
+          {city:'rak', name:'Organic Fruits Farm', nameAr:'مزرعة الفواكه العضوية', lat:25.9480, lon:56.1500, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج المانجو والفواكه الموسمية'},
+          {city:'rak', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.9460, lon:56.1450, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور والزراعة التقليدية'},
+          {city:'rak', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:25.9440, lon:56.1400, rating:4.5, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات المزخرفة'},
+          {city:'rak', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.9420, lon:56.1350, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للطيور المختلفة والحمام'},
+          {city:'rak', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.9400, lon:56.1300, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الفراولة الطازجة'},
+          {city:'rak', name:'Pumpkin and Vegetable Farm', nameAr:'مزرعة القرع والخضار', lat:25.9380, lon:56.1250, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار الموسمية'},
+          {city:'rak', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.9360, lon:56.1200, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'rak', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:25.9340, lon:56.1150, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة'},
+          {city:'rak', name:'Potato Farm', nameAr:'مزرعة البطاطس', lat:25.9320, lon:56.1100, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطاطس العضوية'},
+          {city:'rak', name:'Tomato and Pepper Farm', nameAr:'مزرعة الطماطم والفلفل', lat:25.9300, lon:56.1050, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الطماطم والفلفل العضوي'},
+          {city:'rak', name:'Olive Farm', nameAr:'مزرعة الزيتون', lat:25.9280, lon:56.1000, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج الزيتون والزيت الطبيعي'},
+          {city:'rak', name:'Apple and Fruits Farm', nameAr:'مزرعة التفاح والفواكه', lat:25.9260, lon:56.0950, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج التفاح والفواكه المختلفة'},
+          {city:'rak', name:'Ras Al Khaimah Oasis Farm', nameAr:'مزرعة واحة رأس الخيمة', lat:25.9240, lon:56.0900, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة طبيعية للرحلات والأنشطة العائلية'}
+        ],
+        fujairah: [
+          {city:'fujairah', name:'Fujairah Farm', nameAr:'مزرعة الفجيرة', lat:25.1380, lon:56.3360, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار والفواكه الطازجة'},
+          {city:'fujairah', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:25.1400, lon:56.3380, rating:4.7, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات المزخرفة'},
+          {city:'fujairah', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.1420, lon:56.3400, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور وأشجار النخيل'},
+          {city:'fujairah', name:'Tropical Fruits Farm', nameAr:'مزرعة الفواكه الاستوائية', lat:25.1440, lon:56.3420, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج المانجو والبابايا والأناناس'},
+          {city:'fujairah', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.1460, lon:56.3440, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للطيور والحمام'},
+          {city:'fujairah', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.1480, lon:56.3460, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الفراولة الطازجة'},
+          {city:'fujairah', name:'Pumpkin and Vegetable Farm', nameAr:'مزرعة القرع والخضار', lat:25.1500, lon:56.3480, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للخضار الموسمية'},
+          {city:'fujairah', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.1520, lon:56.3500, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'fujairah', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:25.1540, lon:56.3520, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة والنعناع'},
+          {city:'fujairah', name:'Apple and Fruits Farm', nameAr:'مزرعة التفاح والفواكه', lat:25.1560, lon:56.3540, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج التفاح والفواكه المختلفة'}
+        ],
+        uaq: [
+          {city:'uaq', name:'Umm Al Quwain Farm', nameAr:'مزرعة أم القيوين', lat:25.5860, lon:55.5760, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للخضار والفواكه الطازجة'},
+          {city:'uaq', name:'Flower Farm', nameAr:'مزرعة الزهور', lat:25.5880, lon:55.5780, rating:4.7, متوسط_السعر:'متوسط', time:'9:00 ص - 6:00 م', desc:'مزرعة للزهور والنباتات المزخرفة'},
+          {city:'uaq', name:'Palm Farm', nameAr:'مزرعة النخيل', lat:25.5900, lon:55.5800, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'مزرعة لإنتاج التمور والنخيل'},
+          {city:'uaq', name:'Organic Fruits Farm', nameAr:'مزرعة الفواكه العضوية', lat:25.5920, lon:55.5820, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الفواكه الموسمية العضوية'},
+          {city:'uaq', name:'Bird Farm', nameAr:'مزرعة الطيور', lat:25.5940, lon:55.5840, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لتربية الطيور والحمام'},
+          {city:'uaq', name:'Strawberry Farm', nameAr:'مزرعة الفراولة', lat:25.5960, lon:55.5860, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لزراعة الفراولة الطازجة'},
+          {city:'uaq', name:'Pumpkin and Vegetable Farm', nameAr:'مزرعة القرع والخضار', lat:25.5980, lon:55.5880, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضار الموسمية'},
+          {city:'uaq', name:'Honey Farm', nameAr:'مزرعة العسل', lat:25.6000, lon:55.5900, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج العسل الطبيعي'},
+          {city:'uaq', name:'Mint and Herbs Farm', nameAr:'مزرعة النعناع والأعشاب', lat:25.6020, lon:55.5920, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة للأعشاب الطازجة'},
+          {city:'uaq', name:'Potato and Vegetables Farm', nameAr:'مزرعة البطاطس والخضروات', lat:25.6040, lon:55.5940, rating:4.6, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج البطاطس والخضروات'}
+        ],
+      eastern_region: [
+        {city:'eastern_region', name:'Rafisah Dam Farm', nameAr:'مزرعة سد الرفيصة', lat:25.3450, lon:56.3050, rating:4.8, متوسط_السعر:'متوسط', time:'8:00 ص - 6:00 م', desc:'منطقة زراعية وطبيعية خلابة بجوار السد'},
+        {city:'eastern_region', name:'Shis Farm', nameAr:'مزرعة شيص', lat:25.2900, lon:56.2400, rating:4.7, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزارع تقليدية في منطقة شيص الجبلية'},
+        {city:'eastern_region', name:'Wadi Farm', nameAr:'مزرعة الوادي', lat:25.3500, lon:56.3400, rating:4.5, متوسط_السعر:'متوسط', time:'8:00 ص - 5:00 م', desc:'مزرعة لإنتاج الخضروات المحلية'}
+        ]
+      };
+
+      // Add English descriptions (simple placeholder translations) // إضافة وصف إنجليزي (ترجمات مؤقتة مبسطة)
+      const allPlaces = {};
+      for (const city in rawPlaces) {
+        allPlaces[city] = rawPlaces[city].map(p => ({
+          ...p,
+          descEn: p.desc // fallback: use Arabic desc as placeholder; ideally you'd provide real English translations // احتياطي: استخدام الوصف العربي كعنصر نائب؛ من الأفضل توفير ترجمات إنجليزية حقيقية
+        }));
+      }
+
+      // ---------- STATE ---------- // الحالة
+      let currentLanguage = 'ar'; // Current language (Arabic default) // اللغة الحالية (العربية افتراضياً)
+      let currentCity = 'dubai'; // Currently selected city // المدينة المحددة حالياً
+      let currentSort = 'nearest'; // Current sort type // نوع الترتيب الحالي
+      let currentSearchQuery = ''; // Current search query // استعلام البحث الحالي
+      let filteredPlaces = []; // Array to hold filtered places after applying filters // مصفوفة لحفظ الأماكن المفلترة بعد تطبيق التصفية
+      let userLocation = {lat: 25.2048, lon: 55.2708}; // Default user location (Dubai) // موقع المستخدم الافتراضي (دبي)
+
+      // ---------- UTILS ---------- // دوال مساعدة
+      function deg2rad(deg) { return deg * (Math.PI/180); } // Convert degrees to radians // تحويل الدرجات إلى راديان
+      function calculateDistance(lat1, lon1, lat2, lon2) { // Haversine formula to calculate distance between two coordinates // معادلة هافرسين لحساب المسافة بين إحداثيين
+        const R = 6371; // Earth radius in km // نصف قطر الأرض بالكيلومتر
+        const dLat = deg2rad(lat2 - lat1);
+        const dLon = deg2rad(lon2 - lon1);
+        const a = Math.sin(dLat/2) ** 2 + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return (R * c).toFixed(1); // Return distance with one decimal // إرجاع المسافة برقم عشري واحد
+      }
+
+      // ---------- SUITABILITY (minimal implementation to avoid errors) ---------- // الملاءمة (تنفيذ بسيط لتجنب الأخطاء)
+      function checkIfPlaceUnsuitableForUser(place) {
+        // All places are considered suitable (no allergy/phobia data in this page) // جميع الأماكن تعتبر مناسبة (لا توجد بيانات حساسية/رهاب في هذه الصفحة)
+        return false;
+      }
+
+      // ---------- TRANSLATION ---------- // الترجمة
+      function translateAllContent() { // Translate all elements with data-ar and data-en attributes // ترجمة جميع العناصر التي تحتوي على سمات data-ar و data-en
+        document.querySelectorAll('[data-ar], [data-en]').forEach(el => {
+          if (el.hasAttribute('data-ar') && el.hasAttribute('data-en')) {
+            el.textContent = currentLanguage === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+          }
+        });
+        // Translate placeholders // ترجمة النصوص التوجيهية
+        document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(el => {
+          if (el.hasAttribute('data-ar-placeholder') && el.hasAttribute('data-en-placeholder')) {
+            el.placeholder = currentLanguage === 'ar' ? el.getAttribute('data-ar-placeholder') : el.getAttribute('data-en-placeholder');
+          }
+        });
+        // Update ARIA labels // تحديث تسميات ARIA
+        const homeBtn = document.querySelector('.home-btn');
+        if (homeBtn) homeBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'الرئيسية' : 'Home');
+        const translateBtn = document.getElementById('translateBtn');
+        if (translateBtn) translateBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'تبديل اللغة' : 'Toggle Language');
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) searchInput.setAttribute('aria-label', currentLanguage === 'ar' ? 'ابحث في أماكن الترفيه' : 'Search for entertainment places');
+        const map = document.querySelector('.map');
+        if (map) {
+          map.setAttribute('aria-label', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+          const mapIframe = map.querySelector('iframe');
+          if (mapIframe) {
+            mapIframe.setAttribute('title', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+          }
+        }
+        // Translate city options (the <span> inside each <option>) // ترجمة خيارات المدن (الـ <span> داخل كل <option>)
+        const citySelect = document.getElementById('city-select');
+        if (citySelect) {
+          Array.from(citySelect.options).forEach(opt => {
+            const span = opt.querySelector('span');
+            if (span && span.hasAttribute('data-ar') && span.hasAttribute('data-en')) {
+              span.textContent = currentLanguage === 'ar' ? span.getAttribute('data-ar') : span.getAttribute('data-en');
+            }
+          });
+        }
+        // Translate page title // ترجمة عنوان الصفحة
+        document.title = currentLanguage === 'ar' ? 'حياك | مزارع' : 'Hayyak | Farms';
+      }
+
+      function toggleLanguage() { // Toggle between Arabic and English // التبديل بين العربية والإنجليزية
+        const btn = document.getElementById('translateBtn');
+        btn.classList.add('switching'); // Add animation class // إضافة كلاس الحركة
+        currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+        const langText = btn.querySelector('span:last-child');
+        langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية'; // Update button text // تحديث نص الزر
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; // Set direction // تعيين الاتجاه
+        document.documentElement.lang = currentLanguage; // Set language attribute // تعيين سمة اللغة
+        // Save language preference to localStorage // حفظ تفضيل اللغة في التخزين المحلي
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        profile.language = currentLanguage;
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        filterAndSort(); // Re‑render list with new language // إعادة رسم القائمة باللغة الجديدة
+        translateAllContent(); // Translate static content // ترجمة المحتوى الثابت
+        showError(currentLanguage === 'ar' ? 'تم التبديل إلى العربية' : 'Switched to English'); // Show confirmation toast // عرض إشعار تأكيد
+        setTimeout(() => btn.classList.remove('switching'), 500); // Remove animation class after delay // إزالة كلاس الحركة بعد تأخير
+      }
+
+      // ---------- USER LOCATION ---------- // موقع المستخدم
+      function getUserLocation() { // Load user location from profile // تحميل موقع المستخدم من الملف الشخصي
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        if (profile.latitude && profile.longitude) {
+          userLocation = {lat: parseFloat(profile.latitude), lon: parseFloat(profile.longitude)};
+        }
+        // Set current city based on emirate in profile // تعيين المدينة الحالية بناءً على الإمارة في الملف الشخصي
+        if (profile.emirate) {
+          const map = {
+            'Abu Dhabi': 'abudhabi', 'Dubai': 'dubai', 'Sharjah': 'sharjah',
+            'Ajman': 'ajman', 'Ras Al Khaimah': 'rak', 'Fujairah': 'fujairah',
+            'Umm Al Quwain': 'uaq'
+          };
+          if (map[profile.emirate]) {
+            currentCity = map[profile.emirate];
+            document.getElementById('city-select').value = currentCity;
+          }
+        }
+      }
+
+      // ---------- RENDER ---------- // الرسم
+      function renderPlaces(places) { // Render the list of places // رسم قائمة الأماكن
+        const list = document.getElementById('places-list');
+        list.innerHTML = ''; // Clear previous content // مسح المحتوى السابق
+        if (!places.length) { // Show "no places" message if empty // عرض رسالة "لا توجد أماكن" إذا كانت القائمة فارغة
+          list.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted);">' + 
+            (currentLanguage === 'ar' ? 'لا توجد أماكن متاحة' : 'No places available') + '</div>';
+          return;
+        }
+
+        // Sort: Suitable first, Unsuitable last // ترتيب: المناسب أولاً، غير المناسب أخيراً
+        places.sort((a, b) => {
+          const aUnsuitable = checkIfPlaceUnsuitableForUser(a);
+          const bUnsuitable = checkIfPlaceUnsuitableForUser(b);
+          return (aUnsuitable === bUnsuitable) ? 0 : (aUnsuitable ? 1 : -1);
+        });
+
+        places.forEach(p => { // Loop through places and create HTML // تكرار على الأماكن وإنشاء HTML
+          const isUnsuitable = checkIfPlaceUnsuitableForUser(p);
+          const item = document.createElement('article'); // Create <article> element // إنشاء عنصر <article>
+          item.className = 'item';
+          item.onclick = () => { if(!isUnsuitable) showPlace(p); }; // Click handler // معالج النقر
+          item.style.opacity = isUnsuitable ? '0.6' : '1'; // Dim unsuitable places // تعتيم الأماكن غير المناسبة
+          item.style.cursor = isUnsuitable ? 'not-allowed' : 'pointer'; // Change cursor for unsuitable // تغيير المؤشر للأماكن غير المناسبة
+          const name = currentLanguage === 'ar' ? (p.nameAr || p.name) : p.name; // Select name based on language // اختيار الاسم حسب اللغة
+          const distanceText = currentLanguage === 'ar' ? `${p.distance} كم` : `${p.distance} km`;
+          const rating = p.rating || 4.5;
+          
+          const warningText = currentLanguage === 'ar' ? 'غير مناسب لك ❌' : 'Not appropriate for you ❌';
+          const unsuitableIndicator = isUnsuitable ? `<div style="color: #ef4444; font-size: 11px; font-weight: bold; margin-top: 2px;">${warningText}</div>` : '';
+
+          // Image removed – only pin and label remain // تم إزالة الصورة – يبقى فقط الدبوس والتسمية
+          item.innerHTML = `
+            <div class="pin">📍</div>
+            <div class="label">
+              <span>${name}</span>
+              ${unsuitableIndicator}
+              <div style="display:flex; gap:6px; align-items:center; margin-top:4px; flex-wrap:wrap;">
+                <span class="distance-badge">${distanceText}</span>
+                <span class="rating-badge">⭐ ${rating}</span>
+              </div>
+            </div>
+          `;
+          list.appendChild(item); // Append to list // إلحاق بالقائمة
+        });
+      }
+
+      function filterAndSort() { // Apply filters and sorting then render // تطبيق التصفية والترتيب ثم الرسم
+        let places = allPlaces[currentCity] || [];
+        // Add distance to each place // إضافة المسافة لكل مكان
+        filteredPlaces = places.map(p => ({
+          ...p,
+          distance: calculateDistance(userLocation.lat, userLocation.lon, p.lat, p.lon)
+        }));
+
+        // Apply search filter if any // تطبيق فلتر البحث إذا وجد
+        if (currentSearchQuery) {
+          const q = currentSearchQuery.toLowerCase();
+          filteredPlaces = filteredPlaces.filter(p => 
+            (p.nameAr && p.nameAr.includes(q)) || p.name.toLowerCase().includes(q) || (p.desc && p.desc.includes(q)) || (p.descEn && p.descEn.toLowerCase().includes(q))
+          );
+        }
+
+        // Apply sorting // تطبيق الترتيب
+        if (currentSort === 'nearest') {
+          filteredPlaces.sort((a,b) => parseFloat(a.distance) - parseFloat(b.distance));
+        } else if (currentSort === 'rating') {
+          filteredPlaces.sort((a,b) => b.rating - a.rating);
+        } else if (currentSort === 'price') {
+          filteredPlaces.sort((a,b) => {
+            const pa = a.متوسط_السعر === 'متوسط' ? 50 : 999; // Simple price mapping // تعيين سعر بسيط
+            const pb = b.متوسط_السعر === 'متوسط' ? 50 : 999;
+            return pa - pb;
+          });
+        }
+        renderPlaces(filteredPlaces.slice(0, 4)); // Show only first 4 // عرض أول 4 فقط
+      }
+
+      function sortPlaces(type, event) { // Sort button handler // معالج زر الترتيب
+        if (!event) event = window.event;
+        currentSort = type;
+        // Update active class on buttons // تحديث الكلاس النشط على الأزرار
+        document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        filterAndSort(); // Re‑render // إعادة الرسم
+      }
+
+      function changeCity(city) { // City select handler // معالج اختيار المدينة
+        currentCity = city;
+        filterAndSort();
+      }
+
+      // ---------- PLAN FUNCTION ---------- // دالة المخطط
+      window.addToPlan = function(name) { // Add place to planner queue // إضافة مكان إلى قائمة المخطط
+        let queue = JSON.parse(localStorage.getItem('hayyak_planner_queue') || '[]');
+        if (!queue.includes(name)) {
+          queue.push(name);
+          localStorage.setItem('hayyak_planner_queue', JSON.stringify(queue));
+          showError(currentLanguage === 'ar' ? 'تمت الإضافة إلى المخطط' : 'Added to Planner');
+        } else {
+          showError(currentLanguage === 'ar' ? 'المكان موجود بالفعل في المخطط' : 'Place already in planner');
+        }
+        setTimeout(() => {
+          window.location.href = 'PlanDay.html'; // Redirect to planner page // توجيه إلى صفحة المخطط
+        }, 1000);
+      };
+
+      // ---------- INFO PANEL ---------- // لوحة المعلومات
+      function showPlace(p) { // Show info panel for selected place // عرض لوحة المعلومات للمكان المختار
+        const panel = document.getElementById('info-panel');
+        const placeKey = p.name + p.lat; // crude unique // مفتاح فريد تقريبي
+        if (panel.dataset.currentPlace === placeKey && panel.classList.contains('active')) { // Toggle if same place // إغلاق إذا كان نفس المكان
+          panel.classList.remove('active');
+          panel.dataset.currentPlace = '';
+          return;
+        }
+        panel.dataset.currentPlace = placeKey; // Store current place key // تخزين مفتاح المكان الحالي
+
+        // Update map to show the selected place // تحديث الخريطة لعرض المكان المختار
+        const bbox = `${p.lon-0.008},${p.lat-0.008},${p.lon+0.008},${p.lat+0.008}`;
+        document.querySelector('.map iframe').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik`;
+
+        // Populate panel fields // تعبئة حقول اللوحة
+        const name = currentLanguage === 'ar' ? (p.nameAr || p.name) : p.name;
+        const desc = currentLanguage === 'ar' ? p.desc : (p.descEn || p.desc);
+        const price = currentLanguage === 'ar' ? 'متوسط' : 'Moderate';
+        const time = p.time;
+        const distanceText = currentLanguage === 'ar' ? `${p.distance} كم` : `${p.distance} km`;
+        document.getElementById('p-title').innerText = name;
+        document.getElementById('p-rating').innerText = p.rating + '/5';
+        document.getElementById('p-distance').innerText = distanceText;
+        document.getElementById('p-time').innerText = time;
+        document.getElementById('p-price').innerText = price;
+        document.getElementById('p-desc').innerText = desc;
+
+        // Add action buttons (Map & Plan) // إضافة أزرار الإجراءات (الخريطة والمخطط)
+        const actionsDiv = document.getElementById('p-actions');
+        if (actionsDiv) {
+          actionsDiv.innerHTML = `
+            <button class="map-btn" onclick="openMap(${p.lat}, ${p.lon}, '${(name).replace(/'/g, "\\'")}', '${price}', '${time}', ${p.rating})">
+              <span>🗺️</span>
+              <span class="map-btn-text" data-ar="عرض" data-en="Map">${currentLanguage === 'ar' ? 'عرض' : 'Map'}</span>
+            </button>
+            <button class="plan-btn" onclick="addToPlan('${(name).replace(/'/g, "\\'")}')">
+              <span>📅</span>
+              <span class="plan-btn-text" data-ar="خطط" data-en="Plan">${currentLanguage === 'ar' ? 'خطط' : 'Plan'}</span>
+            </button>
+          `;
+        }
+
+        panel.classList.add('active'); // Show panel // إظهار اللوحة
+
+        // Save to history // حفظ في السجل
+        let history = JSON.parse(localStorage.getItem('hayyak_history') || '[]');
+        history = history.filter(i => i.title !== name);
+        history.unshift({ title: name, lat: p.lat, lon: p.lon, date: new Date().toISOString() });
+        if (history.length > 20) history.pop();
+        localStorage.setItem('hayyak_history', JSON.stringify(history));
+      }
+
+      // Open dedicated map page with parameters // فتح صفحة خريطة مخصصة مع معاملات
+      window.openMap = function(lat, lon, name, price, time, rating){
+        try{
+          const params = new URLSearchParams({lat: lat, lon: lon, name: name, price: price, time: time, rating: rating});
+          window.location.href = 'Map.html?' + params.toString();
+        }catch(e){ console.error(e); }
+      }
+
+      // ---------- TOAST ---------- // الإشعار
+      let toastTimeout;
+      function showError(message) { // Show temporary error/success message // عرض رسالة خطأ/نجاح مؤقتة
+        const toast = document.getElementById('error-toast');
+        toast.innerText = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500); // Auto hide after 3.5s // إخفاء تلقائي بعد 3.5 ثانية
+      }
+
+      // ---------- SEARCH & AUTOCOMPLETE ---------- // البحث والإكمال التلقائي
+      const searchInput = document.getElementById('search-input');
+      const autocompleteList = document.getElementById('autocomplete-list');
+
+      function showAutocomplete(query) { // Show autocomplete suggestions // عرض اقتراحات الإكمال التلقائي
+        const q = query.toLowerCase().trim();
+        const results = Object.values(allPlaces).flat().filter(p => {
+          const name = (currentLanguage === 'ar' ? (p.nameAr || p.name) : p.name).toLowerCase();
+          const desc = currentLanguage === 'ar' ? p.desc : (p.descEn || p.desc);
+          return name.includes(q) || desc.toLowerCase().includes(q);
+        }).slice(0, 5); // Limit to 5 results // حد أقصى 5 نتائج
+        if (!results.length) {
+          autocompleteList.classList.remove('active');
+          return;
+        }
+        autocompleteList.innerHTML = results.map(place => {
+          const name = currentLanguage === 'ar' ? (place.nameAr || place.name) : place.name;
+          const desc = currentLanguage === 'ar' ? place.desc : (place.descEn || place.desc);
+          return `<div class="autocomplete-item" onclick="window.selectPlace('${place.city}', '${place.name}')">
+            <div class="autocomplete-item-name">${name}</div>
+            <div class="autocomplete-item-desc">${desc}</div>
+          </div>`;
+        }).join('');
+        autocompleteList.classList.add('active');
+      }
+
+      window.selectPlace = function(city, placeName) { // Select a place from autocomplete // اختيار مكان من الإكمال التلقائي
+        const place = allPlaces[city].find(p => p.name === placeName);
+        if (!place) return;
+        searchInput.value = currentLanguage === 'ar' ? (place.nameAr || place.name) : place.name; // Set input value // تعيين قيمة حقل الإدخال
+        autocompleteList.classList.remove('active'); // Hide dropdown // إخفاء القائمة المنسدلة
+        currentCity = city; // Change city // تغيير المدينة
+        currentSearchQuery = ''; // Clear search query // مسح استعلام البحث
+        document.getElementById('city-select').value = city; // Update city dropdown // تحديث قائمة المدن
+        filterAndSort(); // Refresh list // تحديث القائمة
+        const distance = calculateDistance(userLocation.lat, userLocation.lon, place.lat, place.lon);
+        showPlace({...place, distance}); // Show info panel // إظهار لوحة المعلومات
+      };
+
+      function performSearch(query) { // Perform search when Enter pressed // تنفيذ البحث عند الضغط على Enter
+        const q = query.toLowerCase().trim();
+        if (q.length < 2) return;
+        const found = Object.values(allPlaces).flat().find(p => {
+          const name = (currentLanguage === 'ar' ? (p.nameAr || p.name) : p.name).toLowerCase();
+          const desc = currentLanguage === 'ar' ? p.desc : (p.descEn || p.desc);
+          return name.includes(q) || desc.toLowerCase().includes(q);
+        });
+        if (found) {
+          currentCity = found.city;
+          currentSearchQuery = q;
+          document.getElementById('city-select').value = currentCity;
+          filterAndSort();
+        } else {
+          showError(currentLanguage === 'ar' ? 'لم يتم العثور على نتائج' : 'No results found');
+        }
+      }
+
+      // Search input event listeners // مستمعات أحداث حقل البحث
+      searchInput.addEventListener('input', e => {
+        const q = e.target.value.trim();
+        if (q.length === 0) { currentSearchQuery = ''; filterAndSort(); }
+        q.length >= 2 ? showAutocomplete(q) : autocompleteList.classList.remove('active');
+      });
+      searchInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          performSearch(e.target.value.trim());
+          autocompleteList.classList.remove('active');
+        }
+      });
+
+      // ---------- INIT ---------- // التهيئة
+      document.addEventListener('DOMContentLoaded', () => { // Run when DOM is ready // يعمل عندما يكون DOM جاهزاً
+        // Attach event listeners // ربط مستمعات الأحداث
+        document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+        document.getElementById('city-select').addEventListener('change', (e) => changeCity(e.target.value));
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortPlaces(btn.dataset.sort, e);
+          });
+        });
+
+        // Load user profile // تحميل الملف الشخصي للمستخدم
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        if (profile.language && profile.language !== currentLanguage) {
+          currentLanguage = profile.language;
+          document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+          document.documentElement.lang = currentLanguage;
+          const btn = document.getElementById('translateBtn');
+          if (btn) btn.querySelector('span:last-child').textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+          translateAllContent();
+        }
+        if (profile.theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); // Apply dark theme if set // تطبيق السمة الداكنة إذا كانت محددة
+
+        getUserLocation();
+        fetchPlacesFromAPI({ category: 'Farm' }).then(apiPlaces => {
+          apiPlaces.forEach(p => HAYYAK_PLACES.push({ name: p.name_en||p.name_ar, nameAr: p.name_ar, city: p.city, lat: p.latitude, lon: p.longitude, rating: 0, price: p.price_range||'', time: p.opening_hours||'', category: p.category, desc: p.description_en||p.description_ar||'', phobias: p.phobia_triggers||[], medicalTriggers: p.medical_triggers||[], interestTags: p.interest_tags||[], _apiId: p.id }));
+          filterAndSort();
+        });
+        filterAndSort(); // Initial render
+      });
+    })(); // End of IIFE
+  </script>
+</body>
+</html>

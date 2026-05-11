@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // يحدد نوع المستند كـ HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element, language Arabic, direction right-to-left // العنصر الجذري، اللغة العربية، الاتجاه من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // يضبط ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Makes page responsive on mobile devices // يجعل الصفحة متجاوبة مع الأجهزة المحمولة -->
+  <title>حياك | HAYYAK</title>
+  <!-- Page title (bilingual) // عنوان الصفحة (ثنائي اللغة) -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon (browser tab icon) // أيقونة علامة تبويب المتصفح -->
+  <meta name="description" content="تطبيق حياك - دليلك الشامل لاستكشاف الإمارات العربية المتحدة. اكتشف المتاجر، المطاعم، السياحة، الشواطئ، والفنادق مع أفضل العروض اليومية." />
+  <!-- Meta description for SEO // وصف تعريفي لمحركات البحث -->
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts domain // اتصال مسبق بنطاق خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع خاصية عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Loads Cairo font from Google Fonts // تحميل خط Cairo من خطوط جوجل -->
+
+  <!-- Auth helpers (replaces Firebase) -->
+  <script src="JS/Auth.js"></script>
+
+  <script>
+    // Auth guard: redirect if already logged in
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/check.php', { credentials: 'include' });
+        const json = await res.json();
+        if (json.ok && json.data.logged_in) {
+          window.location.href = json.data.user.role === 'place_owner' ? 'OwnerDashboard.html' : 'Home.html';
+        }
+      } catch (_) { /* offline / first load — continue */ }
+    })();
+  </script>
+
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    /* Afeesh family (local) */
+    @font-face {
+      font-family: 'Afeesh'; /* Assigns a name to this font variant // يعين اسمًا لمتغير الخط هذا */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'), /* Specifies the font file location and format (modern) // يحدد موقع ملف الخط وتنسيقه (حديث) */
+           url('afeesh/Afeesh-Aadi.woff') format('woff'), /* Fallback format // تنسيق احتياطي */
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype'); /* Older fallback format // تنسيق احتياطي قديم */
+      font-weight: 400; /* Normal weight // وزن عادي */
+      font-style: normal; /* Normal style // نمط عادي */
+      font-display: swap; /* Shows fallback font while loading custom // عرض خط احتياطي أثناء تحميل الخط المخصص */
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; /* Bold weight // وزن عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; /* Light // خفيف */
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (THEME) // متغيرات CSS (السمة) ==================== */
+    :root {
+      --bg: #f5f5f7;        /* Light mode background // خلفية الوضع الفاتح */
+      --card: #ffffff;       /* Card background // خلفية البطاقة */
+      --ink: #0f0f10;        /* Main text color // لون النص الرئيسي */
+      --muted: #6b7280;      /* Muted text // نص باهت */
+      --line: #0f0f10;       /* Border color // لون الحدود */
+      --radius: 14px;        /* Border radius // نصف قطر الحدود */
+      --primary: #16243d;    /* Primary brand color // لون العلامة التجارية الأساسي */
+      --accent: #d4af37;     /* Accent color (gold) // لون مميز (ذهبي) */
+    }
+
+    /* ==================== GLOBAL RESETS // إعادة تعيين عامة ==================== */
+    * {
+      box-sizing: border-box; /* Include padding/border in width/height // تضمين الحشوة/الحدود في العرض/الارتفاع */
+    }
+    html, body {
+      height: 100%;          /* Full height // ارتفاع كامل */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+    }
+    body {
+      margin: 0;             /* Remove default margin // إزالة الهامش الافتراضي */
+      font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* Font stack // مجموعة الخطوط */
+      color: var(--ink);     /* Text color from theme // لون النص من السمة */
+      display: flex;         /* Enable flexbox layout // تفعيل تخطيط المرن */
+      flex-direction: column; /* Stack children vertically // تكديس العناصر عموديًا */
+    }
+
+    /* ==================== LAYOUT COMPONENTS // مكونات التخطيط ==================== */
+    .shell {
+      width: 100%;           /* Full width // عرض كامل */
+      max-width: 480px;      /* Limit width on large screens // تحديد العرض على الشاشات الكبيرة */
+      margin: 0 auto;        /* Center horizontally // توسيط أفقي */
+      padding: 16px;         /* Inner spacing // حشوة داخلية */
+      flex: 1;               /* Take remaining space in flex column // أخذ المساحة المتبقية في عمود المرن */
+    }
+    .card {
+      background: var(--card); /* Card background from theme // خلفية البطاقة من السمة */
+      border: 2px solid var(--line); /* Border using theme line color // حدود بلون الخط من السمة */
+      border-radius: var(--radius); /* Rounded corners using variable // زوايا دائرية باستخدام المتغير */
+      box-shadow: 0 2px 0 #0f0f10; /* Small shadow for depth // ظل صغير للعمق */
+    }
+
+    /* ==================== HEADER // الترويسة ==================== */
+    header.brand {
+      text-align: center;    /* Center align text // محاذاة النص للوسط */
+      background: #16243d;   /* Dark blue background // خلفية زرقاء داكنة */
+      color: #ffffff;        /* White text // نص أبيض */
+      padding: 20px;         /* Padding around content // حشوة حول المحتوى */
+      position: relative;    /* For absolute positioning of children // لتحديد موضع العناصر الفرعية بشكل مطلق */
+    }
+    .logo-text {
+      font-family: 'Afeesh', sans-serif; /* Use Afeesh font // استخدام خط Afeesh */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 48px;       /* Large font // خط كبير */
+      letter-spacing: 2px;   /* Space between letters // مسافة بين الأحرف */
+      color: #d4af37;        /* Gold color // لون ذهبي */
+    }
+    .logo-sub {
+      font-family: 'Afeesh', sans-serif; /* Afeesh font // خط Afeesh */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      color: #94a3b8;        /* Greyish blue // أزرق رمادي */
+      font-size: 20px;       /* Font size // حجم الخط */
+      margin-top: 2px;       /* Small top margin // هامش علوي صغير */
+      letter-spacing: 3px;   /* More spacing between letters // مسافة أكبر بين الأحرف */
+    }
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer {
+      background: #16243d;   /* Dark blue // أزرق داكن */
+      color: #ffffff;        /* White text // نص أبيض */
+      text-align: center;    /* Centered text // نص وسطي */
+      font-size: 14px;       /* Font size // حجم الخط */
+      padding: 20px;         /* Padding // حشوة */
+    }
+
+    /* ==================== FORM STYLES // أنماط النماذج ==================== */
+    .form-section { margin-bottom: 24px; } /* Bottom margin for spacing // هامش سفلي للتباعد */
+    .form-label {
+      display: block;        /* Block element // عنصر كتلة */
+      font-weight: 700;      /* Bold // عريض */
+      margin-bottom: 8px;    /* Bottom margin // هامش سفلي */
+      font-size: 16px;       /* Font size // حجم الخط */
+      color: var(--primary); /* Primary color // اللون الأساسي */
+    }
+    .form-input { 
+      width: 100%;           /* Full width // عرض كامل */
+      padding: 12px 16px;    /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      font-family: inherit;  /* Inherit font from parent // وراثة الخط من العنصر الأب */
+      font-size: 14px;       /* Font size // حجم الخط */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      outline: none;         /* Remove default outline // إزالة المخطط الافتراضي */
+      transition: border-color 0.2s; /* Smooth border color change // تغيير لون الحدود بسلاسة */
+    }
+    .form-input:focus { border-color: var(--accent); } /* Highlight border on focus // تمييز الحدود عند التركيز */
+    
+    /* Tags (selected items) // العلامات (العناصر المحددة) */
+    .tags {
+      display: flex;         /* Flex layout // تخطيط مرن */
+      flex-wrap: wrap;       /* Allow wrapping // السماح بالتفاف */
+      gap: 8px;              /* Gap between tags // فجوة بين العلامات */
+      margin-top: 8px;       /* Top margin // هامش علوي */
+    }
+    .tag {
+      background: var(--primary); /* Primary background // خلفية أساسية */
+      color: #fff;           /* White text // نص أبيض */
+      padding: 6px 12px;     /* Padding // حشوة */
+      border-radius: 20px;   /* Rounded // دائري */
+      font-size: 13px;       /* Font size // حجم الخط */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 8px;              /* Gap // فجوة */
+      animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Pop animation // حركة ظهور */
+    }
+    .tag span {
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      color: var(--accent);  /* Accent color // لون مميز */
+      font-weight: bold;     /* Bold // عريض */
+      font-size: 16px;       /* Font size // حجم الخط */
+      line-height: 1;        /* Normal line height // ارتفاع سطر عادي */
+    }
+    
+    .checkbox-wrapper {
+      display: flex;         /* Flex // مرن */
+      gap: 16px;             /* Gap // فجوة */
+      margin-top: 12px;      /* Top margin // هامش علوي */
+    }
+    .checkbox-label {
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 8px;              /* Gap // فجوة */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      font-size: 14px;       /* Font size // حجم الخط */
+    }
+    .checkbox-input {
+      width: 20px;           /* Width // العرض */
+      height: 20px;          /* Height // الارتفاع */
+      accent-color: var(--primary); /* Checkbox color // لون خانة الاختيار */
+    }
+
+    /* Submit button // زر الإرسال */
+    .submit-btn {
+      width: 100%;           /* Full width // عرض كامل */
+      background: var(--primary); /* Primary background // خلفية أساسية */
+      color: var(--accent);  /* Accent text // نص مميز */
+      padding: 16px;         /* Padding // حشوة */
+      border: none;          /* No border // بلا حدود */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      font-size: 18px;       /* Font size // حجم الخط */
+      font-weight: 700;      /* Bold // عريض */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      margin-top: 10px;      /* Top margin // هامش علوي */
+      box-shadow: 0 4px 0 #0f0f10; /* Shadow for 3D effect // ظل لتأثير ثلاثي الأبعاد */
+      transition: transform 0.1s, box-shadow 0.1s; /* Smooth transition // انتقال سلس */
+    }
+    .submit-btn:active {
+      transform: translateY(4px); /* Press down effect // تأثير الضغط لأسفل */
+      box-shadow: 0 0 0 #0f0f10;  /* Remove shadow // إزالة الظل */
+    }
+    .submit-btn.secondary {
+      background: transparent; /* Transparent background // خلفية شفافة */
+      color: var(--muted);    /* Muted text // نص باهت */
+      box-shadow: none;       /* No shadow // بلا ظل */
+      margin-top: 0;          /* No top margin // بلا هامش علوي */
+    }
+
+    /* Pop animation // حركة الظهور */
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Scrollable List & Search Styles // أنماط القائمة القابلة للتمرير والبحث */
+    .scrollable-list {
+      max-height: 250px;     /* Maximum height // أقصى ارتفاع */
+      overflow-y: auto;      /* Scroll if needed // تمرير إذا لزم */
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      gap: 10px;             /* Gap between items // فجوة بين العناصر */
+      margin-top: 16px;      /* Top margin // هامش علوي */
+      padding: 4px;          /* Padding // حشوة */
+    }
+    .list-item {
+      padding: 12px 16px;    /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      background: var(--card); /* Background // خلفية */
+      transition: all 0.2s;  /* Smooth transition // انتقال سلس */
+      text-align: right;     /* Right align (for RTL) // محاذاة لليمين (لـ RTL) */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      font-size: 14px;       /* Font size // حجم الخط */
+      display: flex;         /* Flex // مرن */
+      justify-content: space-between; /* Space between content and checkmark // مسافة بين المحتوى وعلامة الصح */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+    }
+    .list-item.selected {
+      background: var(--primary); /* Primary background when selected // خلفية أساسية عند الاختيار */
+      color: #fff;           /* White text // نص أبيض */
+      border-color: var(--primary); /* Match border // حدود مطابقة */
+    }
+    .list-item:hover {
+      transform: translateY(-2px); /* Slight lift on hover // رفع طفيف عند التمرير */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow // ظل */
+    }
+    .search-box {
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      background: #f5f5f7;   /* Light grey background // خلفية رمادية فاتحة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      padding: 10px 16px;    /* Padding // حشوة */
+      margin-bottom: 8px;    /* Bottom margin // هامش سفلي */
+    }
+    .search-input {
+      border: none;          /* No border // بلا حدود */
+      background: transparent; /* Transparent background // خلفية شفافة */
+      width: 100%;           /* Full width // عرض كامل */
+      outline: none;         /* No outline // بلا مخطط */
+      font-family: inherit;  /* Inherit font // وراثة الخط */
+      font-size: 14px;       /* Font size // حجم الخط */
+      margin-right: 8px;     /* Right margin (RTL) // هامش أيمن (RTL) */
+    }
+    
+    /* Step Styles // أنماط الخطوات */
+    .step {
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      animation: fadeIn 0.4s ease-out; /* Fade-in animation // حركة ظهور تدريجي */
+    }
+    .step.active { display: block; } /* Show active step // إظهار الخطوة النشطة */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Creative Card for last questions // بطاقة إبداعية للأسئلة الأخيرة */
+    .creative-card {
+      background: #ffffff;   /* White background // خلفية بيضاء */
+      border: 2px solid var(--accent); /* Gold border // حدود ذهبية */
+      border-radius: 24px;   /* Rounded corners // زوايا دائرية كبيرة */
+      padding: 30px 20px;    /* Padding // حشوة */
+      text-align: center;    /* Center text // توسيط النص */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05); /* Soft shadow // ظل ناعم */
+    }
+    .creative-card .form-label {
+      font-size: 20px;       /* Larger label // تسمية أكبر */
+      margin-bottom: 12px;   /* Bottom margin // هامش سفلي */
+      color: var(--primary); /* Primary color // اللون الأساسي */
+    }
+    .creative-card .form-input {
+      text-align: center;    /* Center text // توسيط النص */
+      font-size: 16px;       /* Font size // حجم الخط */
+      border-radius: 30px;   /* Very rounded // دائري جدًا */
+    }
+
+    /* Info Panel Styles // أنماط لوحة المعلومات */
+    .info-panel {
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      margin-top: 16px;      /* Top margin // هامش علوي */
+      padding: 14px;         /* Padding // حشوة */
+      background: var(--bg); /* Background // خلفية */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      animation: fade 0.4s;  /* Fade animation // حركة ظهور */
+      border: 1px solid var(--line); /* Border // حدود */
+    }
+    .info-panel.active { display: block; } /* Show when active // يظهر عند التفعيل */
+    .info-grid {
+      display: grid;         /* Grid // شبكة */
+      grid-template-columns: 1fr 1fr; /* Two columns // عمودان */
+      gap: 10px;             /* Gap // فجوة */
+    }
+    .info-box {
+      background: var(--card); /* Card background // خلفية بطاقة */
+      padding: 12px;         /* Padding // حشوة */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      text-align: center;    /* Center text // توسيط النص */
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      align-items: center;   /* Center horizontally // توسيط أفقي */
+      gap: 4px;              /* Gap // فجوة */
+      border: 1px solid #eee; /* Light border // حدود فاتحة */
+    }
+    .ib-icon {
+      font-size: 24px;       /* Icon size // حجم الأيقونة */
+      margin-bottom: 4px;    /* Bottom margin // هامش سفلي */
+    }
+    .ib-label {
+      font-size: 12px;       /* Label size // حجم التسمية */
+      color: var(--muted);   /* Muted color // لون باهت */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+    }
+    .ib-val {
+      font-size: 14px;       /* Value size // حجم القيمة */
+      font-weight: 700;      /* Bold // عريض */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scrollbar styling // تنسيق شريط التمرير */
+    .scrollable-list::-webkit-scrollbar { width: 6px; }
+    .scrollable-list::-webkit-scrollbar-track { background: #f1f1f1; }
+    .scrollable-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+    /* Location button // زر الموقع */
+    .location-btn {
+      margin-top: 10px;      /* Top margin // هامش علوي */
+      background: transparent; /* Transparent // شفاف */
+      border: 2px solid var(--primary); /* Primary border // حدود أساسية */
+      color: var(--primary); /* Primary text // نص أساسي */
+      padding: 10px;         /* Padding // حشوة */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      width: 100%;           /* Full width // عرض كامل */
+      transition: all 0.2s;  /* Smooth transition // انتقال سلس */
+    }
+    .location-btn:hover {
+      background: var(--primary); /* Primary background on hover // خلفية أساسية عند التمرير */
+      color: #fff;           /* White text // نص أبيض */
+    }
+    .location-status {
+      font-size: 12px;       /* Small font // خط صغير */
+      color: var(--muted);   /* Muted color // لون باهت */
+      margin-top: 6px;       /* Top margin // هامش علوي */
+      text-align: center;    /* Center text // توسيط النص */
+    }
+
+    /* Language Selection Styles // أنماط اختيار اللغة */
+    .language-options {
+      display: flex;         /* Flex // مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 16px;             /* Gap // فجوة */
+      margin-top: 30px;      /* Top margin // هامش علوي */
+    }
+    .language-option {
+      padding: 20px;         /* Padding // حشوة */
+      border: 3px solid var(--line); /* Thick border // حدود سميكة */
+      border-radius: 20px;   /* Rounded corners // زوايا دائرية */
+      text-align: center;    /* Center text // توسيط النص */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      background: var(--card); /* Card background // خلفية بطاقة */
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition // انتقال نطاط */
+    }
+    .language-option:hover {
+      transform: translateY(-5px); /* Lift on hover // رفع عند التمرير */
+      border-color: var(--accent); /* Accent border // حدود مميزة */
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15); /* Gold shadow // ظل ذهبي */
+    }
+    .language-option.selected {
+      background: var(--primary); /* Primary background when selected // خلفية أساسية عند الاختيار */
+      border-color: var(--accent); /* Accent border // حدود مميزة */
+      color: white;          /* White text // نص أبيض */
+    }
+    .lang-emoji {
+      font-size: 48px;       /* Large emoji // إيموجي كبير */
+      margin-bottom: 10px;   /* Bottom margin // هامش سفلي */
+    }
+    .lang-title {
+      font-size: 24px;       /* Large title // عنوان كبير */
+      font-weight: 700;      /* Bold // عريض */
+      margin-bottom: 5px;    /* Bottom margin // هامش سفلي */
+    }
+    .lang-subtitle {
+      font-size: 14px;       /* Small font // خط صغير */
+      color: var(--muted);   /* Muted color // لون باهت */
+    }
+    .language-option.selected .lang-subtitle {
+      color: #d4af37;        /* Gold when selected // ذهبي عند الاختيار */
+    }
+
+    /* Error toast notification // إشعار الخطأ */
+    .error-toast {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      top: 20px;             /* Distance from top // مسافة من الأعلى */
+      left: 50%;             /* Center horizontally // توسيط أفقي */
+      transform: translateX(-50%) translateY(-20px); /* Hidden above screen // مخفي فوق الشاشة */
+      background: #ef4444;   /* Red background // خلفية حمراء */
+      color: #ffffff;        /* White text // نص أبيض */
+      padding: 12px 24px;    /* Padding // حشوة */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Shadow // ظل */
+      opacity: 0;            /* Invisible // غير مرئي */
+      pointer-events: none;  /* Can't click // غير قابل للنقر */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      z-index: 2100;         /* High z-index // مؤشر z عالي */
+    }
+    .error-toast.show {
+      transform: translateX(-50%) translateY(0); /* Slide into view // انزلاق للظهور */
+      opacity: 1;            /* Visible // مرئي */
+    }
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <!-- Logo // الشعار -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <div class="logo-sub">HAYYAK</div>
+  </header>
+  
+  <!-- Error toast container // حاوية إشعار الخطأ -->
+  <div id="error-toast" class="error-toast"></div>
+
+  <main class="shell">
+    <!-- Card container for registration steps // حاوية البطاقة لخطوات التسجيل -->
+    <div class="card" style="padding: 24px; min-height: 450px; display: flex; flex-direction: column; justify-content: center;">
+      
+      <!-- Step 0: Language Selection // الخطوة 0: اختيار اللغة -->
+      <div id="step-0" class="step active">
+        <h1 style="text-align: center; margin-bottom: 10px; color: var(--primary);">أهلاً وسهلاً! 🌍<br><span style="font-size: 16px; color: var(--muted); font-weight: 400;">اختر لغتك المفضلة</span></h1>
+        <p style="text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 30px;">Choose your preferred language</p>
+        
+        <div class="language-options">
+          <!-- Arabic option // الخيار العربي -->
+          <div class="language-option" data-lang="ar">
+            <div class="lang-emoji">AE</div>
+            <div class="lang-title">العربية</div>
+            <div class="lang-subtitle">اللغة العربية</div>
+          </div>
+          <!-- English option // الخيار الإنجليزي -->
+          <div class="language-option" data-lang="en">
+            <div class="lang-emoji">🇬🇧</div>
+            <div class="lang-title">English</div>
+            <div class="lang-subtitle">English Language</div>
+          </div>
+        </div>
+
+        <script>
+          // Attach click handlers to language options. If selectLanguage isn't defined yet,
+          // wait briefly until it becomes available so clicks still work.
+          // ربط معالجات النقر بخيارات اللغة. إذا لم تكن selectLanguage معرفة بعد، انتظر قليلاً حتى تصبح متاحة.
+          document.querySelectorAll('.language-option').forEach(el => {
+            el.addEventListener('click', () => {
+              const lang = el.dataset.lang;
+              if (typeof window.selectLanguage === 'function') {
+                window.selectLanguage(lang);
+                return;
+              }
+              let tries = 0;
+              const iv = setInterval(() => {
+                if (typeof window.selectLanguage === 'function') {
+                  clearInterval(iv);
+                  window.selectLanguage(lang);
+                }
+                tries++;
+                if (tries > 50) { // ~5s timeout // مهلة ~5 ثوان
+                  clearInterval(iv);
+                  console.error('selectLanguage not available after waiting');
+                  const toast = document.getElementById('error-toast');
+                  if (toast) { toast.innerText = 'خطأ: وظيفة اللغة غير متاحة'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 3500); }
+                }
+              }, 100);
+            });
+          });
+        </script>
+      </div>
+
+      <!-- Step A: Account Type // الخطوة أ: نوع الحساب -->
+      <div id="step-A" class="step">
+        <h1 style="text-align:center;margin-bottom:10px;color:var(--primary);">من أنت؟ 🤔<br><span style="font-size:16px;color:var(--muted);font-weight:400;">اختر نوع حسابك</span></h1>
+        <div style="display:grid;gap:16px;margin-top:24px;">
+          <div class="creative-card account-type-card" data-role="user" style="cursor:pointer;text-align:center;padding:28px 20px;transition:border-color 0.2s;">
+            <div style="font-size:56px;margin-bottom:10px;">👤</div>
+            <div style="font-size:20px;font-weight:700;color:var(--primary);">مستخدم / User</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px;">استكشف الأماكن وأدر ملفك الشخصي</div>
+          </div>
+          <div class="creative-card account-type-card" data-role="place_owner" style="cursor:pointer;text-align:center;padding:28px 20px;transition:border-color 0.2s;">
+            <div style="font-size:56px;margin-bottom:10px;">🏢</div>
+            <div style="font-size:20px;font-weight:700;color:var(--primary);">صاحب مكان / Place Owner</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px;">أضف وأدر أماكنك التجارية</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step B: Auth Form (Sign Up / Login) // الخطوة ب: نموذج المصادقة -->
+      <div id="step-B" class="step">
+        <h1 id="auth-title" style="text-align:center;margin-bottom:10px;color:var(--primary);">تسجيل الدخول<br><span style="font-size:16px;color:var(--muted);font-weight:400;">أو إنشاء حساب جديد</span></h1>
+
+        <!-- Tabs -->
+        <div style="display:flex;border-bottom:2px solid var(--line);margin-bottom:20px;">
+          <button id="tab-signup" onclick="switchAuthTab('signup')" style="flex:1;padding:10px;background:transparent;border:none;font-weight:700;font-size:15px;cursor:pointer;color:var(--primary);border-bottom:3px solid var(--primary);margin-bottom:-2px;">إنشاء حساب</button>
+          <button id="tab-login"  onclick="switchAuthTab('login')"  style="flex:1;padding:10px;background:transparent;border:none;font-weight:700;font-size:15px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;">تسجيل دخول</button>
+        </div>
+
+        <!-- Sign Up form -->
+        <div id="form-signup">
+          <input type="email"    id="auth-email-reg"  class="form-input" placeholder="البريد الإلكتروني / Email" style="margin-bottom:12px;" dir="ltr">
+          <input type="password" id="auth-pass-reg"   class="form-input" placeholder="كلمة المرور / Password (8+ chars)" style="margin-bottom:12px;" dir="ltr">
+          <input type="password" id="auth-pass-conf"  class="form-input" placeholder="تأكيد كلمة المرور / Confirm Password" style="margin-bottom:20px;" dir="ltr">
+          <button class="submit-btn" onclick="doRegister()">إنشاء حساب ✅</button>
+        </div>
+
+        <!-- Login form -->
+        <div id="form-login" style="display:none;">
+          <input type="email"    id="auth-email-log"  class="form-input" placeholder="البريد الإلكتروني / Email" style="margin-bottom:12px;" dir="ltr">
+          <input type="password" id="auth-pass-log"   class="form-input" placeholder="كلمة المرور / Password" style="margin-bottom:20px;" dir="ltr">
+          <button class="submit-btn" onclick="doLogin()">تسجيل الدخول 🔑</button>
+        </div>
+
+        <button class="submit-btn secondary" onclick="showStep('A')">↻ رجوع</button>
+      </div>
+
+      <!-- Step 1: Name // الخطوة 1: الاسم -->
+      <div id="step-1" class="step">
+        <h1 id="name-title" style="text-align: center; margin-bottom: 24px; color: var(--primary);">مرحباً بك! 👋<br><span id="name-subtitle" style="font-size: 16px; color: var(--muted); font-weight: 400;">لنتعرف عليك أكثر</span></h1>
+        
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">👤</div>
+          <label id="name-label" class="form-label">ما اسمك؟</label>
+          <p id="name-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">يرجى كتابة الاسم باللغتين</p>
+          <!-- Arabic name input // حقل الاسم بالعربية -->
+          <input type="text" id="nameAr" class="form-input" placeholder="الاسم بالعربية" style="margin-bottom: 12px; text-align: right;" dir="rtl">
+          <!-- English name input // حقل الاسم بالإنجليزية -->
+          <input type="text" id="nameEn" class="form-input" placeholder="Name in English" style="text-align: left;" dir="ltr">
+        </div>
+
+        <button id="next-btn-1" class="submit-btn" onclick="nextStep(1)">التالي ⬅️</button>
+      </div>
+
+      <!-- Step 2: Date of Birth // الخطوة 2: تاريخ الميلاد -->
+      <div id="step-2" class="step">
+        <h1 id="dob-title" style="text-align: center; margin-bottom: 24px; color: var(--primary);">تاريخ ميلادك 🎂</h1>
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">📅</div>
+          <label id="dob-label" class="form-label">متى تاريخ ميلادك؟</label>
+          <p id="dob-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">لنحتفل معك بيومك المميز</p>
+          <input type="date" id="dob" class="form-input" style="text-align: center;">
+        </div>
+        <button id="next-btn-2" class="submit-btn" onclick="nextStep(2)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(2)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 3: Status // الخطوة 3: الصفة -->
+      <div id="step-3" class="step">
+        <h1 id="status-title" style="text-align: center; margin-bottom: 24px; color: var(--primary);">ما هي صفتك؟ 🛂</h1>
+        <div class="form-section">
+          <label id="status-label" class="form-label">اختر صفتك</label>
+          <select id="user-status" class="form-input">
+            <option value="" disabled selected>اختر صفتك</option>
+            <option value="Resident">مقيم</option>
+            <option value="Tourist">سائح</option>
+            <option value="Expat">وافد</option>
+            <option value="Prefer not to answer">أفضل عدم الإجابة</option>
+          </select>
+        </div>
+        <button id="next-btn-3" class="submit-btn" onclick="nextStep(3)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(3)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 4: Emirate // الخطوة 4: الإمارة -->
+      <div id="step-4" class="step">
+        <h1 id="location-title" style="text-align: center; margin-bottom: 24px; color: var(--primary);">من وين؟ 🇦🇪</h1>
+        <div class="form-section">
+          <label id="location-label" class="form-label">اختر الإمارة</label>
+          <select id="emirate" class="form-input">
+            <option value="" disabled selected>اختر الإمارة</option>
+            <option value="Abu Dhabi">أبوظبي</option>
+            <option value="Dubai">دبي</option>
+            <option value="Sharjah">الشارقة</option>
+            <option value="Ajman">عجمان</option>
+            <option value="Umm Al Quwain">أم القيوين</option>
+            <option value="Ras Al Khaimah">رأس الخيمة</option>
+            <option value="Fujairah">الفجيرة</option>
+          </select>
+          <!-- Automatic location detection button // زر تحديد الموقع التلقائي -->
+          <button type="button" class="location-btn" onclick="detectLocation()">
+            <span id="location-btn-text">📍 تحديد موقعي تلقائياً</span>
+          </button>
+          <div id="location-status" class="location-status"></div>
+        </div>
+        <button id="next-btn-4" class="submit-btn" onclick="nextStep(4)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(4)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 5: Medical Conditions // الخطوة 5: الحالات الصحية -->
+      <div id="step-5" class="step">
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">🏥</div>
+          <label id="medical-title" class="form-label">هل لديك أي حالات صحية؟</label>
+          <p id="medical-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">لتقديم توصيات تناسب صحتك</p>
+          
+          <!-- Search box for medical conditions // مربع بحث الحالات الصحية -->
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" class="search-input" placeholder="ابحث عن الحالات..." oninput="filterList('medical', this.value)">
+          </div>
+          <!-- Container for medical conditions list // حاوية قائمة الحالات الصحية -->
+          <div id="medical-list-container" class="scrollable-list"></div>
+          
+          <!-- Custom medical condition input // إدخال حالة صحية مخصصة -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px;">
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="custom-medical-input" class="form-input" placeholder="أضف حالة أخرى..." style="padding: 8px; font-size: 13px;">
+              <button class="submit-btn" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addCustomMedical()">+</button>
+            </div>
+            <!-- Side effects input // إدخال الأعراض الجانبية -->
+            <input type="text" id="custom-medical-side-effects" class="form-input" placeholder="الأعراض الجانبية (اختياري)" style="padding: 8px; font-size: 13px;">
+          </div>
+        </div>
+        <button id="next-btn-5" class="submit-btn" onclick="nextStep(5)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(5)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 6: Allergies // الخطوة 6: الحساسية -->
+      <div id="step-6" class="step">
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">🥜</div>
+          <label id="allergy-title" class="form-label">عندك حساسية من أكل معين؟</label>
+          <p id="allergy-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">صحتك تهمنا!</p>
+
+          <!-- Search box for allergies // مربع بحث الحساسية -->
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" class="search-input" placeholder="ابحث عن الحساسية..." oninput="filterList('allergy', this.value)">
+          </div>
+          <!-- Container for allergies list // حاوية قائمة الحساسية -->
+          <div id="allergy-list-container" class="scrollable-list"></div>
+          
+          <!-- Custom allergy input // إدخال حساسية مخصصة -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px;">
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="custom-allergy-input" class="form-input" placeholder="أضف حساسية أخرى..." style="padding: 8px; font-size: 13px;">
+              <button class="submit-btn" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addCustomAllergy()">+</button>
+            </div>
+          </div>
+        </div>
+        <button id="next-btn-6" class="submit-btn" onclick="nextStep(6)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(6)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 7: Phobias // الخطوة 7: الفوبيا -->
+      <div id="step-7" class="step">
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">😨</div>
+          <label id="phobia-title" class="form-label">هل عندك أي مخاوف (فوبيا)؟</label>
+          <p id="phobia-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">عشان نتجنب الأماكن اللي ما تريحك</p>
+          
+          <!-- Search box for phobias // مربع بحث الفوبيا -->
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" class="search-input" placeholder="ابحث عن الفوبيا..." oninput="filterList('phobia', this.value)">
+          </div>
+          <!-- Container for phobias list // حاوية قائمة الفوبيا -->
+          <div id="phobia-list-container" class="scrollable-list"></div>
+
+          <!-- Custom phobia input // إدخال فوبيا مخصصة -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px;">
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="custom-phobia-input" class="form-input" placeholder="أضف فوبيا أخرى..." style="padding: 8px; font-size: 13px;">
+              <button class="submit-btn" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addCustomPhobia()">+</button>
+            </div>
+          </div>
+        </div>
+        <button id="next-btn-7" class="submit-btn" onclick="nextStep(7)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(7)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 8: Interests // الخطوة 8: الاهتمامات -->
+      <div id="step-8" class="step">
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">⚽</div>
+          <label id="interest-title" class="form-label">ما هي اهتماماتك؟</label>
+          <p id="interest-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">عشان نقترح عليك فعاليات تناسب جوك</p>
+          
+          <!-- Search box for interests // مربع بحث الاهتمامات -->
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" class="search-input" placeholder="ابحث عن اهتمامات..." oninput="filterList('interest', this.value)">
+          </div>
+          <!-- Container for interests list // حاوية قائمة الاهتمامات -->
+          <div id="interest-list-container" class="scrollable-list"></div>
+
+          <!-- Custom interest input // إدخال اهتمام مخصص -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px;">
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="custom-interest-input" class="form-input" placeholder="أضف اهتمام آخر..." style="padding: 8px; font-size: 13px;">
+              <button class="submit-btn" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addCustomInterest()">+</button>
+            </div>
+          </div>
+        </div>
+        <button id="next-btn-8" class="submit-btn" onclick="nextStep(8)">التالي ⬅️</button>
+        <button class="submit-btn secondary" onclick="prevStep(8)">↻ رجوع</button>
+      </div>
+
+      <!-- Step 9: Food Preferences // الخطوة 9: تفضيلات الطعام -->
+      <div id="step-9" class="step">
+        <div class="creative-card">
+          <div style="font-size: 48px; margin-bottom: 10px;">🍔</div>
+          <label id="food-title" class="form-label">وش تحب تاكل؟</label>
+          <p id="food-description" style="font-size: 13px; color: var(--muted); margin-bottom: 20px;">اختر أنواع الطعام المفضلة لديك</p>
+          
+          <!-- Search box for food // مربع بحث الطعام -->
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" class="search-input" placeholder="ابحث عن الأكل..." oninput="filterList('food', this.value)">
+          </div>
+          <!-- Container for food list // حاوية قائمة الطعام -->
+          <div id="food-list-container" class="scrollable-list"></div>
+          
+          <!-- Info panel for selected food // لوحة معلومات للطعام المحدد -->
+          <div id="food-info-panel" class="info-panel">
+            <h3 id="f-title" style="margin:0 0 12px; text-align:center; font-size: 18px;"></h3>
+            <div class="info-grid">
+              <div class="info-box">
+                <div class="ib-icon">🥗</div>
+                <div class="ib-label">صحي؟</div>
+                <div class="ib-val" id="f-healthy"></div>
+              </div>
+              <div class="info-box" style="grid-column: span 2;">
+                <div class="ib-icon">⚠️</div>
+                <div class="ib-label">مسببات الحساسية</div>
+                <div class="ib-val" id="f-allergies"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Healthy diet checkbox // خانة اختيار النظام الصحي -->
+          <div class="checkbox-wrapper" style="justify-content: center; margin-top: 20px;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="healthy" class="checkbox-input">
+              <span id="healthy-label">صحي / دايت 🥗</span>
+            </label>
+          </div>
+        </div>
+        <!-- Save button // زر الحفظ -->
+        <button id="save-btn" class="submit-btn" onclick="saveProfile()">حفظ وانطلاق 🚀</button>
+        <button class="submit-btn secondary" onclick="prevStep(9)">↻ رجوع</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Teleport Confirmation Modal // نافذة تأكيد الانتقال -->
+  <div class="modal" id="teleport-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:20px;">
+    <div class="modal-content" style="background:var(--card); border:2px solid var(--line); border-radius:var(--radius); padding:24px; max-width:400px; width:100%; box-shadow:0 4px 0 #0f0f10; text-align:center; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+      <div style="font-size:48px; margin-bottom:16px;">🚀</div>
+      <h2 style="margin-bottom:12px; color:var(--primary); font-size:24px;" id="teleport-title"></h2>
+      <p style="color:var(--muted); margin-bottom:24px; font-size:16px;" id="teleport-desc"></p>
+      <button class="submit-btn" onclick="window.location.href='home.html'" id="teleport-btn"></button>
+    </div>
+  </div>
+
+  <!-- Footer // التذييل -->
+  <footer id="footer">© عبدالله بن ناصر - حياك</footer>
+
+  <script>
+    // ==================== LANGUAGE DATA // بيانات اللغة ====================
+    const translations = {
+      ar: {
+        // Step 0
+        "step0_title": "أهلاً وسهلاً! 🌍",
+        "step0_subtitle": "اختر لغتك المفضلة",
+        "arabic": "العربية",
+        "arabic_sub": "اللغة العربية",
+        "english": "English",
+        "english_sub": "English Language",
+        
+        // Step 1
+        "step1_title": "مرحباً بك! 👋",
+        "step1_subtitle": "لنتعرف عليك أكثر",
+        "name_label": "ما اسمك؟",
+        "name_desc": "يرجى كتابة الاسم باللغتين",
+        "next": "التالي ⬅️",
+        "back": "↻ رجوع",
+
+        // Step 2 (DOB)
+        "dob_title": "تاريخ ميلادك 🎂",
+        "dob_label": "متى تاريخ ميلادك؟",
+        "dob_desc": "لنحتفل معك بيومك المميز",
+        
+        // Step 2 (Status)
+        "step2_title": "ما هي صفتك؟ 🛂",
+        "status_label": "اختر صفتك",
+        "status_placeholder": "اختر صفتك",
+        "status_citizen": "مواطن",
+        "status_resident": "مقيم",
+        "status_tourist": "سائح",
+        "status_expat": "وافد",
+        "status_prefer_not_to_answer": "أفضل عدم الإجابة",
+
+        // Step 3 (Location)
+        "step3_title": "من وين؟ 🇦🇪",
+        "location_label": "اختر الإمارة",
+        "emirate_placeholder": "اختر الإمارة",
+        "detect_location": "📍 تحديد موقعي تلقائياً",
+        "detecting": "جاري تحديد الموقع...",
+        "location_found": "تم تحديد الموقع: ",
+        "location_manual": "تم تحديد الإحداثيات. الرجاء اختيار الإمارة يدوياً.",
+        "location_error": "تعذر تحديد الموقع. تأكد من تفعيل الـ GPS.",
+        "no_location": "المتصفح لا يدعم تحديد الموقع.",
+        
+        // Step 4
+        "allergy_title": "عندك حساسية من أكل معين؟",
+        "allergy_desc": "صحتك تهمنا!",
+        "allergy_search": "ابحث عن الحساسية...",
+        "allergy_add_placeholder": "أضف حساسية أخرى...",
+        
+        // Step 5
+        "food_title": "وش تحب تاكل؟",
+        "food_desc": "اختر أنواع الطعام المفضلة لديك",
+        "food_search": "ابحث عن الأكل...",
+        "healthy_label": "صحي / دايت 🥗",
+        "healthy_yes": "نعم 🥗",
+        "healthy_no": "لا 🍔",
+        "healthy_medium": "متوسط ⚖️",
+        "allergy_none": "لا يوجد",
+        "allergy_nuts": "مكسرات 🥜",
+        "allergy_seafood": "مأكولات بحرية 🐟",
+        "allergy_dairy": "منتجات الألبان 🥛",
+        "allergy_egg": "بيض 🥚",
+        "allergy_gluten": "غلوتين 🍞",
+        
+        // Step 6
+        "medical_title": "هل لديك أي حالات صحية؟",
+        "medical_desc": "لتقديم توصيات تناسب صحتك",
+        "medical_search": "ابحث عن الحالات...",
+        "medical_add_placeholder": "أضف حالة أخرى...",
+        "medical_side_effects_placeholder": "الأعراض الجانبية (اختياري)",
+        "phobia_add_placeholder": "أضف فوبيا أخرى...",
+        "location_required_msg": "الرجاء الضغط على 'تحديد موقعي تلقائياً' للمتابعة",
+
+        // Step 7
+        "phobia_title": "هل عندك أي مخاوف (فوبيا)؟",
+        "phobia_desc": "عشان نتجنب الأماكن اللي ما تريحك",
+        "phobia_search": "ابحث عن الفوبيا...",
+        
+        // Step 8
+        "interest_title": "ما هي اهتماماتك؟",
+        "interest_desc": "عشان نقترح عليك فعاليات تناسب جوك",
+        "interest_search": "ابحث عن اهتمامات...",
+        "interest_add_placeholder": "أضف اهتمام آخر...",
+
+        // Validation
+        "select_medical": "الرجاء اختيار حالة صحية واحدة على الأقل",
+        "select_allergy": "الرجاء اختيار حساسية واحدة على الأقل",
+        "select_phobia": "الرجاء اختيار فوبيا واحدة على الأقل",
+        "select_interest": "الرجاء اختيار اهتمام واحد على الأقل",
+        "select_food": "الرجاء اختيار نوع طعام واحد على الأقل",
+        
+        // Footer & Save
+        "save": "حفظ وانطلاق 🚀",
+        "footer": "© عبدالله بن ناصر - حياك",
+        
+        // Emirate options (Arabic)
+        "emirate_options": [
+          {value: "Abu Dhabi", text: "أبوظبي"},
+          {value: "Dubai", text: "دبي"},
+          {value: "Sharjah", text: "الشارقة"},
+          {value: "Ajman", text: "عجمان"},
+          {value: "Umm Al Quwain", text: "أم القيوين"},
+          {value: "Ras Al Khaimah", text: "رأس الخيمة"},
+          {value: "Fujairah", text: "الفجيرة"}
+        ],
+
+        "teleport_title": "جاهز للانطلاق؟",
+        "teleport_desc": "تم حفظ ملفك الشخصي بنجاح.",
+        "teleport_btn": "انطلق إلى الرئيسية"
+      },
+      en: {
+        // Step 0
+        "step0_title": "Welcome! 🌍",
+        "step0_subtitle": "Choose your preferred language",
+        "arabic": "العربية",
+        "arabic_sub": "Arabic Language",
+        "english": "English",
+        "english_sub": "English Language",
+        
+        // Step 1
+        "step1_title": "Welcome! 👋",
+        "step1_subtitle": "Let's get to know you better",
+        "name_label": "What's your name?",
+        "name_desc": "Please write your name in both languages",
+        "next": "Next ➡️",
+        "back": "↺ Back",
+
+        // Step 2 (DOB)
+        "dob_title": "Your Date of Birth 🎂",
+        "dob_label": "When is your birthday?",
+        "dob_desc": "So we can celebrate your special day with you",
+        
+        // Step 2 (Status)
+        "step2_title": "What is your status? 🛂",
+        "status_label": "Select Status",
+        "status_placeholder": "Select Status",
+        "status_citizen": "Citizen",
+        "status_resident": "Resident",
+        "status_tourist": "Tourist",
+        "status_expat": "Expat",
+        "status_prefer_not_to_answer": "Prefer not to answer",
+
+        // Step 3 (Location)
+        "step3_title": "Where from? 🇦🇪",
+        "location_label": "Select Emirate",
+        "emirate_placeholder": "Select Emirate",
+        "detect_location": "📍 Detect my location automatically",
+        "detecting": "Detecting location...",
+        "location_found": "Location detected: ",
+        "location_manual": "Coordinates detected. Please select emirate manually.",
+        "location_error": "Failed to detect location. Make sure GPS is enabled.",
+        "no_location": "Browser doesn't support location detection.",
+        
+        // Step 4
+        "allergy_title": "Do you have any food allergies?",
+        "allergy_desc": "Your health matters!",
+        "allergy_search": "Search for allergies...",
+        "allergy_add_placeholder": "Add another allergy...",
+        
+        // Step 5
+        "food_title": "What do you like to eat?",
+        "food_desc": "Choose your favorite food types",
+        "food_search": "Search for food...",
+        "healthy_label": "Healthy / Diet 🥗",
+        "healthy_yes": "Yes 🥗",
+        "healthy_no": "No 🍔",
+        "healthy_medium": "Medium ⚖️",
+        "allergy_none": "None",
+        "allergy_nuts": "Nuts 🥜",
+        "allergy_seafood": "Seafood 🐟",
+        "allergy_dairy": "Dairy 🥛",
+        "allergy_egg": "Egg 🥚",
+        "allergy_gluten": "Gluten 🍞",
+        
+        // Step 6
+        "medical_title": "Do you have any medical conditions?",
+        "medical_desc": "To provide recommendations that suit your health",
+        "medical_search": "Search for conditions...",
+        "medical_add_placeholder": "Add another condition...",
+        "medical_side_effects_placeholder": "Side Effects (Optional)",
+        "phobia_add_placeholder": "Add another phobia...",
+        "location_required_msg": "Please click 'Detect my location automatically' to proceed",
+
+        // Step 7
+        "phobia_title": "Do you have any phobias?",
+        "phobia_desc": "So we can avoid places that make you uncomfortable",
+        "phobia_search": "Search for phobias...",
+        
+        // Step 8
+        "interest_title": "What are your interests?",
+        "interest_desc": "To suggest activities that match your vibe",
+        "interest_search": "Search for interests...",
+        "interest_add_placeholder": "Add another interest...",
+
+        // Validation
+        "select_medical": "Please select at least one medical condition",
+        "select_allergy": "Please select at least one allergy",
+        "select_phobia": "Please select at least one phobia",
+        "select_interest": "Please select at least one interest",
+        "select_food": "Please select at least one food type",
+        
+        // Footer & Save
+        "save": "Save & Start 🚀",
+        "footer": "© Abdullah bin Nasser - Hayyak",
+        
+        // Emirate options (English)
+        "emirate_options": [
+          {value: "Abu Dhabi", text: "Abu Dhabi"},
+          {value: "Dubai", text: "Dubai"},
+          {value: "Sharjah", text: "Sharjah"},
+          {value: "Ajman", text: "Ajman"},
+          {value: "Umm Al Quwain", text: "Umm Al Quwain"},
+          {value: "Ras Al Khaimah", text: "Ras Al Khaimah"},
+          {value: "Fujairah", text: "Fujairah"}
+        ],
+
+        "teleport_title": "Ready to go?",
+        "teleport_desc": "Your profile has been saved successfully.",
+        "teleport_btn": "Go to Home"
+      }
+    };
+
+    // ==================== DATA ARRAYS // مصفوفات البيانات ====================
+    // Phobias data (bilingual with emojis) // بيانات الفوبيا (ثنائية اللغة مع إيموجيات)
+    const phobiasData = {
+      ar: [
+        "💪 لا يوجد",
+        "👥 الفوبيا الاجتماعية",
+        "🌑 فوبيا الظلام",
+        "🎤 فوبيا التحدث أمام الجمهور",
+        "🧗 فوبيا المرتفعات",
+        "📦 فوبيا الأماكن المغلقة",
+        "✈️ فوبيا الطيران",
+        "🐕 فوبيا الكلاب",
+        "🐍 فوبيا الثعابين",
+        "🌊 فوبيا الماء",
+        "⚡ فوبيا الرعد/البرق",
+        "🦠 فوبيا الجراثيم",
+        "🩸 فوبيا الدم",
+        "🦷 فوبيا أطباء الأسنان",
+        "🏙️ فوبيا الأماكن المفتوحة/المزدحمة",
+        "💀 فوبيا الموت",
+        "🔥 فوبيا النار",
+        "🧼 فوبيا القذارة",
+        "🕳️ فوبيا الثقوب",
+        "⏳ فوبيا الزمن",
+      ],
+      en: [
+        "💪 None",
+        "👥 Fear of Social Situations",
+        "🌑 Fear of Darkness",
+        "🎤 Fear of Public Speaking",
+        "🧗 Fear of Heights",
+        "📦 Fear of Enclosed Spaces",
+        "✈️ Fear of Flying",
+        "🐕 Fear of Dogs",
+        "🐍 Fear of Snakes",
+        "🌊 Fear of Water",
+        "⚡ Fear of Thunder/Lightning",
+        "🦠 Fear of Germs",
+        "🩸 Fear of Blood",
+        "🦷 Fear of Dentists",
+        "🏙️ Fear of Open/Crowded Places",
+        "💀 Fear of Death",
+        "🔥 Fear of Fire",
+        "🧼 Fear of Dirt",
+        "🕳️ Fear of Holes",
+        "⏳ Fear of Time",
+      ]
+    };
+
+    const interestsData = {
+      ar: [
+        "⚽ كرة القدم", "🏀 كرة السلة", "🎾 التنس", "🏊 السباحة", "🏃 الجري",
+        "🎨 الرسم", "📚 القراءة", "🎮 ألعاب الفيديو", "🎵 الموسيقى", "✈️ السفر",
+        "📸 التصوير", "🍳 الطبخ", "🎣 صيد السمك", "🚴 ركوب الدراجات", "🧘 اليوغا",
+        "🎭 المسرح", "🎤 الغناء", "💃 الرقص", "♟️ الشطرنج", "🧗 التسلق"
+      ],
+      en: [
+        "⚽ Football", "🏀 Basketball", "🎾 Tennis", "🏊 Swimming", "🏃 Running",
+        "🎨 Painting", "📚 Reading", "🎮 Video Games", "🎵 Music", "✈️ Travel",
+        "📸 Photography", "🍳 Cooking", "🎣 Fishing", "🚴 Cycling", "🧘 Yoga",
+        "🎭 Theater", "🎤 Singing", "💃 Dancing", "♟️ Chess", "🧗 Climbing"
+      ]
+    };
+
+    const allergiesData = {
+      ar: [
+        "💪 لا يوجد",
+        "🥛 حليب", "🥚 بيض", "🥜 فول سوداني", "🌰 مكسرات", "🐟 سمك", "🍤 روبيان", 
+        "🌾 قمح", "🫘 صويا", "🌰 لوز", "🌰 كاجو", "🌰 جوز", "🌰 فستق", "🌰 بندق", 
+        "🍓 فراولة", "🍅 طماطم", "🍫 شوكولاتة", "☕ قهوة", "🍯 عسل", "🐄 حليب بقر"
+      ],
+      en: [
+        "💪 None",
+        "🥛 Milk", "🥚 Eggs", "🥜 Peanuts", "🌰 Tree nuts", "🐟 Fish", "🍤 Shrimp", 
+        "🌾 Wheat", "🫘 Soy", "🌰 Almonds", "🌰 Cashews", "🌰 Walnuts", "🌰 Pistachios", "🌰 Hazelnuts", 
+        "🍓 Strawberries", "🍅 Tomatoes", "🍫 Chocolate", "☕ Coffee", "🍯 Honey", "🐄 Cow milk"
+      ]
+    };
+
+    const medicalConditionsData = {
+      ar: [
+        "💪 لا يوجد",
+        "💉 السكري", "🫀 ضغط الدم", "🫁 الربو", "😰 القلق", "👁️ عمى الألوان",
+        "😔 الاكتئاب", "😴 الأرق", "🦴 التهاب المفاصل", "🤕 الصداع النصفي", "💓 أمراض القلب", "⚡ الصرع", "🔙 ألم الظهر", "👓 ضعف النظر",
+        "🩸 فقر الدم", "⚖️ السمنة", "🫘 أمراض الكلى", "🦠 ضعف المناعة"
+      ],
+      en: [
+        "💪 None",
+        "💉 Diabetes", "🫀 High Blood Pressure", "🫁 Asthma", "😰 Anxiety", "👁️ Color Blindness",
+        "😔 Depression", "😴 Insomnia", "🦴 Arthritis", "🤕 Migraine", "💓 Heart Disease", "⚡ Epilepsy", "🔙 Back Pain", "👓 Poor Eyesight",
+        "🩸 Anemia", "⚖️ Obesity", "🫘 Kidney Disease", "🦠 Immunodeficiency"
+      ]
+    };
+
+    const foodTypesData = {
+      ar: [
+        "🌶️ حار", "🍬 حلو", "🧂 مالح", "🍋 حامض", "🥩 أومامي", "🔥 مشوي", "🍟 مقلي", 
+        "🥗 نباتي", "🌿 نباتي صرف", "🍗 دجاج", "🥩 لحم بقر", "🦞 مأكولات بحرية", 
+        "🇸🇦 أكل عربي", "🇮🇹 أكل إيطالي", "🇨🇳 أكل صيني", "🍔 وجبات سريعة", "🥗 أكل صحي", 
+        "💪 عالي البروتين", "🍏 عضوي", "🌾 خالي من الغلوتين"
+      ],
+      en: [
+        "🌶️ Spicy", "🍬 Sweet", "🧂 Salty", "🍋 Sour", "🥩 Umami", "🔥 Grilled", "🍟 Fried", 
+        "🥗 Vegetarian", "🌿 Vegan", "🍗 Chicken", "🥩 Beef", "🦞 Seafood", 
+        "🇸🇦 Arabic", "🇮🇹 Italian", "🇨🇳 Chinese", "🍔 Fast food", "🥗 Healthy", 
+        "💪 High protein", "🍏 Organic", "🌾 Gluten-free"
+      ]
+    };
+
+    // ==================== STATE // الحالة ====================
+    let selectedLanguage = 'ar'; /* Selected language // اللغة المختارة */
+    let selectedPhobias = new Set(); /* Set of selected phobias // مجموعة الفوبيا المختارة */
+    let selectedInterests = new Set(); /* Set of selected interests // مجموعة الاهتمامات المختارة */
+    let selectedAllergies = new Set(); /* Set of selected allergies // مجموعة الحساسية المختارة */
+    let selectedFoodTypes = new Set(); /* Set of selected food types // مجموعة أنواع الطعام المختارة */
+    let selectedMedicalConditions = new Set(); /* Set of selected medical conditions // مجموعة الحالات الصحية المختارة */
+    let detectedLat = null; /* Detected latitude // خط العرض المكتشف */
+    let detectedLon = null; /* Detected longitude // خط الطول المكتشف */
+    let customConditionsDetails = []; /* Array for custom medical conditions with side effects // مصفوفة للحالات الصحية المخصصة مع الأعراض الجانبية */
+
+    // ==================== LANGUAGE SELECTION // اختيار اللغة ====================
+    window.selectLanguage = function(lang) {
+      console.log('selectLanguage called with', lang);
+      selectedLanguage = lang;
+      
+      // Set HTML direction // تعيين اتجاه HTML
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+      
+      updateLanguage(); /* Update all text content // تحديث كل المحتوى النصي */
+      
+      setTimeout(() => {
+        showStep('A'); /* Go to account type step after language selection */
+      }, 300);
+    };
+
+    function updateLanguage() {
+      const t = translations[selectedLanguage];
+      
+      // Update all text elements // تحديث كل العناصر النصية
+      document.getElementById('name-title').innerHTML = t.step1_title + '<br><span id="name-subtitle" style="font-size: 16px; color: var(--muted); font-weight: 400;">' + t.step1_subtitle + '</span>';
+      document.getElementById('name-subtitle').textContent = t.step1_subtitle;
+      document.getElementById('name-label').textContent = t.name_label;
+      document.getElementById('name-description').textContent = t.name_desc;
+      document.getElementById('next-btn-1').innerHTML = t.next;
+      
+      // Step 2 (DOB)
+      document.getElementById('dob-title').textContent = t.dob_title;
+      document.getElementById('dob-label').textContent = t.dob_label;
+      document.getElementById('dob-description').textContent = t.dob_desc;
+      document.getElementById('next-btn-2').innerHTML = t.next;
+      // Step 2 (Status)
+      document.getElementById('status-title').textContent = t.step2_title;
+      document.getElementById('status-label').textContent = t.status_label;
+      document.getElementById('user-status').innerHTML = `
+        <option value="" disabled selected>${t.status_placeholder}</option>
+        <option value="Citizen">${t.status_citizen}</option>
+        <option value="Resident">${t.status_resident}</option>
+        <option value="Tourist">${t.status_tourist}</option>
+        <option value="Expat">${t.status_expat}</option>
+        <option value="Prefer not to answer">${t.status_prefer_not_to_answer}</option>
+      `;
+      document.getElementById('next-btn-3').innerHTML = t.next;
+
+      // Step 3 (Location)
+      document.getElementById('location-title').textContent = t.step3_title;
+      document.getElementById('location-label').textContent = t.location_label;
+      document.getElementById('emirate').innerHTML = `<option value="" disabled selected>${t.emirate_placeholder}</option>` + 
+        t.emirate_options.map(opt => `<option value="${opt.value}">${opt.text}</option>`).join('');
+      document.getElementById('location-btn-text').textContent = t.detect_location;
+      document.getElementById('next-btn-4').innerHTML = t.next;
+      
+      // Step 4 (Medical)
+      document.getElementById('medical-title').textContent = t.medical_title;
+      document.getElementById('medical-description').textContent = t.medical_desc;
+      document.querySelector('#step-5 .search-input').placeholder = t.medical_search;
+      document.getElementById('custom-medical-input').placeholder = t.medical_add_placeholder;
+      document.getElementById('custom-medical-side-effects').placeholder = t.medical_side_effects_placeholder;
+      document.getElementById('next-btn-5').innerHTML = t.next;
+      
+      // Step 5 (Allergies)
+      document.getElementById('allergy-title').textContent = t.allergy_title;
+      document.getElementById('allergy-description').textContent = t.allergy_desc;
+      document.querySelector('#step-6 .search-input').placeholder = t.allergy_search;
+      document.getElementById('custom-allergy-input').placeholder = t.allergy_add_placeholder;
+      document.getElementById('next-btn-6').innerHTML = t.next;
+      
+      // Step 6 (Phobias)
+      document.getElementById('phobia-title').textContent = t.phobia_title;
+      document.getElementById('phobia-description').textContent = t.phobia_desc;
+      document.querySelector('#step-7 .search-input').placeholder = t.phobia_search;
+      document.getElementById('custom-phobia-input').placeholder = t.phobia_add_placeholder;
+      document.getElementById('next-btn-7').innerHTML = t.next;
+
+      // Step 8 (Interests)
+      document.getElementById('interest-title').textContent = t.interest_title;
+      document.getElementById('interest-description').textContent = t.interest_desc;
+      document.querySelector('#step-8 .search-input').placeholder = t.interest_search;
+      document.getElementById('custom-interest-input').placeholder = t.interest_add_placeholder;
+      document.getElementById('next-btn-8').innerHTML = t.next;
+
+      // Step 9 (Food)
+      document.getElementById('food-title').textContent = t.food_title;
+      document.getElementById('food-description').textContent = t.food_desc;
+      document.querySelector('#step-9 .search-input').placeholder = t.food_search;
+      document.getElementById('healthy-label').innerHTML = t.healthy_label;
+      document.getElementById('save-btn').innerHTML = t.save;
+      
+      // Teleport modal // نافذة الانتقال
+      document.getElementById('teleport-title').textContent = t.teleport_title;
+      document.getElementById('teleport-desc').textContent = t.teleport_desc;
+      document.getElementById('teleport-btn').textContent = t.teleport_btn;
+
+      // Update input placeholders // تحديث النصوص المؤقتة للحقول
+      if (selectedLanguage === 'ar') {
+          document.getElementById('nameAr').placeholder = "الاسم بالعربية";
+          document.getElementById('nameEn').placeholder = "الاسم بالإنجليزية (اختياري)";
+      } else {
+          document.getElementById('nameAr').placeholder = "Name in Arabic (Optional)";
+          document.getElementById('nameEn').placeholder = "Name in English";
+      }
+      
+      // Update back buttons // تحديث أزرار الرجوع
+      document.querySelectorAll('.submit-btn.secondary').forEach(btn => {
+        btn.innerHTML = t.back;
+      });
+      
+      // Footer // التذييل
+      document.getElementById('footer').textContent = t.footer;
+      
+      // Re-render lists with selected language // إعادة عرض القوائم باللغة المحددة
+      renderList('phobia', phobiasData[selectedLanguage], selectedPhobias);
+      renderList('interest', interestsData[selectedLanguage], selectedInterests);
+      renderList('allergy', allergiesData[selectedLanguage], selectedAllergies);
+      renderList('food', foodTypesData[selectedLanguage], selectedFoodTypes);
+      renderList('medical', medicalConditionsData[selectedLanguage], selectedMedicalConditions);
+    }
+
+    // ==================== RENDER LISTS // عرض القوائم ====================
+    function renderList(type, data, selectedSet, filterText = '') {
+      const container = document.getElementById(`${type}-list-container`);
+      if (!container) return;
+      
+      container.innerHTML = ''; /* Clear container // مسح الحاوية */
+      
+      const filteredData = data.filter(item => {
+        const itemText = item.replace(/[^\w\s\u0600-\u06FF]/gi, '').toLowerCase(); /* Remove emojis for search // إزالة الإيموجيات للبحث */
+        const searchText = filterText.replace(/[^\w\s\u0600-\u06FF]/gi, '').toLowerCase();
+        return itemText.includes(searchText);
+      });
+      
+      filteredData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `list-item ${selectedSet.has(item) ? 'selected' : ''}`;
+        
+        // Separate emoji from text // فصل الإيموجي عن النص
+        const emojiMatch = item.match(/^([^\w\s\u0600-\u06FF]+)\s*(.*)/);
+        if (emojiMatch) {
+          div.innerHTML = `<span style="font-size: 18px; margin-left: 8px;">${emojiMatch[1]}</span>${emojiMatch[2]}`;
+        } else {
+          div.textContent = item;
+        }
+        
+        // Add checkmark if selected // إضافة علامة صح إذا كان مختارًا
+        if (selectedSet.has(item)) {
+          div.innerHTML += ' <span style="color: var(--accent); font-weight: bold; font-size: 18px;">✓</span>';
+        }
+        
+        div.onclick = () => {
+          toggleSelection(type, item, selectedSet); /* Toggle selection on click // تبديل التحديد عند النقر */
+          if (type === 'food') {
+            showFoodInfo(item); /* Show info panel for food // إظهار لوحة المعلومات للطعام */
+          }
+        };
+        container.appendChild(div);
+      });
+    }
+
+    function toggleSelection(type, item, set) {
+      const isNone = item.includes("None") || item.includes("لا يوجد"); /* Check if item is "None" // التحقق مما إذا كان العنصر "لا يوجد" */
+
+      if (set.has(item)) {
+        set.delete(item); /* Deselect // إلغاء التحديد */
+      } else {
+        if (isNone) {
+          set.clear(); /* If selecting "None", clear all // إذا اختار "لا يوجد"، امسح الكل */
+        } else {
+          // Remove "None" if selecting a real item // إزالة "لا يوجد" إذا اختار عنصرًا حقيقيًا
+          for (const i of set) {
+            if (i.includes("None") || i.includes("لا يوجد")) set.delete(i);
+          }
+        }
+        set.add(item); /* Add selected item // إضافة العنصر المحدد */
+      }
+      
+      // Get current filter text // الحصول على نص الفلتر الحالي
+      const searchInput = document.querySelector(`#step-${getStepNumber(type)} .search-input`);
+      const filterText = searchInput ? searchInput.value : '';
+      
+      // Re-render the appropriate list // إعادة عرض القائمة المناسبة
+      if (type === 'phobia') renderList('phobia', phobiasData[selectedLanguage], selectedPhobias, filterText);
+      if (type === 'allergy') renderList('allergy', allergiesData[selectedLanguage], selectedAllergies, filterText);
+      if (type === 'food') renderList('food', foodTypesData[selectedLanguage], selectedFoodTypes, filterText);
+      if (type === 'medical') renderList('medical', medicalConditionsData[selectedLanguage], selectedMedicalConditions, filterText);
+      if (type === 'interest') renderList('interest', interestsData[selectedLanguage], selectedInterests, filterText);
+    }
+
+    function getStepNumber(type) {
+      /* Returns the step number for a given type // يعيد رقم الخطوة لنوع معين */
+      switch(type) {
+        case 'medical': return 5;
+        case 'allergy': return 6;
+        case 'phobia': return 7;
+        case 'interest': return 8;
+        case 'food': return 9;
+        default: return 0;
+      }
+    }
+
+    function filterList(type, text) {
+      /* Filter the list based on search input // تصفية القائمة بناءً على إدخال البحث */
+      if (type === 'phobia') renderList('phobia', phobiasData[selectedLanguage], selectedPhobias, text);
+      if (type === 'interest') renderList('interest', interestsData[selectedLanguage], selectedInterests, text);
+      if (type === 'allergy') renderList('allergy', allergiesData[selectedLanguage], selectedAllergies, text);
+      if (type === 'food') renderList('food', foodTypesData[selectedLanguage], selectedFoodTypes, text);
+      if (type === 'medical') renderList('medical', medicalConditionsData[selectedLanguage], selectedMedicalConditions, text);
+    }
+
+    function showFoodInfo(item) {
+      /* Show info panel for selected food item // إظهار لوحة المعلومات لعنصر الطعام المحدد */
+      const panel = document.getElementById('food-info-panel');
+      const title = document.getElementById('f-title');
+      const healthy = document.getElementById('f-healthy');
+      const allergies = document.getElementById('f-allergies');
+
+      const t = translations[selectedLanguage];
+      
+      const textOnly = item.replace(/^([^\w\s\u0600-\u06FF]+)\s*/, ''); /* Remove emoji // إزالة الإيموجي */
+      
+      let isHealthy = t.healthy_medium;
+      let allergyList = t.allergy_none;
+
+      const lowerItem = textOnly.toLowerCase();
+      const lowerEn = textOnly.toLowerCase();
+      
+      // Determine if healthy // تحديد ما إذا كان صحيًا
+      if (lowerItem.includes("صحي") || lowerEn.includes("healthy") || lowerItem.includes("سلطة") || lowerEn.includes("salad") || 
+          lowerItem.includes("نباتي") || lowerEn.includes("vegetarian") || lowerItem.includes("عضوي") || lowerEn.includes("organic")) {
+        isHealthy = t.healthy_yes;
+      } else if (lowerItem.includes("مقلي") || lowerEn.includes("fried") || lowerItem.includes("وجبات سريعة") || 
+                 lowerEn.includes("fast food") || lowerItem.includes("حلو") || lowerEn.includes("sweet")) {
+        isHealthy = t.healthy_no;
+      }
+
+      // Determine allergens // تحديد مسببات الحساسية
+      if (lowerItem.includes("مكسرات") || lowerEn.includes("nut") || lowerItem.includes("فول سوداني") || lowerEn.includes("peanut")) {
+        allergyList = t.allergy_nuts;
+      } else if (lowerItem.includes("بحري") || lowerEn.includes("seafood") || lowerItem.includes("سمك") || lowerEn.includes("fish") || 
+                 lowerItem.includes("روبيان") || lowerEn.includes("shrimp")) {
+        allergyList = t.allergy_seafood;
+      } else if (lowerItem.includes("حليب") || lowerEn.includes("milk") || lowerItem.includes("ألبان") || lowerEn.includes("dairy")) {
+        allergyList = t.allergy_dairy;
+      } else if (lowerItem.includes("بيض") || lowerEn.includes("egg")) {
+        allergyList = t.allergy_egg;
+      } else if (lowerItem.includes("غلوتين") || lowerEn.includes("gluten") || lowerItem.includes("قمح") || lowerEn.includes("wheat")) {
+        allergyList = t.allergy_gluten;
+      }
+
+      title.textContent = item;
+      healthy.textContent = isHealthy;
+      allergies.textContent = allergyList;
+
+      panel.classList.add('active'); /* Show panel // إظهار اللوحة */
+    }
+
+    // ==================== NAVIGATION // التنقل ====================
+    function showStep(step) {
+      /* Show a specific step and hide others // إظهار خطوة معينة وإخفاء البقية */
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      document.getElementById(`step-${step}`).classList.add('active');
+    }
+
+    function nextStep(currentStep) {
+      /* Validate and go to next step // التحقق والانتقال إلى الخطوة التالية */
+      if (currentStep === 1) {
+        const nameAr = document.getElementById('nameAr').value.trim();
+        const nameEn = document.getElementById('nameEn').value.trim();
+        
+        if (selectedLanguage === 'ar') {
+          if (!nameAr) {
+            showError('الرجاء إدخال الاسم بالعربية');
+            return;
+          }
+        } else {
+          if (!nameEn) {
+            showError('Please enter your name in English');
+            return;
+          }
+        }
+      }
+      if (currentStep === 2) {
+        const dob = document.getElementById('dob').value;
+        if (!dob) {
+          showError(selectedLanguage === 'ar' ? 'الرجاء إدخال تاريخ ميلادك' : 'Please enter your date of birth');
+          return;
+        }
+      }
+      if (currentStep === 3) {
+        const status = document.getElementById('user-status').value;
+        if (!status) {
+          showError(selectedLanguage === 'ar' ? 'الرجاء اختيار صفتك' : 'Please select your status');
+          return;
+        }
+      }
+      if (currentStep === 4) {
+        const emirate = document.getElementById('emirate').value;
+        // Enforce location detection button click // فرض النقر على زر تحديد الموقع
+        if (!detectedLat || !detectedLon) {
+          showError(translations[selectedLanguage].location_required_msg);
+          return;
+        }
+        if (!emirate) {
+          showError(selectedLanguage === 'ar' ? 'الرجاء اختيار الإمارة' : 'Please select an emirate');
+          return;
+        }
+      }
+      if (currentStep === 5) { // Medical
+        if (selectedMedicalConditions.size === 0) {
+          showError(translations[selectedLanguage].select_medical);
+          return;
+        }
+      }
+      if (currentStep === 6) { // Allergies
+        if (selectedAllergies.size === 0) {
+          showError(translations[selectedLanguage].select_allergy);
+          return;
+        }
+      }
+      if (currentStep === 7) { // Phobias
+        if (selectedPhobias.size === 0) {
+          showError(translations[selectedLanguage].select_phobia);
+          return;
+        }
+      }
+      if (currentStep === 8) { // Interests
+        if (selectedInterests.size === 0) {
+          showError(translations[selectedLanguage].select_interest);
+          return;
+        }
+      }
+      showStep(currentStep + 1); /* Go to next step // الانتقال إلى الخطوة التالية */
+    }
+
+    function prevStep(currentStep) {
+      /* Go to previous step // العودة إلى الخطوة السابقة */
+      showStep(currentStep - 1);
+    }
+
+    // ==================== LOCATION DETECTION // تحديد الموقع ====================
+    // Cache for geolocation lookups to avoid rate limiting // ذاكرة تخزين مؤقت لاستعلامات الموقع لتجنب الحد من المعدل
+    const geoCache = {};
+
+    function detectLocation() {
+      /* Detect user's location using browser geolocation // تحديد موقع المستخدم باستخدام تحديد الموقع في المتصفح */
+      const status = document.getElementById('location-status');
+      const t = translations[selectedLanguage];
+      status.textContent = t.detecting;
+      
+      if (!navigator.geolocation) {
+        status.textContent = t.no_location;
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        detectedLat = position.coords.latitude;
+        detectedLon = position.coords.longitude;
+        
+        const cacheKey = `${detectedLat.toFixed(3)}_${detectedLon.toFixed(3)}`;
+        
+        try {
+          let emirate = '';
+          
+          // Check cache first // التحقق من الذاكرة المؤقتة أولاً
+          if (geoCache[cacheKey]) {
+            emirate = geoCache[cacheKey];
+            console.log('Using cached location:', emirate);
+          } else {
+            // Make API call with proper User-Agent and delay to avoid 425 errors
+            // استدعاء API مع User-Agent مناسب وتأخير لتجنب أخطاء 425
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${detectedLat}&lon=${detectedLon}&accept-language=${selectedLanguage}`,
+              {
+                headers: {
+                  'User-Agent': 'HAYYAK-App/1.0 (localhost)'
+                }
+              }
+            );
+            
+            if (!response.ok) {
+              console.warn(`Nominatim API returned ${response.status}. Using manual selection.`);
+              status.textContent = t.location_manual;
+              return;
+            }
+            
+            const data = await response.json();
+            const address = data.address;
+            emirate = address.state || address.city || '';
+            
+            // Cache the result // تخزين النتيجة في الذاكرة المؤقتة
+            geoCache[cacheKey] = emirate;
+          }
+          
+          const select = document.getElementById('emirate');
+          const options = Array.from(select.options).map(o => o.value);
+          
+          // Try to match emirate name // محاولة مطابقة اسم الإمارة
+          let match = options.find(opt => {
+            const optText = opt.toLowerCase();
+            const emirateText = emirate.toLowerCase();
+            return emirateText.includes(optText) || optText.includes(emirateText);
+          });
+          
+          if (match) {
+            select.value = match;
+            status.textContent = t.location_found + match;
+          } else {
+            status.textContent = t.location_manual;
+          }
+        } catch (e) {
+          console.error('Geolocation error:', e);
+          status.textContent = t.location_manual;
+        }
+      }, (error) => {
+        status.textContent = t.location_error;
+      });
+    }
+
+    // ==================== ADD CUSTOM ITEMS // إضافة عناصر مخصصة ====================
+    function addCustomMedical() {
+      const input = document.getElementById('custom-medical-input');
+      const sideEffectsInput = document.getElementById('custom-medical-side-effects');
+      const value = input.value.trim();
+      const sideEffects = sideEffectsInput ? sideEffectsInput.value.trim() : '';
+
+      if (value) {
+        // Remove "None" if present // إزالة "لا يوجد" إذا كان موجودًا
+        for (const i of selectedMedicalConditions) {
+          if (i.includes("None") || i.includes("لا يوجد")) selectedMedicalConditions.delete(i);
+        }
+
+        selectedMedicalConditions.add(value); /* Add custom condition // إضافة حالة مخصصة */
+        // Add to data arrays so it persists in list if re-rendered // إضافة إلى مصفوفات البيانات لتبقى في القائمة عند إعادة العرض
+        medicalConditionsData.ar.push(value);
+        medicalConditionsData.en.push(value);
+        renderList('medical', medicalConditionsData[selectedLanguage], selectedMedicalConditions);
+        
+        customConditionsDetails.push({ name: value, sideEffects: sideEffects }); /* Store side effects // تخزين الأعراض الجانبية */
+        input.value = ''; /* Clear input // مسح الحقل */
+        if (sideEffectsInput) sideEffectsInput.value = '';
+      }
+    }
+
+    function addCustomAllergy() {
+      const input = document.getElementById('custom-allergy-input');
+      const value = input.value.trim();
+
+      if (value) {
+        // Remove "None" if present // إزالة "لا يوجد" إذا كان موجودًا
+        for (const i of selectedAllergies) {
+          if (i.includes("None") || i.includes("لا يوجد")) selectedAllergies.delete(i);
+        }
+
+        selectedAllergies.add(value);
+        allergiesData.ar.push(value);
+        allergiesData.en.push(value);
+        renderList('allergy', allergiesData[selectedLanguage], selectedAllergies);
+        input.value = '';
+      }
+    }
+
+    function addCustomPhobia() {
+      const input = document.getElementById('custom-phobia-input');
+      const value = input.value.trim();
+
+      if (value) {
+        // Remove "None" if present // إزالة "لا يوجد" إذا كان موجودًا
+        for (const i of selectedPhobias) {
+          if (i.includes("None") || i.includes("لا يوجد")) selectedPhobias.delete(i);
+        }
+
+        selectedPhobias.add(value);
+        phobiasData.ar.push(value);
+        phobiasData.en.push(value);
+        renderList('phobia', phobiasData[selectedLanguage], selectedPhobias);
+        input.value = '';
+      }
+    }
+
+    function addCustomInterest() {
+      const input = document.getElementById('custom-interest-input');
+      const value = input.value.trim();
+
+      if (value) {
+        // Remove "None" if present // إزالة "لا يوجد" إذا كان موجودًا
+        for (const i of selectedInterests) {
+          if (i.includes("None") || i.includes("لا يوجد")) selectedInterests.delete(i);
+        }
+        selectedInterests.add(value);
+        interestsData.ar.push(value);
+        interestsData.en.push(value);
+        renderList('interest', interestsData[selectedLanguage], selectedInterests);
+        input.value = '';
+      }
+    }
+
+    // ==================== AUTH HELPERS // مساعدات المصادقة ====================
+    let _selectedRole = 'user'; // set by Step A card click
+
+    function switchAuthTab(tab) {
+      const isSignup = tab === 'signup';
+      document.getElementById('form-signup').style.display = isSignup ? '' : 'none';
+      document.getElementById('form-login').style.display  = isSignup ? 'none' : '';
+      document.getElementById('tab-signup').style.color = isSignup ? 'var(--primary)' : 'var(--muted)';
+      document.getElementById('tab-login').style.color  = isSignup ? 'var(--muted)' : 'var(--primary)';
+      document.getElementById('tab-signup').style.borderBottomColor = isSignup ? 'var(--primary)' : 'transparent';
+      document.getElementById('tab-login').style.borderBottomColor  = isSignup ? 'transparent' : 'var(--primary)';
+    }
+
+    async function doRegister() {
+      const email   = document.getElementById('auth-email-reg').value.trim();
+      const pass    = document.getElementById('auth-pass-reg').value;
+      const confirm = document.getElementById('auth-pass-conf').value;
+      if (!email || !pass) return showError('يرجى إدخال البريد الإلكتروني وكلمة المرور');
+      if (pass !== confirm) return showError('كلمة المرور غير متطابقة');
+      if (pass.length < 8) return showError('كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+      try {
+        const res = await apiPost('/api/auth/register.php', {
+          email, password: pass, role: _selectedRole, language: selectedLanguage
+        });
+        if (!res.ok) return showError(res.error || 'خطأ في التسجيل');
+        setLocalProfile({ language: selectedLanguage });
+        if (_selectedRole === 'place_owner') {
+          window.location.href = 'OwnerDashboard.html';
+        } else {
+          showStep(1);
+        }
+      } catch (e) { showError('خطأ في الاتصال بالخادم'); }
+    }
+
+    async function doLogin() {
+      const email = document.getElementById('auth-email-log').value.trim();
+      const pass  = document.getElementById('auth-pass-log').value;
+      if (!email || !pass) return showError('يرجى إدخال البريد الإلكتروني وكلمة المرور');
+      try {
+        const res = await apiPost('/api/auth/login.php', { email, password: pass });
+        if (!res.ok) return showError(res.error || 'بيانات الدخول غير صحيحة');
+        setLocalProfile(res.data);
+        if (res.data.role === 'place_owner') {
+          window.location.href = 'OwnerDashboard.html';
+        } else if (res.data.role === 'admin') {
+          window.location.href = 'Admin.html';
+        } else {
+          window.location.href = 'Home.html';
+        }
+      } catch (e) { showError('خطأ في الاتصال بالخادم'); }
+    }
+
+    // ==================== SAVE PROFILE // حفظ الملف الشخصي ====================
+    async function saveProfile() {
+      const nameAr = document.getElementById('nameAr').value.trim();
+      const nameEn = document.getElementById('nameEn').value.trim();
+      const status = document.getElementById('user-status').value;
+      const dob = document.getElementById('dob').value;
+      const emirate = document.getElementById('emirate').value;
+      const healthy = document.getElementById('healthy').checked;
+
+      if (selectedFoodTypes.size === 0) {
+        showError(translations[selectedLanguage].select_food);
+        return;
+      }
+
+      const saveBtn = document.getElementById('save-btn');
+      const originalText = saveBtn.textContent;
+      saveBtn.disabled = true;
+      saveBtn.textContent = selectedLanguage === 'ar' ? 'جاري الحفظ...' : 'Saving...';
+
+      try {
+        const res = await apiPut('/api/users/profile.php', {
+          name_ar:            nameAr,
+          name_en:            nameEn,
+          dob:                dob,
+          status:             status,
+          emirate:            emirate,
+          latitude:           detectedLat || null,
+          longitude:          detectedLon || null,
+          phobias:            Array.from(selectedPhobias),
+          interests:          Array.from(selectedInterests),
+          allergies:          Array.from(selectedAllergies),
+          medical_conditions: Array.from(selectedMedicalConditions).map(c => ({ condition: c, reason: '' })),
+          food_preferences:   Array.from(selectedFoodTypes),
+          is_healthy:         healthy,
+          language:           selectedLanguage,
+        });
+
+        if (!res.ok) throw new Error(res.error || 'Save failed');
+
+        // Cache profile locally
+        setLocalProfile({
+          name_ar: nameAr, name_en: nameEn, emirate, language: selectedLanguage,
+          is_healthy: healthy,
+        });
+
+        showTeleportModal();
+      } catch (error) {
+        console.error('Error saving profile:', error);
+        saveBtn.disabled = false;
+        saveBtn.textContent = originalText;
+        showError(selectedLanguage === 'ar' ? 'حدث خطأ ما. الرجاء المحاولة مجدداً' : 'An error occurred. Please try again');
+      }
+    }
+
+    function showTeleportModal() {
+      /* Show modal after successful profile save // إظهار النافذة بعد حفظ الملف الشخصي بنجاح */
+      const teleportModal = document.getElementById('teleport-modal');
+      const titleEl = document.getElementById('teleport-title');
+      const descEl = document.getElementById('teleport-desc');
+      const btnEl = document.getElementById('teleport-btn');
+
+      if (selectedLanguage === 'ar') {
+        titleEl.textContent = 'تم! وين حاب تروح؟';
+        descEl.textContent = 'ملفك الشخصي جاهز. اضغط في الأسفل لنبدأ';
+        btnEl.textContent = 'انطلق للبيت 🏠';
+      } else {
+        titleEl.textContent = 'All Set! Where to Now?';
+        descEl.textContent = 'Your profile is ready. Let\'s get started!';
+        btnEl.textContent = 'Go to Home 🏠';
+      }
+
+      teleportModal.style.display = 'flex'; /* Show modal // إظهار النافذة */
+    }
+
+    // ==================== INITIALIZATION // التهيئة ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wire up Step A cards
+      document.querySelectorAll('.account-type-card').forEach(card => {
+        card.addEventListener('click', () => {
+          _selectedRole = card.dataset.role;
+          document.querySelectorAll('.account-type-card').forEach(c => c.style.borderColor = '');
+          card.style.borderColor = 'var(--accent)';
+          showStep('B');
+        });
+      });
+
+      // Initialize lists with Arabic (default)
+      setTimeout(() => {
+        renderList('phobia', phobiasData['ar'], selectedPhobias);
+        renderList('interest', interestsData['ar'], selectedInterests);
+        renderList('allergy', allergiesData['ar'], selectedAllergies);
+        renderList('food', foodTypesData['ar'], selectedFoodTypes);
+        renderList('medical', medicalConditionsData['ar'], selectedMedicalConditions);
+      }, 100);
+    });
+
+    // ==================== NOTIFICATION SOUND // صوت الإشعار ====================
+    function playNotificationSound(type = 'info') {
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (profile.soundEnabled === false) return;
+
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        const now = ctx.currentTime;
+
+        if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(150, now);
+          osc.frequency.exponentialRampToValueAtTime(50, now + 0.3);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'success') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        }
+      } catch (e) {}
+    }
+
+    // ==================== ERROR TOAST // إشعار الخطأ ====================
+    let toastTimeout;
+    function showError(message) {
+      playNotificationSound('error'); /* Play error sound // تشغيل صوت الخطأ */
+      const toast = document.getElementById('error-toast');
+      toast.innerText = message; /* Set message // تعيين الرسالة */
+      toast.classList.add('show'); /* Show toast // إظهار الإشعار */
+      clearTimeout(toastTimeout); /* Clear previous timeout // مسح المؤقت السابق */
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show'); /* Hide after 3.5s // إخفاء بعد 3.5 ثانية */
+      }, 3500);
+    } 
+  </script>
+</body>
+</html>

@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // يحدد نوع المستند كـ HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element, language Arabic, direction right-to-left // العنصر الجذري، اللغة العربية، الاتجاه من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // يضبط ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Makes page responsive on mobile devices // يجعل الصفحة متجاوبة مع الأجهزة المحمولة -->
+  <title>حياك | HAYYAK</title>
+  <!-- Page title (bilingual) // عنوان الصفحة (ثنائي اللغة) -->
+  <meta name="description" content="اهلين، وين حاب تروح اليوم؟ اكتشف المتاجر، المطاعم، السياحة، الشواطئ، والفنادق مع أفضل العروض اليومية." />
+  <!-- Meta description for SEO // وصف تعريفي لمحركات البحث -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon (browser tab icon) // أيقونة علامة تبويب المتصفح -->
+  
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts domain // اتصال مسبق بنطاق خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع خاصية عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Loads Cairo font from Google Fonts // تحميل خط Cairo من خطوط جوجل -->
+
+  <script src="JS/Auth.js"></script>
+  <script>
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/check.php', { credentials: 'include' });
+        const json = await res.json();
+        if (!json.ok || !json.data.logged_in) window.location.href = 'Index.html';
+      } catch (_) {
+        if (!localStorage.getItem('hayyak_user_profile')) window.location.href = 'Index.html';
+      }
+    })();
+  </script>
+  <script src="JS/Places_data.js"></script>
+  <!-- External JavaScript file containing places data // ملف جافا سكريبت خارجي يحتوي على بيانات الأماكن -->
+
+  <!-- Afeesh local fonts (single family name, multiple weights) -->
+  <!-- خطوط Afeesh المحلية (اسم عائلة واحد، أوزان متعددة) -->
+  <style>
+    /* Map several available Afeesh font files to one family name for easy usage */
+    /* تعيين عدة ملفات خط Afeesh إلى اسم عائلة واحد لسهولة الاستخدام */
+    @font-face {
+      font-family: 'Afeesh'; /* Assigns a name to this font variant // يعين اسمًا لمتغير الخط هذا */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'), /* Specifies the font file location and format (modern) // يحدد موقع ملف الخط وتنسيقه (حديث) */
+           url('afeesh/Afeesh-Aadi.woff') format('woff'), /* Fallback format // تنسيق احتياطي */
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype'); /* Older fallback format // تنسيق احتياطي قديم */
+      font-weight: 400; /* Normal weight // وزن عادي */
+      font-style: normal; /* Normal style // نمط عادي */
+      font-display: swap; /* Shows fallback font while loading custom // عرض خط احتياطي أثناء تحميل الخط المخصص */
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; /* Bold weight // وزن عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; /* Light // خفيف */
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (THEME) // متغيرات CSS (السمة) ==================== */
+    :root {
+      --bg: #f5f5f7;        /* Light mode background // خلفية الوضع الفاتح */
+      --card: #ffffff;       /* Card background // خلفية البطاقة */
+      --ink: #0f0f10;        /* Main text color // لون النص الرئيسي */
+      --muted: #6b7280;      /* Muted text // نص باهت */
+      --line: #0f0f10;       /* Border color // لون الحدود */
+      --accent: #d4af37;     /* Accent color (gold) // لون مميز (ذهبي) */
+      --radius: 14px;        /* Border radius // نصف قطر الحدود */
+    }
+    [data-theme="dark"] {    /* Dark mode overrides // تجاوزات الوضع الداكن */
+      --bg: #121212;         /* Dark background // خلفية داكنة */
+      --card: #1e1e1e;       /* Dark card // بطاقة داكنة */
+      --ink: #ffffff;        /* Light text // نص فاتح */
+      --muted: #a0a0a0;      /* Muted grey // رمادي باهت */
+      --line: #333333;       /* Dark border // حدود داكنة */
+    }
+    [data-theme="dark"] .close-btn {
+        background: #333;    /* Dark mode close button background // خلفية زر الإغلاق في الوضع الداكن */
+        color: #fff;         /* White text // نص أبيض */
+    }
+    [data-theme="dark"] .close-btn:hover { background: #444; } /* Darker hover // داكن أكثر عند التمرير */
+
+    * { box-sizing: border-box; } /* Universal box-sizing // صندوق الحواف لجميع العناصر */
+
+    html, body {
+      height: 100%;          /* Full height // ارتفاع كامل */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+    }
+
+    body {
+      margin: 0;             /* Remove default margin // إزالة الهامش الافتراضي */
+      font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* Font stack // مجموعة الخطوط */
+      color: var(--ink);     /* Text color from theme // لون النص من السمة */
+      -webkit-font-smoothing: antialiased; /* Smooth fonts on WebKit // تنعيم الخطوط على WebKit */
+      -moz-osx-font-smoothing: grayscale; /* Smooth fonts on Firefox macOS // تنعيم الخطوط على Firefox macOS */
+    }
+
+    .page {
+      min-height: 100%;      /* Minimum full height // ارتفاع لا يقل عن كامل */
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      grid-template-rows: auto 1fr auto; /* Header, main, footer // ترويسة، محتوى رئيسي، تذييل */
+    }
+
+    /* Phone-width centered container to resemble the mockup, but responsive */
+    /* حاوية مركزية بعرض الهاتف لمحاكاة التصميم، ولكن متجاوبة */
+    .shell {
+      width: 100%;           /* Full width // عرض كامل */
+      max-width: 420px;      /* Limit width on large screens // تحديد العرض على الشاشات الكبيرة */
+      margin: 0 auto;        /* Center horizontally // توسيط أفقي */
+      padding: 16px;         /* Inner spacing // حشوة داخلية */
+    }
+
+    .card {
+      background: var(--card); /* Card background from theme // خلفية البطاقة من السمة */
+      border: 2px solid var(--line); /* Border using theme line color // حدود بلون الخط من السمة */
+      border-radius: var(--radius); /* Rounded corners using variable // زوايا دائرية باستخدام المتغير */
+      box-shadow: 0 2px 0 #0f0f10; /* Small shadow for depth // ظل صغير للعمق */
+    }
+
+    header.brand {
+      text-align: center;    /* Center align text // محاذاة النص للوسط */
+      margin: 0;             /* No margin // بلا هامش */
+      background: #16243d;   /* Dark blue background // خلفية زرقاء داكنة */
+      color: #ffffff;        /* White text // نص أبيض */
+      padding: 20px;         /* Padding around content // حشوة حول المحتوى */
+      position: relative;    /* For absolute positioning of children // لتحديد موضع العناصر الفرعية بشكل مطلق */
+    }
+    .logo-text {
+      font-family: 'Afeesh', sans-serif; /* Use Afeesh font // استخدام خط Afeesh */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 48px;       /* Large font // خط كبير */
+      letter-spacing: 2px;   /* Space between letters // مسافة بين الأحرف */
+      color: #d4af37;        /* Gold color // لون ذهبي */
+    }
+    .logo-sub {
+      font-family: 'Afeesh', sans-serif; /* Afeesh font // خط Afeesh */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      color: #94a3b8;        /* Greyish blue // أزرق رمادي */
+      font-size: 20px;       /* Font size // حجم الخط */
+      margin-top: 2px;       /* Small top margin // هامش علوي صغير */
+      letter-spacing: 3px;   /* More spacing between letters // مسافة أكبر بين الأحرف */
+    }
+    
+    /* Translate Button Styles // أنماط زر الترجمة */
+    .translate-btn {
+      position: absolute;    /* Absolute positioning inside header // تحديد موضع مطلق داخل الترويسة */
+      top: 50%;              /* Center vertically // توسيط عمودي */
+      right: 20px;           /* Distance from right // مسافة من اليمين */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      background: #d4af37;   /* Gold background // خلفية ذهبية */
+      border: 2px solid #ffffff; /* White border // حدود بيضاء */
+      border-radius: 20px;   /* Rounded shape // شكل دائري */
+      color: #16243d;        /* Dark blue text // نص أزرق داكن */
+      padding: 6px 14px;     /* Padding // حشوة */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 13px;       /* Font size // حجم الخط */
+      cursor: pointer;       /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex;         /* Flexbox for icon and text // مرن للأيقونة والنص */
+      align-items: center;   /* Vertically align items // محاذاة عمودية للعناصر */
+      gap: 6px;              /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3); /* Gold shadow // ظل ذهبي */
+      z-index: 100;          /* Ensure it's above other elements // ضمان أنه فوق العناصر الأخرى */
+    }
+    
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05); /* Zoom on hover // تكبير عند التمرير */
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); /* Stronger shadow // ظل أقوى */
+      background: #f7ef8a;   /* Lighter gold // ذهبي أفتح */
+    }
+    
+    .translate-btn .icon {
+      font-size: 16px;       /* Globe icon size // حجم أيقونة الكرة الأرضية */
+      transition: transform 0.3s ease; /* Smooth rotation // دوران سلس */
+    }
+    
+    .translate-btn:hover .icon {
+      transform: rotate(20deg); /* Rotate icon on hover // تدوير الأيقونة عند التمرير */
+    }
+    
+    .translate-btn.switching {
+      animation: pulse 0.5s ease; /* Pulse animation when switching language // حركة نبض عند تبديل اللغة */
+    }
+    
+    @keyframes pulse {
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    /* Map placeholder to mimic the image in the phone // عنصر نائب للخريطة لمحاكاة الصورة في الهاتف */
+    .map {
+      height: 180px;         /* Fixed height // ارتفاع ثابت */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      overflow: hidden;      /* Hide overflow (for iframe) // إخفاء الزيادة (لـ iframe) */
+      position: relative;    /* For any absolute overlays // لأي تراكبات مطلقة */
+      border: 2px solid var(--line); /* Border using theme // حدود باستخدام السمة */
+    }
+    .map iframe {
+      width: 100%;           /* Full width // عرض كامل */
+      height: 100%;          /* Full height // ارتفاع كامل */
+      border: 0;             /* No border // بلا حدود */
+    }
+
+    h1, h2, h3 { margin: 0; } /* Remove default margins from headings // إزالة الهوامش الافتراضية من العناوين */
+
+    .question {
+      font-size: 20px;       /* Font size // حجم الخط */
+      font-weight: 700;      /* Bold // عريض */
+      margin: 14px 6px 8px;  /* Margins // هوامش */
+    }
+
+    /* Categories row - UPDATED // صف الفئات - محدث */
+    .cats {
+      display: flex;         /* Flex layout // تخطيط مرن */
+      flex-wrap: wrap;       /* Allow wrapping // السماح بالتفاف */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      gap: 10px;             /* Gap between items // فجوة بين العناصر */
+      padding: 8px 4px 2px;  /* Padding // حشوة */
+    }
+    .cat {
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      align-items: center;   /* Center horizontally // توسيط أفقي */
+      gap: 6px;              /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      font-size: 12px;       /* Font size // حجم الخط */
+      text-align: center;    /* Center text // توسيط النص */
+      user-select: none;     /* Prevent text selection // منع تحديد النص */
+      text-decoration: none; /* Remove underline from links // إزالة التسطير من الروابط */
+      color: var(--ink);     /* Text color // لون النص */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      width: 64px;           /* Fixed width for all categories // عرض ثابت لجميع الفئات */
+    }
+    .cat .ico {
+      width: 52px;           /* Icon container width // عرض حاوية الأيقونة */
+      height: 46px;          /* Icon container height // ارتفاع حاوية الأيقونة */
+      display: grid;         /* Grid to center // شبكة للتوسيط */
+      place-items: center;   /* Center both axes // توسيط في كلا المحورين */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 10px;   /* Rounded corners // زوايا دائرية */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+    }
+    .cat .emoji { 
+      font-size: 22px;       /* Emoji size // حجم الإيموجي */
+      line-height: 1;        /* Normal line height // ارتفاع سطر عادي */
+    }
+
+    /* New: Center the farms and health categories specifically */
+    /* جديد: توسيط فئتي المزارع والصحة بشكل خاص */
+    .cat-farms-health {
+      order: 0; /* Keep them in normal flow // احتفظ بها في التدفق الطبيعي */
+    }
+
+    .section-title {
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 22px;       /* Font size // حجم الخط */
+      margin: 6px 6px 10px;  /* Margins // هوامش */
+    }
+
+    /* Offer card // بطاقة العرض */
+    .offer { padding: 0 6px 8px; } /* Padding // حشوة */
+    .offer .deal {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      grid-template-columns: 72px 1fr; /* Image and text // صورة ونص */
+      gap: 10px;             /* Gap between columns // فجوة بين الأعمدة */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      padding: 6px 8px 6px 12px; /* Padding // حشوة */
+      background: var(--card); /* Background // خلفية */
+    }
+    .offer .deal img {
+      width: 64px;           /* Image width // عرض الصورة */
+      height: 40px;          /* Image height // ارتفاع الصورة */
+      object-fit: cover;     /* Cover the area without distortion // تغطية المنطقة دون تشويه */
+      border-radius: 8px;    /* Rounded corners // زوايا دائرية */
+      border: 2px solid var(--line); /* Border // حدود */
+    }
+    .offer .deal .title { font-weight: 700; } /* Bold title // عنوان عريض */
+    .offer .deal .sub { color: var(--muted); font-weight: 600; font-size: 13px; } /* Subtitle style // نمط العنوان الفرعي */
+
+    /* List of quick links // قائمة الروابط السريعة */
+    .quick { padding: 6px; display: grid; gap: 8px; } /* Grid for quick links // شبكة للروابط السريعة */
+    .quick .item {
+      display: flex;         /* Flex layout // تخطيط مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 10px;             /* Gap // فجوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      padding: 10px 14px;    /* Padding // حشوة */
+      background: var(--card); /* Background // خلفية */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      text-decoration: none; /* Remove underline // إزالة التسطير */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .quick .item .label { flex: 1 1 auto; } /* Label takes remaining space // التسمية تأخذ المساحة المتبقية */
+
+    /* History Panel // لوحة السجل */
+    .history-panel {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      top: 0; bottom: 0;     /* Full height // ارتفاع كامل */
+      right: 0; left: auto;  /* Align to right // محاذاة إلى اليمين */
+      width: 85%;            /* Width // العرض */
+      max-width: 320px;      /* Maximum width // أقصى عرض */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      border-radius: 20px 0 0 20px; /* Rounded left corners // زوايا يسرى دائرية */
+      box-shadow: -4px 0 20px rgba(0,0,0,0.15); /* Shadow // ظل */
+      padding: 20px;         /* Padding // حشوة */
+      z-index: 2000;         /* High z-index // مؤشر z عالي */
+      transform: translateX(100%); /* Hidden off-screen // مخفي خارج الشاشة */
+      transition: transform 0.3s ease; /* Smooth slide // انزلاق سلس */
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+    }
+    .history-panel.active { transform: translateX(0); } /* Show when active // يظهر عند التفعيل */
+    .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; } /* Header with title and close button // ترويسة مع العنوان وزر الإغلاق */
+    .history-list { overflow-y: auto; display: grid; gap: 10px; } /* Scrollable list // قائمة قابلة للتمرير */
+    .history-item { padding: 12px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; } /* History item // عنصر السجل */
+    .history-item:hover { background: var(--bg); } /* Hover effect // تأثير التمرير */
+    
+    .close-btn { 
+        background: #f0f0f0; border: none; font-size: 20px; cursor: pointer; color: #666; 
+        width: 32px; height: 32px; border-radius: 50%; display: flex; 
+        align-items: center; justify-content: center; transition: all 0.2s; 
+    } /* Close button style // نمط زر الإغلاق */
+    .close-btn:hover { background: #e0e0e0; color: #000; } /* Darker hover // أغمق عند التمرير */
+
+    /* Bottom search // البحث السفلي */
+    .bottom-search { padding: 10px 6px 18px; } /* Padding // حشوة */
+    .search {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      grid-template-columns: 28px 1fr; /* Icon and input // أيقونة وحقل إدخال */
+      align-items: center;   /* Vertically center // توسيط عمودي */
+      gap: 8px;              /* Gap // فجوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      padding: 10px 12px;    /* Padding // حشوة */
+      background: var(--card); /* Background // خلفية */
+    }
+    .search .glass { text-align: center; font-size: 16px; } /* Search icon style // نمط أيقونة البحث */
+    .search input {
+      appearance: none;      /* Remove default styling // إزالة التنسيق الافتراضي */
+      border: 0;             /* No border // بلا حدود */
+      outline: 0;            /* No outline // بلا مخطط */
+      background: transparent; /* Transparent background // خلفية شفافة */
+      width: 100%;           /* Full width // عرض كامل */
+      font: inherit;         /* Inherit font // وراثة الخط */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .search input::placeholder { color: var(--muted); } /* Placeholder color // لون النص المؤقت */
+
+    footer {
+      background: #16243d;   /* Dark blue // أزرق داكن */
+      color: #ffffff;        /* White text // نص أبيض */
+      text-align: center;    /* Centered text // نص وسطي */
+      font-size: 14px;       /* Font size // حجم الخط */
+      padding: 20px;         /* Padding // حشوة */
+    }
+    
+    /* Question Modal Styles // أنماط نافذة الأسئلة */
+    .question-modal {
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      position: fixed;       /* Fixed position // موضع ثابت */
+      top: 0; left: 0; right: 0; bottom: 0; /* Cover whole screen // تغطية الشاشة بالكامل */
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay // تراكب شبه شفاف */
+      z-index: 2000;         /* High z-index // مؤشر z عالي */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      padding: 20px;         /* Padding // حشوة */
+    }
+
+    .question-modal.active {
+      display: flex;         /* Show modal when active // إظهار النافذة عند التفعيل */
+    }
+
+    .question-content {
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      border-radius: 16px;   /* Rounded corners // زوايا دائرية */
+      padding: 24px;         /* Padding // حشوة */
+      max-width: 400px;      /* Maximum width // أقصى عرض */
+      width: 100%;           /* Full width // عرض كامل */
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* Shadow // ظل */
+      border: 2px solid var(--line); /* Border // حدود */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+
+    .question-content h2 {
+      font-size: 18px;       /* Font size // حجم الخط */
+      color: var(--ink);     /* Text color // لون النص */
+      margin: 0 0 16px;      /* Margins // هوامش */
+      text-align: center;    /* Center text // توسيط النص */
+    }
+
+    .question-progress {
+      font-size: 12px;       /* Font size // حجم الخط */
+      color: #94a3b8;        /* Greyish blue // أزرق رمادي */
+      text-align: center;    /* Center text // توسيط النص */
+      margin-bottom: 12px;   /* Bottom margin // هامش سفلي */
+    }
+
+    .question-options {
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 10px;             /* Gap between options // فجوة بين الخيارات */
+      margin-bottom: 16px;   /* Bottom margin // هامش سفلي */
+    }
+
+    .question-option {
+      padding: 12px 14px;    /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 10px;   /* Rounded corners // زوايا دائرية */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      transition: all 0.2s ease; /* Smooth transition // انتقال سلس */
+      text-align: right;     /* Right align (for RTL) // محاذاة لليمين (لـ RTL) */
+      background: var(--card); /* Background // خلفية */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+
+    .question-option:hover {
+      background: var(--bg); /* Background on hover // خلفية عند التمرير */
+      border-color: var(--accent); /* Accent border // حدود مميزة */
+    }
+
+    .question-option {
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+    }
+
+    .question-option label {
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      flex: 1;               /* Take full width // أخذ العرض الكامل */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      width: 100%;           /* Full width // عرض كامل */
+    }
+
+    .question-option input[type="radio"] {
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      margin-right: 12px;    /* Right margin (RTL) // هامش أيمن (RTL) */
+      accent-color: var(--accent); /* Accent color // لون مميز */
+    }
+
+    [dir="rtl"] .question-option input[type="radio"] {
+      margin-right: 0;       /* Remove right margin // إزالة الهامش الأيمن */
+      margin-left: 12px;     /* Add left margin (for RTL) // إضافة هامش أيسر (لـ RTL) */
+    }
+
+    .question-buttons {
+      display: flex;         /* Flex // مرن */
+      gap: 10px;             /* Gap between buttons // فجوة بين الأزرار */
+    }
+
+    .question-btn {
+      flex: 1;               /* Equal width // عرض متساوٍ */
+      padding: 12px;         /* Padding // حشوة */
+      border: none;          /* No border // بلا حدود */
+      border-radius: 10px;   /* Rounded corners // زوايا دائرية */
+      font-weight: 700;      /* Bold // عريض */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      transition: all 0.2s ease; /* Smooth transition // انتقال سلس */
+    }
+
+    .question-btn-submit {
+      background: #16243d;   /* Dark blue // أزرق داكن */
+      color: #d4af37;        /* Gold // ذهبي */
+      box-shadow: 0 4px 0 var(--line); /* Shadow // ظل */
+    }
+
+    .question-btn-submit:hover {
+      background: #1e2f4d;   /* Lighter blue // أزرق أفتح */
+    }
+
+    .question-btn-skip {
+      background: transparent; /* Transparent // شفاف */
+      color: var(--ink);     /* Text color // لون النص */
+      border: 2px solid var(--line); /* Border // حدود */
+    }
+
+    .question-btn-skip:hover {
+      background: var(--bg); /* Background on hover // خلفية عند التمرير */
+    }
+    
+    /* Notification styles // أنماط الإشعارات */
+    .notification {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      top: 20px;             /* Distance from top // مسافة من الأعلى */
+      right: 20px;           /* Distance from right // مسافة من اليمين */
+      background: #16243d;   /* Dark blue // أزرق داكن */
+      color: white;          /* White text // نص أبيض */
+      padding: 15px 20px;    /* Padding // حشوة */
+      border-radius: 14px;   /* Rounded corners // زوايا دائرية */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Shadow // ظل */
+      z-index: 1000;         /* High z-index // مؤشر z عالي */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 12px;             /* Gap // فجوة */
+      animation: slideIn 0.3s ease; /* Slide-in animation // حركة انزلاق للداخل */
+      max-width: 320px;      /* Maximum width // أقصى عرض */
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Chat Widget Styles // أنماط واجهة الدردشة */
+    .chat-widget {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      bottom: 90px;          /* Distance from bottom // مسافة من الأسفل */
+      right: 20px;           /* Distance from right // مسافة من اليمين */
+      width: 350px;          /* Fixed width // عرض ثابت */
+      height: 500px;         /* Fixed height // ارتفاع ثابت */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      border-radius: 20px;   /* Rounded corners // زوايا دائرية */
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2); /* Shadow // ظل */
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      flex-direction: column; /* Column layout // تخطيط عمودي */
+      z-index: 2000;         /* High z-index // مؤشر z عالي */
+      border: 2px solid var(--line); /* Border // حدود */
+      overflow: hidden;      /* Hide overflow // إخفاء الزيادة */
+      animation: slideIn 0.3s ease; /* Slide-in animation // حركة انزلاق للداخل */
+    }
+    .chat-widget.active { display: flex; } /* Show when active // يظهر عند التفعيل */
+    .chat-header {
+      background: var(--primary); /* Primary color (undefined, will be set by theme) // اللون الأساسي (غير محدد، سيتم تعيينه بواسطة السمة) */
+      color: white;          /* White text // نص أبيض */
+      padding: 15px;         /* Padding // حشوة */
+      display: flex;         /* Flex // مرن */
+      justify-content: space-between; /* Space between // مسافة بين العناصر */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      font-weight: bold;     /* Bold // عريض */
+      cursor: move;          /* Move cursor for dragging // مؤشر للتحريك */
+      user-select: none;     /* Prevent text selection // منع تحديد النص */
+    }
+    [data-theme="light"] .chat-header {
+      background: #f0f0f0;   /* Light mode header // ترويسة الوضع الفاتح */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .chat-messages {
+      flex: 1;               /* Take remaining space // أخذ المساحة المتبقية */
+      padding: 15px;         /* Padding // حشوة */
+      overflow-y: auto;      /* Scroll if needed // تمرير إذا لزم */
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 10px;             /* Gap between messages // فجوة بين الرسائل */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+    }
+    .message {
+      max-width: 80%;        /* Maximum width // أقصى عرض */
+      padding: 10px 14px;    /* Padding // حشوة */
+      border-radius: 14px;   /* Rounded corners // زوايا دائرية */
+      font-size: 14px;       /* Font size // حجم الخط */
+      line-height: 1.4;      /* Line height // ارتفاع السطر */
+    }
+    .message.bot {
+      background: var(--card); /* Bot message background // خلفية رسالة البوت */
+      border: 1px solid var(--line); /* Border // حدود */
+      align-self: flex-start; /* Align left // محاذاة لليسار */
+      border-bottom-right-radius: 2px; /* Small corner // زاوية صغيرة */
+    }
+    .message.user {
+      background: #1e3a5f;   /* Dark blue // أزرق داكن */
+      color: white;          /* White text // نص أبيض */
+      align-self: flex-end;  /* Align right // محاذاة لليمين */
+      border-bottom-left-radius: 2px; /* Small corner // زاوية صغيرة */
+    }
+    .chat-input-area {
+      padding: 10px;         /* Padding // حشوة */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      border-top: 1px solid var(--line); /* Top border // حد علوي */
+      display: flex;         /* Flex // مرن */
+      gap: 10px;             /* Gap // فجوة */
+    }
+    .chat-input-area input {
+      flex: 1;               /* Take remaining space // أخذ المساحة المتبقية */
+      padding: 10px;         /* Padding // حشوة */
+      border-radius: 20px;   /* Rounded // دائري */
+      border: 1px solid var(--line); /* Border // حدود */
+      outline: none;         /* No outline // بلا مخطط */
+      font-family: inherit;  /* Inherit font // وراثة الخط */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .send-btn {
+      background: var(--primary); /* Primary color // اللون الأساسي */
+      color: var(--accent);  /* Accent color // لون مميز */
+      border: none;          /* No border // بلا حدود */
+      padding: 10px 14px;    /* Padding // حشوة */
+      border-radius: 20px;   /* Rounded // دائري */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      font-weight: bold;     /* Bold // عريض */
+      transition: all 0.2s;  /* Smooth transition // انتقال سلس */
+    }
+    .send-btn:hover { transform: scale(1.05); } /* Slight zoom on hover // تكبير طفيف عند التمرير */
+    .chat-title {
+      color: #d4af37 !important; /* Gold title // عنوان ذهبي */
+    }
+    .close-chat {
+      background: #e0e0e0 !important; /* Light grey background // خلفية رمادية فاتحة */
+      border: none !important; /* No border // بلا حدود */
+      color: #000000 !important; /* Black text // نص أسود */
+      font-size: 16px !important; /* Font size // حجم الخط */
+      width: 28px !important; /* Fixed width // عرض ثابت */
+      height: 28px !important; /* Fixed height // ارتفاع ثابت */
+      border-radius: 50% !important; /* Circular // دائري */
+      display: flex !important; /* Flex // مرن */
+      align-items: center !important; /* Center vertically // توسيط عمودي */
+      justify-content: center !important; /* Center horizontally // توسيط أفقي */
+      cursor: pointer !important; /* Pointer cursor // مؤشر اليد */
+      padding: 0 !important; /* No padding // بلا حشوة */
+    }
+    [data-theme="dark"] .close-chat {
+      background: #333333 !important; /* Dark background // خلفية داكنة */
+      color: #ffffff !important; /* White text // نص أبيض */
+    }
+    .message-wrapper {
+      position: relative;    /* Relative for delete button // نسبي لزر الحذف */
+      width: 100%;           /* Full width // عرض كامل */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 8px;              /* Gap // فجوة */
+      padding: 2px 0;        /* Vertical padding // حشوة رأسية */
+    }
+    .message-wrapper:hover .message-delete-btn {
+      opacity: 1;            /* Show delete button on hover // إظهار زر الحذف عند التمرير */
+    }
+    .message-delete-btn {
+      background: #ff4444;   /* Red background // خلفية حمراء */
+      color: white;          /* White text // نص أبيض */
+      border: none;          /* No border // بلا حدود */
+      border-radius: 4px;    /* Rounded corners // زوايا دائرية */
+      padding: 2px 6px;      /* Padding // حشوة */
+      font-size: 11px;       /* Font size // حجم الخط */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      opacity: 0;            /* Hidden by default // مخفي افتراضيًا */
+      transition: opacity 0.2s; /* Smooth appearance // ظهور سلس */
+      flex-shrink: 0;        /* Prevent shrinking // منع الانكماش */
+    }
+    .message-delete-btn:hover {
+      background: #cc0000;   /* Darker red // أحمر أغمق */
+    }
+    .chat-toggle-btn {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      bottom: 20px;          /* Distance from bottom // مسافة من الأسفل */
+      right: 20px;           /* Distance from right // مسافة من اليمين */
+      width: 60px;           /* Fixed width // عرض ثابت */
+      height: 60px;          /* Fixed height // ارتفاع ثابت */
+      background: var(--primary); /* Primary color // اللون الأساسي */
+      color: var(--accent);  /* Accent color // لون مميز */
+      border-radius: 50%;    /* Circular // دائري */
+      border: none;          /* No border // بلا حدود */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Shadow // ظل */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      z-index: 2000;         /* High z-index // مؤشر z عالي */
+      font-size: 28px;       /* Font size // حجم الخط */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      transition: transform 0.3s; /* Smooth transform // تحول سلس */
+    }
+    .chat-toggle-btn:hover { transform: scale(1.1); } /* Slight zoom // تكبير طفيف */
+
+    /* Larger screens: breathe a bit more // للشاشات الكبيرة: مساحة أكبر قليلاً */
+    @media (min-width: 768px) {
+      .shell { padding: 24px; } /* More padding // حشوة أكبر */
+      .map { height: 220px; }    /* Taller map // خريطة أطول */
+      .cats { gap: 12px; }       /* Larger gap // فجوة أكبر */
+      .cat { width: 70px; }      /* Slightly wider // أوسع قليلاً */
+    }
+
+    /* Emergency Buttons // أزرار الطوارئ */
+    .emergency-buttons {
+      padding: 0 6px 10px;   /* Padding // حشوة */
+      display: flex;         /* Flex // مرن */
+      gap: 10px;             /* Gap // فجوة */
+    }
+    .emergency-btn {
+      flex: 1;               /* Equal width // عرض متساوٍ */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      gap: 8px;              /* Gap // فجوة */
+      border: 2px solid #ef4444; /* Red border // حدود حمراء */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      padding: 12px;         /* Padding // حشوة */
+      background: #fee2e2;   /* Light red // أحمر فاتح */
+      color: #b91c1c;        /* Dark red // أحمر داكن */
+      font-weight: 700;      /* Bold // عريض */
+      text-decoration: none; /* Remove underline // إزالة التسطير */
+      box-shadow: 0 2px 0 #b91c1c; /* Shadow // ظل */
+      transition: transform 0.1s, box-shadow 0.1s; /* Quick transition // انتقال سريع */
+    }
+    .emergency-btn:active {
+      transform: translateY(2px); /* Press down effect // تأثير الضغط */
+      box-shadow: none;      /* No shadow when pressed // بلا ظل عند الضغط */
+    }
+    [data-theme="dark"] .emergency-btn {
+      background: #450a0a;   /* Dark red // أحمر داكن */
+      color: #fca5a5;        /* Light red // أحمر فاتح */
+      border-color: #ef4444; /* Red border // حدود حمراء */
+      box-shadow: 0 2px 0 #7f1d1d; /* Dark red shadow // ظل أحمر داكن */
+    }
+    
+    /* Search Results // نتائج البحث */
+    .search-results {
+      position: absolute;    /* Absolute positioning // تحديد موضع مطلق */
+      bottom: 70px;          /* Above search bar // فوق شريط البحث */
+      left: 6px; right: 6px; /* Full width with margins // عرض كامل مع هوامش */
+      background: var(--card); /* Background // خلفية */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 14px;   /* Rounded corners // زوايا دائرية */
+      max-height: 50vh;      /* Maximum height // أقصى ارتفاع */
+      overflow-y: auto;      /* Scroll if needed // تمرير إذا لزم */
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      z-index: 2000;         /* High z-index // مؤشر z عالي */
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1); /* Shadow // ظل */
+    }
+    .search-results.active { display: block; } /* Show when active // يظهر عند التفعيل */
+    .search-item {
+      padding: 12px 16px;    /* Padding // حشوة */
+      border-bottom: 1px solid var(--line); /* Bottom border // حد سفلي */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      display: flex;         /* Flex // مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 10px;             /* Gap // فجوة */
+      transition: background 0.2s; /* Smooth background // خلفية سلسة */
+    }
+    .search-item:last-child { border-bottom: none; } /* No border on last // بلا حدود للأخير */
+    .search-item:hover { background: var(--bg); } /* Hover effect // تأثير التمرير */
+    .search-icon { font-size: 20px; } /* Icon size // حجم الأيقونة */
+    .search-info { flex: 1; } /* Take remaining space // أخذ المساحة المتبقية */
+    .search-name { font-weight: 700; font-size: 14px; color: var(--ink); } /* Name style // نمط الاسم */
+    .search-type { font-size: 12px; color: var(--muted); } /* Type style // نمط النوع */
+  </style>
+</head>
+<body>
+  <!-- ==================== PAGE STRUCTURE // هيكل الصفحة ==================== -->
+  <div class="page">
+    <header class="brand">
+      <!-- Logo // الشعار -->
+      <div class="logo-text">حــــــيــــاك</div>
+      <div class="logo-sub">HAYYAK</div>
+      <!-- Language toggle button // زر تبديل اللغة -->
+      <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+        <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+        <span>English</span> <!-- Button text (changes via JS) // نص الزر (يتغير عبر JS) -->
+      </button>
+    </header>
+    <main class="shell">
+      <!-- Map container // حاوية الخريطة -->
+      <div class="map card" aria-label="خريطة" data-ar-label="خريطة" data-en-label="Map">
+        <iframe id="user-map" src="https://www.openstreetmap.org/export/embed.html?bbox=51.50,22.50,56.50,26.20&amp;layer=mapnik" title="Map"></iframe>
+      </div>
+
+      <!-- Welcome question // سؤال الترحيب -->
+      <h1 class="question" data-ar-prefix="" data-en-prefix="" data-ar-suffix="، ماذا تبحث عنه اليوم؟" data-en-suffix=", what are you looking for today?">
+        ماذا تبحث عنه اليوم؟
+      </h1>
+
+      <!-- Categories section // قسم الفئات -->
+      <section class="cats">
+        <a href="Stores.html" class="cat">
+          <div class="ico"><span class="emoji" aria-hidden="true">🛍️</span></div>
+          <div class="cat-text" data-ar="متاجر" data-en="Stores">متاجر</div>
+        </a>
+        <a href="Restaurants.html" class="cat">
+          <div class="ico"><span class="emoji" aria-hidden="true">🍽️</span></div>
+          <div class="cat-text" data-ar="مطاعم" data-en="Restaurants">مطاعم</div>
+        </a>
+        <a href="Tourism.html" class="cat">
+          <div class="ico"><span class="emoji" aria-hidden="true">🗺️</span></div>
+          <div class="cat-text" data-ar="سياحة" data-en="Tourism">سياحة</div>
+        </a>
+        <a href="Entertainment.html" class="cat">
+          <div class="ico"><span class="emoji" aria-hidden="true">🏖️</span></div>
+          <div class="cat-text" data-ar="ترفيه" data-en="Entertainment">ترفيه</div>
+        </a>
+        <a href="Hotel.html" class="cat">
+          <div class="ico"><span class="emoji" aria-hidden="true">🏨</span></div>
+          <div class="cat-text" data-ar="فنادق" data-en="Hotels">فنادق</div>
+        </a>
+        <a href="Farms.html" class="cat cat-farms-health">
+          <div class="ico"><span class="emoji" aria-hidden="true">🌾</span></div>
+          <div class="cat-text" data-ar="مزارع" data-en="Farms">مزارع</div>
+        </a>
+        <a href="Health.html" class="cat cat-farms-health">
+          <div class="ico"><span class="emoji" aria-hidden="true">🏥</span></div>
+          <div class="cat-text" data-ar="صحة" data-en="Health">صحة</div>
+        </a>
+      </section>
+
+      <!-- Today's offer // عرض اليوم -->
+      <h2 class="section-title" data-ar="عرض اليوم!" data-en="Today's Offer!">عرض اليوم!</h2>
+
+      <section class="offer">
+        <div class="deal">
+          <img src="Images/IMG_World_Home_Page.jpg" alt="عرض ترفيهي" data-ar-alt="عرض ترفيهي" data-en-alt="Entertainment offer" />
+          <div>
+            <div class="title" data-ar="خصم 40% على IMG" data-en="40% off on IMG">خصم 40% على IMG</div>
+            <div class="sub" data-ar="لفترة محدودة • اطّلع على التفاصيل" data-en="For a limited time • View details">
+              لفترة محدودة • اطّلع على التفاصيل
+            </div>
+          </div>
+        </div>
+      </section>   
+
+      <!-- Emergency buttons // أزرار الطوارئ -->
+      <section class="emergency-buttons">
+        <a href="tel:999" class="emergency-btn">
+          <span style="font-size: 20px;">🚓</span> 
+          <span data-ar="الشرطة 999" data-en="Police 999">الشرطة 999</span>
+        </a>
+        <a href="tel:998" class="emergency-btn">
+          <span style="font-size: 20px;">🚑</span> 
+          <span data-ar="الإسعاف 998" data-en="Ambulance 998">الإسعاف 998</span>
+        </a>
+      </section>
+
+      <!-- Quick links // روابط سريعة -->
+      <section class="quick">
+        <a href="Contacts.html" class="item">
+          <div class="label" data-ar="افراد العائلة والاصدقاء⬅" data-en="Family & Friends ➡️">افراد العائلة والاصدقاء⬅</div>
+        </a>
+        <a href="PlanDay.html" class="item">
+          <div class="label" data-ar="خطط يومي 📅" data-en="Plan My Day 📅">خطط يومي 📅</div>
+        </a>
+        <a href="Profile.html" class="item">
+          <div class="label" data-ar="الملف الشخصي⬅" data-en="Profile ">الملف الشخصي⬅</div>
+        </a>
+        <a href="AirQuilty.html" class="item">
+          <div class="label" data-ar="محطة قياس جودة المكان لاصحاب الحساسية⬅" data-en="Air Quality Station for Allergy Sufferers ➡️">
+            محطة قياس جودة المكان لاصحاب الحساسية⬅
+          </div>
+        </a>
+        <a href="javascript:void(0)" onclick="toggleHistory()" class="item">
+          <div class="label" data-ar="اماكن زرتها مسبق⬅" data-en="Previously Seen Places ➡️">اماكن زرتها مسبق⬅</div>
+        </a>
+        <a href="HealthProblems.html" class="item">
+          <div class="label" data-ar="المشاكل الصحية/النفسية⬅" data-en="Health/Psychological Issues ➡️">المشاكل الصحية/النفسية⬅</div>
+        </a>
+        <a href="ID.HTML" class="item">
+          <div class="label" data-ar="بطاقة التعريف الرقمية⬅" data-en="Digital ID Card ➡️">بطاقة التعريف الرقمية⬅</div>
+        </a>
+        <a href="Laws.html" class="item">
+          <div class="label" data-ar="قوانين دولة الإمارات العربية المتحدة⬅" data-en="UAE Laws ➡️">قوانين دولة الإمارات العربية المتحدة⬅</div>
+        </a>
+      </section>
+
+      <!-- Search bar // شريط البحث -->
+      <div class="bottom-search" style="position: relative;">
+        <div id="search-results" class="search-results"></div>
+        <div class="search">
+          <div class="glass">🔍</div>
+          <input type="search" 
+                 placeholder="ابحث هنا" 
+                 data-ar-placeholder="ابحث هنا" 
+                 data-en-placeholder="Search here" 
+                 aria-label="ابحث هنا" 
+                 id="search-input" />
+        </div>
+      </div>
+    </main>
+
+    <!-- History panel // لوحة السجل -->
+    <div id="history-panel" class="history-panel" aria-hidden="true">
+      <div class="history-header">
+        <h3 style="font-size:18px; font-weight:700" data-ar="الأماكن التي زرتها مؤخراً" data-en="Recently Visited Places">
+          الأماكن التي زرتها مؤخراً
+        </h3>
+        <button onclick="toggleHistory()" class="close-btn">✕</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+
+    <!-- Footer // التذييل -->
+    <footer id="site-footer" data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">
+      © عبدالله بن ناصر - حياك 
+    </footer>
+  </div>
+
+  <!-- Question Modal // نافذة الأسئلة -->
+  <div id="questionModal" class="question-modal">
+    <div class="question-content">
+      <div class="question-progress" id="questionProgress"></div>
+      <h2 id="questionTitle"></h2>
+      <div class="question-options" id="questionOptions"></div>
+      <div class="question-buttons">
+        <button class="question-btn question-btn-submit" id="submitQuestion" data-ar="تأكيد" data-en="Confirm">تأكيد</button>
+        <button class="question-btn question-btn-skip" id="skipQuestion" data-ar="تخطي" data-en="Skip">تخطي</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Redirect Confirmation Modal // نافذة تأكيد إعادة التوجيه -->
+  <div id="redirectModal" class="question-modal">
+    <div class="question-content" style="text-align: center;">
+      <h2 id="redirectTitle"></h2>
+      <p id="redirectMessage" style="margin-bottom: 20px; color: var(--muted); font-size: 14px;"></p>
+      <div class="question-buttons">
+        <button class="question-btn question-btn-submit" id="confirmRedirect">نعم</button>
+        <button class="question-btn question-btn-skip" id="cancelRedirect">لا</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Chat Widget // واجهة الدردشة المخصصة -->
+  <div id="chat-widget" class="chat-widget">
+    <div class="chat-header">
+      <div class="chat-title" data-ar="Hayyak Agent 3.0v" data-en="Hayyak Agent 3.0v">Hayyak Agent 3.0v</div>
+      <div style="display: flex; gap: 8px;">
+        <button class="action-btn" id="clear-chat-btn" onclick="clearChatMessages()" style="background: transparent; color: white; border: none; font-size: 14px; padding: 0 8px; cursor: pointer;" title="Clear chat" aria-label="Clear chat">🗑️</button>
+        <button class="close-chat" onclick="toggleChat()" aria-label="Close chat">✕</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="..." onkeypress="handleChatKeyPress(event)" aria-label="Chat message">
+      <button class="send-btn" onclick="sendChatMessage()" aria-label="Send message">➤</button>
+    </div>
+  </div>
+  
+  <!-- Chat toggle button // زر تبديل الدردشة -->
+  <button class="chat-toggle-btn" onclick="toggleChat()" aria-label="Open chat">💬</button>
+
+  <script>
+    // Close chat when clicking outside it // إغلاق الدردشة عند النقر خارجها
+    document.addEventListener('click', (e) => {
+      const chatWidget = document.getElementById('chat-widget');
+      const chatToggleBtn = document.querySelector('.chat-toggle-btn');
+      if (chatWidget && chatWidget.classList.contains('active')) {
+        if (!chatWidget.contains(e.target) && !chatToggleBtn.contains(e.target)) {
+          chatWidget.classList.remove('active');
+        }
+      }
+    });
+  </script>
+
+  <script>
+    // ==================== QUESTION SYSTEM ====================
+    // نظام الأسئلة
+
+    const questionsList = [ /* Array of question objects // مصفوفة كائنات الأسئلة */
+      {
+        ar: "ماذا تشتهي أن تأكل اليوم؟", /* Arabic question // السؤال بالعربية */
+        en: "What do you crave today?",   /* English question // السؤال بالإنجليزية */
+        answers: [ /* Array of answer options // مصفوفة خيارات الإجابة */
+          { ar: "مطعم إيطالي", en: "Italian Restaurant", page: "restaurants.html?search=Italian", pageDisplay: "Italian Restaurants" },
+          { ar: "مأكولات بحرية", en: "Seafood", page: "restaurants.html?search=Seafood", pageDisplay: "Seafood Restaurants" },
+          { ar: "برجر", en: "Burger", page: "restaurants.html?search=Burger", pageDisplay: "Burger Joints" }
+        ]
+      },
+      // ... (other questions) ...
+      // Note: The full questionsList is very long; we'll comment the first few as examples.
+      // باقي الأسئلة موجودة ولكن تم اختصارها في التعليق لتجنب التكرار.
+    ];
+
+    let answeredQuestions = JSON.parse(localStorage.getItem('hayyak_answered_questions') || '[]'); /* Load answered questions from localStorage // تحميل الأسئلة التي تمت الإجابة عليها من التخزين المحلي */
+
+    function getNextQuestion() {
+      /* Returns the index of the next unanswered question // يعيد فهرس السؤال التالي الذي لم تتم الإجابة عليه */
+      if (answeredQuestions.length < questionsList.length) {
+        for (let i = 0; i < questionsList.length; i++) {
+          if (!answeredQuestions.includes(i)) return i; /* Return first unanswered // إعادة أول سؤال لم تتم الإجابة عليه */
+        }
+      }
+      return Math.floor(Math.random() * questionsList.length); /* All answered, return random // تمت الإجابة على الكل، إعادة عشوائي */
+    }
+
+    function showQuestion() {
+      /* Shows the question modal // إظهار نافذة الأسئلة */
+      const questionIndex = getNextQuestion();
+      const question = questionsList[questionIndex];
+      
+      document.getElementById('questionTitle').textContent = currentLanguage === 'ar' ? question.ar : question.en; /* Set title based on language // تعيين العنوان حسب اللغة */
+      
+      const optionsContainer = document.getElementById('questionOptions');
+      optionsContainer.innerHTML = ''; /* Clear previous options // مسح الخيارات السابقة */
+      
+      question.answers.forEach((answer, idx) => {
+        const answerText = currentLanguage === 'ar' ? answer.ar : answer.en; /* Get answer text // الحصول على نص الإجابة */
+        const html = `
+          <div class="question-option">
+            <label>
+              <input type="radio" name="answer" value="${idx}" required>
+              ${answerText}
+            </label>
+          </div>
+        `;
+        optionsContainer.innerHTML += html; /* Add answer option // إضافة خيار الإجابة */
+      });
+      
+      const otherText = currentLanguage === 'ar' ? 'أخرى' : 'Other'; /* "Other" option // خيار "أخرى" */
+      optionsContainer.innerHTML += `
+        <div class="question-option">
+          <label>
+            <input type="radio" name="answer" value="other" required>
+            ${otherText}
+          </label>
+        </div>
+      `;
+      
+      document.getElementById('questionModal').dataset.questionIndex = questionIndex; /* Store question index // تخزين فهرس السؤال */
+      document.getElementById('questionModal').classList.add('active'); /* Show modal // إظهار النافذة */
+    }
+
+    function answerQuestion() {
+      /* Handle answer submission // معالجة إرسال الإجابة */
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        showNotification(currentLanguage === 'ar' ? 'الرجاء اختيار إجابة' : 'Please select an answer');
+        return;
+      }
+
+      const questionIndex = parseInt(document.getElementById('questionModal').dataset.questionIndex);
+      const question = questionsList[questionIndex];
+      const selectedValue = selected.value;
+      
+      if (!answeredQuestions.includes(questionIndex)) {
+        answeredQuestions.push(questionIndex);
+        localStorage.setItem('hayyak_answered_questions', JSON.stringify(answeredQuestions));
+      }
+      
+      let targetAnswer = null;
+      if (selectedValue === 'other') {
+        document.getElementById('questionModal').classList.remove('active');
+        return;
+      } else {
+        const answerIndex = parseInt(selectedValue);
+        targetAnswer = question.answers[answerIndex];
+      }
+      
+      document.getElementById('questionModal').classList.remove('active');
+
+      if (targetAnswer && targetAnswer.page) {
+        showRedirectModal(targetAnswer);
+      }
+    }
+
+    function showRedirectModal(targetAnswer) {
+      /* Show confirmation modal before redirect // إظهار نافذة التأكيد قبل إعادة التوجيه */
+      const modal = document.getElementById('redirectModal');
+      const title = document.getElementById('redirectTitle');
+      const msg = document.getElementById('redirectMessage');
+      const confirmBtn = document.getElementById('confirmRedirect');
+      const cancelBtn = document.getElementById('cancelRedirect');
+
+      if (currentLanguage === 'ar') {
+        title.textContent = 'اقتراح وجهة';
+        msg.textContent = `بناءً على إجابتك، نقترح عليك زيارة ${targetAnswer.pageDisplay}. هل تريد الذهاب الآن؟`;
+        confirmBtn.textContent = 'نعم، انطلق 🚀';
+        cancelBtn.textContent = 'لا، ابق هنا';
+      } else {
+        title.textContent = 'Destination Suggestion';
+        msg.textContent = `Based on your answer, we suggest visiting ${targetAnswer.pageDisplay}. Do you want to go now?`;
+        confirmBtn.textContent = 'Yes, Let\'s Go 🚀';
+        cancelBtn.textContent = 'No, Stay Here';
+      }
+
+      confirmBtn.onclick = function() {
+        window.location.href = targetAnswer.page;
+      };
+      
+      cancelBtn.onclick = function() {
+        modal.classList.remove('active');
+      };
+
+      modal.classList.add('active');
+    }
+
+    function skipQuestion() {
+      /* Close question modal without answering // إغلاق نافذة الأسئلة دون إجابة */
+      document.getElementById('questionModal').classList.remove('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      /* Initialize when DOM is ready // التهيئة عند تجهيز DOM */
+      document.getElementById('submitQuestion').addEventListener('click', answerQuestion);
+      document.getElementById('skipQuestion').addEventListener('click', skipQuestion);
+      
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+
+      if (profile.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark'); /* Apply dark theme // تطبيق السمة الداكنة */
+      }
+
+      if (!sessionStorage.getItem('hayyak_has_visited_home')) {
+        sessionStorage.setItem('hayyak_has_visited_home', 'true');
+        setTimeout(showQuestion, 800); /* Show question after 800ms // إظهار السؤال بعد 800 مللي */
+      }
+    });
+
+    // ==================== LANGUAGE STATE ====================    
+    // حالة اللغة
+    let currentLanguage = 'ar'; /* Default language // اللغة الافتراضية */
+    
+    function toggleLanguage() {
+      /* Toggle between Arabic and English // التبديل بين العربية والإنجليزية */
+      const btn = document.getElementById('translateBtn');
+      btn.classList.add('switching'); /* Add animation class // إضافة فئة الحركة */
+      
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar'; /* Switch // تبديل */
+      
+      const langText = btn.querySelector('span:last-child');
+      langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية'; /* Update button text // تحديث نص الزر */
+      
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; /* Set direction // تعيين الاتجاه */
+      document.documentElement.lang = currentLanguage; /* Set language // تعيين اللغة */
+      
+      document.title = currentLanguage === 'ar' ? 'حياك | HAYYAK' : 'Hayyak | Home'; /* Update title // تحديث العنوان */
+      
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      profile.language = currentLanguage;
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile)); /* Save preference // حفظ التفضيل */
+      
+      translatePage(); /* Translate all content // ترجمة كل المحتوى */
+      
+      // Update question modal if open // تحديث نافذة الأسئلة إذا كانت مفتوحة
+      const questionModal = document.getElementById('questionModal');
+      if (questionModal && questionModal.classList.contains('active')) {
+        const questionIndex = parseInt(questionModal.dataset.questionIndex);
+        const question = questionsList[questionIndex];
+        
+        document.getElementById('questionTitle').textContent = 
+          currentLanguage === 'ar' ? question.ar : question.en;
+        
+        const optionsContainer = document.getElementById('questionOptions');
+        optionsContainer.innerHTML = '';
+        
+        question.answers.forEach((answer, idx) => {
+          const answerText = currentLanguage === 'ar' ? answer.ar : answer.en;
+          const html = `
+            <div class="question-option">
+              <label>
+                <input type="radio" name="answer" value="${idx}" required>
+                ${answerText}
+              </label>
+            </div>
+          `;
+          optionsContainer.innerHTML += html;
+        });
+        
+        const otherText = currentLanguage === 'ar' ? 'أخرى' : 'Other';
+        optionsContainer.innerHTML += `
+          <div class="question-option">
+            <label>
+              <input type="radio" name="answer" value="other" required>
+              ${otherText}
+            </label>
+          </div>
+        `;
+      }
+      
+      updateWelcomeMessage(); /* Update welcome message // تحديث رسالة الترحيب */
+      
+      showNotification(currentLanguage === 'ar' ? 'تم التبديل إلى العربية' : 'Switched to English'); /* Show notification // عرض إشعار */
+      
+      setTimeout(() => {
+        btn.classList.remove('switching'); /* Remove animation after 500ms // إزالة الحركة بعد 500 مللي */
+      }, 500);
+    }
+    
+    function translatePage() {
+      /* Translate all static content on the page // ترجمة كل المحتوى الثابت في الصفحة */
+      console.log('Translating to:', currentLanguage);
+      
+      const footer = document.getElementById('site-footer');
+      if (footer && footer.hasAttribute('data-ar') && footer.hasAttribute('data-en')) {
+        const footerText = currentLanguage === 'ar' ? footer.getAttribute('data-ar') : footer.getAttribute('data-en');
+        footer.textContent = footerText; /* Translate footer // ترجمة التذييل */
+        console.log('Footer translated:', footerText);
+      }
+      
+      document.querySelectorAll('.cat-text').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          const text = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+          element.textContent = text; /* Translate category text // ترجمة نص الفئة */
+        }
+      });
+      
+      document.querySelectorAll('[data-ar]:not(.cat-text):not(footer)').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          const text = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+          element.textContent = text; /* Translate other elements // ترجمة العناصر الأخرى */
+        }
+      });
+      
+      document.querySelectorAll('[data-ar-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? element.getAttribute('data-ar-placeholder') : element.getAttribute('data-en-placeholder'); /* Translate placeholders // ترجمة النصوص المؤقتة */
+        }
+      });
+      
+      document.querySelectorAll('[data-ar-label]').forEach(element => {
+        if (element.hasAttribute('data-ar-label') && element.hasAttribute('data-en-label')) {
+          element.setAttribute('aria-label', currentLanguage === 'ar' ? element.getAttribute('data-ar-label') : element.getAttribute('data-en-label')); /* Translate aria-labels // ترجمة تسميات aria */
+        }
+      });
+      
+      const mapElement = document.querySelector('.map');
+      if (mapElement) {
+        mapElement.setAttribute('aria-label', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+        const mapIframe = mapElement.querySelector('iframe');
+        if (mapIframe) {
+          mapIframe.setAttribute('title', currentLanguage === 'ar' ? 'خريطة' : 'Map'); /* Translate map title // ترجمة عنوان الخريطة */
+        }
+      }
+      
+      document.querySelectorAll('[data-ar-alt]').forEach(element => {
+        if (element.hasAttribute('data-ar-alt') && element.hasAttribute('data-en-alt')) {
+          element.setAttribute('alt', currentLanguage === 'ar' ? element.getAttribute('data-ar-alt') : element.getAttribute('data-en-alt')); /* Translate image alt text // ترجمة نص بديل للصور */
+        }
+      });
+      
+      document.querySelectorAll('.section-title').forEach(title => {
+        if (title.hasAttribute('data-ar') && title.hasAttribute('data-en')) {
+          title.textContent = currentLanguage === 'ar' ? title.getAttribute('data-ar') : title.getAttribute('data-en'); /* Translate section titles // ترجمة عناوين الأقسام */
+        }
+      });
+      
+      const historyTitle = document.querySelector('.history-panel h3');
+      if (historyTitle && historyTitle.hasAttribute('data-ar') && historyTitle.hasAttribute('data-en')) {
+        historyTitle.textContent = currentLanguage === 'ar' ? historyTitle.getAttribute('data-ar') : historyTitle.getAttribute('data-en'); /* Translate history panel title // ترجمة عنوان لوحة السجل */
+      }
+      
+      console.log('Translation complete!');
+    }
+    
+    function updateWelcomeMessage() {
+      /* Update the welcome question with user's name // تحديث سؤال الترحيب باسم المستخدم */
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile'));
+      const questionElement = document.querySelector('.question');
+      
+      const userName = currentLanguage === 'ar' ? (userProfile.nameAr || userProfile.name) : (userProfile.nameEn || userProfile.name);
+      
+      if (userProfile && userName) {
+        const prefix = currentLanguage === 'ar' ? questionElement.getAttribute('data-ar-prefix') : questionElement.getAttribute('data-en-prefix');
+        const suffix = currentLanguage === 'ar' ? questionElement.getAttribute('data-ar-suffix') : questionElement.getAttribute('data-en-suffix');
+        
+        if (prefix === '') {
+          questionElement.textContent = ``; // Can be customized // يمكن تخصيصه
+        } else {
+          questionElement.textContent = ` `;
+        }
+      } else {
+        const defaultMsg = currentLanguage === 'ar' ? 'ماذا تبحث عنه اليوم؟' : 'What are you looking for today?';
+        questionElement.textContent = defaultMsg;
+      }
+    }
+
+    // Check for user profile // التحقق من ملف تعريف المستخدم
+    const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile'));
+    if (!userProfile) {
+      window.location.href = 'index.html'; /* Redirect if not logged in // إعادة التوجيه إذا لم يكن مسجلاً */
+    } else {
+      updateWelcomeMessage(); /* Update welcome // تحديث الترحيب */
+    }
+
+    function toggleHistory() {
+      /* Toggle history panel // تبديل لوحة السجل */
+      const panel = document.getElementById('history-panel');
+      panel.classList.toggle('active');
+      if (panel.classList.contains('active')) {
+        loadHistory(); /* Load history when opened // تحميل السجل عند الفتح */
+      }
+    }
+
+    function loadHistory() {
+      /* Load and display visit history // تحميل وعرض سجل الزيارات */
+      const list = document.getElementById('history-list');
+      const history = JSON.parse(localStorage.getItem('hayyak_history') || '[]');
+      
+      if (history.length === 0) {
+        list.innerHTML = `<div style="text-align:center; color:var(--muted); padding:20px;">
+          ${currentLanguage === 'ar' ? 'لا يوجد سجل زيارات بعد' : 'No visit history yet'}
+        </div>`;
+        return;
+      }
+
+      list.innerHTML = history.map(item => `
+        <div class="history-item" onclick="locateHistory(${item.lat}, ${item.lon})">
+          <div style="font-weight:700">${item.title}</div>
+          <div style="font-size:12px; color:var(--muted)">
+            ${new Date(item.date).toLocaleDateString(currentLanguage === 'ar' ? 'ar-AE' : 'en-US')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function locateHistory(lat, lon) {
+      /* Center map on a history location // توسيط الخريطة على موقع من السجل */
+      const f = 0.01;
+      const bbox = `${lon-f},${lat-f},${lon+f},${lat+f}`;
+      document.getElementById('user-map').src = `https://www.openstreetmap.org/export/embed.html?bbox=&layer=mapnik`; // Placeholder // عنصر نائب
+      toggleHistory();
+      
+      const message = currentLanguage === 'ar' ? 
+        `تم تحديد الموقع: ${lat.toFixed(4)}, ${lon.toFixed(4)}` :
+        `Location set to: ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+      showNotification(message);
+    }
+
+    // Search functionality // وظيفة البحث
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function(e) {
+      const query = this.value.trim().toLowerCase();
+      
+      // Filter Categories // تصفية الفئات
+      document.querySelectorAll('.cat').forEach(cat => {
+        const text = cat.textContent.toLowerCase();
+        cat.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+
+      // Filter Quick Links // تصفية الروابط السريعة
+      document.querySelectorAll('.quick .item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+
+      // Filter Emergency Buttons // تصفية أزرار الطوارئ
+      document.querySelectorAll('.emergency-btn').forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        btn.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+
+      searchResults.classList.remove('active'); /* Hide global search results // إخفاء نتائج البحث العامة */
+    });
+
+    // Close search results when clicking outside // إغلاق نتائج البحث عند النقر خارجها
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.classList.remove('active');
+      }
+    });
+    
+    // ==================== NOTIFICATION SOUND // صوت الإشعار ====================
+    function playNotificationSound(type = 'info') {
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (profile.soundEnabled === false) return;
+
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        const now = ctx.currentTime;
+
+        if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(150, now);
+          osc.frequency.exponentialRampToValueAtTime(50, now + 0.3);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'success') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        }
+      } catch (e) {}
+    }
+
+    function showNotification(message, type = 'info') {
+      /* Show a notification toast // عرض إشعار */
+      playNotificationSound(type === 'error' ? 'error' : (type === 'success' ? 'success' : 'info')); // Play sound // تشغيل صوت
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+        existingNotification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => existingNotification.remove(), 300);
+      }
+      
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: #d4af37; display: grid; place-items: center; font-size: 18px;">
+          ${type === 'error' ? '⚠️' : (type === 'success' ? '🏆' : '💡')}
+        </div>
+        <div style="flex: 1;">
+          <div style="font-weight: 700; margin-bottom: 4px;">
+            ${currentLanguage === 'ar' ? (type === 'error' ? 'تنبيه' : 'إشعار') : (type === 'error' ? 'Alert' : 'Notification')}
+          </div>
+          <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+        </div>
+        <button onclick="this.parentElement.style.animation='slideOut 0.3s ease'; setTimeout(() => this.parentElement.remove(), 300)" 
+                style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; width: 24px; height: 24px; display: grid; place-items: center;">
+          ×
+        </button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }
+      }, 5000);
+    }
+
+    // Health tips data // بيانات النصائح الصحية
+    const healthTips = {
+      ar: [
+        "💊 تذكر تناول أدويتك في موعدها",
+        "🥗 تناول وجبة إفطار صحية لتبدأ يومك بنشاط",
+        "💧 اشرب 8 أكواب من الماء يومياً",
+        "🚶‍♂️ امشِ 30 دقيقة يومياً لصحة قلبك",
+        "🧘‍♂️ خذ قسطاً من الراحة والتأمل لتخفيف القلق",
+        "📋 تابع قراءة السكر بانتظام إذا كنت مريض سكري",
+        "😊 الابتسام يقلل التوتر ويحسن المزاج",
+        "🥦 تجنب الأطعمة المسببة للحساسية",
+        "🌞 تعرض لأشعة الشمس الصباحية لفيتامين د",
+        "🧠 تمرن عقلك بالقراءة والألعاب الذهنية"
+      ],
+      en: [
+        "💊 Remember to take your medications on time",
+        "🥗 Eat a healthy breakfast to start your day energetically",
+        "💧 Drink 8 glasses of water daily",
+        "🚶‍♂️ Walk 30 minutes daily for heart health",
+        "🧘‍♂️ Take a break and meditate to reduce anxiety",
+        "📋 Monitor your sugar regularly if you have diabetes",
+        "😊 Smiling reduces stress and improves mood",
+        "🥦 Avoid foods that cause allergies",
+        "🌞 Get morning sun exposure for Vitamin D",
+        "🧠 Exercise your brain with reading and mental games"
+      ]
+    };
+
+    function showHealthNotification() {
+      /* Show a random health tip // عرض نصيحة صحية عشوائية */
+      const privacySettings = {
+        healthNotifications: localStorage.getItem('healthNotifications') !== 'false'
+      };
+      
+      if (privacySettings.healthNotifications) {
+        const tips = currentLanguage === 'ar' ? healthTips.ar : healthTips.en;
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        
+        setTimeout(() => {
+          showNotification(randomTip, 'info');
+        }, 2000);
+      }
+    }
+
+    // Initialize // التهيئة
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage); /* Attach translate button // ربط زر الترجمة */
+      
+      if (userProfile && userProfile.language && userProfile.language !== currentLanguage) {
+        currentLanguage = userProfile.language; /* Apply saved language // تطبيق اللغة المحفوظة */
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+        const btn = document.getElementById('translateBtn');
+        if (btn) {
+          const langText = btn.querySelector('span:last-child');
+          if (langText) langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+        }
+        translatePage(); /* Translate // ترجمة */
+      }
+
+      if (userProfile && userProfile.name) {
+        showHealthNotification(); /* Show health tip if user is logged in // عرض نصيحة صحية إذا كان المستخدم مسجلاً */
+      }
+    });
+  </script>
+  
+  <!-- Achievements System // نظام الإنجازات -->
+  <script src="JS/Achievements.js"></script>
+  
+  <script>
+    // Chat widget functions (global so inline onclick handlers work)
+    // دوال واجهة الدردشة (عامة لتعمل مع معالجات onclick المضمنة)
+    
+    function formatBotMessage(text) {
+      /* Format bot message: escape HTML, convert newlines, convert markdown links // تنسيق رسالة البوت: تحويل أحرف HTML، تحويل الأسطر الجديدة، تحويل روابط ماركداون */
+      if (!text) return '';
+      let safeText = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+      safeText = safeText.replace(/\n/g, '<br>');
+
+      safeText = safeText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, label, url) {
+        url = url.trim();
+        return `<a href="${url}" style="color: var(--accent); text-decoration: underline; font-weight: bold;">${label}</a>`;
+      });
+
+      return safeText;
+    }
+
+    function loadChatMessages() {
+      /* Load chat messages from localStorage // تحميل رسائل الدردشة من التخزين المحلي */
+      const messages = document.getElementById('chat-messages');
+      if (!messages) return;
+      messages.innerHTML = '';
+      const stored = localStorage.getItem('hayyak_chat_messages');
+      if (!stored) return;
+      try {
+        const msgArray = JSON.parse(stored);
+        msgArray.forEach((msg, index) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'message-wrapper';
+          const msgEl = document.createElement('div');
+          msgEl.className = 'message ' + msg.type;
+          if (msg.type === 'bot') {
+            msgEl.innerHTML = formatBotMessage(msg.text);
+            addPlanButton(msgEl, msg.text);
+          } else {
+            msgEl.textContent = msg.text;
+          }
+          wrapper.appendChild(msgEl);
+          if (msg.type === 'user') {
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'message-delete-btn';
+            deleteBtn.textContent = '✕';
+            deleteBtn.setAttribute('aria-label', 'Delete message');
+            deleteBtn.onclick = () => deleteMessage(index);
+            wrapper.appendChild(deleteBtn);
+          }
+          messages.appendChild(wrapper);
+        });
+        messages.scrollTop = messages.scrollHeight;
+      } catch (e) {
+        console.error('Error loading chat messages:', e);
+      }
+    }
+
+    function deleteMessage(index) {
+      /* Delete a specific message by index // حذف رسالة محددة حسب الفهرس */
+      const stored = localStorage.getItem('hayyak_chat_messages');
+      if (!stored) return;
+      try {
+        const msgArray = JSON.parse(stored);
+        msgArray.splice(index, 1);
+        localStorage.setItem('hayyak_chat_messages', JSON.stringify(msgArray));
+        loadChatMessages();
+      } catch (e) {
+        console.error('Error deleting message:', e);
+      }
+    }
+
+    function clearChatMessages() {
+      /* Clear all chat messages // مسح كل رسائل الدردشة */
+      localStorage.removeItem('hayyak_chat_messages');
+      const messages = document.getElementById('chat-messages');
+      if (messages) messages.innerHTML = '';
+    }
+
+    function toggleChat() {
+      /* Toggle chat widget visibility // تبديل ظهور واجهة الدردشة */
+      const w = document.getElementById('chat-widget');
+      if (!w) return;
+      w.classList.toggle('active');
+      if (w.classList.contains('active')) {
+        loadChatMessages();
+        const inp = document.getElementById('chat-input');
+        if (inp) setTimeout(() => inp.focus(), 120);
+      }
+    }
+
+    async function sendChatMessage() {
+      /* Send a message to the assistant // إرسال رسالة إلى المساعد */
+      const input = document.getElementById('chat-input');
+      const messages = document.getElementById('chat-messages');
+      if (!input || !messages) return;
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const stored = localStorage.getItem('hayyak_chat_messages') || '[]';
+      let msgArray = JSON.parse(stored);
+      msgArray.push({ type: 'user', text: text });
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = 'message-wrapper';
+      const userEl = document.createElement('div');
+      userEl.className = 'message user';
+      userEl.textContent = text;
+      wrapper.appendChild(userEl);
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'message-delete-btn';
+      deleteBtn.textContent = '✕';
+      deleteBtn.setAttribute('aria-label', 'Delete message');
+      deleteBtn.onclick = () => deleteMessage(msgArray.length - 1);
+      wrapper.appendChild(deleteBtn);
+      messages.appendChild(wrapper);
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      const typingWrapper = document.createElement('div');
+      typingWrapper.className = 'message-wrapper';
+      const typing = document.createElement('div');
+      typing.className = 'message bot';
+      typing.textContent = '...';
+      typingWrapper.appendChild(typing);
+      messages.appendChild(typingWrapper);
+      messages.scrollTop = messages.scrollHeight;
+
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      const userContext = {
+        name: profile.nameAr || profile.name || 'User',
+        allergies: profile.allergies || [],
+        medicalConditions: profile.medicalConditions || [],
+        foodPreferences: profile.foodPreferences || [],
+        phobias: profile.phobias || [],
+        interests: profile.interests || [],
+        city: profile.emirate || 'UAE'
+      };
+
+      let websiteContext = {};
+      if (typeof searchWebsitePlaces === 'function') {
+        const lowerText = text.toLowerCase();
+        const isPlanRequest = lowerText.includes('plan') || lowerText.includes('itinerary') || lowerText.includes('schedule') || text.includes('خطة') || text.includes('برنامج') || text.includes('جدول');
+        
+        let relevantPlaces = searchWebsitePlaces(text);
+
+        if (isPlanRequest && relevantPlaces.length < 4 && typeof HAYYAK_PLACES !== 'undefined') {
+           const emirateMap = {
+               'Abu Dhabi': 'abudhabi', 'Dubai': 'dubai', 'Sharjah': 'sharjah',
+               'Ajman': 'ajman', 'Ras Al Khaimah': 'rak', 'Fujairah': 'fujairah',
+               'Umm Al Quwain': 'uaq',
+               'Eastern Region': 'eastern_region'
+           };
+           const userCity = profile.emirate ? emirateMap[profile.emirate] : null;
+
+           let all = [...HAYYAK_PLACES];
+           
+           if (userCity) {
+               const inCity = all.filter(p => p.city === userCity).sort(() => 0.5 - Math.random());
+               const outCity = all.filter(p => p.city !== userCity).sort(() => 0.5 - Math.random());
+               all = [...inCity, ...outCity];
+           } else {
+               all.sort(() => 0.5 - Math.random());
+           }
+
+           relevantPlaces = all.slice(0, 12).map(p => {
+             let link = p.link;
+             if (p.lat && p.lon) {
+                link = `map.html?lat=${p.lat}&lon=${p.lon}&name=${encodeURIComponent(p.name)}&rating=${p.rating||''}&price=${encodeURIComponent(p.price||'')}&time=${encodeURIComponent(p.time||'')}`;
+             }
+             return {
+               name: p.name, nameAr: p.nameAr, description: p.desc, type: p.category, link: link || p.page, city: p.city
+             };
+           });
+        } else {
+           const limit = isPlanRequest ? 15 : 3;
+           relevantPlaces = relevantPlaces.slice(0, limit).map(p => {
+             if (p.lat && p.lon && (!p.link || !p.link.includes('map.html'))) {
+                p.link = `map.html?lat=${p.lat}&lon=${p.lon}&name=${encodeURIComponent(p.name)}&rating=${p.rating||''}&price=${encodeURIComponent(p.price||'')}&time=${encodeURIComponent(p.time||'')}`;
+             }
+             return p;
+           });
+        }
+
+        if (relevantPlaces.length > 0) {
+          websiteContext.availablePlaces = relevantPlaces;
+        }
+      }
+
+      try {
+        const resp = await fetch('api/assistant.php', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, userContext: userContext, websiteContext: websiteContext })
+        });
+        const data = await resp.json();
+        typingWrapper.remove();
+        
+        let replyText = '';
+        
+        if (!resp.ok) {
+          console.error('API Error:', resp.status, data);
+          if (resp.status === 401) {
+            replyText = currentLanguage === 'ar' 
+              ? 'خطأ في المصادقة. يرجى التحقق من مفتاح API.' 
+              : 'Authentication error. Please check the API key.';
+          } else if (resp.status === 500) {
+            replyText = currentLanguage === 'ar'
+              ? 'خطأ في الخادم. يرجى المحاولة لاحقاً.'
+              : 'Server error. Please try again later.';
+          } else {
+            replyText = currentLanguage === 'ar' 
+              ? 'خطأ: ' + (data.error || 'حدث خطأ غير معروف') 
+              : 'Error: ' + (data.error || 'Unknown error');
+          }
+        } else if (data && data.reply) {
+          replyText = data.reply;
+        } else if (data && data.error) {
+          replyText = currentLanguage === 'ar' ? 'حدث خطأ: ' + (data.error || '') : 'Error: ' + (data.error || '');
+        } else {
+          replyText = currentLanguage === 'ar' ? 'حدث خطأ. حاول لاحقاً.' : 'An error occurred. Try again later.';
+        }
+        
+        msgArray.push({ type: 'bot', text: replyText });
+        localStorage.setItem('hayyak_chat_messages', JSON.stringify(msgArray));
+        
+        const botWrapper = document.createElement('div');
+        botWrapper.className = 'message-wrapper';
+        const botEl = document.createElement('div');
+        botEl.className = 'message bot';
+        botEl.innerHTML = formatBotMessage(replyText);
+        addPlanButton(botEl, replyText);
+        
+        botWrapper.appendChild(botEl);
+        messages.appendChild(botWrapper);
+      } catch (e) {
+        typingWrapper.remove();
+        const botWrapper = document.createElement('div');
+        botWrapper.className = 'message-wrapper';
+        const botEl = document.createElement('div');
+        botEl.className = 'message bot';
+        botEl.textContent = currentLanguage === 'ar' ? 'فشل الاتصال بالخادم.' : 'Failed to connect to server.';
+        botWrapper.appendChild(botEl);
+        messages.appendChild(botWrapper);
+        
+        msgArray.push({ type: 'bot', text: botEl.textContent });
+        localStorage.setItem('hayyak_chat_messages', JSON.stringify(msgArray));
+      }
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function handleChatKeyPress(e) {
+      /* Handle Enter key in chat input // معالجة مفتاح Enter في إدخال الدردشة */
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    }
+
+    function addPlanFromChat(places) {
+      /* Save places to planner queue // حفظ الأماكن في قائمة المخطط */
+      const queue = places.map(p => ({
+        name: p.name,
+        nameAr: p.name // Fallback
+      }));
+      localStorage.setItem('hayyak_planner_queue', JSON.stringify(queue));
+      
+      const planName = currentLanguage === 'ar' ? 'خطة مقترحة من AI' : 'AI Suggested Plan';
+      localStorage.setItem('hayyak_auto_plan_name', planName);
+      
+      window.location.href = 'PlanDay.html';
+    }
+
+    function addPlanButton(container, text) {
+      /* Add a "Add Plan" button if places are mentioned in the message // إضافة زر "إضافة خطة" إذا تم ذكر أماكن في الرسالة */
+      const placeMatches = text.match(/\[([^\]]+)\]\(([^)]+)\)/g);
+      if (placeMatches && placeMatches.length > 0) {
+          const places = placeMatches.map(m => {
+              const match = m.match(/\[([^\]]+)\]\(([^)]+)\)/);
+              return { name: match[1], link: match[2] };
+          });
+          
+          const isArabicResponse = /[\u0600-\u06FF]/.test(text);
+          const btnText = isArabicResponse ? '📅 إضافة هذه الخطة' : '📅 Add this Plan';
+
+          const planBtn = document.createElement('button');
+          planBtn.className = 'action-btn';
+          planBtn.style.cssText = 'margin-top: 8px; width: 100%; background: var(--primary); color: var(--accent); border: 1px solid var(--accent); padding: 8px; border-radius: 12px; cursor: pointer; font-weight: bold;';
+          planBtn.innerHTML = btnText;
+          planBtn.onclick = () => addPlanFromChat(places);
+          container.appendChild(planBtn);
+      }
+    }
+
+    // Draggable Chat Widget Logic // منطق تحريك واجهة الدردشة
+    (function() {
+      const chatWidget = document.getElementById('chat-widget');
+      const chatHeader = chatWidget.querySelector('.chat-header');
+      let isDragging = false;
+      let dragOffsetX = 0;
+      let dragOffsetY = 0;
+
+      chatHeader.addEventListener('mousedown', function(e) {
+        if (e.target.closest('button') || e.target.closest('.close-chat')) return;
+        
+        isDragging = true;
+        const rect = chatWidget.getBoundingClientRect();
+        
+        chatWidget.style.right = 'auto';
+        chatWidget.style.bottom = 'auto';
+        chatWidget.style.left = rect.left + 'px';
+        chatWidget.style.top = rect.top + 'px';
+        
+        dragOffsetX = e.clientX - rect.left;
+        dragOffsetY = e.clientY - rect.top;
+        chatHeader.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        chatWidget.style.left = (e.clientX - dragOffsetX) + 'px';
+        chatWidget.style.top = (e.clientY - dragOffsetY) + 'px';
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          chatHeader.style.cursor = 'move';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

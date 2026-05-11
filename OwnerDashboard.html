@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HAYYAK | لوحة صاحب المكان</title>
+<link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="JS/Auth.js"></script>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#0f0f10;--muted:#6b7280;--line:#0f0f10;--radius:14px;--primary:#16243d;--accent:#d4af37}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);font-family:'Cairo',system-ui,sans-serif;color:var(--ink)}
+header{background:var(--primary);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+header h1{font-size:20px;font-weight:700;color:var(--accent)}
+.shell{max-width:560px;margin:0 auto;padding:16px}
+.tabs{display:flex;border-bottom:2px solid var(--line);margin-bottom:20px}
+.tab-btn{flex:1;padding:10px;background:transparent;border:none;font-weight:700;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.card{background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:0 2px 0 #0f0f10}
+.form-label{display:block;font-weight:700;margin-bottom:6px;font-size:14px;color:var(--primary)}
+.form-input{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:var(--card);outline:none;transition:border-color 0.2s}
+.form-input:focus{border-color:var(--accent)}
+.submit-btn{width:100%;padding:12px;background:var(--primary);color:var(--accent);border:2px solid var(--line);border-radius:12px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed}
+.submit-btn.secondary{background:transparent;color:var(--primary)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.badge.pending{background:#fef3c7;color:#d97706}
+.badge.approved{background:#d1fae5;color:#065f46}
+.badge.rejected{background:#fee2e2;color:#991b1b}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.checkbox-group label{display:flex;align-items:center;gap:6px;font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+.checkbox-group input[type=checkbox]{accent-color:var(--primary)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:8px;border-bottom:1px solid var(--line)}
+th{font-weight:700;color:var(--muted);font-size:12px}
+.action-btns{display:flex;gap:8px;margin-top:12px}
+.btn-sm{padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--line)}
+.btn-edit{background:var(--accent);color:var(--primary)}
+.btn-delete{background:#ef4444;color:#fff;border-color:#ef4444}
+.notice{background:#fef3c7;border:1px solid #d97706;border-radius:8px;padding:10px 14px;font-size:13px;color:#92400e;margin-bottom:16px}
+.trigger-row{display:flex;gap:8px;margin-bottom:8px}
+.trigger-row input{flex:1}
+.trigger-row button{padding:6px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--bg)}
+#place-form{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏢 لوحة صاحب المكان</h1>
+  <button onclick="logout()" style="background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;">تسجيل الخروج</button>
+</header>
+
+<div class="shell">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="places">📍 أماكني</button>
+    <button class="tab-btn" data-tab="menu">🍽️ القائمة</button>
+    <button class="tab-btn" data-tab="account">👤 الحساب</button>
+  </div>
+
+  <!-- ══════════ TAB: MY PLACES ══════════ -->
+  <div id="tab-places" class="tab-panel active">
+    <button class="submit-btn" onclick="showPlaceForm(null)" style="margin-bottom:16px;">+ إضافة مكان جديد</button>
+
+    <!-- Place form (hidden by default) -->
+    <div id="place-form" class="card">
+      <h3 id="place-form-title" style="margin-bottom:16px;color:var(--primary);">إضافة مكان</h3>
+      <div class="notice">سيتم مراجعة المكان من قِبل الإدارة قبل ظهوره للعامة.</div>
+
+      <div class="grid2">
+        <div><label class="form-label">الاسم بالعربية</label><input id="pf-name-ar" class="form-input" placeholder="اسم المكان عربي"></div>
+        <div><label class="form-label">الاسم بالإنجليزية</label><input id="pf-name-en" class="form-input" placeholder="Place name EN" dir="ltr"></div>
+      </div>
+
+      <div style="margin-top:12px"><label class="form-label">الفئة</label>
+        <select id="pf-cat" class="form-input">
+          <option value="Restaurant">مطعم / Restaurant</option>
+          <option value="Hotel">فندق / Hotel</option>
+          <option value="Tourism">سياحة / Tourism</option>
+          <option value="Entertainment">ترفيه / Entertainment</option>
+          <option value="Farm">مزرعة / Farm</option>
+          <option value="Store">متجر / Store</option>
+          <option value="Health">صحة / Health</option>
+        </select>
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div><label class="form-label">المدينة</label><input id="pf-city" class="form-input" placeholder="Dubai"></div>
+        <div><label class="form-label">الإمارة</label><input id="pf-emirate" class="form-input" placeholder="Dubai"></div>
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div><label class="form-label">خط العرض</label><input id="pf-lat" class="form-input" placeholder="25.2048" dir="ltr"></div>
+        <div><label class="form-label">خط الطول</label><input id="pf-lon" class="form-input" placeholder="55.2708" dir="ltr"></div>
+      </div>
+      <button class="submit-btn secondary" style="margin-top:6px;font-size:13px;" onclick="useMyLocation()">📍 استخدام موقعي</button>
+
+      <div style="margin-top:12px"><label class="form-label">العنوان بالعربية</label><input id="pf-addr-ar" class="form-input" placeholder="العنوان..."></div>
+      <div style="margin-top:10px"><label class="form-label">العنوان بالإنجليزية</label><input id="pf-addr-en" class="form-input" placeholder="Address..." dir="ltr"></div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div><label class="form-label">ساعات العمل</label><input id="pf-hours" class="form-input" placeholder="9 AM - 11 PM" dir="ltr"></div>
+        <div><label class="form-label">نطاق السعر</label><input id="pf-price" class="form-input" placeholder="$$" dir="ltr"></div>
+      </div>
+
+      <div style="margin-top:12px"><label class="form-label">وصف بالعربية</label><textarea id="pf-desc-ar" class="form-input" rows="3" placeholder="وصف المكان..."></textarea></div>
+      <div style="margin-top:10px"><label class="form-label">وصف بالإنجليزية</label><textarea id="pf-desc-en" class="form-input" rows="3" dir="ltr" placeholder="Place description..."></textarea></div>
+
+      <div style="margin-top:16px">
+        <label class="form-label">محفزات الفوبيا (اختر ما ينطبق)</label>
+        <div class="checkbox-group" id="pf-phobias">
+          <label><input type="checkbox" value="heights"> المرتفعات</label>
+          <label><input type="checkbox" value="crowds"> الازدحام</label>
+          <label><input type="checkbox" value="darkness"> الظلام</label>
+          <label><input type="checkbox" value="enclosed_spaces"> الأماكن المغلقة</label>
+          <label><input type="checkbox" value="water"> الماء</label>
+          <label><input type="checkbox" value="animals"> الحيوانات</label>
+          <label><input type="checkbox" value="fire"> النار</label>
+          <label><input type="checkbox" value="blood"> الدم</label>
+          <label><input type="checkbox" value="loud_noises"> الأصوات العالية</label>
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <label class="form-label">محفزات الحالات الطبية</label>
+        <div id="pf-medical-rows"></div>
+        <button class="btn-sm" onclick="addMedicalRow('pf-medical-rows')" style="margin-top:6px;">+ إضافة حالة</button>
+      </div>
+
+      <div style="margin-top:16px">
+        <label class="form-label">الاهتمامات / الفئات</label>
+        <div class="checkbox-group" id="pf-interests">
+          <label><input type="checkbox" value="adventure"> المغامرة</label>
+          <label><input type="checkbox" value="history"> التاريخ</label>
+          <label><input type="checkbox" value="food"> الطعام</label>
+          <label><input type="checkbox" value="nature"> الطبيعة</label>
+          <label><input type="checkbox" value="sports"> الرياضة</label>
+          <label><input type="checkbox" value="culture"> الثقافة</label>
+          <label><input type="checkbox" value="shopping"> التسوق</label>
+          <label><input type="checkbox" value="health"> الصحة</label>
+          <label><input type="checkbox" value="family"> العائلة</label>
+        </div>
+      </div>
+
+      <div class="action-btns">
+        <button class="submit-btn" onclick="savePlace()" style="margin-top:0;">حفظ المكان ✅</button>
+        <button class="submit-btn secondary" onclick="hidePlaceForm()" style="margin-top:0;">إلغاء</button>
+      </div>
+      <input type="hidden" id="pf-edit-id" value="">
+    </div>
+
+    <!-- Places list -->
+    <div id="places-list-owner"><p style="color:var(--muted);text-align:center;padding:24px;">جاري التحميل...</p></div>
+  </div>
+
+  <!-- ══════════ TAB: MENU ══════════ -->
+  <div id="tab-menu" class="tab-panel">
+    <div style="margin-bottom:16px">
+      <label class="form-label">اختر المكان</label>
+      <select id="menu-place-select" class="form-input" onchange="loadMenuItems()">
+        <option value="">-- اختر مكانًا --</option>
+      </select>
+    </div>
+    <button class="submit-btn" onclick="showMenuItemForm(null)" style="margin-bottom:16px;">+ إضافة عنصر جديد</button>
+
+    <div id="menu-item-form" class="card" style="display:none;">
+      <h3 style="margin-bottom:12px;color:var(--primary);">إضافة / تعديل عنصر</h3>
+      <div class="grid2">
+        <div><label class="form-label">الاسم عربي</label><input id="mi-name-ar" class="form-input"></div>
+        <div><label class="form-label">Name EN</label><input id="mi-name-en" class="form-input" dir="ltr"></div>
+      </div>
+      <div class="grid2" style="margin-top:10px">
+        <div><label class="form-label">السعر (درهم)</label><input id="mi-price" type="number" class="form-input" dir="ltr"></div>
+        <div><label class="form-label">الفئة</label>
+          <select id="mi-cat" class="form-input">
+            <option value="Starter">مقبلات</option><option value="Main">رئيسي</option>
+            <option value="Dessert">حلويات</option><option value="Drink">مشروبات</option><option value="Other">أخرى</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:10px"><label class="form-label">وصف عربي</label><textarea id="mi-desc-ar" class="form-input" rows="2"></textarea></div>
+      <div style="margin-top:10px"><label class="form-label">Description EN</label><textarea id="mi-desc-en" class="form-input" rows="2" dir="ltr"></textarea></div>
+
+      <div style="margin-top:12px">
+        <label class="form-label">مسببات الحساسية</label>
+        <div class="checkbox-group" id="mi-allergens">
+          <label><input type="checkbox" value="gluten"> جلوتين</label>
+          <label><input type="checkbox" value="dairy"> ألبان</label>
+          <label><input type="checkbox" value="eggs"> بيض</label>
+          <label><input type="checkbox" value="nuts"> مكسرات</label>
+          <label><input type="checkbox" value="seafood"> مأكولات بحرية</label>
+          <label><input type="checkbox" value="soy"> صويا</label>
+          <label><input type="checkbox" value="sesame"> سمسم</label>
+          <label><input type="checkbox" value="shellfish"> محار</label>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <label class="form-label">محفزات الفوبيا</label>
+        <div class="checkbox-group" id="mi-phobias">
+          <label><input type="checkbox" value="heights"> المرتفعات</label>
+          <label><input type="checkbox" value="crowds"> الازدحام</label>
+          <label><input type="checkbox" value="darkness"> الظلام</label>
+          <label><input type="checkbox" value="enclosed_spaces"> الأماكن المغلقة</label>
+          <label><input type="checkbox" value="water"> الماء</label>
+          <label><input type="checkbox" value="fire"> النار</label>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <label class="form-label">محفزات طبية</label>
+        <div id="mi-medical-rows"></div>
+        <button class="btn-sm" onclick="addMedicalRow('mi-medical-rows')" style="margin-top:6px;">+ إضافة حالة</button>
+      </div>
+      <div class="action-btns">
+        <button class="submit-btn" onclick="saveMenuItem()" style="margin-top:0;">حفظ ✅</button>
+        <button class="submit-btn secondary" onclick="document.getElementById('menu-item-form').style.display='none'" style="margin-top:0;">إلغاء</button>
+      </div>
+      <input type="hidden" id="mi-edit-id" value="">
+    </div>
+    <div id="menu-items-list"></div>
+  </div>
+
+  <!-- ══════════ TAB: ACCOUNT ══════════ -->
+  <div id="tab-account" class="tab-panel">
+    <div class="card">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">البريد الإلكتروني</p>
+      <p id="acct-email" style="font-weight:700;color:var(--primary);font-size:16px;margin-bottom:16px;"></p>
+      <hr style="border:none;border-top:1px solid var(--line);margin-bottom:16px;">
+      <h3 style="margin-bottom:12px;">تغيير كلمة المرور</h3>
+      <input type="password" id="new-pass" class="form-input" placeholder="كلمة المرور الجديدة (8+ أحرف)" style="margin-bottom:10px;" dir="ltr">
+      <input type="password" id="conf-pass" class="form-input" placeholder="تأكيد كلمة المرور" dir="ltr">
+      <div id="pass-msg" style="margin-top:8px;font-size:13px;color:#ef4444;"></div>
+      <button class="submit-btn" onclick="changePassword()" style="margin-top:12px;">تغيير كلمة المرور 🔑</button>
+      <hr style="border:none;border-top:1px solid var(--line);margin:20px 0;">
+      <button class="submit-btn" onclick="logout()" style="background:#ef4444;border-color:#ef4444;color:#fff;">تسجيل الخروج 🚪</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Auth guard ────────────────────────────────────────────────────────────
+let _owner = null;
+(async () => {
+  _owner = await checkAuth('place_owner');
+  if (!_owner) return;
+  document.getElementById('acct-email').textContent = _owner.email || '';
+  loadOwnerPlaces();
+  populateMenuPlaceSelect();
+})();
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ── Medical triggers helper ───────────────────────────────────────────────
+function addMedicalRow(containerId, condition = '', reason = '') {
+  const c = document.getElementById(containerId);
+  const row = document.createElement('div');
+  row.className = 'trigger-row';
+  row.innerHTML = `
+    <input class="form-input mt-cond" placeholder="الحالة (مثل: السكري)" value="${condition}">
+    <input class="form-input mt-reason" placeholder="السبب (مثل: يحتوي على سكر زائد)" value="${reason}">
+    <button onclick="this.parentElement.remove()" title="حذف">✕</button>`;
+  c.appendChild(row);
+}
+
+function collectMedicalTriggers(containerId) {
+  const rows = document.querySelectorAll('#' + containerId + ' .trigger-row');
+  const result = [];
+  rows.forEach(r => {
+    const cond = r.querySelector('.mt-cond').value.trim();
+    const reason = r.querySelector('.mt-reason').value.trim();
+    if (cond) result.push({ condition: cond, reason });
+  });
+  return result;
+}
+
+function collectChecked(containerId) {
+  return Array.from(document.querySelectorAll('#' + containerId + ' input[type=checkbox]:checked')).map(c => c.value);
+}
+
+// ── Place form ────────────────────────────────────────────────────────────
+function showPlaceForm(place) {
+  document.getElementById('place-form').style.display = 'block';
+  document.getElementById('place-form-title').textContent = place ? 'تعديل المكان' : 'إضافة مكان جديد';
+  document.getElementById('pf-edit-id').value = place?.id || '';
+  document.getElementById('pf-name-ar').value  = place?.name_ar  || '';
+  document.getElementById('pf-name-en').value  = place?.name_en  || '';
+  document.getElementById('pf-cat').value       = place?.category || 'Restaurant';
+  document.getElementById('pf-city').value      = place?.city    || '';
+  document.getElementById('pf-emirate').value   = place?.emirate || '';
+  document.getElementById('pf-lat').value       = place?.latitude|| '';
+  document.getElementById('pf-lon').value       = place?.longitude|| '';
+  document.getElementById('pf-addr-ar').value   = place?.address_ar || '';
+  document.getElementById('pf-addr-en').value   = place?.address_en || '';
+  document.getElementById('pf-hours').value     = place?.opening_hours || '';
+  document.getElementById('pf-price').value     = place?.price_range || '';
+  document.getElementById('pf-desc-ar').value   = place?.description_ar || '';
+  document.getElementById('pf-desc-en').value   = place?.description_en || '';
+
+  // Phobias
+  document.querySelectorAll('#pf-phobias input').forEach(cb => {
+    cb.checked = (place?.phobia_triggers || []).includes(cb.value);
+  });
+  // Medical triggers
+  document.getElementById('pf-medical-rows').innerHTML = '';
+  (place?.medical_triggers || []).forEach(t => addMedicalRow('pf-medical-rows', t.condition, t.reason));
+  // Interests
+  document.querySelectorAll('#pf-interests input').forEach(cb => {
+    cb.checked = (place?.interest_tags || []).includes(cb.value);
+  });
+  document.getElementById('place-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+function hidePlaceForm() { document.getElementById('place-form').style.display = 'none'; }
+
+function useMyLocation() {
+  navigator.geolocation.getCurrentPosition(pos => {
+    document.getElementById('pf-lat').value = pos.coords.latitude.toFixed(6);
+    document.getElementById('pf-lon').value = pos.coords.longitude.toFixed(6);
+  }, () => alert('تعذّر تحديد الموقع'));
+}
+
+async function savePlace() {
+  const editId = document.getElementById('pf-edit-id').value;
+  const payload = {
+    name_ar:        document.getElementById('pf-name-ar').value.trim(),
+    name_en:        document.getElementById('pf-name-en').value.trim(),
+    category:       document.getElementById('pf-cat').value,
+    city:           document.getElementById('pf-city').value.trim(),
+    emirate:        document.getElementById('pf-emirate').value.trim(),
+    latitude:       parseFloat(document.getElementById('pf-lat').value) || null,
+    longitude:      parseFloat(document.getElementById('pf-lon').value) || null,
+    address_ar:     document.getElementById('pf-addr-ar').value.trim(),
+    address_en:     document.getElementById('pf-addr-en').value.trim(),
+    opening_hours:  document.getElementById('pf-hours').value.trim(),
+    price_range:    document.getElementById('pf-price').value.trim(),
+    description_ar: document.getElementById('pf-desc-ar').value.trim(),
+    description_en: document.getElementById('pf-desc-en').value.trim(),
+    phobia_triggers:  collectChecked('pf-phobias'),
+    medical_triggers: collectMedicalTriggers('pf-medical-rows'),
+    interest_tags:    collectChecked('pf-interests'),
+  };
+  if (!payload.name_ar && !payload.name_en) return alert('يرجى إدخال اسم المكان');
+
+  let res;
+  if (editId) {
+    res = await apiPut('/api/places/update.php', { ...payload, id: Number(editId) });
+  } else {
+    res = await apiPost('/api/places/index.php', payload);
+  }
+  if (!res.ok) return alert(res.error || 'حدث خطأ');
+  hidePlaceForm();
+  loadOwnerPlaces();
+  populateMenuPlaceSelect();
+}
+
+async function loadOwnerPlaces() {
+  const container = document.getElementById('places-list-owner');
+  const res = await apiGet('/api/places/index.php');
+  const all = res.ok ? res.data : [];
+  // Filter to owner's places (API already returns only approved; we need a separate endpoint)
+  // Use GET /api/places/index.php with owner filter via session on server
+  // For now, show all (server filters by logged-in owner for non-admin)
+  if (!all.length) { container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:24px;">لا توجد أماكن مضافة بعد</p>'; return; }
+  container.innerHTML = all.map(p => `
+    <div class="card" style="border-right:4px solid ${p.status==='approved'?'#10b981':p.status==='rejected'?'#ef4444':'#f59e0b'}">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+        <div>
+          <div style="font-weight:700;font-size:15px;">${p.name_ar||p.name_en}</div>
+          <div style="font-size:12px;color:var(--muted);">${p.category} · ${p.city||''}</div>
+        </div>
+        <span class="badge ${p.status}">${p.status==='approved'?'مقبول':p.status==='rejected'?'مرفوض':'قيد المراجعة'}</span>
+      </div>
+      ${p.rejection_reason ? `<div style="font-size:12px;color:#ef4444;margin-bottom:8px;">سبب الرفض: ${p.rejection_reason}</div>` : ''}
+      <div class="action-btns">
+        <button class="btn-sm btn-edit" onclick='editPlace(${JSON.stringify(p)})'>✏️ تعديل</button>
+        <button class="btn-sm btn-delete" onclick="deletePlace(${p.id})">🗑️ حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function editPlace(p) { showPlaceForm(p); }
+
+async function deletePlace(id) {
+  if (!confirm('هل تريد حذف هذا المكان؟')) return;
+  const res = await apiDelete('/api/places/delete.php', { id });
+  if (!res.ok) return alert(res.error || 'حدث خطأ');
+  loadOwnerPlaces();
+  populateMenuPlaceSelect();
+}
+
+// ── Menu ──────────────────────────────────────────────────────────────────
+async function populateMenuPlaceSelect() {
+  const sel = document.getElementById('menu-place-select');
+  const res = await apiGet('/api/places/index.php');
+  const all = res.ok ? res.data : [];
+  sel.innerHTML = '<option value="">-- اختر مكانًا --</option>' + all.map(p => `<option value="${p.id}">${p.name_ar||p.name_en}</option>`).join('');
+}
+
+async function loadMenuItems() {
+  const placeId = document.getElementById('menu-place-select').value;
+  const container = document.getElementById('menu-items-list');
+  if (!placeId) { container.innerHTML = ''; return; }
+  const res = await apiGet('/api/places/menu.php?place_id=' + placeId);
+  const items = res.ok ? res.data : [];
+  if (!items.length) { container.innerHTML = '<p style="color:var(--muted);padding:16px;">لا توجد عناصر في القائمة</p>'; return; }
+  container.innerHTML = items.map(it => `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <div style="font-weight:700;">${it.name_ar||it.name_en}</div>
+        <div style="font-weight:700;color:var(--primary);">${it.price ? it.price + ' د.إ' : ''}</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);">${it.category||''}</div>
+      ${it.allergens?.length ? `<div style="font-size:12px;color:#d97706;margin-top:4px;">⚠️ ${it.allergens.join(', ')}</div>` : ''}
+      <div class="action-btns">
+        <button class="btn-sm btn-edit" onclick='editMenuItem(${JSON.stringify(it)})'>✏️ تعديل</button>
+        <button class="btn-sm btn-delete" onclick="deleteMenuItem(${it.id})">🗑️ حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showMenuItemForm(item) {
+  const f = document.getElementById('menu-item-form');
+  f.style.display = 'block';
+  document.getElementById('mi-edit-id').value  = item?.id || '';
+  document.getElementById('mi-name-ar').value  = item?.name_ar || '';
+  document.getElementById('mi-name-en').value  = item?.name_en || '';
+  document.getElementById('mi-price').value    = item?.price   || '';
+  document.getElementById('mi-cat').value      = item?.category || 'Main';
+  document.getElementById('mi-desc-ar').value  = item?.description_ar || '';
+  document.getElementById('mi-desc-en').value  = item?.description_en || '';
+  document.querySelectorAll('#mi-allergens input').forEach(cb => cb.checked = (item?.allergens||[]).includes(cb.value));
+  document.querySelectorAll('#mi-phobias input').forEach(cb => cb.checked = (item?.phobia_triggers||[]).includes(cb.value));
+  document.getElementById('mi-medical-rows').innerHTML = '';
+  (item?.medical_triggers||[]).forEach(t => addMedicalRow('mi-medical-rows', t.condition, t.reason));
+  f.scrollIntoView({ behavior: 'smooth' });
+}
+
+function editMenuItem(item) { showMenuItemForm(item); }
+
+async function saveMenuItem() {
+  const editId = document.getElementById('mi-edit-id').value;
+  const placeId = document.getElementById('menu-place-select').value;
+  if (!placeId) return alert('يرجى اختيار مكان أولاً');
+  const payload = {
+    place_id:        Number(placeId),
+    name_ar:         document.getElementById('mi-name-ar').value.trim(),
+    name_en:         document.getElementById('mi-name-en').value.trim(),
+    price:           parseFloat(document.getElementById('mi-price').value) || null,
+    category:        document.getElementById('mi-cat').value,
+    description_ar:  document.getElementById('mi-desc-ar').value.trim(),
+    description_en:  document.getElementById('mi-desc-en').value.trim(),
+    allergens:       collectChecked('mi-allergens'),
+    phobia_triggers: collectChecked('mi-phobias'),
+    medical_triggers:collectMedicalTriggers('mi-medical-rows'),
+  };
+  let res;
+  if (editId) {
+    res = await apiPut('/api/places/menu_item.php', { ...payload, id: Number(editId) });
+  } else {
+    res = await apiPost('/api/places/menu.php', payload);
+  }
+  if (!res.ok) return alert(res.error || 'حدث خطأ');
+  document.getElementById('menu-item-form').style.display = 'none';
+  loadMenuItems();
+}
+
+async function deleteMenuItem(id) {
+  if (!confirm('حذف هذا العنصر؟')) return;
+  const res = await apiDelete('/api/places/menu_item.php', { id });
+  if (!res.ok) return alert(res.error || 'حدث خطأ');
+  loadMenuItems();
+}
+
+// ── Account ────────────────────────────────────────────────────────────────
+async function changePassword() {
+  const np = document.getElementById('new-pass').value;
+  const cp = document.getElementById('conf-pass').value;
+  const msg = document.getElementById('pass-msg');
+  if (np.length < 8) { msg.textContent = 'كلمة المرور يجب أن تكون 8 أحرف على الأقل'; return; }
+  if (np !== cp) { msg.textContent = 'كلمة المرور غير متطابقة'; return; }
+  const res = await apiPut('/api/users/profile.php', { password: np });
+  msg.style.color = res.ok ? '#10b981' : '#ef4444';
+  msg.textContent = res.ok ? 'تم تغيير كلمة المرور بنجاح ✓' : (res.error || 'حدث خطأ');
+}
+</script>
+</body>
+</html>

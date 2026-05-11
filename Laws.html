@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // تعريف نوع المستند على أنه HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element: Arabic language, right-to-left direction // العنصر الجذر: اللغة العربية، اتجاه النص من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // تعيين ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Configures viewport for responsive design // تكوين منفذ العرض للتصميم المتجاوب -->
+  <title>HAYYAK | Legal Guide</title>
+  <!-- Page title // عنوان الصفحة -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon // أيقونة الموقع -->
+  <meta name="description" content="تعرف على القوانين الأساسية في الإمارات العربية المتحدة لضمان تجربة آمنة ومحترمة أثناء زيارتك." />
+  <!-- Meta description for SEO // وصف ميتا لمحركات البحث -->
+
+  <!-- Google Fonts: Cairo // خطوط جوجل: كايرو -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts server // اتصال مسبق بخادم خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع سمة عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Import Cairo font with weights // استيراد خط كايرو بالأوزان المحددة -->
+
+  <style>
+    /* ==================== Afeesh family (local) // خط أفش المحلي ==================== */
+    @font-face {
+      /* Defines custom font 'Afeesh' // تعريف الخط المخصص 'أفش' */
+      font-family: 'Afeesh';
+      /* Font name // اسم الخط */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'),
+           url('afeesh/Afeesh-Aadi.woff') format('woff'),
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype');
+      /* Font files in modern and fallback formats // ملفات الخط بتنسيقات حديثة واحتياطية */
+      font-weight: 400; font-style: normal; font-display: swap;
+      /* Normal weight, normal style, swap display // وزن عادي، نمط عادي، عرض تبديل */
+    }
+    @font-face {
+      /* Bold variant // النسخة العريضة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      /* Semi-bold variant // النسخة شبه العريضة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      /* Light variant // النسخة الخفيفة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    :root {
+      /* Light theme variables // متغيرات السمة الفاتحة */
+      --bg: #f5f5f7; --card: #ffffff; --ink: #0f0f10; --muted: #6b7280; --line: #0f0f10; --radius: 14px;
+    }
+    [data-theme="dark"] {
+      /* Dark theme overrides // تجاوزات السمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333;
+    }
+    [data-theme="dark"] .modal-title { color: #d4af37; }
+    [data-theme="dark"] .detail-value { color: #ffffff; }
+    [data-theme="dark"] .close-btn { background: #333; color: #fff; }
+    [data-theme="dark"] .close-btn:hover { background: #444; }
+
+    *{box-sizing:border-box}
+    /* Universal selector: include padding and border in element's total width/height // المحدد الشامل: تضمين الحشوة والحدود في العرض/الارتفاع الكلي */
+    html,body{height:100%; background:var(--bg)}
+    /* Full height, background using variable // ارتفاع كامل، خلفية باستخدام المتغير */
+    body{margin:0; font-family:'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink)}
+    /* Body styles: remove default margin, set font stack, text color // أنماط الجسم: إزالة الهامش الافتراضي، تسلسل الخطوط، لون النص */
+
+    .shell{width:100%; max-width:420px; margin:0 auto; padding:16px}
+    /* Centered container for main content, max width // حاوية مركزية للمحتوى الرئيسي، أقصى عرض */
+    .card{background:var(--card); border:2px solid var(--line); border-radius:var(--radius); box-shadow:0 2px 0 #0f0f10}
+    /* Card component // مكون البطاقة */
+
+    header.brand{text-align:center; background:#16243d; color:#ffffff; padding:20px; position:relative}
+    /* Header branding // ترويسة العلامة التجارية */
+   
+    .logo-text {
+      /* Logo text // نص الشعار */
+      font-family: 'Afeesh', sans-serif;
+      /* Custom font // خط مخصص */
+      font-weight: 700;
+      /* Bold // عريض */
+      font-size: 48px;
+      /* Large size // حجم كبير */
+      letter-spacing: 2px;
+      /* Space between letters // مسافة بين الحروف */
+      color: #d4af37;
+      /* Gold color // ذهبي */
+    }
+    .logo-sub {
+      /* Subtitle under logo // العنوان الفرعي تحت الشعار */
+      font-family: 'Afeesh', sans-serif;
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 20px;
+      margin-top: 2px;
+      letter-spacing: 3px;
+    }
+    .home-btn {
+      /* Home/back button // زر الرئيسية/الرجوع */
+      position: absolute;
+      /* Absolute positioning // وضع مطلق */
+      top: 50%;
+      /* Center vertically // توسيط عمودي */
+      left: 20px;
+      /* 20px from left // 20 بكسل من اليسار */
+      transform: translateY(-50%);
+      /* Fine-tune vertical centering // ضبط دقيق للتوسيط العمودي */
+      color: #d4af37;
+      /* Gold text // نص ذهبي */
+      text-decoration: none;
+      /* Remove underline // إزالة التسطير */
+      font-size: 15px;
+      background-color: #0f0f10;
+      /* Dark background // خلفية داكنة */
+      padding: 9px 12px;
+      /* Padding // حشوة */
+      border-radius: 999px;
+      /* Fully rounded (pill shape) // دائري بالكامل (شكل حبة) */
+      transition: all 0.3s ease;
+      /* Smooth transition // انتقال سلس */
+    }
+    
+    .home-btn:hover {
+      /* Hover state // حالة التمرير */
+      background-color: #d4af37;
+      color: #0f0f10;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    /* Translate Button Styles // أنماط زر الترجمة */
+    .translate-btn {
+      /* Language toggle button // زر تبديل اللغة */
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      /* 20px from right // 20 بكسل من اليمين */
+      transform: translateY(-50%);
+      background: #d4af37;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      color: #16243d;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      z-index: 100;
+    }
+    
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+      background: #f7ef8a;
+    }
+    
+    .translate-btn .icon {
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+    
+    .translate-btn:hover .icon {
+      transform: rotate(20deg);
+    }
+    
+    .translate-btn.switching {
+      animation: pulse 0.5s ease;
+    }
+    
+    @keyframes pulse {
+      /* Pulse animation for button // حركة نبض للزر */
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    .map{height:180px; border-radius:var(--radius); overflow:hidden; position:relative; border:2px solid var(--line)}
+    /* Map container // حاوية الخريطة */
+    .map iframe{width:100%; height:100%; border:0}
+    /* Map iframe // إطار الخريطة */
+
+    .section-title{display:flex; align-items:center; justify-content:center; gap:10px; margin:14px 0 10px; font-weight:700; font-size:20px}
+    /* Section title style // نمط عنوان القسم */
+    .section-title .emoji{font-size:22px}
+    /* Emoji inside section title // رمز تعبيري داخل عنوان القسم */
+
+    /* List items // عناصر القائمة */
+    .list{display:grid; gap:10px}
+    .item{display:grid; grid-template-columns: 36px 1fr; align-items:center; gap:10px; border:2px solid var(--line); border-radius:999px; background:var(--card); padding:8px 12px}
+    .item{cursor:pointer; transition:all 0.2s ease}
+    .item:hover{background:#f5f5f7; transform:translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); border-color: #d4af37;}
+    .pin{display:grid; place-items:center; font-size:22px}
+    .label{font-weight:700; display:flex; flex-direction:column; gap:4px}
+    .label span{display:block; font-weight:700; font-size:13px; color:var(--ink); line-height:1.2}
+    .category-badge{font-size:11px; color:var(--muted); font-weight:600}
+    .date-badge{font-size:11px; background:#fbbf24; color:#000; padding:2px 6px; border-radius:6px; width:fit-content}
+
+    .info-panel{display:none; margin-top:10px; padding:14px; animation:fade 0.4s}
+    /* Info panel for place details // لوحة المعلومات لتفاصيل المكان */
+    .info-panel.active{display:block}
+    .info-desc{font-size:14px; line-height:1.6; color:var(--muted); margin-bottom:16px}
+    .info-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .info-box{background:var(--bg); padding:12px; border-radius:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:4px}
+    .ib-icon{font-size:24px; margin-bottom:4px}
+    .ib-label{font-size:12px; color:var(--muted); font-weight:600}
+    .ib-val{font-size:14px; font-weight:700; color:var(--ink)}
+    @keyframes fade{from{opacity:0; transform:translateY(-10px)}to{opacity:1; transform:translateY(0)}}
+
+    .bottom-search{padding:12px 0 18px; position:relative}
+    /* Search bar container // حاوية شريط البحث */
+    .search{display:grid; grid-template-columns:28px 1fr; align-items:center; gap:8px; border:2px solid var(--line); border-radius:999px; padding:10px 12px; background:var(--card)}
+    .glass{text-align:center}
+    .search input{appearance:none; border:0; outline:0; background:transparent; width:100%; font:inherit; color:var(--ink)}
+    .search input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+    .search input::placeholder{color:var(--muted)}
+
+    .autocomplete-list{display:none; position:absolute; top:100%; left:0; right:0; background:var(--card); border:2px solid var(--line); border-top:0; border-radius:0 0 var(--radius) var(--radius); max-height:200px; overflow-y:auto; z-index:100}
+    .autocomplete-list.active{display:block}
+    .autocomplete-item{padding:12px; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.2s}
+    .autocomplete-item:hover{background:#f5f5f7}
+    [data-theme="dark"] .autocomplete-item:hover{background:#2a2a2a;}
+    .autocomplete-item:last-child{border-bottom:none}
+    .autocomplete-item-name{font-weight:700; color:var(--ink)}
+    .autocomplete-item-desc{font-size:12px; color:var(--muted); margin-top:2px}
+
+     footer {
+      /* Footer // التذييل */
+      background: #16243d;
+      color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    @media (min-width:768px){.shell{padding:24px} .map{height:220px}}
+    /* Responsive adjustments for larger screens // تعديلات متجاوبة للشاشات الأكبر */
+
+    .error-toast {
+      /* Error toast notification // إشعار خطأ منبثق */
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #ef4444;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .error-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Modal Styles // أنماط النافذة المنبثقة */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal.active { 
+      display: flex; 
+      opacity: 1;
+    }
+    .modal-content {
+      background: var(--card);
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 24px;
+      border: 2px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .modal.active .modal-content { transform: scale(1); }
+    .modal-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    .modal-title { font-weight: 700; font-size: 20px; color: #16243d; margin: 0; line-height: 1.3; }
+    .close-btn { background: #f0f0f0; border: none; font-size: 20px; cursor: pointer; color: #666; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .close-btn:hover { background: #e0e0e0; color: #000; }
+    .law-desc { font-size: 16px; line-height: 1.6; margin-bottom: 24px; color: var(--ink); }
+    .law-detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f5f5f7; font-size: 14px; }
+    .law-detail-row:last-child { border-bottom: none; }
+    .detail-label { font-weight: 600; color: var(--muted); }
+    .detail-value { font-weight: 700; color: #16243d; text-align: end; max-width: 60%; }
+    
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <!-- Header branding // ترويسة العلامة التجارية -->
+    <a href="Home.html" class="home-btn" aria-label="الرئيسية" data-ar="الرجوع" data-en="Back">الرجوع</a>
+    <!-- Home button // زر الصفحة الرئيسية -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <!-- Logo text // نص الشعار -->
+    <div class="logo-sub">HAYYAK</div>
+    <!-- Subtitle // العنوان الفرعي -->
+    <!-- Translation Button // زر الترجمة -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+      <span class="icon">🌐</span>
+      <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span id="translateText">English</span>
+      <!-- Button text changes with JS // نص الزر يتغير بواسطة JS -->
+    </button>
+  </header>
+  <div id="error-toast" class="error-toast"></div>
+  <!-- Toast container for error messages // حاوية الإشعارات المنبثقة للأخطاء -->
+  <main class="shell">
+    <!-- Main content container // حاوية المحتوى الرئيسي -->
+          
+    <div class="map card" aria-label="خريطة">
+      <!-- Map card // بطاقة الخريطة -->
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=51.50,22.50,56.50,26.20&amp;layer=mapnik" title="Map"></iframe>
+      <!-- OpenStreetMap iframe // إطار OpenStreetMap -->
+    </div>
+
+    <div class="section-title">
+      <!-- Section title // عنوان القسم -->
+      <span class="emoji" aria-hidden="true">⚖️</span>
+      <!-- Emoji // رمز تعبيري -->
+      <span data-ar="القوانين" data-en="Laws">القوانين</span>
+      <!-- Text that changes with language // نص يتغير مع اللغة -->
+      <span></span>
+    </div>
+
+    <section class="list" id="laws-list">
+      <!-- Laws will be injected here via JS // سيتم حقن القوانين هنا بواسطة JS -->
+    </section>
+
+    <div class="bottom-search">
+      <!-- Search bar container // حاوية شريط البحث -->
+      <div class="search">
+        <div class="glass">🔍</div>
+        <!-- Search icon // أيقونة البحث -->
+        <input type="search" 
+               id="search-input" 
+               placeholder="ابحث عن معلومات" 
+               data-ar-placeholder="ابحث عن معلومات" 
+               data-en-placeholder="Search information" 
+               aria-label="ابحث عن معلومات" 
+               data-ar-aria-label="ابحث عن معلومات"
+               data-en-aria-label="Search information" />
+        <!-- Search input // حقل إدخال البحث -->
+      </div>
+    </div>
+
+  </main>
+  
+  <!-- Law Details Modal // نافذة تفاصيل القانون -->
+  <div id="law-modal" class="modal" onclick="if(event.target === this) closeLawModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-law-title"></h3>
+        <!-- Modal title // عنوان النافذة -->
+        <button class="close-btn" onclick="closeLawModal()">✕</button>
+        <!-- Close button // زر الإغلاق -->
+      </div>
+      <div class="modal-body">
+        <p id="modal-law-desc" class="law-desc"></p>
+        <!-- Law description // وصف القانون -->
+        <div class="law-detail-row">
+          <span class="detail-label" data-ar="تاريخ الإصدار" data-en="Date Issued">تاريخ الإصدار</span>
+          <span class="detail-value" id="modal-law-date"></span>
+        </div>
+        <div class="law-detail-row">
+          <span class="detail-label" data-ar="المصدر" data-en="Source">المصدر</span>
+          <span class="detail-value" id="modal-law-source"></span>
+        </div>
+        <div class="law-detail-row">
+          <span class="detail-label" data-ar="العقوبة / الغرامة" data-en="Penalty / Fine">العقوبة / الغرامة</span>
+          <span class="detail-value" id="modal-law-penalty" style="color: #ef4444;"></span>
+        </div>
+        <div class="law-detail-row">
+          <span class="detail-label" data-ar="التصنيف" data-en="Category">التصنيف</span>
+          <span class="detail-value" id="modal-law-category" style="color: #d4af37;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer>
+  <!-- Footer // التذييل -->
+
+  <script>
+    // ==================== STATE // الحالة ====================
+    let currentLanguage = 'ar'; // Current language (Arabic by default) // اللغة الحالية (العربية افتراضيًا)
+    
+    // ==================== TRANSLATION DATA // بيانات الترجمة ====================
+    const translations = {
+      ar: {
+        pageTitle: "حياك | قوانين الإمارات",
+        homeBtn: "الرجوع",
+        homeAria: "الرئيسية",
+        footer: "© عبدالله بن ناصر-حياك",
+        translateBtn: "English",
+        translateAria: "تبديل اللغة",
+        sectionTitle: "القوانين",
+        mapAria: "خريطة",
+        flagAlt: "علم الإمارات",
+        searchPlaceholder: "ابحث عن معلومات",
+        searchAriaLabel: "ابحث عن معلومات",
+        searchErrorShort: "يرجى كتابة أكثر من حرف للبحث.",
+        searchErrorNotFound: "لم يتم العثور على المكان، يرجى المحاولة مرة أخرى.",
+        searchErrorGeneral: "حدث خطأ أثناء البحث.",
+        switched: "تم التبديل إلى العربية"
+      },
+      en: {
+        pageTitle: "Hayyak | UAE Laws",
+        homeBtn: "Back",
+        homeAria: "Home",
+        footer: "© Abdullah bin Nasser - Hayyak",
+        translateBtn: "العربية",
+        translateAria: "Toggle Language",
+        sectionTitle: "Laws",
+        mapAria: "Map",
+        flagAlt: "UAE Flag",
+        searchPlaceholder: "Search information",
+        searchAriaLabel: "Search information",
+        searchErrorShort: "Please type more than one character to search.",
+        searchErrorNotFound: "Place not found, please try again.",
+        searchErrorGeneral: "An error occurred while searching.",
+        switched: "Switched to English"
+      }
+    };
+
+    // ==================== LAWS DATA // بيانات القوانين ====================
+    const lawsData = [
+      {
+        id: 1,
+        titleAr: "اللباس المحتشم",
+        titleEn: "Modest Dress",
+        descAr: "يطلب من الجميع ارتداء ملابس محتشمة في الأماكن العامة، تغطي الأكتاف والركبتين.",
+        descEn: "Everyone is required to wear modest clothing in public places, covering shoulders and knees.",
+        date: "2005",
+        sourceAr: "قانون العقوبات الاتحادي",
+        sourceEn: "Federal Penal Code",
+        penaltyAr: "تحذير، وقد تصل إلى المنع من دخول المكان",
+        penaltyEn: "Warning, potential denial of entry",
+        categoryAr: "الآداب العامة",
+        categoryEn: "Public Decency"
+      },
+      {
+        id: 2,
+        titleAr: "تجنب إظهار المشاعر الحميمة",
+        titleEn: "Public Display of Affection",
+        descAr: "يمنع التقبيل أو العناق أو أي تصرفات حميمة في الأماكن العامة.",
+        descEn: "Kissing, hugging, or any intimate behavior is prohibited in public places.",
+        date: "1987",
+        sourceAr: "قانون العقوبات المادة 358",
+        sourceEn: "Penal Code Article 358",
+        penaltyAr: "الحبس أو الغرامة",
+        penaltyEn: "Imprisonment or fine",
+        categoryAr: "السلوك العام",
+        categoryEn: "Public Behavior"
+      },
+      {
+        id: 3,
+        titleAr: "الألفاظ والإيماءات المسيئة",
+        titleEn: "Offensive Language/Gestures",
+        descAr: "يُمنع استخدام الشتائم أو الألفاظ البذيئة أو الإيماءات الوقحة في الأماكن العامة.",
+        descEn: "Using profanity, vulgar language, or rude gestures is prohibited in public.",
+        date: "1987",
+        sourceAr: "قانون العقوبات المادة 373",
+        sourceEn: "Penal Code Article 373",
+        penaltyAr: "الحبس مدة لا تزيد على سنة أو غرامة 10,000 درهم",
+        penaltyEn: "Jail up to 1 year or 10,000 AED fine",
+        categoryAr: "الآداب العامة",
+        categoryEn: "Public Decency"
+      },
+      {
+        id: 4,
+        titleAr: "تجنب الجدال والصراخ",
+        titleEn: "Avoid Arguments/Shouting",
+        descAr: "يُفضل تجنب التحدث بصوت مرتفع أو الدخول في جدالات حادة في الأماكن العامة.",
+        descEn: "It is preferable to avoid speaking loudly or getting into heated arguments in public.",
+        date: "2015",
+        sourceAr: "قانون مكافحة التمييز والكراهية",
+        sourceEn: "Anti-Discrimination/Hatred Law",
+        penaltyAr: "تختلف حسب شدة الموقف",
+        penaltyEn: "Varies by severity",
+        categoryAr: "النظام العام",
+        categoryEn: "Public Order"
+      },
+      {
+        id: 5,
+        titleAr: "الكحول",
+        titleEn: "Alcohol",
+        descAr: "يُمنع شرب الكحول في الأماكن العامة غير المرخصة. الشرب مسموح فقط في الأماكن المرخصة أو المنازل.",
+        descEn: "Drinking alcohol in unlicensed public places is prohibited. Allowed only in licensed venues or homes.",
+        date: "2020",
+        sourceAr: "تعديلات قانون العقوبات",
+        sourceEn: "Penal Code Amendments",
+        penaltyAr: "غرامة لا تقل عن 2000 درهم",
+        penaltyEn: "Fine not less than 2000 AED",
+        categoryAr: "المواد الخاضعة للرقابة",
+        categoryEn: "Controlled Substances"
+      },
+      {
+        id: 6,
+        titleAr: "تصوير الأشخاص",
+        titleEn: "Photographing People",
+        descAr: "يمنع تصوير الأشخاص (خاصة النساء والعائلات) دون إذنهم الصريح.",
+        descEn: "Photographing people (especially women and families) without explicit permission is prohibited.",
+        date: "2021",
+        sourceAr: "قانون مكافحة الشائعات والجرائم الإلكترونية",
+        sourceEn: "Cybercrimes Law",
+        penaltyAr: "الحبس 6 أشهر وغرامة تصل لـ 500,000 درهم",
+        penaltyEn: "6 months jail and fine up to 500,000 AED",
+        categoryAr: "الخصوصية",
+        categoryEn: "Privacy"
+      },
+      {
+        id: 7,
+        titleAr: "احترام الدين والحكومة",
+        titleEn: "Respect Religion/Govt",
+        descAr: "يُمنع انتقاد الحكومة أو الدين الإسلامي أو الأديان الأخرى أو إهانة الرموز الوطنية.",
+        descEn: "Criticizing the government, Islam, other religions, or insulting national symbols is prohibited.",
+        date: "1987",
+        sourceAr: "قانون العقوبات الاتحادي",
+        sourceEn: "Federal Penal Code",
+        penaltyAr: "السجن والغرامة والإبعاد",
+        penaltyEn: "Imprisonment, fine, and deportation",
+        categoryAr: "الأمن الوطني",
+        categoryEn: "National Security"
+      },
+      {
+        id: 8,
+        titleAr: "تصوير الأماكن المحظورة",
+        titleEn: "Restricted Photography",
+        descAr: "يُمنع تصوير المباني الحكومية، المنشآت العسكرية، والقصور.",
+        descEn: "Taking pictures of government buildings, military installations, and palaces is prohibited.",
+        date: "1980",
+        sourceAr: "قانون حماية المنشآت الحيوية",
+        sourceEn: "Vital Facilities Protection Law",
+        penaltyAr: "الحبس ومصادرة الكاميرا",
+        penaltyEn: "Imprisonment and camera confiscation",
+        categoryAr: "الأمن",
+        categoryEn: "Security"
+      }
+    ];
+    
+    // ==================== TRANSLATION FUNCTION // وظيفة الترجمة ====================
+    function toggleLanguage() {
+      // Toggles between Arabic and English // يبدل بين العربية والإنجليزية
+      const btn = document.getElementById('translateBtn');
+      btn.classList.add('switching'); // Add animation class // إضافة كلاس الحركة
+      
+      // Switch language // تبديل اللغة
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      
+      // Update page direction // تحديث اتجاه الصفحة
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = currentLanguage;
+      
+      // Save language preference // حفظ تفضيل اللغة
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      profile.language = currentLanguage;
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+      
+      // Translate all content // ترجمة جميع المحتويات
+      translatePage();
+      
+      // Re-render laws list // إعادة رسم قائمة القوانين
+      renderLaws();
+      
+      // Show notification // إظهار إشعار
+      showError(translations[currentLanguage].switched, true);
+      
+      // Remove animation class // إزالة كلاس الحركة
+      setTimeout(() => {
+        btn.classList.remove('switching');
+      }, 500);
+    }
+    
+    // ==================== TRANSLATE PAGE // ترجمة الصفحة ====================
+    function translatePage() {
+      // Translates all static content based on selected language // يترجم جميع المحتويات الثابتة بناءً على اللغة المحددة
+      const t = translations[currentLanguage];
+      
+      // Update page title // تحديث عنوان الصفحة
+      document.title = t.pageTitle;
+      
+      // Update translate button text and aria-label // تحديث نص زر الترجمة و aria-label
+      const translateBtn = document.getElementById('translateBtn');
+      document.getElementById('translateText').textContent = t.translateBtn;
+      translateBtn.setAttribute('aria-label', t.translateAria);
+      
+      // Update home button // تحديث زر الرئيسية
+      const homeBtn = document.querySelector('.home-btn');
+      homeBtn.textContent = t.homeBtn;
+      homeBtn.setAttribute('aria-label', t.homeAria);
+      
+      // Update footer // تحديث التذييل
+      document.querySelector('footer').textContent = t.footer;
+      
+      // Update section title // تحديث عنوان القسم
+      const sectionTitle = document.querySelector('.section-title span:nth-child(2)');
+      sectionTitle.textContent = t.sectionTitle;
+      
+      // Update map aria-label and iframe title // تحديث aria-label للخريطة وعنوان الإطار
+      const mapEl = document.querySelector('.map');
+      mapEl.setAttribute('aria-label', t.mapAria);
+      const mapIframeEl = mapEl.querySelector('iframe');
+      if (mapIframeEl) {
+        mapIframeEl.setAttribute('title', t.mapAria);
+      }
+      
+      
+      // Update flag image alt text // تحديث نص alt لصورة العلم
+      const flagImg = document.querySelector('img[src="Images/UAE_Flag.png"]');
+      if (flagImg) {
+        flagImg.setAttribute('alt', t.flagAlt);
+      }
+      
+      // Update search input // تحديث حقل البحث
+      const searchInput = document.getElementById('search-input');
+      searchInput.placeholder = t.searchPlaceholder;
+      searchInput.setAttribute('aria-label', t.searchAriaLabel);
+      
+      // Update all elements with data attributes // تحديث جميع العناصر التي تحتوي على سمات بيانات
+      document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          element.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+        }
+      });
+      
+      // Update all placeholders // تحديث جميع النصوص النائبة
+      document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? element.getAttribute('data-ar-placeholder') : element.getAttribute('data-en-placeholder');
+        }
+      });
+      
+      // Update all aria-labels // تحديث جميع تسميات aria
+      document.querySelectorAll('[data-ar-aria-label], [data-en-aria-label]').forEach(element => {
+        if (element.hasAttribute('data-ar-aria-label') && element.hasAttribute('data-en-aria-label')) {
+          element.setAttribute('aria-label', currentLanguage === 'ar' ? element.getAttribute('data-ar-aria-label') : element.getAttribute('data-en-aria-label'));
+        }
+      });
+      
+      // Update all alt text // تحديث جميع نصوص alt
+      document.querySelectorAll('[data-ar-alt], [data-en-alt]').forEach(element => {
+        if (element.hasAttribute('data-ar-alt') && element.hasAttribute('data-en-alt')) {
+          element.setAttribute('alt', currentLanguage === 'ar' ? element.getAttribute('data-ar-alt') : element.getAttribute('data-en-alt'));
+        }
+      });
+    }
+    
+    // ==================== RENDER LAWS LIST // رسم قائمة القوانين ====================
+    function renderLaws() {
+      // Renders the list of laws // يعرض قائمة القوانين
+      const listContainer = document.getElementById('laws-list');
+      listContainer.innerHTML = '';
+      
+      lawsData.forEach(law => {
+        const title = currentLanguage === 'ar' ? law.titleAr : law.titleEn;
+        const category = currentLanguage === 'ar' ? law.categoryAr : law.categoryEn;
+        
+        const article = document.createElement('article');
+        article.className = 'item';
+        article.onclick = () => openLawModal(law); // Open modal on click // فتح النافذة عند النقر
+        
+        article.innerHTML = `
+          <div class="pin">⚖️</div>
+          <div class="label">
+            <span>${title}</span>
+            <span class="category-badge">${category}</span>
+            <span class="date-badge">${law.date}</span>
+          </div>
+        `;
+        
+        listContainer.appendChild(article);
+      });
+    }
+    
+    // ==================== MODAL FUNCTIONS // وظائف النافذة المنبثقة ====================
+    function openLawModal(law) {
+      // Opens the modal with law details // يفتح النافذة مع تفاصيل القانون
+      const modal = document.getElementById('law-modal');
+      
+      document.getElementById('modal-law-title').textContent = currentLanguage === 'ar' ? law.titleAr : law.titleEn;
+      document.getElementById('modal-law-desc').textContent = currentLanguage === 'ar' ? law.descAr : law.descEn;
+      document.getElementById('modal-law-date').textContent = law.date;
+      document.getElementById('modal-law-source').textContent = currentLanguage === 'ar' ? law.sourceAr : law.sourceEn;
+      document.getElementById('modal-law-penalty').textContent = currentLanguage === 'ar' ? law.penaltyAr : law.penaltyEn;
+      document.getElementById('modal-law-category').textContent = currentLanguage === 'ar' ? law.categoryAr : law.categoryEn;
+      
+      modal.classList.add('active'); // Show modal // إظهار النافذة
+    }
+    
+    function closeLawModal() {
+      // Closes the law modal // يغلق نافذة القانون
+      document.getElementById('law-modal').classList.remove('active');
+    }
+    
+    // Close modal on Escape key // إغلاق النافذة عند الضغط على مفتاح Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLawModal();
+    });
+    
+    // ==================== NOTIFICATION // الإشعار ====================
+    function showError(message, isSuccess = false) {
+      // Shows a toast notification // يعرض إشعارًا منبثقًا
+      const toast = document.getElementById('error-toast');
+      toast.textContent = message;
+      toast.style.background = isSuccess ? '#10b981' : '#ef4444'; // Green for success, red for error // أخضر للنجاح، أحمر للخطأ
+      
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // ==================== SEARCH FUNCTIONALITY // وظيفة البحث ====================
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', function (e) {
+      // Filters the laws list based on search input // يفلتر قائمة القوانين بناءً على إدخال البحث
+      const query = this.value.toLowerCase().trim();
+      const items = document.querySelectorAll('#laws-list .item');
+      
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = 'grid'; // Show if matches // إظهار إذا تطابق
+        } else {
+          item.style.display = 'none'; // Hide if not // إخفاء إذا لم يتطابق
+        }
+      });
+    });
+
+    // ==================== INITIALIZATION // التهيئة ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Runs when DOM is fully loaded // يعمل عند تحميل DOM بالكامل
+      // Add click event to translate button // إضافة حدث النقر لزر الترجمة
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+      
+      // Load user profile from localStorage // تحميل الملف الشخصي للمستخدم من التخزين المحلي
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (userProfile.language && userProfile.language !== currentLanguage) {
+        currentLanguage = userProfile.language;
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+      }
+      
+      // Apply Theme // تطبيق السمة
+      if (userProfile.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      // Initialize the page in Arabic // تهيئة الصفحة بالعربية
+      translatePage();
+      renderLaws();
+    });
+    
+    // Remove the existing performSearch function and replace with simplified version
+    // The existing placesDB and related functions are not needed for this page
+  </script>
+</body>
+</html>

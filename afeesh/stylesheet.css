@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Afeesh NosMesalwa\'';
+    src: url('Afeesh-NosMesalwa.eot');
+    src: local('Afeesh NosMesalwa\''), local('Afeesh-NosMesalwa\''),
+        url('Afeesh-NosMesalwa.eot?#iefix') format('embedded-opentype'),
+        url('Afeesh-NosMesalwa.woff2') format('woff2'),
+        url('Afeesh-NosMesalwa.woff') format('woff'),
+        url('Afeesh-NosMesalwa.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Afeesh NosMekalbaz';
+    src: url('Afeesh-NosMekalbaz.eot');
+    src: local('Afeesh NosMekalbaz'), local('Afeesh-NosMekalbaz'),
+        url('Afeesh-NosMekalbaz.eot?#iefix') format('embedded-opentype'),
+        url('Afeesh-NosMekalbaz.woff2') format('woff2'),
+        url('Afeesh-NosMekalbaz.woff') format('woff'),
+        url('Afeesh-NosMekalbaz.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Afeesh Mesalwa\'';
+    src: url('Afeesh-Mesalwa.eot');
+    src: local('Afeesh Mesalwa\''), local('Afeesh-Mesalwa\''),
+        url('Afeesh-Mesalwa.eot?#iefix') format('embedded-opentype'),
+        url('Afeesh-Mesalwa.woff2') format('woff2'),
+        url('Afeesh-Mesalwa.woff') format('woff'),
+        url('Afeesh-Mesalwa.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Afeesh Aadi';
+    src: url('Afeesh-Aadi.eot');
+    src: local('Afeesh Aadi'), local('Afeesh-Aadi'),
+        url('Afeesh-Aadi.eot?#iefix') format('embedded-opentype'),
+        url('Afeesh-Aadi.woff2') format('woff2'),
+        url('Afeesh-Aadi.woff') format('woff'),
+        url('Afeesh-Aadi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Afeesh Mekalbaz';
+    src: url('Afeesh-Mekalbaz.eot');
+    src: local('Afeesh Mekalbaz'), local('Afeesh-Mekalbaz'),
+        url('Afeesh-Mekalbaz.eot?#iefix') format('embedded-opentype'),
+        url('Afeesh-Mekalbaz.woff2') format('woff2'),
+        url('Afeesh-Mekalbaz.woff') format('woff'),
+        url('Afeesh-Mekalbaz.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

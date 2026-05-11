@@ -1,0 +1,4745 @@
+2026-03-08 22:04:43 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=52&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:04:48 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=51&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:04:53 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=50&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:04:59 - Request Received
+Raw Body: temp=28.20&hum=64.90&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.90
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:05 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=50&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:10 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=48&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 48
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:16 - Request Received
+Raw Body: temp=28.20&hum=64.80&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.80
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:22 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=52&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:29 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=51&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:34 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:39 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=52&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:45 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=52&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:51 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=52&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:05:56 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:01 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=50&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:06 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:14 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:19 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:25 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:31 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=51&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:37 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=52&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:43 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=50&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:48 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=52&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:54 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=52&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:06:59 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=50&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:05 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:11 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=50&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:32 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=49&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:37 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=52&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:42 - Request Received
+Raw Body: temp=28.10&hum=66.70&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.70
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:47 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=50&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:52 - Request Received
+Raw Body: temp=28.10&hum=66.20&aqi=49&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.20
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:07:58 - Request Received
+Raw Body: temp=28.10&hum=66.40&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:03 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=49&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:08 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:14 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=50&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:20 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:25 - Request Received
+Raw Body: temp=28.10&hum=66.00&aqi=51&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.00
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:31 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=50&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:36 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=51&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:41 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:46 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:52 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:08:57 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:02 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=196&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 196
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:07 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=52&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:13 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=52&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:19 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=49&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:25 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=48&crowd=50&sound=195&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 48
+    [crowd] => 50
+    [sound] => 195
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:30 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=50&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:35 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:40 - Request Received
+Raw Body: temp=28.10&hum=66.20&aqi=51&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:46 - Request Received
+Raw Body: temp=28.10&hum=66.90&aqi=51&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.90
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:52 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=50&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:09:57 - Request Received
+Raw Body: temp=28.20&hum=65.50&aqi=52&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.50
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:03 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=52&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:08 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:13 - Request Received
+Raw Body: temp=28.20&hum=65.40&aqi=51&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.40
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:18 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=53&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:23 - Request Received
+Raw Body: temp=28.20&hum=66.20&aqi=51&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 66.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:29 - Request Received
+Raw Body: temp=28.10&hum=66.10&aqi=51&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.10
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:34 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:39 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:44 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=50&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:50 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:10:55 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:01 - Request Received
+Raw Body: temp=28.20&hum=65.30&aqi=49&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.30
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:06 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=49&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:12 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:17 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=50&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:23 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=49&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:28 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:33 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=49&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:39 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=50&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:46 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=51&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:52 - Request Received
+Raw Body: temp=28.10&hum=66.00&aqi=51&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.00
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:11:57 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=50&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:02 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=53&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:07 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:12 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:18 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=51&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:23 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=50&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:28 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=50&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:33 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:39 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=48&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 48
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:44 - Request Received
+Raw Body: temp=28.20&hum=65.80&aqi=49&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.80
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:50 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=50&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:12:56 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=51&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:01 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=51&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:07 - Request Received
+Raw Body: temp=28.20&hum=65.40&aqi=51&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.40
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:12 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=49&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:17 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=51&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:22 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=50&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:27 - Request Received
+Raw Body: temp=28.10&hum=66.40&aqi=50&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.40
+    [aqi] => 50
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:32 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=51&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:38 - Request Received
+Raw Body: temp=28.10&hum=66.80&aqi=47&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.80
+    [aqi] => 47
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:43 - Request Received
+Raw Body: temp=28.10&hum=65.80&aqi=49&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.80
+    [aqi] => 49
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:48 - Request Received
+Raw Body: temp=28.20&hum=65.40&aqi=51&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.40
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:53 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=51&crowd=50&sound=195&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 195
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:13:59 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=52&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:04 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=52&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:11 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=53&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:16 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=54&crowd=50&sound=195&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 195
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:22 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=54&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:28 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=53&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:34 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=55&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:39 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=55&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:45 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=56&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:51 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=54&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:14:56 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=54&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:02 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=52&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:07 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=55&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:12 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=59&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 59
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:18 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=57&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:23 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=56&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:28 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=54&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:33 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=52&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:38 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=51&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:43 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=51&crowd=50&sound=196&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 51
+    [crowd] => 50
+    [sound] => 196
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:48 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=52&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:15:54 - Request Received
+Raw Body: temp=28.10&hum=66.30&aqi=53&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.30
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:00 - Request Received
+Raw Body: temp=28.10&hum=66.40&aqi=54&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.40
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:06 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=53&crowd=50&sound=184&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 184
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:11 - Request Received
+Raw Body: temp=28.10&hum=65.50&aqi=54&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.50
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:17 - Request Received
+Raw Body: temp=28.10&hum=66.00&aqi=54&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:23 - Request Received
+Raw Body: temp=28.10&hum=66.00&aqi=54&crowd=50&sound=197&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 197
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:29 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=54&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:34 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=54&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:40 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=56&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:46 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=55&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:51 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=52&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:16:57 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=55&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:03 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=56&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:09 - Request Received
+Raw Body: temp=28.10&hum=66.10&aqi=54&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 66.10
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:15 - Request Received
+Raw Body: temp=28.10&hum=65.60&aqi=54&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.60
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:21 - Request Received
+Raw Body: temp=28.10&hum=65.40&aqi=56&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.40
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:26 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=55&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:32 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=55&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:37 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=55&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:43 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=54&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:49 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=54&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:17:55 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=54&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:00 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=53&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:06 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=54&crowd=50&sound=188&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 188
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:12 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=54&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:17 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=54&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:22 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=54&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:27 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=55&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:33 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=56&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:38 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=55&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:43 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=54&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:49 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=56&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:54 - Request Received
+Raw Body: temp=28.20&hum=65.00&aqi=55&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.00
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:18:59 - Request Received
+Raw Body: temp=28.20&hum=64.80&aqi=55&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.80
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:04 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=54&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:10 - Request Received
+Raw Body: temp=28.20&hum=65.00&aqi=52&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.00
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:15 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=52&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:21 - Request Received
+Raw Body: temp=28.20&hum=64.70&aqi=54&crowd=50&sound=188&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.70
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 188
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:27 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=52&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:33 - Request Received
+Raw Body: temp=28.10&hum=65.70&aqi=53&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.70
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:39 - Request Received
+Raw Body: temp=28.20&hum=65.50&aqi=52&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.50
+    [aqi] => 52
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:44 - Request Received
+Raw Body: temp=28.20&hum=65.70&aqi=56&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:49 - Request Received
+Raw Body: temp=28.20&hum=65.30&aqi=55&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.30
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:19:55 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=56&crowd=50&sound=184&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 184
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:00 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=55&crowd=50&sound=177&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 177
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:05 - Request Received
+Raw Body: temp=28.20&hum=65.10&aqi=56&crowd=50&sound=178&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.10
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 178
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:10 - Request Received
+Raw Body: temp=28.20&hum=65.20&aqi=55&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 65.20
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:16 - Request Received
+Raw Body: temp=28.20&hum=64.70&aqi=54&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.70
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:21 - Request Received
+Raw Body: temp=28.20&hum=64.60&aqi=58&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.20
+    [hum] => 64.60
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:26 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=56&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:31 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=55&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:36 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=55&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:42 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=55&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:47 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=54&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 54
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:53 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=53&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 53
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:20:59 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:04 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=56&crowd=50&sound=178&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 178
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:10 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=55&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:15 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=55&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 55
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:20 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:26 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=57&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:31 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=56&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:36 - Request Received
+Raw Body: temp=28.10&hum=64.60&aqi=57&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.60
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:41 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:47 - Request Received
+Raw Body: temp=28.10&hum=65.30&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.30
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:52 - Request Received
+Raw Body: temp=28.10&hum=65.20&aqi=56&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.20
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:21:57 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=58&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:03 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=57&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:08 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=56&crowd=50&sound=184&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 184
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:13 - Request Received
+Raw Body: temp=28.10&hum=65.10&aqi=57&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.10
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:19 - Request Received
+Raw Body: temp=28.10&hum=65.00&aqi=56&crowd=50&sound=177&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 65.00
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 177
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:24 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=56&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:29 - Request Received
+Raw Body: temp=28.10&hum=64.90&aqi=59&crowd=50&sound=184&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.90
+    [aqi] => 59
+    [crowd] => 50
+    [sound] => 184
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:34 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=57&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:39 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=57&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:45 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:50 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=58&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:22:56 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=57&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:01 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=180&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 180
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:06 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:11 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:16 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=57&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:22 - Request Received
+Raw Body: temp=28.10&hum=64.80&aqi=56&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.80
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:28 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=56&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:33 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=56&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:38 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=57&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:43 - Request Received
+Raw Body: temp=28.10&hum=64.70&aqi=56&crowd=50&sound=180&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.10
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 180
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:49 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=57&crowd=50&sound=178&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 178
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:54 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=57&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:23:59 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=58&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:04 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=57&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 57
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:10 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=56&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 56
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:15 - Request Received
+Raw Body: temp=28.00&hum=64.70&aqi=58&crowd=50&sound=178&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.70
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 178
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:20 - Request Received
+Raw Body: temp=28.00&hum=64.90&aqi=58&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.90
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:26 - Request Received
+Raw Body: temp=28.00&hum=64.80&aqi=58&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.80
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:31 - Request Received
+Raw Body: temp=28.00&hum=65.10&aqi=58&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.10
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:37 - Request Received
+Raw Body: temp=28.00&hum=64.90&aqi=58&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.90
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:43 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=60&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 60
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:49 - Request Received
+Raw Body: temp=28.00&hum=65.60&aqi=59&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.60
+    [aqi] => 59
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:24:54 - Request Received
+Raw Body: temp=28.00&hum=65.80&aqi=58&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.80
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:00 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=58&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 58
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:05 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=59&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 59
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:11 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=60&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 60
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:17 - Request Received
+Raw Body: temp=28.00&hum=65.90&aqi=61&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.90
+    [aqi] => 61
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:22 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=60&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 60
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:27 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=61&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 61
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:33 - Request Received
+Raw Body: temp=28.00&hum=64.90&aqi=62&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.90
+    [aqi] => 62
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:38 - Request Received
+Raw Body: temp=28.00&hum=64.90&aqi=62&crowd=50&sound=195&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.90
+    [aqi] => 62
+    [crowd] => 50
+    [sound] => 195
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:43 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=63&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 63
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:48 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=62&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 62
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:53 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=62&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 62
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:25:59 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=63&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 63
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:04 - Request Received
+Raw Body: temp=28.00&hum=65.10&aqi=64&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.10
+    [aqi] => 64
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:09 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=64&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 64
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:14 - Request Received
+Raw Body: temp=27.90&hum=64.90&aqi=64&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 64.90
+    [aqi] => 64
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:20 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=62&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 62
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:25 - Request Received
+Raw Body: temp=28.00&hum=65.10&aqi=65&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.10
+    [aqi] => 65
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:30 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=66&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 66
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:35 - Request Received
+Raw Body: temp=28.00&hum=64.90&aqi=67&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 64.90
+    [aqi] => 67
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:41 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=69&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 69
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:46 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=70&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:51 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=71&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:26:56 - Request Received
+Raw Body: temp=27.90&hum=64.90&aqi=72&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 64.90
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:01 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=72&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:07 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=70&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:12 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=72&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:17 - Request Received
+Raw Body: temp=27.90&hum=66.10&aqi=72&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:25 - Request Received
+Raw Body: temp=27.90&hum=67.00&aqi=75&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 67.00
+    [aqi] => 75
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:31 - Request Received
+Raw Body: temp=27.90&hum=65.90&aqi=76&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.90
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:36 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=72&crowd=50&sound=178&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 178
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:41 - Request Received
+Raw Body: temp=28.00&hum=65.40&aqi=71&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.40
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:47 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=74&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:52 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=76&crowd=50&sound=181&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 181
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:27:57 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=71&crowd=50&sound=176&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 176
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:03 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=74&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:08 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=76&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:13 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=78&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 78
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:18 - Request Received
+Raw Body: temp=27.90&hum=65.60&aqi=79&crowd=50&sound=182&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.60
+    [aqi] => 79
+    [crowd] => 50
+    [sound] => 182
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:23 - Request Received
+Raw Body: temp=27.90&hum=65.60&aqi=77&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.60
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:29 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=80&crowd=50&sound=184&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 80
+    [crowd] => 50
+    [sound] => 184
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:34 - Request Received
+Raw Body: temp=28.00&hum=65.50&aqi=81&crowd=50&sound=185&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.50
+    [aqi] => 81
+    [crowd] => 50
+    [sound] => 185
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:39 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=80&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 80
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:45 - Request Received
+Raw Body: temp=28.00&hum=65.40&aqi=81&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.40
+    [aqi] => 81
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:50 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=79&crowd=50&sound=180&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 79
+    [crowd] => 50
+    [sound] => 180
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:28:55 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=76&crowd=50&sound=179&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 179
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:01 - Request Received
+Raw Body: temp=28.00&hum=65.50&aqi=77&crowd=50&sound=180&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.50
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 180
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:08 - Request Received
+Raw Body: temp=28.00&hum=65.90&aqi=79&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.90
+    [aqi] => 79
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:14 - Request Received
+Raw Body: temp=28.00&hum=65.80&aqi=82&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.80
+    [aqi] => 82
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:19 - Request Received
+Raw Body: temp=28.00&hum=65.90&aqi=81&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.90
+    [aqi] => 81
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:24 - Request Received
+Raw Body: temp=28.00&hum=65.70&aqi=79&crowd=50&sound=183&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.70
+    [aqi] => 79
+    [crowd] => 50
+    [sound] => 183
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:30 - Request Received
+Raw Body: temp=28.00&hum=65.50&aqi=79&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.50
+    [aqi] => 79
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:35 - Request Received
+Raw Body: temp=28.00&hum=65.40&aqi=78&crowd=50&sound=191&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.40
+    [aqi] => 78
+    [crowd] => 50
+    [sound] => 191
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:41 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=77&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:46 - Request Received
+Raw Body: temp=28.00&hum=65.50&aqi=77&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.50
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:51 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=76&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:29:56 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=76&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:01 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=70&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:06 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=77&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:12 - Request Received
+Raw Body: temp=28.00&hum=65.30&aqi=78&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.30
+    [aqi] => 78
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:17 - Request Received
+Raw Body: temp=28.00&hum=65.20&aqi=77&crowd=50&sound=223&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.20
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 223
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:22 - Request Received
+Raw Body: temp=28.00&hum=65.40&aqi=75&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.40
+    [aqi] => 75
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:27 - Request Received
+Raw Body: temp=28.00&hum=65.10&aqi=73&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:33 - Request Received
+Raw Body: temp=28.00&hum=65.10&aqi=73&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:38 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=72&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:44 - Request Received
+Raw Body: temp=28.00&hum=65.00&aqi=73&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 28.00
+    [hum] => 65.00
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:50 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=72&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:30:56 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=71&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:02 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=70&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:08 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=70&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:13 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=70&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:28 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=73&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:34 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=73&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:39 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=74&crowd=50&sound=200&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 200
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:44 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=74&crowd=50&sound=201&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 201
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:49 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=74&crowd=50&sound=192&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 192
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:31:54 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=76&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:00 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=76&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:05 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=73&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:11 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=73&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:16 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=73&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:22 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=71&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:27 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=72&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:32 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=70&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:37 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=70&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:43 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=71&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:48 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=70&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:53 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=70&crowd=50&sound=190&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 190
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:32:59 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=65&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 65
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:04 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=67&crowd=50&sound=206&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 67
+    [crowd] => 50
+    [sound] => 206
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:09 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=70&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:15 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=75&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 75
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:20 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=73&crowd=50&sound=198&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 198
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:26 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=74&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:31 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=74&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:37 - Request Received
+Raw Body: temp=27.90&hum=65.00&aqi=73&crowd=50&sound=202&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.00
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 202
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:43 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=72&crowd=50&sound=204&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 204
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:49 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=72&crowd=50&sound=207&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 207
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:33:54 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=72&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:00 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=73&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:05 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=72&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:11 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=70&crowd=50&sound=193&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 193
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:17 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=72&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:23 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=74&crowd=50&sound=196&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 196
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:28 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=74&crowd=50&sound=189&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 189
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:33 - Request Received
+Raw Body: temp=27.90&hum=65.10&aqi=75&crowd=50&sound=186&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.10
+    [aqi] => 75
+    [crowd] => 50
+    [sound] => 186
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:38 - Request Received
+Raw Body: temp=27.90&hum=65.20&aqi=76&crowd=50&sound=187&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.20
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 187
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:43 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=77&crowd=50&sound=195&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 77
+    [crowd] => 50
+    [sound] => 195
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:49 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=76&crowd=50&sound=194&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 194
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:54 - Request Received
+Raw Body: temp=27.90&hum=66.20&aqi=84&crowd=50&sound=225&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.20
+    [aqi] => 84
+    [crowd] => 50
+    [sound] => 225
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:34:59 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=85&crowd=50&sound=217&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 85
+    [crowd] => 50
+    [sound] => 217
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:04 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=76&crowd=50&sound=212&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 76
+    [crowd] => 50
+    [sound] => 212
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:09 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=73&crowd=50&sound=210&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 210
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:15 - Request Received
+Raw Body: temp=27.90&hum=65.60&aqi=73&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.60
+    [aqi] => 73
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:21 - Request Received
+Raw Body: temp=27.90&hum=66.10&aqi=74&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.10
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:27 - Request Received
+Raw Body: temp=27.90&hum=65.60&aqi=69&crowd=50&sound=199&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.60
+    [aqi] => 69
+    [crowd] => 50
+    [sound] => 199
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:32 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=72&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:38 - Request Received
+Raw Body: temp=27.90&hum=65.90&aqi=72&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.90
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:43 - Request Received
+Raw Body: temp=27.90&hum=65.80&aqi=72&crowd=50&sound=210&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.80
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 210
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:48 - Request Received
+Raw Body: temp=27.90&hum=65.60&aqi=72&crowd=50&sound=213&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.60
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 213
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:54 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=72&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:35:59 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=71&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:04 - Request Received
+Raw Body: temp=27.90&hum=66.00&aqi=72&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.00
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:09 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=71&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:14 - Request Received
+Raw Body: temp=27.90&hum=66.40&aqi=68&crowd=50&sound=214&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.40
+    [aqi] => 68
+    [crowd] => 50
+    [sound] => 214
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:19 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=72&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:25 - Request Received
+Raw Body: temp=27.90&hum=65.80&aqi=70&crowd=50&sound=209&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.80
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 209
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:30 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=72&crowd=50&sound=211&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 211
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:35 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=72&crowd=50&sound=214&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 214
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:41 - Request Received
+Raw Body: temp=27.90&hum=65.90&aqi=69&crowd=50&sound=203&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.90
+    [aqi] => 69
+    [crowd] => 50
+    [sound] => 203
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:46 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=71&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:51 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=70&crowd=50&sound=213&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 213
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:36:58 - Request Received
+Raw Body: temp=27.90&hum=65.30&aqi=69&crowd=50&sound=208&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.30
+    [aqi] => 69
+    [crowd] => 50
+    [sound] => 208
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:03 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=65&crowd=50&sound=205&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 65
+    [crowd] => 50
+    [sound] => 205
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:09 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=70&crowd=50&sound=212&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 212
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:14 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=70&crowd=50&sound=213&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 213
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:20 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=70&crowd=50&sound=217&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 217
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:25 - Request Received
+Raw Body: temp=27.90&hum=65.50&aqi=66&crowd=50&sound=212&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.50
+    [aqi] => 66
+    [crowd] => 50
+    [sound] => 212
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:30 - Request Received
+Raw Body: temp=27.90&hum=65.80&aqi=70&crowd=50&sound=211&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.80
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 211
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:35 - Request Received
+Raw Body: temp=27.90&hum=66.10&aqi=72&crowd=50&sound=215&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.10
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 215
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:40 - Request Received
+Raw Body: temp=27.90&hum=66.40&aqi=72&crowd=50&sound=214&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.40
+    [aqi] => 72
+    [crowd] => 50
+    [sound] => 214
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:46 - Request Received
+Raw Body: temp=27.90&hum=66.00&aqi=70&crowd=50&sound=213&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 66.00
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 213
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:51 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=70&crowd=50&sound=216&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 216
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:37:56 - Request Received
+Raw Body: temp=27.90&hum=65.70&aqi=70&crowd=50&sound=217&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.70
+    [aqi] => 70
+    [crowd] => 50
+    [sound] => 217
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:38:02 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=71&crowd=50&sound=227&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 71
+    [crowd] => 50
+    [sound] => 227
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json
+2026-03-08 22:38:07 - Request Received
+Raw Body: temp=27.90&hum=65.40&aqi=74&crowd=50&sound=222&dist=400
+REQUEST Params: Array
+(
+    [temp] => 27.90
+    [hum] => 65.40
+    [aqi] => 74
+    [crowd] => 50
+    [sound] => 222
+    [dist] => 400
+)
+
+SUCCESS: Data written to data.json

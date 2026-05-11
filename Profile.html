@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // تعريف نوع المستند على أنه HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element: Arabic language, right-to-left direction // العنصر الجذر: اللغة العربية، اتجاه النص من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // تعيين ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Configures viewport for responsive design // تكوين منفذ العرض للتصميم المتجاوب -->
+  <title>HAYYAK | User Profile</title>
+  <!-- Page title // عنوان الصفحة -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon // أيقونة الموقع -->
+  <meta name="description" content="إدارة ملفك الشخصي في تطبيق حياك بسهولة وأمان." />
+  <!-- Meta description for SEO // وصف ميتا لمحركات البحث -->
+  <!-- Google Fonts: Cairo // خطوط جوجل: كايرو -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts server // اتصال مسبق بخادم خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع سمة عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Import Cairo font with weights // استيراد خط كايرو بالأوزان المحددة -->
+
+  <script src="JS/Auth.js"></script>
+  <script>
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/check.php', { credentials: 'include' });
+        const json = await res.json();
+        if (!json.ok || !json.data.logged_in) window.location.href = 'Index.html';
+      } catch (_) {
+        if (!localStorage.getItem('hayyak_user_profile')) window.location.href = 'Index.html';
+      }
+    })();
+  </script>
+
+  <style>
+    /* ==================== Afeesh family (local) // خط أفش المحلي ==================== */
+    @font-face {
+      /* Defines custom font 'Afeesh' // تعريف الخط المخصص 'أفش' */
+      font-family: 'Afeesh';
+      /* Font name // اسم الخط */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'),
+           url('afeesh/Afeesh-Aadi.woff') format('woff'),
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype');
+      /* Font files in modern and fallback formats // ملفات الخط بتنسيقات حديثة واحتياطية */
+      font-weight: 400; font-style: normal; font-display: swap;
+      /* Normal weight, normal style, swap display // وزن عادي، نمط عادي، عرض تبديل */
+    }
+    @font-face {
+      /* Bold variant // النسخة العريضة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      /* Semi-bold variant // النسخة شبه العريضة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      /* Light variant // النسخة الخفيفة */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    :root {
+      /* Light theme variables // متغيرات السمة الفاتحة */
+      --bg: #f5f5f7; --card: #ffffff; --ink: #0f0f10; --muted: #6b7280; --line: #0f0f10; --radius: 14px;
+      --primary: #16243d; --accent: #d4af37;
+      --health-green: #10b981;
+      --health-red: #ef4444;
+      --health-blue: #3b82f6;
+      --health-yellow: #f59e0b;
+    }
+    [data-theme="dark"] {
+      /* Dark theme overrides // تجاوزات السمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333;
+    }
+    [data-theme="dark"] .user-name,
+    [data-theme="dark"] .section-title {
+      color: var(--accent);
+    }
+    [data-theme="dark"] .tag {
+      background: #2a2a2a;
+      border-color: #444444;
+    }
+    [data-theme="dark"] .health-condition-item {
+      background: #2a2a2a;
+      border-color: #444444;
+    }
+    [data-theme="dark"] .friend-item {
+        border-bottom-color: #333;
+    }
+    [data-theme="dark"] .friend-avatar {
+        background: #2a2a2a;
+        color: #fff;
+    }
+    [data-theme="dark"] .close-btn {
+        background: #333; color: #fff;
+    }
+    [data-theme="dark"] .close-btn:hover { background: #444; }
+    [data-theme="dark"] .profile-completion-section {
+      background: linear-gradient(135deg, #1e3c50 0%, #162a3a 100%);
+      border-color: #1f4a5c;
+    }
+    [data-theme="dark"] .completion-label {
+      color: #4db8f0;
+    }
+    [data-theme="dark"] .completion-percentage {
+      color: #60d5ff;
+    }
+    [data-theme="dark"] .completion-bar {
+      background: #1f4a5c;
+      border-color: #2a5a7a;
+    }
+    [data-theme="dark"] .achievement-badge {
+      background: #2a2a2a;
+      border-color: #3a3a3a;
+    }
+    [data-theme="dark"] .achievement-badge.unlocked {
+      border-color: #d4af37;
+      background: #2a2520;
+    }
+    [data-theme="dark"] .achievement-badge.locked {
+      background: #1a1a1a;
+    }
+    *{box-sizing:border-box}
+    /* Universal selector: include padding and border in element's total width/height // المحدد الشامل: تضمين الحشوة والحدود في العرض/الارتفاع الكلي */
+    html,body{height:100%; background:var(--bg)}
+    /* Full height, background using variable // ارتفاع كامل، خلفية باستخدام المتغير */
+    body{margin:0; font-family:'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink); display: flex; flex-direction: column;}
+    /* Body styles: remove default margin, set font stack, text color, flex column layout // أنماط الجسم: إزالة الهامش الافتراضي، تسلسل الخطوط، لون النص، تخطيط عمودي مرن */
+
+    .shell{width:100%; max-width:480px; margin:0 auto; padding:16px; flex: 1;}
+    /* Centered container for main content, max width, flex grow // حاوية مركزية للمحتوى الرئيسي، أقصى عرض، نمو مرن */
+    .card{background:var(--card); border:2px solid var(--line); border-radius:var(--radius); box-shadow:0 2px 0 #0f0f10; padding: 20px; margin-bottom: 16px;}
+    /* Card component // مكون البطاقة */
+
+    header.brand{text-align:center; background:#16243d; color:#ffffff; padding:20px; position:relative}
+    /* Header branding // ترويسة العلامة التجارية */
+   
+    .logo-text {
+      /* Logo text // نص الشعار */
+      font-family: 'Afeesh', sans-serif;
+      /* Custom font // خط مخصص */
+      font-weight: 700;
+      /* Bold // عريض */
+      font-size: 48px;
+      /* Large size // حجم كبير */
+      letter-spacing: 2px;
+      /* Space between letters // مسافة بين الحروف */
+      color: #d4af37;
+      /* Gold color // ذهبي */
+    }
+    .logo-sub {
+      /* Subtitle under logo // العنوان الفرعي تحت الشعار */
+      font-family: 'Afeesh', sans-serif;
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 20px;
+      margin-top: 2px;
+      letter-spacing: 3px;
+    }
+    .home-btn {
+      /* Home/back button // زر الرئيسية/الرجوع */
+      position: absolute;
+      /* Absolute positioning // وضع مطلق */
+      top: 50%;
+      /* Center vertically // توسيط عمودي */
+      left: 20px;
+      /* 20px from left // 20 بكسل من اليسار */
+      transform: translateY(-50%);
+      /* Fine-tune vertical centering // ضبط دقيق للتوسيط العمودي */
+      color: #d4af37;
+      /* Gold text // نص ذهبي */
+      text-decoration: none;
+      /* Remove underline // إزالة التسطير */
+      font-size: 15px;
+      background-color: #0f0f10;
+      /* Dark background // خلفية داكنة */
+      padding: 9px 12px;
+      /* Padding // حشوة */
+      border-radius: 999px;
+      /* Fully rounded (pill shape) // دائري بالكامل (شكل حبة) */
+    }
+    
+    /* Translate Button Styles // أنماط زر الترجمة */
+    .translate-btn {
+      /* Language toggle button // زر تبديل اللغة */
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      /* 20px from right // 20 بكسل من اليمين */
+      transform: translateY(-50%);
+      background: #d4af37;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      color: #16243d;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+      z-index: 100;
+    }
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+      background: #f7ef8a;
+    }
+    .translate-btn .icon { font-size: 16px; transition: transform 0.3s ease; }
+    .translate-btn:hover .icon { transform: rotate(20deg); }
+    .translate-btn.switching { animation: pulse 0.5s ease; }
+    @keyframes pulse {
+      /* Pulse animation for button // حركة نبض للزر */
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+
+     footer {
+      /* Footer // التذييل */
+      background: #16243d;
+      color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .avatar {
+        width: 100px;
+        height: 100px;
+        background: var(--primary);
+        color: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        margin: 0 auto 10px;
+        border: 4px solid var(--card);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+    }
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .camera-icon {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        font-size: 12px;
+        padding: 4px 0;
+        text-align: center;
+    }
+
+    .user-name {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    .user-emirate {
+        color: var(--muted);
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: #f0f0f0; color: var(--ink); padding: 6px 12px; 
+      border-radius: 20px; font-size: 14px; display: flex; 
+      align-items: center; gap: 6px; border: 1px solid #ddd;
+    }
+    
+    .pref-box {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .pref-item {
+        flex: 1;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #eee;
+    }
+    .pref-item.active {
+        background: #e6fffa;
+        border-color: #b2f5ea;
+        color: #047857;
+    }
+    .pref-item.inactive {
+        background: #fff5f5;
+        border-color: #fed7d7;
+        color: #c53030;
+    }
+    
+    /* Health Conditions Styles // أنماط الحالات الصحية */
+    .health-conditions-section {
+        margin-top: 10px;
+    }
+    .health-condition-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        margin-bottom: 8px;
+        border: 1px solid #e9ecef;
+    }
+    .health-condition-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    .health-condition-info {
+        flex: 1;
+    }
+    .health-condition-name {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+    .health-condition-desc {
+        font-size: 12px;
+        color: var(--muted);
+    }
+    .health-condition-status {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+    .status-active {
+        background: #dcfce7;
+        color: #047857;
+    }
+    .status-inactive {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+    
+    /* Friends List Styles // أنماط قائمة الأصدقاء */
+    .friend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    .friend-item:last-child { border-bottom: none; }
+    .friend-avatar {
+        width: 40px; height: 40px;
+        background: #eee; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 20px;
+    }
+
+    /* Edit Modal Styles // أنماط نافذة التعديل */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+        background: var(--card);
+        width: 100%;
+        max-width: 500px;
+        border-radius: var(--radius);
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .modal-header {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 20px;
+    }
+    .modal-title { font-weight: 700; font-size: 20px; }
+    .close-btn { 
+        background: #f0f0f0; border: none; font-size: 20px; cursor: pointer; color: #666; 
+        width: 32px; height: 32px; border-radius: 50%; display: flex; 
+        align-items: center; justify-content: center; transition: all 0.2s; 
+    }
+    .close-btn:hover { background: #e0e0e0; color: #000; }
+    
+    .edit-form-group { margin-bottom: 16px; }
+    .edit-label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .edit-input { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; font-family: inherit; }
+    
+    .tag-editor {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .tag-editor input {
+        border: none; outline: none; flex: 1; min-width: 100px; font-family: inherit;
+    }
+    .edit-tag {
+        background: var(--primary); color: #fff;
+        padding: 4px 8px; border-radius: 4px; font-size: 12px;
+        display: flex; align-items: center; gap: 4px;
+    }
+    .edit-tag span { cursor: pointer; }
+    
+    .autocomplete-suggestions {
+        border: 1px solid #ddd;
+        max-height: 150px;
+        overflow-y: auto;
+        background: #fff;
+        position: absolute;
+        width: 100%;
+        z-index: 10;
+        left: 0;
+        top: 100%;
+    }
+    .suggestion { padding: 8px; cursor: pointer; font-size: 13px; }
+    .suggestion:hover { background: #f0f0f0; }
+
+    .action-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: transform 0.1s;
+    }
+    .edit-btn {
+        background: linear-gradient(135deg, var(--primary) 0%, #2c3e50 100%);
+        color: var(--accent);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        border: 1px solid var(--accent);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .edit-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+    .edit-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    
+    .logout-btn {
+        background: transparent;
+        color: var(--muted);
+        border: 2px solid var(--line);
+        margin-top: 16px;
+    }
+    
+    /* Privacy Info Badge // شارة معلومات الخصوصية */
+    .privacy-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: #f0f9ff;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #0369a1;
+        border: 1px solid #bae6fd;
+    }
+
+    .delete-btn-style {
+        background: #fee2e2;
+        color: #ef4444;
+        border: 2px solid #ef4444;
+        box-shadow: none;
+        margin-top: 16px;
+    }
+    .profile-completion-section {
+        margin-bottom: 20px;
+        padding: 16px;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 12px;
+        border: 2px solid #bae6fd;
+    }
+    .completion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .completion-label {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 14px;
+    }
+    .completion-percentage {
+        font-weight: 700;
+        color: #0284c7;
+        font-size: 16px;
+    }
+    .completion-bar {
+        width: 100%;
+        height: 10px;
+        background: #dbeafe;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #bae6fd;
+    }
+    .completion-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6 0%, #0284c7 100%);
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+    .achievements-section {
+        margin-top: 20px;
+    }
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+    }
+    .achievement-badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 8px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 2px solid #e9ecef;
+        text-align: center;
+        cursor: help;
+        transition: all 0.2s;
+        position: relative;
+    }
+    .achievement-badge.unlocked {
+        border-color: #fbbf24;
+        background: #fffbeb;
+        cursor: pointer;
+    }
+    .achievement-badge.unlocked:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 16px rgba(251, 191, 36, 0.3);
+    }
+    .achievement-badge.locked {
+        opacity: 0.5;
+        background: #f3f4f6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .achievement-badge:not(.locked):hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .achievement-icon {
+        font-size: 28px;
+    }
+    .achievement-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink);
+    }
+    .achievement-tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: white;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        z-index: 10;
+        margin-bottom: 6px;
+    }
+    .achievement-badge:hover .achievement-tooltip {
+        opacity: 1;
+    }
+    .leaderboard-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    .leaderboard-item:last-child { border-bottom: none; }
+    .leaderboard-rank {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--muted);
+        width: 30px;
+        text-align: center;
+    }
+    .leaderboard-avatar {
+        width: 40px; height: 40px;
+        background: #eee; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 20px;
+        overflow: hidden;
+    }
+    .leaderboard-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .leaderboard-info { flex: 1; }
+    .leaderboard-name { font-weight: 700; font-size: 14px; }
+    .leaderboard-achievements { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .leaderboard-score { font-size: 16px; font-weight: 700; color: var(--primary); }
+    [data-theme="dark"] .leaderboard-item { border-bottom-color: #333; }
+    [data-theme="dark"] .leaderboard-avatar { background: #2a2a2a; }
+    [data-theme="dark"] .leaderboard-score { color: var(--accent); }
+    .profile-preview-section {
+        padding: 20px;
+        background: var(--bg);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 2px dashed var(--line);
+        text-align: center;
+    }
+    .preview-avatar {
+        width: 80px;
+        height: 80px;
+        background: var(--primary);
+        color: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 12px;
+        border: 3px solid var(--accent);
+        overflow: hidden;
+    }
+    .preview-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .preview-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--ink);
+    }
+    .preview-emirate {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+    .preview-bio {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+    .preview-badges {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+    .preview-stat {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #f0f0f0;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
+    }
+    .avatar-picker {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+    .avatar-color {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+    }
+    .avatar-color:hover {
+        transform: scale(1.1);
+    }
+    .avatar-color.selected {
+        border-color: var(--ink);
+        box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--ink);
+    }
+    .edit-textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+    .field-counter {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+        text-align: right;
+    }
+    .modal-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+    .modal-form-col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    @media (max-width: 800px) {
+        .modal-split {
+            grid-template-columns: 1fr;
+        }
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 15px 20px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 2100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideIn 0.3s ease;
+      max-width: 320px;
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+    .missing-items-btn {
+        margin-top: 16px;
+        background: var(--card);
+        color: var(--primary);
+        border: 1px solid var(--line);
+        font-size: 14px;
+        padding: 10px;
+        box-shadow: none;
+    }
+    [data-theme="dark"] .missing-items-btn {
+        color: var(--ink);
+    }
+
+    .bottom-search{padding:12px 0 18px; margin-top: auto; position:relative}
+    /* Search bar container // حاوية شريط البحث */
+    .search{display:grid; grid-template-columns:28px 1fr; align-items:center; gap:8px; border:2px solid var(--line); border-radius:999px; padding:10px 12px; background:var(--card)}
+    .glass{text-align:center}
+    .search input{appearance:none; border:0; outline:0; background:transparent; width:100%; font:inherit; color:var(--ink)}
+    .search input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+    .search input::placeholder{color:var(--muted)}
+
+    .autocomplete-list{display:none; position:absolute; top:100%; left:0; right:0; background:var(--card); border:2px solid var(--line); border-top:0; border-radius:0 0 var(--radius) var(--radius); max-height:200px; overflow-y:auto; z-index:100}
+    .autocomplete-list.active{display:block}
+    .autocomplete-item{padding:12px; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.2s}
+    .autocomplete-item:hover{background:#f5f5f7}
+    [data-theme="dark"] .autocomplete-item:hover{background:#2a2a2a;}
+    .autocomplete-item:last-child{border-bottom:none}
+    .autocomplete-item-name{font-weight:700; color:var(--ink)}
+    .autocomplete-item-desc{font-size:12px; color:var(--muted); margin-top:2px}
+  </style>
+</head>
+<body>
+  <header class="brand">
+    <!-- Header branding // ترويسة العلامة التجارية -->
+    <a href="Home.html" class="home-btn" id="homeBtn" aria-label="الرئيسية" data-ar="الرجوع" data-en="Back">الرجوع</a>
+    <!-- Home button // زر الصفحة الرئيسية -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <!-- Logo text // نص الشعار -->
+    <div class="logo-sub">HAYYAK</div>
+    <!-- Subtitle // العنوان الفرعي -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+      <!-- Language toggle button // زر تبديل اللغة -->
+      <span class="icon">🌐</span>
+      <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span>
+      <!-- Button text changes with JS // نص الزر يتغير بواسطة JS -->
+    </button>
+  </header>
+  
+  <main class="shell">
+    <!-- Main content container // حاوية المحتوى الرئيسي -->
+    <div class="card">
+        <div class="profile-header">
+            <div class="avatar" id="avatar-container">
+                <!-- Avatar container // حاوية الصورة الشخصية -->
+                <img id="avatar-img" src="" alt="Profile Picture" style="display:none;">
+                <span id="avatar-emoji">👤</span>
+                <div class="camera-icon">📷</div>
+                <!-- Camera icon for upload // أيقونة الكاميرا للرفع -->
+            </div>
+            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+            <!-- Hidden file input for avatar upload // إدخال ملف مخفي لرفع الصورة -->
+            <div class="user-name" id="p-name">ضيف</div>
+            <!-- User name // اسم المستخدم -->
+            <div class="user-emirate" id="p-emirate">الإمارات</div>
+            <!-- User emirate // إمارة المستخدم -->
+            <div class="user-dob" id="p-dob" style="color: var(--muted); font-size: 14px; margin-top: 4px;"></div>
+            <!-- Date of birth // تاريخ الميلاد -->
+        </div>
+
+        <div class="pref-box">
+            <div class="pref-item" id="p-healthy">
+                <div>🥗</div>
+                <div data-ar="صحي" data-en="Healthy">صحي</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Completion Tracker // متتبع إكمال الملف الشخصي -->
+    <div class="card profile-completion-section">
+        <div class="completion-header">
+            <div class="completion-label" data-ar="إكمال الملف الشخصي" data-en="Profile Completion">إكمال الملف الشخصي</div>
+            <div class="completion-percentage" id="completion-percentage">0%</div>
+        </div>
+        <div class="completion-bar">
+            <div class="completion-fill" id="completion-fill" style="width: 0%;"></div>
+        </div>
+        <button class="action-btn missing-items-btn" onclick="showMissingProfileItems()">
+            <span data-ar="ماذا ينقصني؟ 🤔" data-en="What's missing? 🤔">ماذا ينقصني؟ 🤔</span>
+        </button>
+    </div>
+
+    <!-- Achievements Section // قسم الإنجازات -->
+    <div class="card achievements-section">
+        <div class="section-title"><span>🏆</span> <span data-ar="الإنجازات" data-en="Achievements">الإنجازات</span></div>
+        <div class="achievements-grid" id="achievements-grid">
+            <!-- Achievements will be populated here // سيتم ملء الإنجازات هنا -->
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-title"><span>⚙️</span> <span data-ar="الإعدادات" data-en="Settings">الإعدادات</span></div>
+        <div class="edit-form-group" style="display: flex; justify-content: space-between; align-items: center;">
+            <label style="font-weight: 600;" data-ar="الوضع الليلي" data-en="Dark Mode">الوضع الليلي</label>
+            <input type="checkbox" id="dark-mode-toggle" style="width: 20px; height: 20px;">
+        </div>
+        <div class="edit-form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+            <label style="font-weight: 600;" data-ar="الأصوات" data-en="Sounds">الأصوات</label>
+            <input type="checkbox" id="sound-toggle" style="width: 20px; height: 20px;">
+        </div>
+    </div>
+
+    <!-- NEW: Health Conditions Section // جديد: قسم الحالات الصحية -->
+    <div class="card">
+        <div class="section-title"><span>🏥</span> <span data-ar="المشاكل الصحية" data-en="Health Issues">المشاكل الصحية</span></div>
+        <div class="health-conditions-section" id="health-conditions-list">
+            <!-- Health conditions will be loaded here // سيتم تحميل الحالات الصحية هنا -->
+            <div style="text-align: center; padding: 20px; color: var(--muted);" id="health-conditions-empty" data-ar="لا توجد مشاكل صحية مسجلة" data-en="No health issues recorded">
+                لا توجد مشاكل صحية مسجلة
+            </div>
+        </div>
+        <div class="privacy-info" id="health-privacy-info" style="display: none;">
+            <span>🔒</span>
+            <span data-ar="مشاركة المعلومات الصحية:" data-en="Sharing health information:">مشاركة المعلومات الصحية: <strong id="privacy-status" data-ar="غير مفعل" data-en="Disabled">غير مفعل</strong></span>
+        </div>
+        <a href="HealthProblems.html" style="display:block; text-align:center; margin-top:10px; font-size:14px; color:var(--primary); text-decoration:none; font-weight:600;">
+          <span data-ar="إدارة المشاكل الصحية ⬅" data-en="Manage Health Issues ⬅">إدارة المشاكل الصحية ⬅</span>
+        </a>
+    </div>
+
+    <!-- Saved Plan Section // قسم الخطة المحفوظة -->
+    <div class="card" id="saved-plans-card" style="display:none;">
+        <div class="section-title"><span>📅</span> <span data-ar="خطتي المحفوظة" data-en="My Saved Plans">خططي المحفوظة</span></div>
+        <div id="saved-plans-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
+    </div>
+
+    <div class="card">
+        <div class="section-title"><span>⚽</span> <span data-ar="الاهتمامات" data-en="Interests">الاهتمامات</span></div>
+        <div class="tags" id="p-interests">
+            <span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-title"><span>🥜</span> <span data-ar="الحساسية" data-en="Allergies">الحساسية</span></div>
+        <div class="tags" id="p-allergies">
+            <span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-title"><span>🍔</span> <span data-ar="الأكل المفضل" data-en="Favorite Food">الأكل المفضل</span></div>
+        <div class="tags" id="p-food">
+            <span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="section-title"><span>😨</span> <span data-ar="المخاوف (فوبيا)" data-en="Phobias">المخاوف (فوبيا)</span></div>
+        <div class="tags" id="p-phobias">
+            <span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-title"><span>👥</span> <span data-ar="الأصدقاء والعائلة" data-en="Friends & Family">الأصدقاء والعائلة</span></div>
+        <div id="friends-list">
+            <span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>
+        </div>
+        <a href="Contacts.html" style="display:block; text-align:center; margin-top:10px; font-size:14px; color:var(--primary); text-decoration:none; font-weight:600;">
+          <span data-ar="إدارة القائمة" data-en="Manage List">إدارة القائمة</span>
+        </a>
+    </div>
+
+    <!-- NEW: Leaderboard Section // جديد: قسم لوحة الصدارة -->
+    <div class="card">
+        <div class="section-title"><span>🥇</span> <span data-ar="لوحة الصدارة" data-en="Leaderboard">لوحة الصدارة</span></div>
+        <div id="leaderboard-list">
+            <div style="text-align: center; padding: 20px; color: var(--muted);" id="leaderboard-loading" data-ar="جاري تحميل لوحة الصدارة..." data-en="Loading leaderboard...">
+                جاري تحميل لوحة الصدارة...
+            </div>
+        </div>
+    </div>
+
+    <button class="action-btn edit-btn" onclick="editProfile()">
+      <span data-ar="تعديل الملف الشخصي ✏️" data-en="Edit Profile ✏️">تعديل الملف الشخصي ✏️</span>
+    </button>
+
+    <button class="action-btn delete-btn-style" onclick="openDeleteModal()">
+      <span data-ar="حذف الحساب 🗑️" data-en="Delete Account 🗑️">حذف الحساب 🗑️</span>
+    </button>
+
+    <div class="bottom-search">
+      <div class="search">
+        <div class="glass">🔍</div>
+        <!-- Search icon // أيقونة البحث -->
+        <input type="search" 
+               id="search-input" 
+               placeholder="ابحث في الملف الشخصي" 
+               data-ar-placeholder="ابحث في الملف الشخصي" 
+               data-en-placeholder="Search profile" 
+               aria-label="Search profile" />
+        <!-- Search input // حقل إدخال البحث -->
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer" data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer>
+  <!-- Footer // التذييل -->
+
+  <!-- Edit Modal // نافذة التعديل -->
+  <div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title" data-ar="تعديل الملف الشخصي" data-en="Edit Profile">تعديل الملف الشخصي</div>
+            <button class="close-btn" onclick="closeEditModal()">×</button>
+            <!-- Close button // زر الإغلاق -->
+        </div>
+        
+        <!-- Two Column Layout: Form + Live Preview // تخطيط عمودين: النموذج + المعاينة الحية -->
+        <div class="modal-split">
+            <div class="modal-form-col">
+                <!-- Profile Picture Section // قسم صورة الملف الشخصي -->
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="صورة الملف الشخصي" data-en="Profile Picture">صورة الملف الشخصي</label>
+                    <div style="display: flex; gap: 12px;">
+                        <div id="edit-avatar-preview" style="width: 60px; height: 60px; background: var(--primary); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; border: 3px solid var(--accent); flex-shrink: 0;">👤</div>
+                        <div style="flex: 1;">
+                            <button class="action-btn" style="background: var(--primary); color: var(--accent); margin: 0; padding: 8px 12px; font-size: 14px;" onclick="document.getElementById('edit-avatar-upload').click();">
+                                <span data-ar="تغيير الصورة" data-en="Change Picture">تغيير الصورة</span>
+                            </button>
+                            <input type="file" id="edit-avatar-upload" accept="image/*" style="display: none;">
+                            <!-- Hidden file input for edit avatar // إدخال ملف مخفي لتعديل الصورة -->
+                            <div style="margin-top: 8px;">
+                                <label style="font-size: 12px; font-weight: 500;" data-ar="أو اختر لون:" data-en="Or choose color:">أو اختر لون:</label>
+                                <div class="avatar-picker" id="avatar-color-picker"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="الاسم (بالعربية)" data-en="Name (Arabic)">الاسم (بالعربية)</label>
+                    <input type="text" id="edit-name-ar" class="edit-input" style="text-align: right;" dir="rtl" placeholder="أدخل اسمك">
+                    <div class="field-error" id="name-ar-error" style="display: none;"></div>
+                </div>
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="الاسم (بالإنجليزية)" data-en="Name (English)">الاسم (بالإنجليزية)</label>
+                    <input type="text" id="edit-name-en" class="edit-input" style="text-align: left;" dir="ltr" placeholder="Enter your name">
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="الإمارة" data-en="Emirate">الإمارة</label>
+                    <select id="edit-emirate" class="edit-input">
+                        <option value="Abu Dhabi">أبوظبي</option>
+                        <option value="Dubai">دبي</option>
+                        <option value="Sharjah">الشارقة</option>
+                        <option value="Ajman">عجمان</option>
+                        <option value="Umm Al Quwain">أم القيوين</option>
+                        <option value="Ras Al Khaimah">رأس الخيمة</option>
+                        <option value="Fujairah">الفجيرة</option>
+                    </select>
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="نبذة شخصية" data-en="Bio">نبذة شخصية</label>
+                    <textarea id="edit-bio" class="edit-input edit-textarea" placeholder="اخبر عن نفسك..." data-ar-placeholder="اخبر عن نفسك..." data-en-placeholder="Tell us about yourself..."></textarea>
+                    <div class="field-counter"><span id="bio-counter">0</span>/150</div>
+                    <div class="field-error" id="bio-error" style="display: none;"></div>
+                </div>
+
+                <div class="edit-form-group">
+                    <label class="edit-label" data-ar="تفضيلات غذائية" data-en="Dietary Preferences">تفضيلات غذائية</label>
+                    <div style="display:flex; gap:20px;">
+                        <label><input type="checkbox" id="edit-healthy"> <span data-ar="صحي" data-en="Healthy">صحي</span></label>
+                    </div>
+                </div>
+        
+                <div class="edit-form-group" style="position:relative;">
+                    <label class="edit-label" data-ar="الاهتمامات" data-en="Interests">الاهتمامات</label>
+                    <div class="tag-editor" id="edit-interests-container">
+                        <input type="text" id="edit-interests-input" placeholder="أضف..." data-ar-placeholder="أضف..." data-en-placeholder="Add...">
+                    </div>
+                    <div id="interests-suggestions" class="autocomplete-suggestions" style="display:none;"></div>
+                </div>
+
+                <div class="edit-form-group" style="position:relative;">
+                    <label class="edit-label" data-ar="الحساسية" data-en="Allergies">الحساسية</label>
+                    <div class="tag-editor" id="edit-allergies-container">
+                        <input type="text" id="edit-allergies-input" placeholder="أضف..." data-ar-placeholder="أضف..." data-en-placeholder="Add...">
+                    </div>
+                    <div id="allergies-suggestions" class="autocomplete-suggestions" style="display:none;"></div>
+                </div>
+
+                <div class="edit-form-group" style="position:relative;">
+                    <label class="edit-label" data-ar="الأكل المفضل" data-en="Favorite Food">الأكل المفضل</label>
+                    <div class="tag-editor" id="edit-food-container">
+                        <input type="text" id="edit-food-input" placeholder="أضف..." data-ar-placeholder="أضف..." data-en-placeholder="Add...">
+                    </div>
+                    <div id="food-suggestions" class="autocomplete-suggestions" style="display:none;"></div>
+                </div>
+                
+                <div class="edit-form-group" style="position:relative;">
+                    <label class="edit-label" data-ar="المخاوف (فوبيا)" data-en="Phobias">المخاوف (فوبيا)</label>
+                    <div class="tag-editor" id="edit-phobias-container">
+                        <input type="text" id="edit-phobias-input" placeholder="أضف..." data-ar-placeholder="أضف..." data-en-placeholder="Add...">
+                    </div>
+                    <div id="phobias-suggestions" class="autocomplete-suggestions" style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- Live Preview Panel // لوحة المعاينة الحية -->
+            <div>
+                <label class="edit-label" style="margin-bottom: 12px;" data-ar="معاينة حية" data-en="Live Preview">معاينة حية</label>
+                <div class="profile-preview-section">
+                    <div class="preview-avatar" id="preview-avatar">👤</div>
+                    <div class="preview-name" id="preview-name">الاسم</div>
+                    <div class="preview-emirate" id="preview-emirate">الإمارة</div>
+                    <div class="preview-bio" id="preview-bio"></div>
+                    <div class="preview-badges">
+                        <div class="preview-stat" id="preview-completion">0%</div>
+                        <div class="preview-stat" id="preview-tags">0 <span data-ar="علامات" data-en="Tags">علامات</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="action-btn edit-btn" onclick="saveEdit()" style="margin-top: 20px;">
+          <span data-ar="حفظ التغييرات" data-en="Save Changes">حفظ التغييرات</span>
+        </button>
+    </div>
+  </div>
+
+  <!-- Missing Items Modal // نافذة العناصر المفقودة -->
+  <div id="missing-items-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title" data-ar="خطوات إكمال الملف" data-en="Profile Completion Steps">خطوات إكمال الملف</div>
+            <button class="close-btn" onclick="closeMissingItemsModal()">×</button>
+        </div>
+        <div id="missing-items-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+            <!-- Items will be injected here // سيتم حقن العناصر هنا -->
+        </div>
+        <button class="action-btn edit-btn" onclick="editProfile(); closeMissingItemsModal();">
+            <span data-ar="اذهب للتعديل ✏️" data-en="Go to Edit ✏️">اذهب للتعديل ✏️</span>
+        </button>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal // نافذة تأكيد الحذف -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content" style="text-align: center;">
+        <div class="modal-header" style="justify-content: center; margin-bottom: 10px;">
+            <div class="modal-title" style="color: #ef4444;" data-ar="حذف الحساب" data-en="Delete Account">حذف الحساب</div>
+        </div>
+        <p style="margin-bottom: 24px; color: var(--muted); line-height: 1.5;" data-ar="هل أنت متأكد أنك تريد حذف حسابك؟ سيتم مسح جميع بياناتك ولا يمكن التراجع عن هذا الإجراء." data-en="Are you sure you want to delete your account? All your data will be erased and this action cannot be undone.">
+            هل أنت متأكد أنك تريد حذف حسابك؟ سيتم مسح جميع بياناتك ولا يمكن التراجع عن هذا الإجراء.
+        </p>
+        <div style="display: flex; gap: 12px;">
+            <button class="action-btn" style="background: #ef4444; color: white; margin-top: 0; box-shadow: none;" onclick="confirmDelete()">
+                <span data-ar="نعم، احذف" data-en="Yes, Delete">نعم، احذف</span>
+            </button>
+            <button class="action-btn" style="background: var(--bg); color: var(--ink); border: 2px solid var(--line); margin-top: 0; box-shadow: none;" onclick="closeDeleteModal()">
+                <span data-ar="إلغاء" data-en="Cancel">إلغاء</span>
+            </button>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== STATE // الحالة ====================
+    let currentLanguage = 'ar'; // Current language (Arabic by default) // اللغة الحالية (العربية افتراضيًا)
+
+    // ==================== LANGUAGE TOGGLE // تبديل اللغة ====================
+    function toggleLanguage() {
+      // Toggles between Arabic and English // يبدل بين العربية والإنجليزية
+      const btn = document.getElementById('translateBtn');
+      btn.classList.add('switching'); // Add animation class // إضافة كلاس الحركة
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      const langText = btn.querySelector('span:last-child');
+      langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = currentLanguage;
+      
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      profile.language = currentLanguage;
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+      
+      translatePage(); // Translate all content // ترجمة جميع المحتويات
+      setTimeout(() => btn.classList.remove('switching'), 500);
+    }
+
+    // ==================== PROFILE COMPLETION // إكمال الملف الشخصي ====================
+    function calculateProfileCompletion(profile = null) {
+        // Calculates profile completion percentage // يحسب نسبة إكمال الملف الشخصي
+        if (!profile) profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        
+        let completed = 0;
+        const total = 10; // Total number of completion items // إجمالي عدد عناصر الإكمال
+        
+        // 1. Both names are filled // كلا الاسمين مملوءان
+        if (profile.nameAr && profile.nameAr.length > 2 && profile.nameEn && profile.nameEn.length > 2) completed++;
+        
+        // 2. Emirate is set // الإمارة محددة
+        if (profile.emirate) completed++;
+        
+        // 3. Bio is written // النبذة الشخصية مكتوبة
+        if (profile.bio && profile.bio.length > 10) completed++;
+        
+        // 4. Avatar is set // الصورة الشخصية محددة
+        if (localStorage.getItem('hayyak_user_avatar')) completed++;
+        
+        // 5. Allergies are set (even if "None") // الحساسية محددة (حتى لو "لا يوجد")
+        if (profile.allergies && profile.allergies.length > 0) completed++;
+        
+        // 6. Food preferences are set // تفضيلات الطعام محددة
+        if (profile.foodPreferences && profile.foodPreferences.length > 0) completed++;
+        
+        // 7. Phobias are set (even if "None") // الفوبيا محددة (حتى لو "لا يوجد")
+        if (profile.phobias && profile.phobias.length > 0) completed++;
+        
+        // 8. Friends/Family are added // الأصدقاء/العائلة مضافة
+        const friends = JSON.parse(localStorage.getItem('hayyak_family') || '[]');
+        if (friends.length > 0) completed++;
+        
+        // 9. Health conditions are added // الحالات الصحية مضافة
+        const conditions = JSON.parse(localStorage.getItem('hayyak_health_conditions') || '[]');
+        if (conditions.some(c => c.enabled)) completed++;
+
+        // 10. Interests are set // الاهتمامات محددة
+        if (profile.interests && profile.interests.length > 0) completed++;
+
+        return Math.round((completed / total) * 100);
+    }
+
+    function updateProfileCompletion() {
+        // Updates profile completion UI // يحدث واجهة إكمال الملف الشخصي
+        const percentage = calculateProfileCompletion();
+        const completionFill = document.getElementById('completion-fill');
+        const completionPercentage = document.getElementById('completion-percentage');
+        
+        if (completionFill) {
+            completionFill.style.width = percentage + '%';
+        }
+        if (completionPercentage) {
+            completionPercentage.textContent = percentage + '%';
+        }
+        
+        const previewCompletion = document.getElementById('preview-completion');
+        if (previewCompletion) {
+            previewCompletion.textContent = percentage + '%';
+        }
+    }
+
+    // ==================== RENDER ACHIEVEMENTS // عرض الإنجازات ====================
+    function renderAchievements() {
+        // Renders achievements grid // يعرض شبكة الإنجازات
+        const grid = document.getElementById('achievements-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = achievements.map(achievement => {
+            const isUnlocked = achievement.condition();
+            return `
+                <div class="achievement-badge ${isUnlocked ? 'unlocked' : 'locked'}" 
+                     ${isUnlocked ? `onclick="showAchievementDetails(${achievement.id})"` : 'style="cursor: not-allowed;"'}>
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-name">${currentLanguage === 'ar' ? achievement.arName : achievement.enName}</div>
+                    <div class="achievement-tooltip">${currentLanguage === 'ar' ? achievement.arName : achievement.enName}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ==================== SHOW ACHIEVEMENT DETAILS // عرض تفاصيل الإنجاز ====================
+    function showAchievementDetails(achievementId) {
+        // Shows modal with achievement details // يعرض نافذة بتفاصيل الإنجاز
+        const achievement = achievements.find(a => a.id === achievementId);
+        if (!achievement) return;
+        
+        const isUnlocked = achievement.condition();
+        if (!isUnlocked) return; // Can't open locked achievements // لا يمكن فتح الإنجازات المقفلة
+        
+        const title = currentLanguage === 'ar' ? achievement.arName : achievement.enName;
+        const description = currentLanguage === 'ar' ? achievement.arDesc : achievement.enDesc;
+        
+        let content = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 50px; margin-bottom: 10px;">${achievement.icon}</div>
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: var(--ink);">${title}</div>
+                <div style="font-size: 14px; color: var(--muted); line-height: 1.6;">
+                    ${description}
+                </div>
+                <div style="margin-top: 20px; padding: 12px; background: #e8f5e9; border-radius: 8px; color: #2e7d32; font-size: 12px; font-weight: 500;">
+                    ✓ ${currentLanguage === 'ar' ? 'تم إنجازه!' : 'Unlocked!'}
+                </div>
+            </div>
+        `;
+        
+        // Create and show modal // إنشاء وعرض النافذة
+        let modal = document.getElementById('achievement-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'achievement-modal';
+            modal.className = 'modal';
+            modal.style.display = 'none';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <button class="close-btn" onclick="document.getElementById('achievement-modal').style.display='none'">×</button>
+                    </div>
+                    <div id="achievement-modal-content"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        document.getElementById('achievement-modal-content').innerHTML = content;
+        modal.style.display = 'flex';
+        
+        // Close on background click // إغلاق عند النقر على الخلفية
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        };
+    }
+
+    
+    // ==================== TRANSLATE PAGE // ترجمة الصفحة ====================
+    function translatePage() {
+      // Translates all static content based on selected language // يترجم جميع المحتويات الثابتة بناءً على اللغة المحددة
+      // Translate FOOTER // ترجمة التذييل
+      const footer = document.getElementById('site-footer');
+      if (footer && footer.hasAttribute('data-ar') && footer.hasAttribute('data-en')) {
+        footer.textContent = currentLanguage === 'ar' ? footer.getAttribute('data-ar') : footer.getAttribute('data-en');
+      }
+      
+      // Translate HOME BUTTON // ترجمة زر الرئيسية
+      const homeBtn = document.getElementById('homeBtn');
+      if (homeBtn && homeBtn.hasAttribute('data-ar') && homeBtn.hasAttribute('data-en')) {
+        homeBtn.textContent = currentLanguage === 'ar' ? homeBtn.getAttribute('data-ar') : homeBtn.getAttribute('data-en');
+      }
+      
+      // Translate all elements with data attributes // ترجمة جميع العناصر التي تحتوي على سمات بيانات
+      document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          element.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+        }
+      });
+      
+      // Translate placeholders // ترجمة النصوص النائبة
+      document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? 
+            element.getAttribute('data-ar-placeholder') : 
+            element.getAttribute('data-en-placeholder');
+        }
+      });
+      
+      // Update health status text based on language // تحديث نص الحالة الصحية بناءً على اللغة
+      updateHealthStatusText();
+    }
+    
+    // ==================== UPDATE HEALTH STATUS TEXT // تحديث نص الحالة الصحية ====================
+    function updateHealthStatusText() {
+      const statusElements = document.querySelectorAll('.health-condition-status');
+      statusElements.forEach(element => {
+        if (element.textContent.includes('نشط') || element.textContent.includes('غير نشط')) {
+          element.textContent = currentLanguage === 'ar' ? 
+            (element.textContent.includes('نشط') ? 'نشط' : 'غير نشط') :
+            (element.textContent.includes('نشط') ? 'Active' : 'Inactive');
+        }
+      });
+      
+      // Update privacy status // تحديث حالة الخصوصية
+      const privacyStatus = document.getElementById('privacy-status');
+      if (privacyStatus && privacyStatus.hasAttribute('data-ar') && privacyStatus.hasAttribute('data-en')) {
+        const isEnabled = privacyStatus.textContent.includes('مفعل') || privacyStatus.textContent.includes('Enabled');
+        privacyStatus.textContent = currentLanguage === 'ar' ? 
+          (isEnabled ? 'مفعل' : 'غير مفعل') : 
+          (isEnabled ? 'Enabled' : 'Disabled');
+        privacyStatus.style.color = isEnabled ? '#047857' : '#6b7280';
+      }
+    }
+
+    // ==================== DATA ARRAYS (with emojis) // مصفوفات البيانات (مع الرموز التعبيرية) ====================
+const phobiasData = {
+  ar: [
+    "💪 لا يوجد",
+    "👥 الفوبيا الاجتماعية",
+    "🌑 فوبيا الظلام",
+    "🎤 فوبيا التحدث أمام الجمهور",
+    "🧗 فوبيا المرتفعات",
+ "📦 فوبيا الأماكن المغلقة",
+    "✈️ فوبيا الطيران", 
+    "🐕 فوبيا الكلاب",
+    "🐍 فوبيا الزواحف",
+    "🌊 فوبيا الماء",
+    "⚡ فوبيا الرعد/البرق",
+    "🦠 فوبيا الجراثيم",
+    "🩸 فوبيا الدم",
+    "🏙️ فوبيا الأماكن المفتوحة/المزدحمة",
+    "💀 فوبيا الموت",
+    "🔥 فوبيا النار",
+    "🧼 فوبيا القذارة",
+    "🕳️ فوبيا الثقوب",
+    "⏳ فوبيا الزمن",
+  ],
+  en: [
+    "💪 None",
+    "👥 Fear of Social Situations",
+    "🌑 Fear of Darkness",
+    "🎤 Fear of Public Speaking",
+    "🧗 Fear of Heights",
+    "📦 Fear of Enclosed Spaces",
+    "✈️ Fear of Flying",
+    "🐕 Fear of Dogs",
+    "🐍 Fear of Reptiles",
+    "🌊 Fear of Water",
+    "⚡ Fear of Thunder/Lightning",
+    "🦠 Fear of Germs",
+    "🩸 Fear of Blood",
+    "🏙️ Fear of Open/Crowded Places",
+    "💀 Fear of Death",
+    "🔥 Fear of Fire",
+    "🧼 Fear of Dirt",
+    "🕳️ Fear of Holes",
+    "⏳ Fear of Time",
+  ]
+};
+
+    const interestsData = {
+      ar: [
+        "⚽ كرة القدم", "🏀 كرة السلة", "🎾 التنس", "🏊 السباحة", "🏃 الجري",
+        "🎨 الرسم", "📚 القراءة", "🎮 ألعاب الفيديو", "🎵 الموسيقى", "✈️ السفر",
+        "📸 التصوير", "🍳 الطبخ", "🎣 صيد السمك", "🚴 ركوب الدراجات", "🧘 اليوغا",
+        "🎭 المسرح", "🎤 الغناء", "💃 الرقص", "♟️ الشطرنج", "🧗 التسلق"
+      ],
+      en: [
+        "⚽ Football", "🏀 Basketball", "🎾 Tennis", "🏊 Swimming", "🏃 Running",
+        "🎨 Painting", "📚 Reading", "🎮 Video Games", "🎵 Music", "✈️ Travel",
+        "📸 Photography", "🍳 Cooking", "🎣 Fishing", "🚴 Cycling", "🧘 Yoga",
+        "🎭 Theater", "🎤 Singing", "💃 Dancing", "♟️ Chess", "🧗 Climbing"
+      ]
+    };
+
+    const allergiesData = {
+      ar: [
+        "💪 لا يوجد", "🥛 حليب", "🥚 بيض", "🥜 فول سوداني", "🌰 مكسرات", "🐟 سمك", "🍤 روبيان", 
+        "🌾 قمح", "🫘 صويا", "🌰 لوز", "🌰 كاجو", "🌰 جوز", "🌰 فستق", "🌰 بندق", 
+        "🍓 فراولة", "🍅 طماطم", "🍫 شوكولاتة", "☕ قهوة", "🍯 عسل", "🐄 حليب بقر"
+      ],
+      en: [
+        "💪 None", "🥛 Milk", "🥚 Eggs", "🥜 Peanuts", "🌰 Tree nuts", "🐟 Fish", "🍤 Shrimp", 
+        "🌾 Wheat", "🫘 Soy", "🌰 Almonds", "🌰 Cashews", "🌰 Walnuts", "🌰 Pistachios", "🌰 Hazelnuts", 
+        "🍓 Strawberries", "🍅 Tomatoes", "🍫 Chocolate", "☕ Coffee", "🍯 Honey", "🐄 Cow milk"
+      ]
+    };
+
+    const foodTypesData = {
+      ar: [
+        "🌶️ حار", "🍬 حلو", "🧂 مالح", "🍋 حامض", "🥩 أومامي", "🔥 مشوي", "🍟 مقلي", 
+        "🥗 نباتي", "🌿 نباتي صرف", "🍗 دجاج", "🥩 لحم بقر", "🦞 مأكولات بحرية", 
+        "🇸🇦 أكل عربي", "🇮🇹 أكل إيطالي", "🇨🇳 أكل صيني", "🍔 وجبات سريعة", "🥗 أكل صحي", 
+        "💪 عالي البروتين", "🍏 عضوي", "🌾 خالي من الغلوتين"
+      ],
+      en: [
+        "🌶️ Spicy", "🍬 Sweet", "🧂 Salty", "🍋 Sour", "🥩 Umami", "🔥 Grilled", "🍟 Fried", 
+        "🥗 Vegetarian", "🌿 Vegan", "🍗 Chicken", "🥩 Beef", "🦞 Seafood", 
+        "🇸🇦 Arabic", "🇮🇹 Italian", "🇨🇳 Chinese", "🍔 Fast food", "🥗 Healthy", 
+        "💪 High protein", "🍏 Organic", "🌾 Gluten-free"
+      ]
+    };
+
+
+
+    const avatarContainer = document.getElementById('avatar-container');
+    const avatarUpload = document.getElementById('avatar-upload');
+    const avatarImg = document.getElementById('avatar-img');
+    const avatarEmoji = document.getElementById('avatar-emoji');
+    
+    // Edit State // حالة التعديل
+    let editPhobias = [];
+    let editAllergies = [];
+    let editInterests = [];
+    let editFood = [];
+
+    // ==================== TRANSLATE LIST // ترجمة القائمة ====================
+    function translateList(items, dataObj) {
+        // Translates a list of items based on current language // يترجم قائمة من العناصر بناءً على اللغة الحالية
+        if (!items || !Array.isArray(items)) return [];
+        return items.map(item => {
+            // Try to find in Arabic // محاولة العثور في العربية
+            let index = dataObj.ar.indexOf(item);
+            if (index !== -1) return dataObj[currentLanguage][index];
+            
+            // Try to find in English // محاولة العثور في الإنجليزية
+            index = dataObj.en.indexOf(item);
+            if (index !== -1) return dataObj[currentLanguage][index];
+            
+            // Return original if not found // إرجاع الأصلي إذا لم يتم العثور
+            return item;
+        });
+    }
+
+    // ==================== LOAD PROFILE // تحميل الملف الشخصي ====================
+    function loadProfile() {
+        // Loads user profile from localStorage and updates UI // يحمل الملف الشخصي للمستخدم من التخزين المحلي ويحدث واجهة المستخدم
+        const savedAvatar = localStorage.getItem('hayyak_user_avatar');
+        displayAvatar(savedAvatar);
+
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile'));
+        
+        // Display name based on current language // عرض الاسم بناءً على اللغة الحالية
+        document.getElementById('p-name').innerText = currentLanguage === 'ar' ? (profile.nameAr || profile.name) : (profile.nameEn || profile.name || profile.nameAr);
+        document.getElementById('p-emirate').innerText = profile.emirate || 'غير محدد';
+        document.getElementById('p-dob').innerText = profile.dob ? (currentLanguage === 'ar' ? `تاريخ الميلاد: ${profile.dob}` : `DOB: ${profile.dob}`) : '';
+
+        // Healthy Status // الحالة الصحية
+        const healthyEl = document.getElementById('p-healthy');
+        healthyEl.innerHTML = '';
+        healthyEl.innerHTML = '<div>🥗</div><div data-ar="صحي" data-en="Healthy">صحي</div>';
+        if (profile.isHealthy) {
+            healthyEl.classList.add('active');
+            healthyEl.innerHTML += '<div>✅</div>';
+        } else {
+            healthyEl.classList.add('inactive');
+            healthyEl.innerHTML += '<div>❌</div>';
+        }
+
+        // Lists // القوائم
+        renderTags('p-allergies', translateList(profile.allergies, allergiesData));
+        renderTags('p-interests', translateList(profile.interests, interestsData));
+        renderTags('p-food', translateList(profile.foodPreferences, foodTypesData));
+        renderTags('p-phobias', translateList(profile.phobias, phobiasData));
+
+        // Load Friends // تحميل الأصدقاء
+        const friends = JSON.parse(localStorage.getItem('hayyak_family') || '[]');
+        const friendsList = document.getElementById('friends-list');
+        if (friends.length > 0) {
+            friendsList.innerHTML = friends.map(f => {
+                const relationText = f.relation === 'family' 
+                  ? (currentLanguage === 'ar' ? 'عائلة' : 'Family')
+                  : f.relation === 'friend' 
+                  ? (currentLanguage === 'ar' ? 'صديق' : 'Friend')
+                  : (currentLanguage === 'ar' ? 'آخر' : 'Other');
+                return `
+                <div class="friend-item">
+                    <div class="friend-avatar">👤</div>
+                    <div>
+                        <div style="font-weight:700; font-size:14px;">${f.name}</div>
+                        <div style="font-size:12px; color:var(--muted);">${relationText}</div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        } else {
+            const noneText = currentLanguage === 'ar' ? 'لا يوجد' : 'None';
+            friendsList.innerHTML = `<span style="color:var(--muted); font-size:14px;">${noneText}</span>`;
+        }
+        
+        // Load Health Conditions // تحميل الحالات الصحية
+        loadHealthConditions();
+
+        // Load Saved Plan // تحميل الخطة المحفوظة
+        if (profile.myPlans && profile.myPlans.length > 0) {
+            const plansCard = document.getElementById('saved-plans-card');
+            const plansContainer = document.getElementById('saved-plans-container');
+            plansCard.style.display = 'block';
+            
+            plansContainer.innerHTML = profile.myPlans.map((plan, index) => {
+                const date = new Date(plan.date).toLocaleDateString(currentLanguage === 'ar' ? 'ar-AE' : 'en-US');
+                return `
+                    <div class="plan-item" style="border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--bg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-weight: 700; font-size: 16px; color: var(--primary);">${plan.name}</div>
+                                <div style="font-size: 12px; color: var(--muted);">${date}</div>
+                            </div>
+                            <div>
+                                <button onclick="editPlanName(${index})" style="background: #e0f2fe; color: #0284c7; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; margin-inline-end: 5px;">
+                                    ${currentLanguage === 'ar' ? 'تعديل' : 'Edit'}
+                                </button>
+                                <button onclick="deletePlan(${index})" style="background: #fee2e2; color: #ef4444; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;">
+                                    ${currentLanguage === 'ar' ? 'حذف' : 'Delete'}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="plan-details" style="font-size: 13px; line-height: 1.5;">
+                            ${renderPlanZones(plan.zones)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else {
+            document.getElementById('saved-plans-card').style.display = 'none';
+        }
+    }
+
+    function renderPlanZones(zones) {
+        // Renders plan zones // يعرض مناطق الخطة
+        if (!zones || !Array.isArray(zones)) return '';
+        return zones.map(zone => {
+            const title = currentLanguage === 'ar' ? (zone.title || zone.titleEn) : (zone.titleEn || zone.title);
+            if (!zone.items || zone.items.length === 0) return '';
+            return `
+                <div style="margin-top: 6px;">
+                    <strong style="color: var(--accent);">${title} (${zone.time}):</strong>
+                    <ul style="margin: 4px 0; padding-inline-start: 20px; color: var(--ink);">
+                        ${zone.items.map(item => `<li>${currentLanguage === 'ar' ? (item.nameAr || item.name) : item.name}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function editPlanName(index) {
+        // Edits plan name // يعدل اسم الخطة
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        if (!profile.myPlans || !profile.myPlans[index]) return;
+        
+        const currentName = profile.myPlans[index].name;
+        const newName = prompt(currentLanguage === 'ar' ? 'أدخل الاسم الجديد للخطة:' : 'Enter new plan name:', currentName);
+        
+        if (newName && newName.trim() !== '') {
+            profile.myPlans[index].name = newName.trim();
+            localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+            loadProfile();
+            showNotification(currentLanguage === 'ar' ? 'تم تحديث اسم الخطة' : 'Plan name updated');
+        }
+    }
+
+    function deletePlan(index) {
+        // Deletes a saved plan // يحذف خطة محفوظة
+        if (!confirm(currentLanguage === 'ar' ? 'هل أنت متأكد من حذف هذه الخطة؟' : 'Are you sure you want to delete this plan?')) return;
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        if (profile.myPlans) {
+            profile.myPlans.splice(index, 1);
+            localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+            loadProfile();
+        }
+    }
+
+    function loadHealthConditions() {
+        // Loads health conditions from storage and displays them // يحمل الحالات الصحية من التخزين ويعرضها
+        let healthConditions = JSON.parse(localStorage.getItem('hayyak_health_conditions') || '[]');
+        const container = document.getElementById('health-conditions-list');
+        const emptyMessage = document.getElementById('health-conditions-empty');
+        const privacyInfo = document.getElementById('health-privacy-info');
+        const privacyStatus = document.getElementById('privacy-status');
+        
+        // Ensure conditions have English translations // التأكد من أن الحالات تحتوي على ترجمات إنجليزية
+        healthConditions = healthConditions.map(condition => {
+            if (!condition.nameEn) {
+                condition.nameEn = condition.name;
+            }
+            if (!condition.descriptionEn) {
+                condition.descriptionEn = condition.description;
+            }
+            if (!condition.medicationEn) {
+                condition.medicationEn = condition.medication || '';
+            }
+            if (!condition.medicationTimeEn) {
+                condition.medicationTimeEn = condition.medicationTime || '';
+            }
+            return condition;
+        });
+        
+        // Check privacy settings // التحقق من إعدادات الخصوصية
+        const shareHealthInfo = localStorage.getItem('shareHealthInfo') !== 'false';
+        
+        // Update privacy info // تحديث معلومات الخصوصية
+        if (shareHealthInfo) {
+            privacyInfo.style.display = 'flex';
+            privacyStatus.textContent = currentLanguage === 'ar' ? 'مفعل' : 'Enabled';
+            privacyStatus.style.color = '#047857';
+        } else {
+            privacyStatus.textContent = currentLanguage === 'ar' ? 'غير مفعل' : 'Disabled';
+        }
+        
+        // Filter active conditions // تصفية الحالات النشطة
+        const activeConditions = healthConditions.filter(condition => condition.enabled);
+        
+        if (activeConditions.length === 0) {
+            emptyMessage.style.display = 'block';
+            const emptyText = currentLanguage === 'ar' ? 'لا توجد مشاكل صحية مسجلة' : 'No health issues recorded';
+            container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--muted);" id="health-conditions-empty">${emptyText}</div>`;
+            return;
+        }
+        
+        emptyMessage.style.display = 'none';
+        
+        // Render health conditions // عرض الحالات الصحية
+        container.innerHTML = activeConditions.map(condition => {
+            let color;
+            let statusClass;
+            let statusText;
+            
+            // Translate condition text based on current language // ترجمة نص الحالة بناءً على اللغة الحالية
+            const conditionName = currentLanguage === 'ar' ? condition.name : (condition.nameEn || condition.name);
+            const conditionDesc = currentLanguage === 'ar' ? condition.description : (condition.descriptionEn || condition.description);
+            const conditionMed = condition.medication ? (currentLanguage === 'ar' ? condition.medication : (condition.medicationEn || condition.medication)) : null;
+            const conditionMedTime = condition.medicationTime ? (currentLanguage === 'ar' ? condition.medicationTime : (condition.medicationTimeEn || condition.medicationTime)) : null;
+            
+            // Assign colors based on category // تخصيص الألوان بناءً على الفئة
+            if (condition.category === 'physical') {
+                color = condition.enabled ? '#dcfce7' : '#fee2e2';
+                statusClass = condition.enabled ? 'status-active' : 'status-inactive';
+                statusText = condition.enabled ? (currentLanguage === 'ar' ? 'نشط' : 'Active') : (currentLanguage === 'ar' ? 'غير نشط' : 'Inactive');
+            } else {
+                color = condition.enabled ? '#e0e7ff' : '#f3e8ff';
+                statusClass = condition.enabled ? 'status-active' : 'status-inactive';
+                statusText = condition.enabled ? (currentLanguage === 'ar' ? 'نشط' : 'Active') : (currentLanguage === 'ar' ? 'غير نشط' : 'Inactive');
+            }
+            
+            return `
+                <div class="health-condition-item">
+                    <div class="health-condition-icon" style="background: ${color};">
+                        ${condition.icon}
+                    </div>
+                    <div class="health-condition-info">
+                        <div class="health-condition-name">${conditionName}</div>
+                        <div class="health-condition-desc">${conditionDesc}</div>
+                        ${condition.enabled && conditionMed ? `<div style="font-size: 11px; color: #10b981; margin-top: 2px;">💊 ${conditionMed}${conditionMedTime ? ' - ' + conditionMedTime : ''}</div>` : ''}
+                    </div>
+                    <div class="health-condition-status ${statusClass}">
+                        ${statusText}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Also save to profile if sharing is enabled // أيضًا حفظ في الملف الشخصي إذا كانت المشاركة مفعلة
+        if (shareHealthInfo) {
+            const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+            profile.healthConditions = activeConditions.map(c => ({
+                name: c.name,
+                nameEn: c.nameEn || c.name,
+                description: c.description,
+                descriptionEn: c.descriptionEn || c.description,
+                medication: c.medication,
+                medicationEn: c.medicationEn || c.medication,
+                medicationTime: c.medicationTime,
+                medicationTimeEn: c.medicationTimeEn || c.medicationTime,
+                category: c.category,
+                icon: c.icon,
+                enabled: c.enabled
+            }));
+            localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        }
+    }
+
+    function displayAvatar(base64Image) {
+        // Displays avatar image or fallback // يعرض الصورة الشخصية أو البديل
+        if (base64Image) {
+            avatarImg.src = base64Image;
+            avatarImg.style.display = 'block';
+            avatarEmoji.style.display = 'none';
+        } else {
+            avatarImg.style.display = 'none';
+            avatarEmoji.style.display = 'block';
+        }
+    }
+
+    function renderTags(elementId, items) {
+        // Renders tags for a given element // يعرض علامات لعنصر معين
+        const container = document.getElementById(elementId);
+        if (items && items.length > 0) {
+            container.innerHTML = items.map(item => `<div class="tag">${item}</div>`).join('');
+        } else {
+            container.innerHTML = '<span style="color:var(--muted); font-size:14px;" data-ar="لا يوجد" data-en="None">لا يوجد</span>';
+        }
+    }
+
+    // ==================== LIVE PREVIEW // المعاينة الحية ====================
+    function updateLivePreview() {
+        // Updates live preview in edit modal // يحدث المعاينة الحية في نافذة التعديل
+        const nameAr = document.getElementById('edit-name-ar').value || 'الاسم';
+        const emirate = document.getElementById('edit-emirate').value || '';
+        const bio = document.getElementById('edit-bio').value || '';
+        const avatarPreview = document.getElementById('edit-avatar-preview');
+        
+        document.getElementById('preview-name').textContent = nameAr;
+        document.getElementById('preview-emirate').textContent = emirate;
+        document.getElementById('preview-bio').textContent = bio.substring(0, 100);
+        
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const totalTags = (editPhobias?.length || 0) + (editAllergies?.length || 0) + (editFood?.length || 0) + (editInterests?.length || 0);
+        document.getElementById('preview-tags').innerHTML = `${totalTags} <span data-ar="علامات" data-en="Tags">علامات</span>`;
+        
+        updateProfileCompletion();
+    }
+
+    // ==================== CHANGE AVATAR COLOR // تغيير لون الصورة الرمزية ====================
+    function changeAvatarColor(color) {
+        // Changes avatar color in preview // يغير لون الصورة الرمزية في المعاينة
+        const avatarPreview = document.getElementById('edit-avatar-preview');
+        if (avatarPreview) {
+            avatarPreview.style.background = color;
+            avatarPreview.style.color = '#fff';
+            avatarPreview.textContent = '👤';
+        }
+        
+        // Update selected state in color picker // تحديث حالة التحديد في منتقي الألوان
+        document.querySelectorAll('.avatar-color').forEach(el => el.classList.remove('selected'));
+        event.target?.classList.add('selected');
+        
+        // Store color preference // تخزين تفضيل اللون
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        profile.avatarColor = color;
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+    }
+
+    // ==================== HANDLE EDIT AVATAR UPLOAD // معالجة رفع الصورة في وضع التعديل ====================
+    function handleEditAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Image = e.target.result;
+                const avatarPreview = document.getElementById('edit-avatar-preview');
+                if (avatarPreview) {
+                    avatarPreview.style.backgroundImage = `url('${base64Image}')`;
+                    avatarPreview.style.backgroundSize = 'cover';
+                    avatarPreview.style.backgroundPosition = 'center';
+                    avatarPreview.textContent = '';
+                    avatarPreview.style.borderColor = '#d4af37';
+                }
+                
+                // Store the image temporarily // تخزين الصورة مؤقتًا
+                sessionStorage.setItem('hayyak_temp_avatar', base64Image);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // ==================== EDIT MODAL FUNCTIONS // وظائف نافذة التعديل ====================
+    function editProfile() {
+        // Opens edit modal with current profile data // يفتح نافذة التعديل مع بيانات الملف الشخصي الحالية
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const avatarPreview = document.getElementById('edit-avatar-preview');
+        const biocounter = document.getElementById('bio-counter');
+        
+        // Load form fields // تحميل حقول النموذج
+        document.getElementById('edit-name-ar').value = profile.nameAr || profile.name || '';
+        document.getElementById('edit-name-en').value = profile.nameEn || '';
+        document.getElementById('edit-emirate').value = profile.emirate || 'Dubai';
+        document.getElementById('edit-bio').value = profile.bio || '';
+        document.getElementById('edit-healthy').checked = profile.isHealthy || false;
+        
+        // Update bio counter // تحديث عداد النبذة
+        if (biocounter) {
+            biocounter.textContent = (profile.bio || '').length;
+        }
+        
+        editPhobias = translateList(profile.phobias || [], phobiasData);
+        editAllergies = translateList(profile.allergies || [], allergiesData);
+        editInterests = translateList(profile.interests || [], interestsData);
+        editFood = translateList(profile.foodPreferences || [], foodTypesData);
+        
+        renderEditTags('edit-phobias-container', editPhobias, 'editPhobias');
+        renderEditTags('edit-allergies-container', editAllergies, 'editAllergies');
+        renderEditTags('edit-interests-container', editInterests, 'editInterests');
+        renderEditTags('edit-food-container', editFood, 'editFood');
+        
+        // Display avatar preview // عرض معاينة الصورة الرمزية
+        if (localStorage.getItem('hayyak_user_avatar')) {
+            const avatarData = localStorage.getItem('hayyak_user_avatar');
+            avatarPreview.style.backgroundImage = 'url(' + avatarData + ')';
+            avatarPreview.style.backgroundSize = 'cover';
+            avatarPreview.style.backgroundPosition = 'center';
+            avatarPreview.textContent = '';
+        } else {
+            avatarPreview.style.backgroundImage = 'none';
+            avatarPreview.textContent = '👤';
+        }
+        
+        // Initialize avatar color picker // تهيئة منتقي ألوان الصورة الرمزية
+        const colorPicker = document.getElementById('avatar-color-picker');
+        if (colorPicker && colorPicker.children.length === 0) {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
+            colors.forEach(color => {
+                const colorBtn = document.createElement('div');
+                colorBtn.className = 'avatar-color';
+                colorBtn.style.backgroundColor = color;
+                colorBtn.onclick = function() { changeAvatarColor(color); };
+                if (profile.avatarColor === color) {
+                    colorBtn.classList.add('selected');
+                }
+                colorPicker.appendChild(colorBtn);
+            });
+        }
+        
+        // Add event listeners for input fields // إضافة مستمعي الأحداث لحقول الإدخال
+        const inputFields = ['edit-name-ar', 'edit-name-en', 'edit-emirate', 'edit-bio'];
+        inputFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.removeEventListener('input', updateLivePreview);
+                field.addEventListener('input', function() {
+                    if (fieldId === 'edit-bio') {
+                        const bioLength = field.value.length;
+                        const bioError = document.getElementById('bio-error');
+                        const biocounter = document.getElementById('bio-counter');
+                        if (biocounter) biocounter.textContent = bioLength;
+                        if (bioLength > 150) {
+                            bioError.style.display = 'block';
+                            bioError.textContent = currentLanguage === 'ar' ? 'الحد الأقصى 150 حرف' : 'Maximum 150 characters';
+                        } else {
+                            bioError.style.display = 'none';
+                        }
+                    }
+                    updateLivePreview();
+                });
+            }
+        });
+        
+        // Setup avatar upload listener // إعداد مستمع رفع الصورة الرمزية
+        const editAvatarUpload = document.getElementById('edit-avatar-upload');
+        if (editAvatarUpload) {
+            editAvatarUpload.removeEventListener('change', handleEditAvatarUpload);
+            editAvatarUpload.addEventListener('change', handleEditAvatarUpload);
+        }
+        
+        // Update live preview initially and open modal // تحديث المعاينة الحية أولاً وفتح النافذة
+        updateLivePreview();
+        document.getElementById('edit-modal').classList.add('active');
+    }
+
+    function closeEditModal() {
+        // Closes edit modal // يغلق نافذة التعديل
+        document.getElementById('edit-modal').classList.remove('active');
+    }
+
+    function renderEditTags(containerId, items, arrayName) {
+        // Renders editable tags in modal // يعرض علامات قابلة للتعديل في النافذة
+        const container = document.getElementById(containerId);
+        const input = container.querySelector('input');
+        
+        // Clear existing tags (keep input) // مسح العلامات الموجودة (الاحتفاظ بالإدخال)
+        Array.from(container.querySelectorAll('.edit-tag')).forEach(el => el.remove());
+        
+        items.forEach((item, index) => {
+            const tag = document.createElement('div');
+            tag.className = 'edit-tag';
+            tag.innerHTML = `${item} <span onclick="removeTag('${arrayName}', ${index}, '${containerId}')">×</span>`;
+            container.insertBefore(tag, input);
+        });
+    }
+
+    function removeTag(arrayName, index, containerId) {
+        // Removes a tag from the edit array // يزيل علامة من مصفوفة التعديل
+        if (arrayName === 'editPhobias') editPhobias.splice(index, 1);
+        if (arrayName === 'editAllergies') editAllergies.splice(index, 1);
+        if (arrayName === 'editInterests') editInterests.splice(index, 1);
+        if (arrayName === 'editFood') editFood.splice(index, 1);
+        
+        renderEditTags(containerId, 
+            arrayName === 'editPhobias' ? editPhobias : 
+            arrayName === 'editAllergies' ? editAllergies : 
+            arrayName === 'editInterests' ? editInterests : editFood, 
+            arrayName
+        );
+    }
+
+    // ==================== SETUP AUTOCOMPLETE // إعداد الإكمال التلقائي ====================
+    function setupAutocomplete(inputId, suggestionsId, dataObj, arrayName, containerId) {
+        // Sets up autocomplete for an input field // يضبط الإكمال التلقائي لحقل إدخال
+        const input = document.getElementById(inputId);
+        const suggestions = document.getElementById(suggestionsId);
+        
+        input.addEventListener('input', () => {
+            const val = input.value.toLowerCase();
+            suggestions.innerHTML = '';
+            if (!val) {
+                suggestions.style.display = 'none';
+                return;
+            }
+            
+            // Get all items from both languages to allow searching in any language // الحصول على جميع العناصر من كلتا اللغتين للسماح بالبحث بأي لغة
+            const allItems = [...new Set([...dataObj.ar, ...dataObj.en])];
+            const matches = allItems.filter(item => item.toLowerCase().includes(val));
+            
+            if (matches.length > 0) {
+                suggestions.style.display = 'block';
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion';
+                    div.innerText = match;
+                    div.onclick = () => {
+                        // Store the English version for consistency // تخزين النسخة الإنجليزية للاتساق
+                        let itemToStore = match;
+                        
+                        // If this is an Arabic item, translate it to English for storage // إذا كان هذا عنصرًا عربيًا، ترجمته إلى الإنجليزية للتخزين
+                        const arIndex = dataObj.ar.indexOf(match);
+                        if (arIndex !== -1) {
+                            itemToStore = dataObj.en[arIndex];
+                        } else {
+                            // Check if it's English // التحقق مما إذا كان إنجليزيًا
+                            const enIndex = dataObj.en.indexOf(match);
+                            if (enIndex !== -1) {
+                                itemToStore = dataObj.en[enIndex];
+                            }
+                        }
+                        
+                        // Add to appropriate array without duplicates // إضافة إلى المصفوفة المناسبة بدون تكرار
+                        if (arrayName === 'editPhobias') {
+                            const isNone = itemToStore.includes("None") || itemToStore.includes("لا يوجد");
+                            if (isNone) {
+                                editPhobias = [itemToStore];
+                            } else {
+                                editPhobias = editPhobias.filter(i => !i.includes("None") && !i.includes("لا يوجد"));
+                                if (!editPhobias.includes(itemToStore)) editPhobias.push(itemToStore);
+                            }
+                        }
+                        if (arrayName === 'editAllergies') {
+                            const isNone = itemToStore.includes("None") || itemToStore.includes("لا يوجد");
+                            if (isNone) {
+                                editAllergies = [itemToStore];
+                            } else {
+                                editAllergies = editAllergies.filter(i => !i.includes("None") && !i.includes("لا يوجد"));
+                                if (!editAllergies.includes(itemToStore)) editAllergies.push(itemToStore);
+                            }
+                        }
+                        if (arrayName === 'editInterests') {
+                            const isNone = itemToStore.includes("None") || itemToStore.includes("لا يوجد");
+                            if (isNone) {
+                                editInterests = [itemToStore];
+                            } else {
+                                if (!editInterests.includes(itemToStore)) editInterests.push(itemToStore);
+                            }
+                        }
+                        if (arrayName === 'editFood') {
+                            if (!editFood.includes(itemToStore)) editFood.push(itemToStore);
+                        }
+                        
+                        renderEditTags(containerId, 
+                            arrayName === 'editPhobias' ? editPhobias : 
+                            arrayName === 'editAllergies' ? editAllergies : 
+                            arrayName === 'editInterests' ? editInterests : editFood, 
+                            arrayName
+                        );
+                        input.value = '';
+                        suggestions.style.display = 'none';
+                    };
+                    suggestions.appendChild(div);
+                });
+            } else {
+                suggestions.style.display = 'none';
+            }
+        });
+    }
+
+    // ==================== DELETE ACCOUNT MODAL // نافذة حذف الحساب ====================
+    function openDeleteModal() {
+        // Opens delete confirmation modal // يفتح نافذة تأكيد الحذف
+        document.getElementById('delete-modal').classList.add('active');
+    }
+
+    function closeDeleteModal() {
+        // Closes delete confirmation modal // يغلق نافذة تأكيد الحذف
+        document.getElementById('delete-modal').classList.remove('active');
+    }
+
+    function confirmDelete() {
+        // Deletes account and redirects to index // يحذف الحساب ويعيد التوجيه إلى الصفحة الرئيسية
+        localStorage.clear();
+        window.location.href = '../index.html';
+    }
+
+    // ==================== SAVE EDIT // حفظ التعديلات ====================
+    function saveEdit() {
+        // Saves edited profile to localStorage // يحفظ الملف الشخصي المعدل في التخزين المحلي
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const nameAr = document.getElementById('edit-name-ar').value.trim();
+        const bio = document.getElementById('edit-bio').value.trim();
+        const nameArError = document.getElementById('name-ar-error');
+        const bioError = document.getElementById('bio-error');
+        
+        // Validation // التحقق من الصحة
+        let hasError = false;
+        
+        if (!nameAr || nameAr.length < 2) {
+            nameArError.style.display = 'block';
+            nameArError.textContent = currentLanguage === 'ar' ? 'الاسم يجب أن يكون أكثر من حرفين' : 'Name must be at least 2 characters';
+            hasError = true;
+        } else {
+            nameArError.style.display = 'none';
+        }
+        
+        if (bio.length > 150) {
+            bioError.style.display = 'block';
+            bioError.textContent = currentLanguage === 'ar' ? 'الحد الأقصى 150 حرف' : 'Maximum 150 characters';
+            hasError = true;
+        } else {
+            bioError.style.display = 'none';
+        }
+        
+        if (hasError) return;
+        
+        // Save form data // حفظ بيانات النموذج
+        profile.nameAr = nameAr;
+        profile.nameEn = document.getElementById('edit-name-en').value.trim();
+        profile.name = profile.nameAr;
+        profile.emirate = document.getElementById('edit-emirate').value;
+        profile.bio = bio;
+        profile.isHealthy = document.getElementById('edit-healthy').checked;
+        
+        profile.phobias = editPhobias;
+        profile.allergies = editAllergies;
+        profile.interests = editInterests;
+        profile.foodPreferences = editFood;
+        
+        // Save edited avatar if it's a data URL // حفظ الصورة المعدلة إذا كانت عنوان URL للبيانات
+        const tempAvatar = sessionStorage.getItem('hayyak_temp_avatar');
+        if (tempAvatar) {
+            localStorage.setItem('hayyak_user_avatar', tempAvatar);
+            sessionStorage.removeItem('hayyak_temp_avatar');
+        }
+        
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        
+        // Update UI after save // تحديث واجهة المستخدم بعد الحفظ
+        closeEditModal();
+        loadProfile();
+        updateProfileCompletion();
+        renderAchievements();
+        
+        // Show success notification // عرض إشعار النجاح
+        showNotification(
+            currentLanguage === 'ar' ? 'تم حفظ التغييرات بنجاح' : 'Changes saved successfully',
+            'info'
+        );
+    }
+
+    // ==================== NOTIFICATION // الإشعار ====================
+    function showNotification(message, type = 'info') {
+      // Shows a notification on screen // يعرض إشعارًا على الشاشة
+      // Remove any existing notification // إزالة أي إشعار موجود
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+        existingNotification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => existingNotification.remove(), 300);
+      }
+      
+      // Create new notification element // إنشاء عنصر إشعار جديد
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 18px;">
+          ${type === 'error' ? '⚠️' : (type === 'success' ? '🏆' : '💡')}
+        </div>
+        <div style="flex: 1;">
+          <div style="font-weight: 700; margin-bottom: 4px;">
+            ${currentLanguage === 'ar' ? (type === 'error' ? 'تنبيه' : 'إشعار') : (type === 'error' ? 'Alert' : 'Notification')}
+          </div>
+          <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+        </div>
+        <button onclick="this.parentElement.style.animation='slideOut 0.3s ease'; setTimeout(() => this.parentElement.remove(), 300)" 
+                style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0; width: 24px; height: 24px; display: grid; place-items: center;">
+          ×
+        </button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Remove notification automatically after 5 seconds // إزالة الإشعار تلقائيًا بعد 5 ثوانٍ
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }
+      }, 5000);
+    }
+
+    // ==================== AVATAR CLICK HANDLER // معالج النقر على الصورة الرمزية ====================
+    avatarContainer.addEventListener('click', () => {
+        avatarUpload.click();
+    });
+
+    avatarUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Image = e.target.result;
+                localStorage.setItem('hayyak_user_avatar', base64Image);
+                displayAvatar(base64Image);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // ==================== SHOW MISSING PROFILE ITEMS // عرض عناصر الملف الشخصي المفقودة ====================
+    function showMissingProfileItems() {
+        // Shows modal with missing profile items // يعرض نافذة بعناصر الملف الشخصي المفقودة
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const missingList = document.getElementById('missing-items-list');
+        missingList.innerHTML = '';
+        
+        const items = [];
+        
+        // Name check based on current language // التحقق من الاسم بناءً على اللغة الحالية
+        if (currentLanguage === 'ar') {
+             if (!profile.nameAr || profile.nameAr.length < 3) {
+                 items.push({ ar: 'إضافة الاسم الكامل (بالعربية)', en: 'Add full name (Arabic)' });
+             }
+        } else {
+             if (!profile.nameEn || profile.nameEn.length < 3) {
+                 items.push({ ar: 'إضافة الاسم الكامل (بالإنجليزية)', en: 'Add full name (English)' });
+             }
+        }
+        
+        if (!profile.emirate) items.push({ ar: 'تحديد الإمارة', en: 'Select Emirate' });
+        if (!profile.bio || profile.bio.length < 10) items.push({ ar: 'كتابة نبذة شخصية (10 أحرف على الأقل)', en: 'Write a bio (at least 10 chars)' });
+        if (!localStorage.getItem('hayyak_user_avatar')) items.push({ ar: 'إضافة صورة شخصية', en: 'Add profile picture' });
+        
+        const totalTags = (profile.allergies?.length || 0) + (profile.foodPreferences?.length || 0) + (profile.phobias?.length || 0) + (profile.interests?.length || 0);
+        if (totalTags < 5) items.push({ ar: 'إضافة 5 علامات (حساسية، طعام، مخاوف، اهتمامات)', en: 'Add 5 tags (allergies, food, phobias, interests)' });
+        
+        if (items.length === 0) {
+            missingList.innerHTML = `<div style="text-align:center; color:#10b981; font-weight:bold; padding: 20px;">
+                ${currentLanguage === 'ar' ? '🎉 ملفك الشخصي مكتمل بشكل رائع!' : '🎉 Your profile is perfectly complete!'}
+            </div>`;
+        } else {
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.style.cssText = 'padding: 12px; background: var(--bg); border-radius: 8px; border: 1px solid var(--line); display: flex; align-items: center; gap: 10px; font-size: 14px;';
+                div.innerHTML = `<span style="color: var(--accent); font-weight: bold;">○</span> <span>${currentLanguage === 'ar' ? item.ar : item.en}</span>`;
+                missingList.appendChild(div);
+            });
+        }
+        
+        document.getElementById('missing-items-modal').classList.add('active');
+    }
+
+    function closeMissingItemsModal() {
+        // Closes missing items modal // يغلق نافذة العناصر المفقودة
+        document.getElementById('missing-items-modal').classList.remove('active');
+    }
+
+    // Setup Autocomplete // إعداد الإكمال التلقائي
+    setupAutocomplete('edit-phobias-input', 'phobias-suggestions', phobiasData, 'editPhobias', 'edit-phobias-container');
+    setupAutocomplete('edit-allergies-input', 'allergies-suggestions', allergiesData, 'editAllergies', 'edit-allergies-container');
+    setupAutocomplete('edit-interests-input', 'interests-suggestions', interestsData, 'editInterests', 'edit-interests-container');
+    setupAutocomplete('edit-food-input', 'food-suggestions', foodTypesData, 'editFood', 'edit-food-container');
+
+    // Listen for changes in health conditions from other pages // الاستماع للتغييرات في الحالات الصحية من الصفحات الأخرى
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'hayyak_health_conditions' || e.key === 'shareHealthInfo') {
+            loadHealthConditions();
+        }
+    });
+
+    // ==================== INITIALIZATION // التهيئة ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Runs when DOM is fully loaded // يعمل عند تحميل DOM بالكامل
+      // Check if user profile exists (already done by redirect script at top) // التحقق من وجود الملف الشخصي (تم بالفعل بواسطة سكريبت إعادة التوجيه في الأعلى)
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      
+      // Dark Mode Toggle // مفتاح الوضع الليلي
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      if (userProfile.theme === 'dark') darkModeToggle.checked = true;
+
+      darkModeToggle.addEventListener('change', function() {
+        const newTheme = this.checked ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        userProfile.theme = newTheme;
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(userProfile));
+        if (newTheme === 'dark') localStorage.setItem('hayyak_has_used_dark_mode', 'true');
+        updateProfileCompletion();
+        renderAchievements();
+      });
+
+      // Sound Toggle // مفتاح الصوت
+      const soundToggle = document.getElementById('sound-toggle');
+      if (userProfile.soundEnabled !== false) soundToggle.checked = true;
+
+      soundToggle.addEventListener('change', function() {
+        const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        userProfile.soundEnabled = this.checked;
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(userProfile));
+      });
+
+      // Apply profile language // تطبيق لغة الملف الشخصي
+      if (userProfile.language && userProfile.language !== currentLanguage) {
+        currentLanguage = userProfile.language;
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+        const btn = document.getElementById('translateBtn');
+        if (btn) btn.querySelector('span:last-child').textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+        translatePage();
+      }
+      
+      // Translate button event // حدث زر الترجمة
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+
+      // Apply Theme // تطبيق السمة
+      if (userProfile.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+
+      // --- FIX: Set intervals FIRST to guarantee they run even if initial calls fail ---
+      // Update profile completion and achievements every second // تحديث إكمال الملف الشخصي والإنجازات كل ثانية
+      setInterval(function() {
+        updateProfileCompletion();
+        renderAchievements();
+      }, 1000);
+      
+      // Refresh health conditions every 2 seconds (for real-time updates) // تحديث الحالات الصحية كل ثانيتين (للتحديثات الفورية)
+      setInterval(loadHealthConditions, 2000);
+
+      // --- Now load initial data and call UI updates --- // الآن تحميل البيانات الأولية واستدعاء تحديثات واجهة المستخدم
+      try {
+        loadProfile();
+        updateProfileCompletion();
+        renderAchievements();
+        
+        // Also call them again after a tiny delay to ensure DOM is fully processed // أيضًا استدعاؤها مرة أخرى بعد تأخير بسيط لضمان معالجة DOM بالكامل
+        setTimeout(function() {
+          updateProfileCompletion();
+          renderAchievements();
+        }, 0);
+      } catch (e) {
+        console.error('Error during initial profile load:', e);
+        // Even if an error occurs, the intervals will handle updates later // حتى في حالة حدوث خطأ، ستتعامل الفواصل الزمنية مع التحديثات لاحقًا
+      }
+      
+      // Add modal close event listeners // إضافة مستمعي إغلاق النوافذ المنبثقة
+      const editModal = document.getElementById('edit-modal');
+      if (editModal) {
+        editModal.addEventListener('click', function(e) {
+          if (e.target === editModal) {
+            closeEditModal();
+          }
+        });
+      }
+      
+      const deleteModal = document.getElementById('delete-modal');
+      if (deleteModal) {
+        deleteModal.addEventListener('click', function(e) {
+          if (e.target === deleteModal) {
+            closeDeleteModal();
+          }
+        });
+      }
+
+      const missingItemsModal = document.getElementById('missing-items-modal');
+      if (missingItemsModal) {
+        missingItemsModal.addEventListener('click', function(e) {
+          if (e.target === missingItemsModal) {
+            closeMissingItemsModal();
+          }
+        });
+      }
+
+      // Search functionality // وظيفة البحث
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const query = this.value.toLowerCase().trim();
+          const cards = document.querySelectorAll('.shell .card');
+          
+          cards.forEach(card => {
+            // Skip the profile header card (first one) to keep context // تخطي بطاقة رأس الملف الشخصي (الأولى) للحفاظ على السياق
+            if (card.querySelector('.profile-header')) return;
+            
+            const text = card.textContent.toLowerCase();
+            if (text.includes(query)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+      
+      // Force repaint to ensure sections are visible // فرض إعادة الرسم لضمان ظهور الأقسام
+      setTimeout(function() {
+        updateProfileCompletion();
+        renderAchievements();
+      }, 100);
+    });
+  </script>
+
+  <!-- User Management Module -->
+  <script src="JS/User-management.js"></script>
+
+  <!-- Achievements System -->
+  <script src="JS/Achievements.js"></script>
+
+  <!-- Profile Enhancement (Friends & Privacy) -->
+  <script src="JS/Profile-enhancement.js"></script>
+     
+</body>
+</html>

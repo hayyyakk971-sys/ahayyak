@@ -1,0 +1,1079 @@
+<!DOCTYPE html> <!-- Defines the document type as HTML5 -->
+<html lang="ar" dir="rtl"> <!-- The root element, specifying Arabic language and right-to-left direction -->
+<head>
+  <meta charset="utf-8" /> <!-- Sets the character encoding to UTF-8, which supports Arabic characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Configures the viewport for responsive design on mobile devices -->
+  <title>HAYYAK | Environment Monitor</title> <!-- The title that appears in the browser tab -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg"> <!-- Sets the small icon (favicon) for the browser tab. This is my custom logo. // يضبط الأيقونة الصغيرة (favicon) لعلامة تبويب المتصفح. هذا هو شعاري المخصص. -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" /> <!-- Imports the 'Cairo' font from Google Fonts -->
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    /* Afeesh family (local) */
+    @font-face { /* Defines a custom font to be used on the page // يحدد خطًا مخصصًا لاستخدامه في الصفحة */
+      font-family: 'Afeesh'; /* Assigns a name to this font variant // يعين اسمًا لمتغير الخط هذا */
+      src: url('./afeesh/Afeesh-Aadi.woff2') format('woff2'), /* Specifies the font file location and format (modern) // يحدد موقع ملف الخط وتنسيقه (حديث) */
+           url('./afeesh/Afeesh-Aadi.woff') format('woff'), /* Fallback format // تنسيق احتياطي */
+           url('./afeesh/Afeesh-Aadi.ttf') format('truetype'); /* Older fallback format // تنسيق احتياطي قديم */
+      font-weight: 400; font-style: normal; font-display: swap; /* Sets font properties: normal weight, normal style, and how it loads // يحدد خصائص الخط: وزن عادي، نمط عادي، وكيفية تحميله */
+    }
+    @font-face { /* Defines the bold version of the 'Afeesh' font // يحدد النسخة العريضة من خط 'Afeesh' */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('./afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('./afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Defines the semi-bold version // يحدد النسخة شبه العريضة */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('./afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('./afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Defines the light version // يحدد النسخة الخفيفة */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('./afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('./afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    /* ==================== GENERAL STYLES & THEME // الأنماط العامة والسمة ==================== */
+    /* Universal selector: Resets default browser margins and padding for all elements. `box-sizing: border-box` is a crucial rule that makes layout math more intuitive by including padding and border in the element's total width and height. */
+    /* المحدد العام: يعيد تعيين هوامش وحشوات المتصفح الافتراضية لجميع العناصر. `box-sizing: border-box` يجعل حسابات التخطيط أكثر سهولة عن طريق تضمين الحشوة والإطار في العرض والارتفاع الكلي للعنصر. */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Body styles: Sets up a flex container to manage the main layout, especially for keeping the footer at the bottom on short pages (`min-height: 100vh`). The default font is 'Cairo' for a modern look. */
+    /* أنماط الـ body: يتم إعداده كحاوية flex لإدارة التخطيط الرئيسي بسهولة، خاصة للحفاظ على التذييل في الأسفل في الصفحات القصيرة (`min-height: 100vh`). الخط الافتراضي هو "Cairo" لمظهر عصري. */
+    body {
+      font-family: 'Cairo', sans-serif; /* Sets the default font for the page, ensuring consistency. // يضبط الخط الافتراضي للصفحة، مما يضمن الاتساق. */
+      background: var(--bg); /* Uses a CSS variable for the background color (for theming) // يستخدم متغير CSS للون الخلفية (للسماح بالثيمات) */
+      color: var(--ink); /* Uses a CSS variable for the text color // يستخدم متغير CSS للون النص */
+      display: flex; /* Enables flexbox layout // يفعّل تخطيط flexbox */
+      flex-direction: column; /* Stacks children vertically // يكدس العناصر الفرعية عموديًا */
+      min-height: 100vh; /* Ensures the body takes at least the full height of the viewport // يضمن أن يأخذ الجسم على الأقل الارتفاع الكامل لمنفذ العرض */
+    }
+    /* Dark theme variables: Overrides the default colors defined in :root when the `data-theme="dark"` attribute is present on the html element. This is an efficient way to manage themes. */
+    /* متغيرات السمة الداكنة: تتجاوز الألوان الافتراضية المعرفة في :root عندما يكون `data-theme="dark"` موجودًا على عنصر html. هذه طريقة فعالة لإدارة السمات. */
+    [data-theme="dark"] { /* Defines colors for the dark theme // يحدد الألوان للسمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333; /* CSS variables for dark mode colors // متغيرات CSS لألوان الوضع الداكن */
+    }
+    .container { max-width: 480px; margin: 0 auto; padding: 16px; flex: 1; } /* A centered container for the main content, ensuring it's readable on large screens. // حاوية مركزية للمحتوى الرئيسي، مما يضمن سهولة القراءة على الشاشات الكبيرة. */
+    .card {
+      background: white; border: 2px solid #0f0f10; border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 0 #0f0f10; /* Card styles // أنماط البطاقة */
+    }
+    [data-theme="dark"] .card { /* Overrides card styles for dark mode // يتجاوز أنماط البطاقة للوضع الداكن */
+      background: #1e1e1e; border-color: #333; box-shadow: 0 2px 0 #333;
+    }
+    
+    /* ==================== HEADER & NAVIGATION // الترويسة والتنقل ==================== */
+    .header {
+      background: #16243d; /* Header background color // لون خلفية الترويسة */
+      color: white; /* Header text color // لون نص الترويسة */
+      padding: 20px; /* Inner spacing // تباعد داخلي */
+      text-align: center; /* Center-aligns text // محاذاة النص في الوسط */
+      position: relative; /* Needed for positioning child elements like buttons // مطلوب لتحديد موضع العناصر الفرعية مثل الأزرار */
+    }
+    .logo {
+      font-family: 'Afeesh', sans-serif; /* Uses the custom 'Afeesh' font // يستخدم خط 'Afeesh' المخصص */
+      font-size: 48px; /* Large font size for the logo // حجم خط كبير للشعار */
+      font-weight: 700; /* Bold weight // وزن عريض */
+      color: #d4af37; /* Gold color for the logo text // لون ذهبي لنص الشعار */
+      letter-spacing: 2px; /* Adds space between letters // يضيف مسافة بين الحروف */
+    }
+    .sub { color: #94a3b8; font-size: 16px; } /* Subtitle style // نمط العنوان الفرعي */
+    /* Home button: Positioned absolutely within the relatively-positioned header for precise placement. `transform: translateY(-50%)` is a classic technique for perfect vertical centering. */
+    /* زر الصفحة الرئيسية: موضوع بشكل مطلق داخل الترويسة الموضوعة بشكل نسبي لوضعه بدقة. `transform: translateY(-50%)` هي تقنية كلاسيكية لتحقيق التوسيط العمودي المثالي. */
+    .home-btn { /* Style for the 'Back' button // نمط زر 'الرجوع' */
+      position: absolute; /* Positions the button relative to the header // يحدد موضع الزر بالنسبة للترويسة */
+      top: 50%; /* Vertically centers the button // يوسط الزر عموديًا */
+      left: 20px; /* Positions from the left // يحدد الموضع من اليسار */
+      transform: translateY(-50%); /* Fine-tunes vertical centering // يضبط التوسيط العمودي بدقة */
+      color: #d4af37;
+      text-decoration: none; /* Removes underline from the link // يزيل التسطير من الرابط */
+      font-size: 15px;
+      background-color: #0f0f10;
+      padding: 9px 12px;
+      border-radius: 999px; /* Creates a pill shape // ينشئ شكل حبة دواء */
+      transition: all 0.3s ease; /* Smooth transition for hover effects // انتقال سلس لتأثيرات التمرير */
+      border: 2px solid transparent;
+      font-weight: 600;
+    }
+    .home-btn:hover { /* Styles for when the mouse is over the button // أنماط عند مرور الماوس فوق الزر */
+      background-color: #d4af37;
+      color: #0f0f10;
+      transform: translateY(-50%) scale(1.05); /* Slight zoom effect // تأثير تكبير طفيف */
+      border-color: white;
+    }
+    /* Translate button: Also positioned absolutely, but on the opposite side of the header. */
+    /* زر الترجمة: موضوع أيضًا بشكل مطلق، ولكن على الجانب الآخر من الترويسة. */
+    .translate-btn { /* Style for the language toggle button // نمط زر تبديل اللغة */
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: #d4af37;
+      border: 2px solid white;
+      border-radius: 20px;
+      color: #16243d;
+      padding: 6px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer; /* Changes cursor to a pointer on hover // يغير المؤشر إلى مؤشر عند التمرير */
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(212,175,55,0.3);
+    }
+    #themeBtn { /* Specific style for a theme button if it exists // نمط محدد لزر السمة إذا كان موجودًا */
+      right: auto; left: 20px;
+    }
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05);
+      background: #f7ef8a;
+    }
+    .translate-btn .icon { font-size: 16px; } /* Style for the globe icon // نمط أيقونة الكرة الأرضية */
+    
+    /* ==================== FOOTER // التذييل ==================== */
+    .footer {
+      background: #16243d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    /* ==================== SEARCH BAR & AUTOCOMPLETE // شريط البحث والإكمال التلقائي ==================== */
+    .bottom-search{padding:12px 0 18px; position:relative}
+    .search{display:grid; grid-template-columns:28px 1fr; align-items:center; gap:8px; border:2px solid var(--line); border-radius:999px; padding:10px 12px; background:var(--card)}
+    .glass{text-align:center}
+    .search input{appearance:none; border:0; outline:0; background:transparent; width:100%; font:inherit; color:var(--ink)}
+    .search input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
+    .search input::placeholder{color:var(--muted)}
+
+    .autocomplete-list{display:none; position:absolute; top:100%; left:0; right:0; background:var(--card); border:2px solid var(--line); border-top:0; border-radius:0 0 var(--radius) var(--radius); max-height:200px; overflow-y:auto; z-index:100}
+    .autocomplete-list.active{display:block}
+    .autocomplete-item{padding:12px; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.2s}
+    .autocomplete-item:hover{background:#f5f5f7}
+    [data-theme="dark"] .autocomplete-item:hover{background:#2a2a2a;}
+    .autocomplete-item:last-child{border-bottom:none}
+    .autocomplete-item-name{font-weight:700; color:var(--ink)}
+    .autocomplete-item-desc{font-size:12px; color:var(--muted); margin-top:2px}
+    /* ==================== PAGE CONTENT // محتوى الصفحة ==================== */
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 16px 0 8px;
+      color: #16243d;
+    }
+    [data-theme="dark"] .page-title { color: #d4af37; } /* Dark mode page title color // لون عنوان الصفحة في الوضع الداكن */
+    .page-desc {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+    [data-theme="dark"] .page-desc { color: #a0a0a0; }
+    .refresh-btn {
+      background: #16243d;
+      color: white;
+      border: 2px solid #d4af37;
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .refresh-btn:hover {
+      background: #d4af37;
+      color: #16243d;
+    }
+    .live-badge { /* The 'Live Data' badge // شارة 'بيانات حية' */
+      background: #10b981; /* Green background // خلفية خضراء */
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      animation: pulse 2s infinite; /* Applies a pulsing animation // يطبق حركة نبض */
+    }
+    @keyframes pulse { /* Defines the pulse animation // يحدد حركة النبض */
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .warning-banner { /* Style for the red/orange warning banners // نمط لافتات التحذير الحمراء/البرتقالية */
+      display: none; /* Hidden by default, shown by JavaScript // مخفي افتراضيًا، يظهر بواسطة جافا سكريبت */
+      background: #ef4444; /* Red background for warnings // خلفية حمراء للتحذيرات */
+      color: white;
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      border: 2px solid #7f1d1d;
+    }
+    .current-location { /* This card displays the user's current location, styled with a gradient for emphasis. // هذه البطاقة تعرض موقع المستخدم الحالي، مصممة بتدرج لوني للتأكيد. */
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd); /* Light blue gradient // تدرج أزرق فاتح */
+      border: 2px solid #0ea5e9;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    [data-theme="dark"] .current-location {
+      background: #1e293b; border-color: #0ea5e9;
+    }
+    .location-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #16243d;
+    }
+    [data-theme="dark"] .location-name { color: #e0f2fe; }
+    .location-addr {
+      color: #6b7280;
+      margin: 8px 0;
+    }
+    .update-time {
+      color: #64748b;
+      font-size: 12px;
+    }
+    
+    /* ==================== AQI (Air Quality Index) CARD // بطاقة مؤشر جودة الهواء ==================== */
+    .aqi-container { cursor: pointer; margin-bottom: 24px; } /* Makes the card look clickable // يجعل البطاقة تبدو قابلة للنقر */
+    .aqi-header {
+      display: flex;
+      justify-content: space-between; /* Pushes title and value to opposite ends // يدفع العنوان والقيمة إلى طرفي نقيض */
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .aqi-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: #16243d;
+    }
+    [data-theme="dark"] .aqi-title { color: #ffffff; }
+    .aqi-value { /* The colored badge showing the AQI number // الشارة الملونة التي تظهر رقم AQI */
+      font-weight: 700;
+      font-size: 28px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      color: white;
+    }
+    .aqi-good { background: #10b981; } /* Green for good // أخضر للجيد */
+    .aqi-moderate { background: #f59e0b; } /* Yellow for moderate // أصفر للمتوسط */
+    .aqi-poor { background: #ef4444; } /* Red for poor // أحمر للسيء */
+    .aqi-hazardous { background: #7c2d12; } /* Dark red for hazardous // أحمر داكن للخطير */
+    .aqi-scale { /* The colored bar representing the AQI scale // الشريط الملون الذي يمثل مقياس AQI */
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .aqi-segment { flex: 1; } /* Each segment of the scale takes equal width // يأخذ كل جزء من المقياس عرضًا متساويًا */
+    .segment-good { background: #10b981; }
+    .segment-moderate { background: #f59e0b; }
+    .segment-poor { background: #ef4444; }
+    .segment-hazardous { background: #7c2d12; }
+    .aqi-desc {
+      font-size: 14px;
+      text-align: center;
+      color: #6b7280;
+    }
+    
+    /* ==================== MEASUREMENT GRID (Temp & Humidity) // شبكة القياسات (الحرارة والرطوبة) ==================== */
+    .measurement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Creates a 2-column grid // ينشئ شبكة من عمودين */
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .measurement-card {
+      background: white;
+      border: 2px solid #0f0f10;
+      border-radius: 14px;
+      padding: 16px;
+    }
+    [data-theme="dark"] .measurement-card {
+      background: #1e1e1e; border-color: #333;
+    }
+    .measurement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .measurement-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .measurement-value {
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .unit {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .status { /* The small badge (e.g., 'Cold', 'Comfortable') // الشارة الصغيرة (مثل "بارد"، "مريح") */
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+    .status-good { background: #dcfce7; color: #047857; }
+    .status-moderate { background: #fef3c7; color: #92400e; }
+    .status-poor { background: #fee2e2; color: #b91c1c; }
+    
+    /* ==================== OVERCROWDING CARD // بطاقة الازدحام ==================== */
+    .overcrowding-card {
+      background: white;
+      border: 2px solid #0f0f10;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 0 #0f0f10;
+    }
+    [data-theme="dark"] .overcrowding-card {
+      background: #1e1e1e; border-color: #333; box-shadow: 0 2px 0 #333;
+    }
+    .overcrowding-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .overcrowding-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: #16243d;
+    }
+    [data-theme="dark"] .overcrowding-title { color: #ffffff; }
+    .overcrowding-level { /* The colored badge for the level (Low, High, etc.) // الشارة الملونة للمستوى (منخفض، مرتفع، إلخ) */
+      font-weight: 700;
+      font-size: 24px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      color: white;
+    }
+    .ov-level-low { background: #10b981; }
+    .ov-level-moderate { background: #f59e0b; }
+    .ov-level-high { background: #ef4444; }
+    .ov-level-critical { background: #7c2d12; }
+    .overcrowding-bar { /* The progress bar container // حاوية شريط التقدم */
+      width: 100%;
+      height: 12px;
+      background: #f5f5f7;
+      border-radius: 6px;
+      margin: 12px 0;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+    }
+    .overcrowding-fill { /* The colored fill inside the progress bar // التعبئة الملونة داخل شريط التقدم */
+      height: 100%;
+      width: 0%; /* Width is set by JavaScript // يتم تعيين العرض بواسطة جافا سكريبت */
+      background: #16243d;
+      transition: width 0.3s; /* Smooth animation when width changes // حركة سلسة عند تغيير العرض */
+    }
+    .overcrowding-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #16248b;
+    }
+    
+    /* ==================== POLLEN SECTION // قسم حبوب اللقاح ==================== */
+    .pollen-section { margin-bottom: 24px; } /* Bottom margin for spacing // هامش سفلي للتباعد */
+    .section-title {
+      font-weight: 700; /* Bold font weight // وزن خط عريض */
+      font-size: 18px; /* Font size // حجم الخط */
+      margin-bottom: 14px; /* Bottom margin // هامش سفلي */
+      color: #16243d; /* Text color // لون النص */
+    }
+    [data-theme="dark"] .section-title { color: #d4af37; } /* Dark mode color // لون الوضع الداكن */
+    .pollen-grid {
+      display: grid; /* Use grid layout // استخدام تخطيط الشبكة */
+      grid-template-columns: repeat(3, 1fr); /* 3 equal columns // 3 أعمدة متساوية */
+      gap: 12px; /* Gap between grid items // فجوة بين عناصر الشبكة */
+    }
+    .pollen-item {
+      text-align: center; /* Center align text // محاذاة النص في الوسط */
+      padding: 12px; /* Padding inside item // حشوة داخل العنصر */
+      border: 2px solid #0f0f10; /* Border style // نمط الحدود */
+      border-radius: 14px; /* Rounded corners // زوايا دائرية */
+      background: white; /* Background color // لون الخلفية */
+    }
+    [data-theme="dark"] .pollen-item {
+      background: #1e1e1e; border-color: #333; /* Dark mode styles // أنماط الوضع الداكن */
+    }
+    .pollen-name {
+      font-weight: 700; /* Bold font // خط عريض */
+      font-size: 14px; /* Font size // حجم الخط */
+      margin-bottom: 8px; /* Bottom margin // هامش سفلي */
+    }
+    .pollen-level {
+      font-size: 24px; /* Large font size // حجم خط كبير */
+      font-weight: 700; /* Bold font // خط عريض */
+      margin-bottom: 4px; /* Bottom margin // هامش سفلي */
+    }
+    .pollen-level.level-low { color: #10b981; } /* Green for low level // أخضر للمستوى المنخفض */
+    .pollen-level.level-medium { color: #f59e0b; } /* Yellow for medium level // أصفر للمستوى المتوسط */
+    .pollen-level.level-high { color: #ef4444; } /* Red for high level // أحمر للمستوى المرتفع */
+    
+    /* ==================== RECOMMENDATIONS CARD // بطاقة التوصيات ==================== */
+    .recommendations {
+      background: #f0f9ff; /* Light blue background // خلفية زرقاء فاتحة */
+      border: 2px solid #0ea5e9; /* Blue border // حدود زرقاء */
+      border-radius: 14px; /* Rounded corners // زوايا دائرية */
+      padding: 16px; /* Padding // حشوة */
+    }
+    [data-theme="dark"] .recommendations {
+      background: #0c4a6e; border-color: #0ea5e9; /* Dark mode styles // أنماط الوضع الداكن */
+    }
+    .rec-title {
+      font-weight: 700; /* Bold font // خط عريض */
+      font-size: 16px; /* Font size // حجم الخط */
+      color: #0369a1; /* Text color // لون النص */
+      margin-bottom: 8px; /* Bottom margin // هامش سفلي */
+    }
+    .rec-list {
+      list-style: none; /* Removes default bullet points // يزيل النقاط الافتراضية */
+      padding-right: 0; /* Removes default padding for Arabic // يزيل الحشو الافتراضي للعربية */
+    }
+    .rec-list li {
+      margin-bottom: 6px; /* Bottom margin for items // هامش سفلي للعناصر */
+      font-size: 14px; /* Font size // حجم الخط */
+      color: #0c4a6e; /* Text color // لون النص */
+    }
+    [data-theme="dark"] .rec-list li { color: #e0f2fe; } /* Dark mode text color // لون النص في الوضع الداكن */
+
+    /* ==================== ERROR TOAST NOTIFICATION // إشعار الخطأ ==================== */
+    .error-toast {
+      position: fixed; /* Stays in the same place even when scrolling // يبقى في نفس المكان حتى عند التمرير */
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px); /* Centers horizontally and hides above screen // يوسط أفقيًا ويخفي فوق الشاشة */
+      background: #ef4444;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0; /* Hidden by default // مخفي افتراضيًا */
+      pointer-events: none; /* Not clickable when hidden // غير قابل للنقر عند إخفائه */
+      transition: all 0.3s ease; /* Smooth transition for showing/hiding // انتقال سلس للإظهار/الإخفاء */
+      z-index: 2100; /* Appears on top of other content // يظهر فوق المحتوى الآخر */
+    }
+    .error-toast.show { /* Class added by JavaScript to show the toast // فئة تضاف بواسطة جافا سكريبت لإظهار الإشعار */
+      transform: translateX(-50%) translateY(0); /* Moves it into view // يحركه إلى العرض */
+      opacity: 1; /* Makes it visible // يجعله مرئيًا */
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== HEADER SECTION // قسم الترويسة ==================== -->
+  <div class="header"> <!-- Header container // حاوية الترويسة -->
+    <!-- Navigation button to return to the home page. // زر التنقل للعودة إلى الصفحة الرئيسية. -->
+    <a href="home.html" class="home-btn" data-ar="رجوع" data-en="Back">رجوع</a> <!-- Back button // زر الرجوع -->
+    <div class="logo">حــــــيــــاك</div> <!-- Logo text // نص الشعار -->
+    <div class="sub">HAYYAK</div> <!-- Subtitle // العنوان الفرعي -->
+    <!-- Button to toggle between Arabic and English. // زر للتبديل بين العربية والإنجليزية. -->
+    <button class="translate-btn" id="translateBtn"> <!-- Translate button // زر الترجمة -->
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span data-ar="English" data-en="العربية">English</span> <!-- Button text // نص الزر -->
+    </button>
+  </div>
+  <div id="error-toast" class="error-toast"></div> <!-- Placeholder for error notifications // عنصر نائب لإشعارات الخطأ -->
+
+  <!-- ==================== MAIN CONTENT CONTAINER // حاوية المحتوى الرئيسي ==================== -->
+  <div class="container"> <!-- Main container // الحاوية الرئيسية -->
+    <h1 class="page-title" data-ar="محطة قياس جودة المكان" data-en="Place Quality Measurement Station">محطة قياس جودة المكان</h1> <!-- Page title // عنوان الصفحة -->
+    <p class="page-desc" data-ar="مراقبة جودة الهواء وحبوب اللقاح ومستوى الازدحام" data-en="Monitoring air quality, pollen and overcrowding level">مراقبة جودة الهواء وحبوب اللقاح ومستوى الازدحام</p> <!-- Page description // وصف الصفحة -->
+
+    <!-- ==================== REFRESH CONTROLS // عناصر التحكم بالتحديث ==================== -->
+    <div style="text-align: center;"> <!-- Center align controls // محاذاة عناصر التحكم في الوسط -->
+      <!-- Button to manually trigger data fetch. // زر لتشغيل جلب البيانات يدويًا. -->
+      <button class="refresh-btn" onclick="fetchRealData()" id="refreshBtn">
+        🔄 <span data-ar="تحديث البيانات" data-en="Refresh Data">تحديث البيانات</span>
+        <span class="live-badge" data-ar="بيانات حية" data-en="Live Data">بيانات حية</span>
+      </button>
+      <div id="dataSourceDebug" style="font-size: 12px; font-weight: bold; margin-top: 5px; direction: ltr;"></div>
+    </div>
+
+    <!-- ==================== WARNING BANNERS // لافتات التحذير ==================== -->
+    <!-- These banners are hidden by default and shown via JS if conditions are met. // هذه اللافتات مخفية افتراضيًا وتظهر عبر JS إذا تم استيفاء الشروط. -->
+    <div id="airQualityWarning" class="warning-banner" data-ar="🔴 تحذير: جودة الهواء سيئة!" data-en="🔴 Warning: Air quality is poor!"> <!-- Air quality warning // تحذير جودة الهواء -->
+      🔴 تحذير: جودة الهواء سيئة!
+    </div>
+
+    <div id="overcrowdingWarning" class="warning-banner" style="background: #f97316; display: none;" data-ar="⚠️ تحذير: المكان مزدحم جداً!" data-en="⚠️ Warning: This place is very crowded!"> <!-- Overcrowding warning // تحذير الازدحام -->
+      ⚠️ تحذير: المكان مزدحم جداً!
+    </div>
+
+    <!-- ==================== LOCATION INFO // معلومات الموقع ==================== -->
+    <div class="current-location"> <!-- Location card // بطاقة الموقع -->
+      <div class="location-name" data-ar="موقعك الحالي" data-en="Your Current Location">موقعك الحالي</div> <!-- Location title // عنوان الموقع -->
+      <div class="location-addr" id="locationDisplay">الرياض، حي العليا</div> <!-- Location name is updated by JS // يتم تحديث اسم الموقع بواسطة JS -->
+      <div class="update-time"> <!-- Update time container // حاوية وقت التحديث -->
+        🕒 <span data-ar="آخر تحديث:" data-en="Last update:">آخر تحديث:</span> <!-- Label // التسمية -->
+        <span id="lastUpdate">--:--</span> <!-- Last update time is updated by JS // يتم تحديث وقت آخر تحديث بواسطة JS -->
+      </div>
+    </div>
+
+    <!-- ==================== AIR QUALITY CARD // بطاقة جودة الهواء ==================== -->
+    <div class="card aqi-container"> <!-- AQI card // بطاقة AQI -->
+      <div class="aqi-header"> <!-- Header // الترويسة -->
+        <div class="aqi-title" data-ar="مؤشر جودة الهواء (AQI)" data-en="Air Quality Index (AQI)">مؤشر جودة الهواء (AQI)</div> <!-- Title // العنوان -->
+        <div class="aqi-value aqi-moderate" id="aqiValue">65</div> <!-- AQI value is updated by JS // يتم تحديث قيمة AQI بواسطة JS -->
+      </div>
+      <div class="aqi-scale"> <!-- The visual scale bar // شريط المقياس المرئي -->
+        <div class="aqi-segment segment-good"></div> <!-- Good segment // جزء جيد -->
+        <div class="aqi-segment segment-moderate"></div> <!-- Moderate segment // جزء متوسط -->
+        <div class="aqi-segment segment-poor"></div> <!-- Poor segment // جزء سيء -->
+        <div class="aqi-segment segment-hazardous"></div> <!-- Hazardous segment // جزء خطير -->
+      </div>
+      <div class="aqi-desc" id="aqiDesc">متوسطة</div> <!-- AQI description is updated by JS // يتم تحديث وصف AQI بواسطة JS -->
+    </div>
+
+    <!-- ==================== ENVIRONMENTAL MEASUREMENTS // القياسات البيئية ==================== -->
+    <h2 class="section-title" data-ar="📊 القياسات البيئية" data-en="📊 Environmental Measurements">📊 القياسات البيئية</h2> <!-- Section title // عنوان القسم -->
+    <div class="measurement-grid" id="measurementsGrid"></div> <!-- Temp & Humidity cards are injected here by JS // يتم حقن بطاقات الحرارة والرطوبة هنا بواسطة JS -->
+
+    <!-- ==================== OVERCROWDING CARD // بطاقة الازدحام ==================== -->
+    <div class="overcrowding-card" id="overcrowdingCard"> <!-- Overcrowding card // بطاقة الازدحام -->
+      <div class="overcrowding-header"> <!-- Header // الترويسة -->
+        <div class="overcrowding-title" data-ar="👥 مستوى الازدحام" data-en="👥 Overcrowding Level">👥 مستوى الازدحام</div> <!-- Title // العنوان -->
+        <div class="overcrowding-level ov-level-low" id="overcrowdingLevelBadge">منخفض</div> <!-- Level badge is updated by JS // يتم تحديث شارة المستوى بواسطة JS -->
+      </div>
+      <div class="overcrowding-bar"> <!-- Progress bar container // حاوية شريط التقدم -->
+        <div class="overcrowding-fill" id="overcrowdingFill" style="width: 0%;"></div> <!-- Fill width is updated by JS // يتم تحديث عرض التعبئة بواسطة JS -->
+      </div>
+      <div class="overcrowding-stats"> <!-- Stats container // حاوية الإحصائيات -->
+        <span data-ar="الازدحام:" data-en="Overcrowding:">الازدحام:</span> <!-- Label // التسمية -->
+        <span id="overcrowdingPercent">0%</span> <!-- Percentage is updated by JS // يتم تحديث النسبة المئوية بواسطة JS -->
+      </div>
+    </div>
+    
+    <!-- ==================== POLLEN SECTION // قسم حبوب اللقاح ==================== -->
+    <div class="pollen-section"> <!-- Pollen section container // حاوية قسم حبوب اللقاح -->
+      <h2 class="section-title" data-ar="🌸 حبوب اللقاح" data-en="🌸 Pollen Levels">🌸 حبوب اللقاح</h2> <!-- Title // العنوان -->
+      <div class="pollen-grid" id="pollenGrid"></div> <!-- Pollen items are injected here by JS // يتم حقن عناصر حبوب اللقاح هنا بواسطة JS -->
+    </div>
+
+    <!-- ==================== RECOMMENDATIONS // التوصيات ==================== -->
+    <div class="card recommendations"> <!-- Recommendations card // بطاقة التوصيات -->
+      <div class="rec-title" data-ar="💡 توصيات للصحة" data-en="💡 Health Recommendations">💡 توصيات للصحة</div> <!-- Title // العنوان -->
+      <ul class="rec-list" id="recommendationsList"></ul> <!-- Recommendations list is injected here by JS // يتم حقن قائمة التوصيات هنا بواسطة JS -->
+    </div>
+
+    <!-- ==================== SEARCH BAR // شريط البحث ==================== -->
+    <div class="bottom-search"> <!-- Bottom search container // حاوية البحث السفلي -->
+      <div class="search"> <!-- Search box // مربع البحث -->
+        <div class="glass">🔍</div> <!-- Search icon // أيقونة البحث -->
+        <input type="search" 
+               id="search-input"
+               placeholder="ابحث في البيانات"
+               data-ar-placeholder="ابحث في البيانات"
+               data-en-placeholder="Search data"
+               aria-label="Search data" /> <!-- Search input // إدخال البحث -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER // التذييل ==================== -->
+  <div class="footer" data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak"> <!-- Footer content // محتوى التذييل -->
+    © عبدالله بن ناصر - حياك
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC // منطق الجافا سكريبت ==================== -->
+  <script>
+    // ==================== CONFIGURATION & STATE // الإعدادات والحالة ====================
+    const API_URL = 'api/data.php'; // Defines the URL to fetch data from. Relative path to avoid CORS issues. // يحدد عنوان URL لجلب البيانات منه. مسار نسبي لتجنب مشاكل CORS.
+    let currentLanguage = 'ar'; // Sets the default language to Arabic. // يحدد اللغة الافتراضية إلى العربية.
+    let lastSuccessfulData = null; // A variable to store the last valid data received, used for simulations if the API fails. // متغير لتخزين آخر بيانات صالحة تم استلامها، يستخدم للمحاكاة في حالة فشل API.
+    let isSimulation = false;
+
+    // ==================== TRANSLATION LOGIC // منطق الترجمة ====================
+    function toggleLanguage() {
+      // Switches the language between 'ar' and 'en'. // يبدل اللغة بين العربية والإنجليزية.
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      // Sets the page direction (right-to-left for Arabic, left-to-right for English). // يحدد اتجاه الصفحة (من اليمين لليسار للعربية، من اليسار لليمين للإنجليزية).
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = currentLanguage;
+
+      // Saves the user's language preference to localStorage. // يحفظ تفضيل لغة المستخدم في التخزين المحلي.
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      profile.language = currentLanguage;
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+
+      // Updates the text of the language toggle button. // يحدث نص زر تبديل اللغة.
+      const btn = document.getElementById('translateBtn');
+      btn.querySelector('span:last-child').textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+
+      // Iterates through all elements with translation data attributes. // يكرر عبر جميع العناصر التي لها سمات بيانات الترجمة.
+      document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+        if (el.tagName === 'INPUT' && el.placeholder !== undefined) {
+          // If it's an input field, update its placeholder text. // إذا كان حقل إدخال، قم بتحديث نص العنصر النائب.
+          el.placeholder = currentLanguage === 'ar' ? el.dataset.ar : el.dataset.en;
+        } else {
+          // Otherwise, update its text content. // خلاف ذلك، قم بتحديث محتوى النص.
+          el.textContent = currentLanguage === 'ar' ? el.dataset.ar : el.dataset.en;
+        }
+      });
+
+      // Special handling to update the text of the overcrowding level badge. // معالجة خاصة لتحديث نص شارة مستوى الازدحام.
+      const levelBadge = document.getElementById('overcrowdingLevelBadge');
+      if (levelBadge) {
+        const currentLevel = levelBadge.className.split('ov-level-')[1]; // Gets the current level (e.g., 'low', 'high'). // يحصل على المستوى الحالي.
+        if (currentLevel) {
+          // Sets the text based on the new language. // يحدد النص بناءً على اللغة الجديدة.
+          levelBadge.textContent = currentLanguage === 'ar'
+            ? (currentLevel === 'low' ? 'منخفض' :
+               currentLevel === 'moderate' ? 'متوسط' :
+               currentLevel === 'high' ? 'مرتفع' : 'حرج')
+            : (currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1)); // Capitalizes the first letter for English.
+        }
+      }
+
+      // Re-updates the UI with the last known data to apply language changes to dynamic content like recommendations. // يعيد تحديث واجهة المستخدم بآخر بيانات معروفة لتطبيق تغييرات اللغة على المحتوى الديناميكي مثل التوصيات.
+      if (lastSuccessfulData) {
+        updateUI({ success: true, data: lastSuccessfulData });
+      }
+    }
+
+    // ==================== HELPER FUNCTIONS // وظائف مساعدة ====================
+    // These functions return a color based on a given value, used for styling. // تعيد هذه الوظائف لونًا بناءً على قيمة معينة، وتستخدم للتصميم.
+    function getTempColor(temp) {
+      if (temp < 20) return '#3b82f6'; // Blue for cold // أزرق للبارد
+      if (temp < 27) return '#10b981'; // Green for moderate // أخضر للمعتدل
+      if (temp < 32) return '#f59e0b'; // Yellow for warm // أصفر للدافئ
+      return '#ef4444'; // Red for hot // أحمر للحار
+    }
+    function getHumColor(hum) {
+      if (hum < 40) return '#f59e0b'; // Yellow for dry // أصفر للجاف
+      if (hum < 70) return '#10b981'; // Green for comfortable // أخضر للمريح
+      return '#3b82f6'; // Blue for humid // أزرق للرطب
+    }
+    function getAqiColor(aqi) {
+      if (aqi >= 90) return '#10b981'; // Excellent // ممتاز
+      if (aqi >= 70) return '#22c55e'; // Good // جيد
+      if (aqi >= 50) return '#f59e0b'; // Moderate // متوسط
+      if (aqi >= 30) return '#f97316'; // Poor // سيء
+      return '#ef4444'; // Hazardous // خطير
+    }
+    function getAqiText(aqi) {
+      // Returns a descriptive text for the AQI value in the current language. // يعيد نصًا وصفيًا لقيمة AQI باللغة الحالية.
+      if (aqi >= 90) return currentLanguage === 'ar' ? 'ممتازة' : 'Excellent';
+      if (aqi >= 70) return currentLanguage === 'ar' ? 'جيدة' : 'Good';
+      if (aqi >= 50) return currentLanguage === 'ar' ? 'متوسطة' : 'Moderate';
+      if (aqi >= 30) return currentLanguage === 'ar' ? 'سيئة' : 'Poor';
+      return currentLanguage === 'ar' ? 'خطيرة' : 'Hazardous';
+    }
+
+    // ==================== DATA FETCHING // جلب البيانات ====================
+    async function fetchRealData() {
+      const refreshBtn = document.getElementById('refreshBtn');
+      const originalHTML = refreshBtn.innerHTML;
+      refreshBtn.innerHTML = '⏳ <span data-ar="جاري التحديث..." data-en="Updating...">جاري التحديث...</span>'; // Shows a loading state. // يظهر حالة التحميل.
+      refreshBtn.disabled = true; // Prevents multiple clicks. // يمنع النقرات المتعددة.
+
+      try {
+        // Add timestamp to URL to prevent browser caching // إضافة طابع زمني للرابط لمنع التخزين المؤقت للمتصفح
+        const response = await fetch(API_URL + '?t=' + new Date().getTime()); // Fetches data from the API. // يجلب البيانات من API.
+        const rawData = await response.json(); // Parses the JSON response. // يحلل استجابة JSON.
+        
+        // Handle direct JSON array from data.json (Fix for array format)
+        let data = {};
+        if (Array.isArray(rawData) && rawData.length > 0) {
+             data = { success: true, data: rawData[0] };
+        } else {
+             data = rawData.success ? rawData : { success: true, data: rawData };
+        }
+
+        if (data.success) {
+          lastSuccessfulData = data.data; // Stores the data for later use (e.g., simulation). // يخزن البيانات للاستخدام لاحقًا.
+          updateUI(data); // Updates the page with the new data. // يحدث الصفحة بالبيانات الجديدة.
+          updateLastUpdateTime(data.data.timestamp); // Updates the "Last update" timestamp. // يحدث طابع "آخر تحديث".
+          isSimulation = false;
+        } else {
+          throw new Error('API error'); // If the API reports an error. // إذا أبلغ API عن خطأ.
+        }
+      } catch (error) {
+        console.error('Fetch failed:', error);
+        // If the fetch fails (e.g., no internet), use simulated data as a fallback. // إذا فشل الجلب (مثل عدم وجود إنترنت)، استخدم بيانات محاكاة كبديل.
+        useSimulatedData();
+      } finally {
+        // This block always runs, whether the fetch succeeded or failed. // يتم تشغيل هذه الكتلة دائمًا، سواء نجح الجلب أو فشل.
+        refreshBtn.innerHTML = originalHTML; // Restores the button's original text. // يعيد النص الأصلي للزر.
+        refreshBtn.disabled = false; // Re-enables the button. // يعيد تفعيل الزر.
+      }
+    }
+
+    // ==================== DATA SIMULATION // محاكاة البيانات ====================
+    function useSimulatedData() {
+      isSimulation = true;
+      let baseData;
+      if (lastSuccessfulData) {
+        // If we have previous real data, create a slightly modified version of it. // إذا كان لدينا بيانات حقيقية سابقة، قم بإنشاء نسخة معدلة قليلاً منها.
+        baseData = JSON.parse(JSON.stringify(lastSuccessfulData)); // Creates a deep copy. // ينشئ نسخة عميقة.
+        baseData.temperature += (Math.random() * 1 - 0.5); // Adds a small random change. // يضيف تغييرًا عشوائيًا صغيرًا.
+        baseData.humidity += (Math.random() * 3 - 1.5);
+        baseData.aqi += Math.floor(Math.random() * 10 - 5);
+        baseData.aqi = Math.max(0, Math.min(500, baseData.aqi)); // Keeps AQI within a valid range. // يحافظ على AQI ضمن نطاق صالح.
+        
+        // Simulates a change in overcrowding. // يحاكي تغييرًا في الازدحام.
+        let change = Math.floor(Math.random() * 15 - 5);
+        baseData.overcrowding_percent += change;
+        baseData.overcrowding_percent = Math.max(0, Math.min(100, baseData.overcrowding_percent));
+        
+        // Updates the overcrowding level text based on the new percentage. // يحدث نص مستوى الازدحام بناءً على النسبة المئوية الجديدة.
+        if (baseData.overcrowding_percent < 20) baseData.overcrowding_level = "low";
+        else if (baseData.overcrowding_percent < 40) baseData.overcrowding_level = "moderate";
+        else if (baseData.overcrowding_percent < 60) baseData.overcrowding_level = "high";
+        else baseData.overcrowding_level = "critical";
+      } else {
+        // If there's no previous data, generate completely random (but realistic) data. // إذا لم تكن هناك بيانات سابقة، قم بتوليد بيانات عشوائية تمامًا (ولكن واقعية).
+        baseData = {
+          temperature: 25.5 + (Math.random() * 2 - 1),
+          humidity: 65.2 + (Math.random() * 5 - 2.5),
+          air_quality_level: Math.random() > 0.7 ? 'bad' : 'good',
+          aqi: 65 + Math.floor(Math.random() * 20 - 10),
+          overcrowding_level: ['low','moderate','high','critical'][Math.floor(Math.random()*4)],
+          overcrowding_percent: Math.floor(Math.random() * 100),
+          pollen: [
+            { name: 'الأشجار', level: 'medium', value: 7.2 },
+            { name: 'الحشائش', level: 'low', value: 3.1 },
+            { name: 'الأعشاب الضارة', level: 'high', value: 9.5 }
+          ]
+        };
+      }
+
+      // Updates the UI with the simulated data and a warning message. // يحدث واجهة المستخدم بالبيانات المحاكية ورسالة تحذير.
+      updateUI({ success: true, data: baseData, data_source: '⚠️ Simulation Mode (Connection Failed)' });
+    }
+
+    // ==================== UI UPDATE LOGIC // منطق تحديث واجهة المستخدم ====================
+    function updateUI(apiResponse) {
+      const d = apiResponse.data; // Shortcut for the data object. // اختصار لكائن البيانات.
+
+      // --- Temperature & Humidity ---
+      const temp = d.temperature || 25.5; // Uses a default value if data is missing. // يستخدم قيمة افتراضية إذا كانت البيانات مفقودة.
+      const hum = d.humidity || 65.2;
+
+      // Determines the status text (e.g., 'Cold', 'Warm') in the current language. // يحدد نص الحالة (مثل "بارد"، "دافئ") باللغة الحالية.
+      const tempTitle = currentLanguage === 'ar' ? '🌡️ درجة الحرارة' : '🌡️ Temperature';
+      const humTitle = currentLanguage === 'ar' ? '💧 الرطوبة' : '💧 Humidity';
+      const tempStatus = currentLanguage === 'ar'
+        ? (temp < 20 ? 'بارد' : temp < 27 ? 'معتدل' : 'دافئ')
+        : (temp < 20 ? 'Cold' : temp < 27 ? 'Moderate' : 'Warm');
+      const humStatus = currentLanguage === 'ar'
+        ? (hum < 40 ? 'جاف' : hum < 70 ? 'مريح' : 'رطب')
+        : (hum < 40 ? 'Dry' : hum < 70 ? 'Comfortable' : 'Humid');
+
+      // Injects the HTML for the temperature and humidity cards into the grid. // يحقن HTML لبطاقات الحرارة والرطوبة في الشبكة.
+      document.getElementById('measurementsGrid').innerHTML = `
+        <div class="measurement-card">
+          <div class="measurement-header">
+            <span class="measurement-title">${tempTitle}</span>
+            <span class="measurement-value" style="color: ${getTempColor(temp)}">
+              ${temp.toFixed(1)}<span class="unit">°C</span>
+            </span>
+          </div>
+          <span class="status status-${temp < 20 ? 'good' : temp < 27 ? 'good' : 'moderate'}">
+            ${tempStatus}
+          </span>
+        </div>
+        <div class="measurement-card">
+          <div class="measurement-header">
+            <span class="measurement-title">${humTitle}</span>
+            <span class="measurement-value" style="color: ${getHumColor(hum)}">
+              ${hum.toFixed(1)}<span class="unit">%</span>
+            </span>
+          </div>
+          <span class="status status-${hum < 70 ? 'good' : 'moderate'}">
+            ${humStatus}
+          </span>
+        </div>
+      `;
+
+      // --- AQI ---
+      const aqi = d.aqi || 65;
+      const aqiEl = document.getElementById('aqiValue');
+      aqiEl.textContent = aqi; // Sets the number. // يحدد الرقم.
+      aqiEl.style.backgroundColor = getAqiColor(aqi); // Sets the badge color. // يحدد لون الشارة.
+      document.getElementById('aqiDesc').textContent = getAqiText(aqi); // Sets the description text. // يحدد نص الوصف.
+
+      // --- Bad air warning ---
+      const warningEl = document.getElementById('airQualityWarning');
+      if (warningEl) {
+        // Shows the warning banner if AQI is below 50. // يظهر لافتة التحذير إذا كان AQI أقل من 50.
+        warningEl.style.display = aqi < 50 ? 'block' : 'none';
+        // Updates the warning text based on the current language. // يحدث نص التحذير بناءً على اللغة الحالية.
+        const warningText = currentLanguage === 'ar' 
+          ? '🔴 تحذير: جودة الهواء سيئة!' 
+          : '🔴 Warning: Air quality is poor!';
+        warningEl.textContent = warningText;
+      }
+
+      // --- Overcrowding ---
+      const overcrowdingPercent = d.overcrowding_percent || 0;
+      const overcrowdingLevel = d.overcrowding_level || 'low';
+      
+      const levelBadge = document.getElementById('overcrowdingLevelBadge');
+      // Sets the text for the level badge in the current language. // يحدد النص لشارة المستوى باللغة الحالية.
+      levelBadge.textContent = currentLanguage === 'ar'
+        ? (overcrowdingLevel === 'low' ? 'منخفض' :
+           overcrowdingLevel === 'moderate' ? 'متوسط' :
+           overcrowdingLevel === 'high' ? 'مرتفع' : 'حرج')
+        : (overcrowdingLevel === 'low' ? 'Low' :
+           overcrowdingLevel === 'moderate' ? 'Moderate' :
+           overcrowdingLevel === 'high' ? 'High' : 'Critical');
+      
+      // Sets the color class for the badge. // يحدد فئة اللون للشارة.
+      levelBadge.className = 'overcrowding-level ov-level-' + overcrowdingLevel;
+      
+      // Updates the fill bar width and percentage text. // يحدث عرض شريط التعبئة ونص النسبة المئوية.
+      document.getElementById('overcrowdingFill').style.width = overcrowdingPercent + '%';
+      document.getElementById('overcrowdingPercent').textContent = overcrowdingPercent + '%';
+
+      // --- Overcrowding warning ---
+      const overcrowdingWarningEl = document.getElementById('overcrowdingWarning');
+      if (overcrowdingWarningEl) {
+        // Shows the warning if overcrowding is 60% or more. // يظهر التحذير إذا كان الازدحام 60% أو أكثر.
+        overcrowdingWarningEl.style.display = overcrowdingPercent >= 60 ? 'block' : 'none';
+        // Updates the warning text based on language. // يحدث نص التحذير بناءً على اللغة.
+        const crowdingWarningText = currentLanguage === 'ar' 
+          ? '⚠️ تحذير: المكان مزدحم جداً!' 
+          : '⚠️ Warning: This place is very crowded!';
+        overcrowdingWarningEl.textContent = crowdingWarningText;
+      }
+
+      // --- Pollen ---
+      if (d.pollen && Array.isArray(d.pollen)) {
+        // Generates the HTML for each pollen item and injects it into the grid. // يولد HTML لكل عنصر حبوب اللقاح ويحقنه في الشبكة.
+        document.getElementById('pollenGrid').innerHTML = d.pollen.map(p => {
+          // Translates the pollen level text. // يترجم نص مستوى حبوب اللقاح.
+          let levelText = currentLanguage === 'ar'
+            ? (p.level === 'low' ? 'منخفض' : p.level === 'medium' ? 'متوسط' : 'مرتفع')
+            : (p.level.charAt(0).toUpperCase() + p.level.slice(1));
+          return `
+            <div class="pollen-item">
+              <div class="pollen-name">${currentLanguage === 'ar' ? p.name : (p.name === 'الأشجار' ? 'Trees' : p.name === 'الحشائش' ? 'Grass' : 'Weeds')}</div>
+              <div class="pollen-level level-${p.level}">${p.value.toFixed(1)}</div>
+              <div>${levelText}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // --- Recommendations based on AQI ---
+      updateRecommendations(aqi); // Calls the function to update the recommendations list. // يستدعي الوظيفة لتحديث قائمة التوصيات.
+
+      // --- Show data source if simulation ---
+      const debugEl = document.getElementById('dataSourceDebug');
+      if (apiResponse.data_source && isSimulation) {
+        // Logs a message to the console if the data is simulated. // يسجل رسالة إلى وحدة التحكم إذا كانت البيانات محاكاة.
+        console.log('Data source:', apiResponse.data_source);
+        debugEl.textContent = apiResponse.data_source;
+        debugEl.style.color = 'red';
+      } else {
+        // Check if data is stale (older than 5 minutes)
+        const dataTime = new Date(d.timestamp).getTime();
+        const now = new Date().getTime();
+        const diffMinutes = (now - dataTime) / 1000 / 60;
+        if (diffMinutes > 5) {
+             debugEl.textContent = `⚠️ Stale Data (Last update: ${d.timestamp})`;
+             debugEl.style.color = 'orange';
+        } else {
+             debugEl.textContent = `✅ Live Data (ESP32 Connected)`;
+             debugEl.style.color = 'green';
+        }
+      }
+
+      // Check for notifications and achievements
+      handleNotificationsAndAchievements(aqi, overcrowdingPercent);
+    }
+
+    // ==================== RECOMMENDATIONS LOGIC // منطق التوصيات ====================
+    function updateRecommendations(aqi) {
+      let items = [];
+      // Selects the appropriate list of recommendations based on the AQI value and current language. // يختار القائمة المناسبة من التوصيات بناءً على قيمة AQI واللغة الحالية.
+      if (aqi >= 90) {
+        items = currentLanguage === 'ar' ? [
+          '✅ الظروف ممتازة للمصابين بالحساسية',
+          '🌳 يمكنك فتح النوافذ للتهوية',
+          '🚶‍♂️ آمن للمشي والأنشطة الخارجية',
+          '🏃‍♂️ يمكن ممارسة الرياضة في الخارج'
+        ] : [
+          '✅ Excellent conditions for allergy sufferers',
+          '🌳 You can open windows for ventilation',
+          '🚶‍♂️ Safe for walking and outdoor activities',
+          '🏃‍♂️ Suitable for outdoor sports'
+        ];
+      } else if (aqi >= 70) {
+        items = currentLanguage === 'ar' ? [
+          '⚠️ الأشخاص الحساسون قد يعانون من أعراض خفيفة',
+          '🤧 قد يحتاج المصابون بحساسية الأنف لأدوية',
+          '🪟 قلل من فتح النوافذ في الصباح الباكر',
+          '😷 فكر في ارتداء قناع إذا كنت شديد الحساسية'
+        ] : [
+          '⚠️ Sensitive people may experience mild symptoms',
+          '🤧 Those with allergies may need medication',
+          '🪟 Reduce opening windows in early morning',
+          '😷 Consider wearing a mask if you are sensitive'
+        ];
+      } else if (aqi >= 50) {
+        items = currentLanguage === 'ar' ? [
+          '🚫 تجنب الأنشطة الخارجية المكثفة',
+          '🏠 ابق في الداخل قدر الإمكان',
+          '💨 استخدم جهاز تنقية الهواء',
+          '🩺 استشر الطبيب إذا ازدادت الأعراض'
+        ] : [
+          '🚫 Avoid intensive outdoor activities',
+          '🏠 Stay indoors as much as possible',
+          '💨 Use an air purifier',
+          '🩺 Consult a doctor if symptoms worsen'
+        ];
+      } else {
+        items = currentLanguage === 'ar' ? [
+          '⛔ تجنب الخروج من المنزل تماماً',
+          '🏥 اتصل بالطوارئ إذا كانت الأعراض شديدة',
+          '🔄 شغل أجهزة تنقية الهواء على أعلى مستوى',
+          '💊 تأكد من توفر أدوية الطوارئ'
+        ] : [
+          '⛔ Avoid leaving home at all',
+          '🏥 Call emergency services if symptoms are severe',
+          '🔄 Turn on air purifiers to maximum level',
+          '💊 Ensure emergency medications are available'
+        ];
+      }
+      // Injects the list of recommendations as `<li>` elements into the recommendations card. // يحقن قائمة التوصيات كعناصر `<li>` في بطاقة التوصيات.
+      document.getElementById('recommendationsList').innerHTML = items.map(item => `<li>${item}</li>`).join('');
+    }
+
+    // ==================== NOTIFICATIONS & ACHIEVEMENTS // الإشعارات والإنجازات ====================
+    function handleNotificationsAndAchievements(aqi, overcrowding) {
+      // Notifications (using session storage to avoid spamming on every refresh) // الإشعارات (استخدام تخزين الجلسة لتجنب التكرار عند كل تحديث)
+      if (aqi < 50 && !sessionStorage.getItem('hayyak_notified_air')) {
+        setTimeout(() => showError(currentLanguage === 'ar' ? 'تنبيه: جودة الهواء سيئة هنا' : 'Alert: Air quality is bad here'), 1000);
+        sessionStorage.setItem('hayyak_notified_air', 'true');
+      }
+      
+      if (overcrowding >= 60 && !sessionStorage.getItem('hayyak_notified_crowd')) {
+        setTimeout(() => showError(currentLanguage === 'ar' ? 'تنبيه: المكان مزدحم' : 'Alert: Place is crowded'), 2500);
+        sessionStorage.setItem('hayyak_notified_crowd', 'true');
+      }
+
+      // Achievement: ID 10 (The Survivor) - Bad Air + Crowded // الإنجاز: المعرف 10 (الناجي) - هواء سيء + مزدحم
+      if (aqi < 50 && overcrowding >= 60) {
+        const achievementId = 10;
+        let unlocked = JSON.parse(localStorage.getItem('hayyak_unlocked_achievements') || '[]');
+        if (!unlocked.includes(achievementId)) {
+          unlocked.push(achievementId);
+          localStorage.setItem('hayyak_unlocked_achievements', JSON.stringify(unlocked));
+          setTimeout(() => showError(currentLanguage === 'ar' ? '🏆 إنجاز جديد: الناجي!' : '🏆 New Achievement: The Survivor!'), 4000);
+        }
+      }
+    }
+
+    // ==================== UTILITIES // أدوات مساعدة ====================
+    function updateLastUpdateTime(timestamp) {
+      if (timestamp) {
+        document.getElementById('lastUpdate').textContent = timestamp;
+      } else {
+        const now = new Date();
+        // Formats the current time as HH:MM:SS and displays it. // ينسق الوقت الحالي كـ HH:MM:SS ويعرضه.
+        document.getElementById('lastUpdate').textContent = 
+          now.getHours().toString().padStart(2,'0') + ':' +
+          now.getMinutes().toString().padStart(2,'0') + ':' +
+          now.getSeconds().toString().padStart(2,'0');
+      }
+    }
+
+    // ==================== LOAD LOCATION // تحميل الموقع ====================
+    function loadLocationFromProfile() {
+      try {
+        const profileData = localStorage.getItem('hayyak_user_profile');
+        if (profileData) {
+          const profile = JSON.parse(profileData);
+          if (profile.emirate) {
+            // If an emirate is found in the user's profile, display it in the location card. // إذا تم العثور على إمارة في ملف تعريف المستخدم، اعرضها في بطاقة الموقع.
+            const locationDisplay = document.getElementById('locationDisplay');
+            if (locationDisplay) {
+              locationDisplay.textContent = profile.emirate;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error loading location from profile:', error);
+      }
+    }
+
+    // ==================== ERROR TOAST // إشعار الخطأ ====================
+    let toastTimeout; // Holds the timer for the toast. // يحتفظ بمؤقت الإشعار.
+    function showError(message) {
+      const toast = document.getElementById('error-toast');
+      toast.innerText = message;
+      toast.classList.add('show'); // Makes the toast visible. // يجعل الإشعار مرئيًا.
+      clearTimeout(toastTimeout); // Clears any previous timer. // يمسح أي مؤقت سابق.
+      // Sets a new timer to hide the toast after 3.5 seconds. // يضبط مؤقتًا جديدًا لإخفاء الإشعار بعد 3.5 ثانية.
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // ==================== SEARCH FUNCTIONALITY // وظيفة البحث ====================
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      // Adds an event listener that triggers on every key press in the search input. // يضيف مستمع حدث يعمل عند كل ضغطة مفتاح في إدخال البحث.
+      searchInput.addEventListener('input', function(e) {
+        const query = this.value.toLowerCase().trim(); // Gets the search query. // يحصل على استعلام البحث.
+        // Selects all the main content cards on the page. // يحدد جميع بطاقات المحتوى الرئيسية في الصفحة.
+        const elements = document.querySelectorAll('.card, .measurement-card, .overcrowding-card, .pollen-item');
+        
+        elements.forEach(el => {
+          const text = el.textContent.toLowerCase(); // Gets all text content from the card. // يحصل على كل محتوى النص من البطاقة.
+          if (text.includes(query)) {
+            el.style.display = ''; // Shows the card if it contains the search query. // يظهر البطاقة إذا كانت تحتوي على استعلام البحث.
+          } else {
+            el.style.display = 'none'; // Hides the card if it doesn't. // يخفي البطاقة إذا لم تكن كذلك.
+          }
+        });
+      });
+    }
+
+    // ==================== INITIALIZATION // التهيئة ====================
+    // This function runs when the page has finished loading. // تعمل هذه الوظيفة عند الانتهاء من تحميل الصفحة.
+    document.addEventListener('DOMContentLoaded', function() {
+      // Loads the user's preferred language from their profile. // يحمل اللغة المفضلة للمستخدم من ملفه الشخصي.
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (userProfile.language && userProfile.language !== currentLanguage) {
+        currentLanguage = userProfile.language;
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+        const btn = document.getElementById('translateBtn');
+        if (btn) {
+          btn.querySelector('span:last-child').textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+        }
+      }
+      
+      // Applies the dark theme if it's set in the user's profile. // يطبق السمة الداكنة إذا تم تعيينها في ملف تعريف المستخدم.
+      if (userProfile.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      // Attaches the click event to the language toggle button. // يربط حدث النقر بزر تبديل اللغة.
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+      // Loads the location from the user's profile. // يحمل الموقع من ملف تعريف المستخدم.
+      loadLocationFromProfile();
+      // Fetches the initial data from the API. // يجلب البيانات الأولية من API.
+      fetchRealData();
+      // Sets up an interval to automatically refresh the data every 10 seconds. // يعد فاصلًا زمنيًا لتحديث البيانات تلقائيًا كل 10 ثوانٍ.
+      setInterval(fetchRealData, 10000);
+    });
+  </script>
+</body>
+</html>

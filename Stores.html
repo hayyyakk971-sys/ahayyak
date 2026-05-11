@@ -1,0 +1,1159 @@
+﻿<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // يحدد نوع المستند كـ HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element, language Arabic, direction right-to-left // العنصر الجذري، اللغة العربية، الاتجاه من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // يضبط ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Makes page responsive on mobile devices // يجعل الصفحة متجاوبة مع الأجهزة المحمولة -->
+  <title>HAYYAK | Shopping</title>
+  <!-- Page title // عنوان الصفحة -->
+  <meta name="description" content="أماكن الترفيه في دبي - مع تصفية حسب الموقع والتقييم والسعر والمسافة" />
+  <!-- Meta description for SEO (Arabic) // وصف تعريفي لمحركات البحث (بالعربية) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts domain // اتصال مسبق بنطاق خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع خاصية عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Loads Cairo font from Google Fonts // تحميل خط Cairo من خطوط جوجل -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon (browser tab icon) // أيقونة علامة تبويب المتصفح -->
+  <script src="js/search_index.js"></script>
+  <!-- External JavaScript file containing search index data // ملف جافا سكريبت خارجي يحتوي على بيانات فهرس البحث -->
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    /* Afeesh family (local) - defines custom fonts // عائلة Afeesh (محلية) - تعريف خطوط مخصصة */
+    @font-face {
+      font-family: 'Afeesh'; /* Assigns a name to this font variant // يعين اسمًا لمتغير الخط هذا */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'), /* WOFF2 format (modern) // تنسيق WOFF2 (حديث) */
+           url('afeesh/Afeesh-Aadi.woff') format('woff'), /* WOFF format (fallback) // تنسيق WOFF (احتياطي) */
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype'); /* TrueType format (older) // تنسيق TrueType (قديم) */
+      font-weight: 400; /* Normal weight // وزن عادي */
+      font-style: normal; /* Normal style // نمط عادي */
+      font-display: swap; /* Shows fallback font while loading custom // عرض خط احتياطي أثناء تحميل الخط المخصص */
+    }
+    @font-face {
+      font-family: 'Afeesh'; /* Same family name // نفس اسم العائلة */
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; /* Bold weight // وزن عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; /* Light // خفيف */
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (THEME) // متغيرات CSS (السمة) ==================== */
+    :root {
+      --bg: #f5f5f7;        /* Light mode background // خلفية الوضع الفاتح */
+      --card: #ffffff;       /* Card background // خلفية البطاقة */
+      --ink: #0f0f10;        /* Main text color // لون النص الرئيسي */
+      --muted: #6b7280;      /* Muted text // نص باهت */
+      --line: #0f0f10;       /* Border color // لون الحدود */
+      --radius: 14px;        /* Border radius // نصف قطر الحدود */
+    }
+    [data-theme="dark"] {    /* Dark mode overrides // تجاوزات الوضع الداكن */
+      --bg: #121212;         /* Dark background // خلفية داكنة */
+      --card: #1e1e1e;       /* Dark card // بطاقة داكنة */
+      --ink: #ffffff;        /* Light text // نص فاتح */
+      --muted: #a0a0a0;      /* Muted grey // رمادي باهت */
+      --line: #333333;       /* Dark border // حدود داكنة */
+    }
+
+    /* ==================== GLOBAL RESETS // إعادة تعيين عامة ==================== */
+    * {
+      box-sizing: border-box; /* Include padding/border in width/height // تضمين الحشوة/الحدود في العرض/الارتفاع */
+    }
+    html, body {
+      height: 100%;          /* Full height // ارتفاع كامل */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+    }
+    body {
+      margin: 0;             /* Remove default margin // إزالة الهامش الافتراضي */
+      font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* Font stack // مجموعة الخطوط */
+      color: var(--ink);     /* Text color from theme // لون النص من السمة */
+    }
+
+    /* ==================== LAYOUT COMPONENTS // مكونات التخطيط ==================== */
+    .shell {
+      width: 100%;           /* Full width // عرض كامل */
+      max-width: 420px;      /* Limit width on large screens // تحديد العرض على الشاشات الكبيرة */
+      margin: 0 auto;        /* Center horizontally // توسيط أفقي */
+      padding: 16px;         /* Inner spacing // حشوة داخلية */
+    }
+    .card {
+      background: var(--card); /* Card background from theme // خلفية البطاقة من السمة */
+      border: 2px solid var(--line); /* Border using theme line color // حدود بلون الخط من السمة */
+      border-radius: var(--radius); /* Rounded corners using variable // زوايا دائرية باستخدام المتغير */
+      box-shadow: 0 2px 0 #0f0f10; /* Small shadow for depth // ظل صغير للعمق */
+    }
+
+    /* ==================== HEADER // الترويسة ==================== */
+    header.brand {
+      text-align: center;    /* Center align text // محاذاة النص للوسط */
+      background: #16243d;   /* Dark blue background // خلفية زرقاء داكنة */
+      color: #ffffff;        /* White text // نص أبيض */
+      padding: 20px;         /* Padding around content // حشوة حول المحتوى */
+      position: relative;    /* For absolute positioning of children // لتحديد موضع العناصر الفرعية بشكل مطلق */
+    }
+    .logo-text {
+      font-family: 'Afeesh', sans-serif; /* Use Afeesh font // استخدام خط Afeesh */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 48px;       /* Large font // خط كبير */
+      letter-spacing: 2px;   /* Space between letters // مسافة بين الأحرف */
+      color: #d4af37;        /* Gold color // لون ذهبي */
+    }
+    .logo-sub {
+      font-family: 'Afeesh', sans-serif; /* Afeesh font // خط Afeesh */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      color: #94a3b8;        /* Greyish blue // أزرق رمادي */
+      font-size: 20px;       /* Font size // حجم الخط */
+      margin-top: 2px;       /* Small top margin // هامش علوي صغير */
+      letter-spacing: 3px;   /* More spacing between letters // مسافة أكبر بين الأحرف */
+    }
+    .home-btn {
+      position: absolute;    /* Absolute positioning inside header // تحديد موضع مطلق داخل الترويسة */
+      top: 50%;              /* Center vertically // توسيط عمودي */
+      left: 20px;            /* Distance from left (RTL) // مسافة من اليسار (RTL) */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      color: #d4af37;        /* Gold text // نص ذهبي */
+      text-decoration: none; /* Remove underline // إزالة التسطير */
+      font-size: 15px;       /* Font size // حجم الخط */
+      background-color: #0f0f10; /* Dark background // خلفية داكنة */
+      padding: 9px 12px;     /* Padding // حشوة */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+    }
+
+    /* Translate Button Styles // أنماط زر الترجمة */
+    .translate-btn {
+      position: absolute;    /* Absolute positioning // تحديد موضع مطلق */
+      top: 50%;              /* Center vertically // توسيط عمودي */
+      right: 20px;           /* Distance from right (RTL) // مسافة من اليمين (RTL) */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      background: #d4af37;   /* Gold background // خلفية ذهبية */
+      border: 2px solid #ffffff; /* White border // حدود بيضاء */
+      border-radius: 20px;   /* Rounded shape // شكل دائري */
+      color: #16243d;        /* Dark blue text // نص أزرق داكن */
+      padding: 6px 14px;     /* Padding // حشوة */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 13px;       /* Font size // حجم الخط */
+      cursor: pointer;       /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex;         /* Flexbox for icon and text // مرن للأيقونة والنص */
+      align-items: center;   /* Vertically align items // محاذاة عمودية للعناصر */
+      gap: 6px;              /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3); /* Gold shadow // ظل ذهبي */
+      z-index: 100;          /* Ensure it's above other elements // ضمان أنه فوق العناصر الأخرى */
+    }
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05); /* Zoom on hover // تكبير عند التمرير */
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); /* Stronger shadow // ظل أقوى */
+      background: #f7ef8a;   /* Lighter gold // ذهبي أفتح */
+    }
+    .translate-btn .icon {
+      font-size: 16px;       /* Globe icon size // حجم أيقونة الكرة الأرضية */
+      transition: transform 0.3s ease; /* Smooth rotation // دوران سلس */
+    }
+    .translate-btn:hover .icon {
+      transform: rotate(20deg); /* Rotate icon on hover // تدوير الأيقونة عند التمرير */
+    }
+    .translate-btn.switching {
+      animation: pulse 0.5s ease; /* Pulse animation when switching language // حركة نبض عند تبديل اللغة */
+    }
+    @keyframes pulse {
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    /* ==================== MAP // الخريطة ==================== */
+    .map {
+      height: 180px;         /* Fixed height // ارتفاع ثابت */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      overflow: hidden;      /* Hide overflow (for iframe) // إخفاء الزيادة (لـ iframe) */
+      position: relative;    /* For any absolute overlays // لأي تراكبات مطلقة */
+      border: 2px solid var(--line); /* Border using theme // حدود باستخدام السمة */
+    }
+    .map iframe {
+      width: 100%;           /* Full width // عرض كامل */
+      height: 100%;          /* Full height // ارتفاع كامل */
+      border: 0;             /* No border // بلا حدود */
+    }
+
+    /* ==================== SECTION TITLE // عنوان القسم ==================== */
+    .section-title {
+      display: flex;         /* Flex layout // تخطيط مرن */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      gap: 10px;             /* Gap between emoji and text // فجوة بين الإيموجي والنص */
+      margin: 14px 0 10px;   /* Vertical margins // هوامش رأسية */
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 20px;       /* Font size // حجم الخط */
+    }
+    .section-title .emoji {
+      font-size: 22px;       /* Larger emoji // إيموجي أكبر */
+    }
+
+    /* ==================== LIST ITEMS // عناصر القائمة ==================== */
+    .list {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      gap: 10px;             /* Gap between items // فجوة بين العناصر */
+    }
+    .item {
+      display: grid;         /* Grid inside item // شبكة داخل العنصر */
+      grid-template-columns: 36px 1fr; /* Icon column and content column // عمود للأيقونة وعمود للمحتوى */
+      align-items: center;   /* Center vertically // توسيط عمودي */
+      gap: 10px;             /* Gap between columns // فجوة بين الأعمدة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      background: var(--card); /* Background from theme // خلفية من السمة */
+      padding: 8px 12px;     /* Padding // حشوة */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      transition: background 0.2s; /* Smooth background change // تغيير خلفية سلس */
+    }
+    .item:hover {
+      background: #f5f5f7;   /* Light grey on hover // رمادي فاتح عند التمرير */
+    }
+    .pin {
+      display: grid;         /* Center the icon // توسيط الأيقونة */
+      place-items: center;   /* Center both axes // توسيط في كلا المحورين */
+      font-size: 22px;       /* Icon size // حجم الأيقونة */
+    }
+    .label {
+      font-weight: 700;      /* Bold name // اسم عريض */
+      display: flex;         /* Flex // مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 4px;              /* Gap between lines // فجوة بين الأسطر */
+    }
+    .distance-badge {
+      font-size: 12px;       /* Small font // خط صغير */
+      color: var(--muted);   /* Muted color // لون باهت */
+      font-weight: 400;      /* Normal weight // وزن عادي */
+    }
+    .rating-badge {
+      font-size: 12px;       /* Font size // حجم الخط */
+      background: #fbbf24;   /* Yellow background // خلفية صفراء */
+      color: #000;           /* Black text // نص أسود */
+      padding: 2px 6px;      /* Padding // حشوة */
+      border-radius: 6px;    /* Rounded corners // زوايا دائرية */
+      width: fit-content;    /* Fit content width // عرض حسب المحتوى */
+    }
+
+    /* ==================== CONTROLS (FILTERS) // عناصر التحكم (التصفية) ==================== */
+    .controls {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      gap: 10px;             /* Gap between groups // فجوة بين المجموعات */
+      margin: 14px 0;        /* Vertical margins // هوامش رأسية */
+    }
+    .filter-group {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      gap: 8px;              /* Gap inside group // فجوة داخل المجموعة */
+    }
+    .filter-label {
+      font-weight: 700;      /* Bold // عريض */
+      font-size: 14px;       /* Font size // حجم الخط */
+      color: var(--muted);   /* Muted color // لون باهت */
+    }
+    .city-select {
+      width: 100%;           /* Full width // عرض كامل */
+      padding: 10px 12px;    /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      background: var(--card); /* Background // خلفية */
+      color: var(--ink);     /* Text color // لون النص */
+      font: inherit;         /* Inherit font // وراثة الخط */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+    }
+    .sort-buttons {
+      display: grid;         /* Grid // شبكة */
+      grid-template-columns: 1fr 1fr 1fr; /* Three equal columns // ثلاثة أعمدة متساوية */
+      gap: 8px;              /* Gap between buttons // فجوة بين الأزرار */
+    }
+    .sort-btn {
+      padding: 10px 8px;     /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      background: var(--card); /* Background // خلفية */
+      color: var(--ink);     /* Text color // لون النص */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      font: inherit;         /* Inherit font // وراثة الخط */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      font-size: 12px;       /* Font size // حجم الخط */
+      transition: all 0.2s;  /* Smooth transition // انتقال سلس */
+    }
+    .sort-btn.active {
+      background: #d4af37;   /* Gold background when active // خلفية ذهبية عند التفعيل */
+      color: #16243d;        /* Dark blue text // نص أزرق داكن */
+      border-color: #16243d; /* Dark blue border // حدود زرقاء داكنة */
+    }
+    .sort-btn:hover {
+      background: #f5f5f7;   /* Light grey on hover // رمادي فاتح عند التمرير */
+    }
+
+    /* ==================== INFO PANEL // لوحة المعلومات ==================== */
+    .info-panel {
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      margin-top: 10px;      /* Top margin // هامش علوي */
+      padding: 14px;         /* Padding // حشوة */
+      animation: fade 0.4s;  /* Fade animation // حركة ظهور */
+    }
+    .info-panel.active {
+      display: block;        /* Show when active // يظهر عند التفعيل */
+    }
+    .info-desc {
+      font-size: 14px;       /* Font size // حجم الخط */
+      line-height: 1.6;      /* Line height // ارتفاع السطر */
+      color: var(--muted);   /* Muted color // لون باهت */
+      margin-bottom: 16px;   /* Bottom margin // هامش سفلي */
+    }
+    .info-grid {
+      display: grid;         /* Grid // شبكة */
+      grid-template-columns: 1fr 1fr; /* Two columns // عمودان */
+      gap: 10px;             /* Gap // فجوة */
+    }
+    .info-box {
+      background: var(--bg); /* Background // خلفية */
+      padding: 12px;         /* Padding // حشوة */
+      border-radius: 12px;   /* Rounded corners // زوايا دائرية */
+      text-align: center;    /* Center text // توسيط النص */
+      display: flex;         /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      align-items: center;   /* Center horizontally // توسيط أفقي */
+      gap: 4px;              /* Gap // فجوة */
+    }
+    .ib-icon {
+      font-size: 24px;       /* Icon size // حجم الأيقونة */
+      margin-bottom: 4px;    /* Bottom margin // هامش سفلي */
+    }
+    .ib-label {
+      font-size: 12px;       /* Label size // حجم التسمية */
+      color: var(--muted);   /* Muted color // لون باهت */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+    }
+    .ib-val {
+      font-size: 14px;       /* Value size // حجم القيمة */
+      font-weight: 700;      /* Bold // عريض */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== SEARCH // البحث ==================== */
+    .bottom-search {
+      padding: 12px 0 18px;  /* Vertical padding // حشوة رأسية */
+      position: relative;    /* For autocomplete positioning // لتحديد موضع الإكمال التلقائي */
+    }
+    .search {
+      display: grid;         /* Grid layout // تخطيط شبكي */
+      grid-template-columns: 28px 1fr; /* Icon and input // أيقونة وحقل إدخال */
+      align-items: center;   /* Vertically center // توسيط عمودي */
+      gap: 8px;              /* Gap // فجوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      padding: 10px 12px;    /* Padding // حشوة */
+      background: var(--card); /* Background // خلفية */
+    }
+    .glass {
+      text-align: center;    /* Center icon // توسيط الأيقونة */
+    }
+    .search input {
+      appearance: none;      /* Remove default styling // إزالة التنسيق الافتراضي */
+      border: 0;             /* No border // بلا حدود */
+      outline: 0;            /* No outline // بلا مخطط */
+      background: transparent; /* Transparent background // خلفية شفافة */
+      width: 100%;           /* Full width // عرض كامل */
+      font: inherit;         /* Inherit font // وراثة الخط */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .search input::placeholder {
+      color: var(--muted);   /* Placeholder color // لون النص المؤقت */
+    }
+
+    /* ==================== AUTOCOMPLETE // الإكمال التلقائي ==================== */
+    .autocomplete-list {
+      display: none;         /* Hidden by default // مخفي افتراضيًا */
+      position: absolute;    /* Absolute positioning // تحديد موضع مطلق */
+      top: 100%;             /* Below search bar // أسفل شريط البحث */
+      left: 0; right: 0;     /* Full width // عرض كامل */
+      background: var(--card); /* Background // خلفية */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-top: 0;         /* Remove top border // إزالة الحد العلوي */
+      border-radius: 0 0 var(--radius) var(--radius); /* Rounded bottom corners // زوايا سفلية دائرية */
+      max-height: 200px;     /* Max height // أقصى ارتفاع */
+      overflow-y: auto;      /* Scroll if needed // تمرير إذا لزم */
+      z-index: 100;          /* Above other content // فوق المحتوى الآخر */
+    }
+    .autocomplete-list.active {
+      display: block;        /* Show when active // يظهر عند التفعيل */
+    }
+    .autocomplete-item {
+      padding: 12px;         /* Padding // حشوة */
+      border-bottom: 1px solid var(--line); /* Bottom border // حد سفلي */
+      cursor: pointer;       /* Pointer cursor // مؤشر اليد */
+      transition: background 0.2s; /* Smooth background // خلفية سلسة */
+    }
+    .autocomplete-item:hover {
+      background: #f5f5f7;   /* Light grey // رمادي فاتح */
+    }
+    .autocomplete-item:last-child {
+      border-bottom: none;   /* No border on last // بلا حدود للأخير */
+    }
+    .autocomplete-item-name {
+      font-weight: 700;      /* Bold // عريض */
+      color: var(--ink);     /* Text color // لون النص */
+    }
+    .autocomplete-item-desc {
+      font-size: 12px;       /* Small font // خط صغير */
+      color: var(--muted);   /* Muted color // لون باهت */
+      margin-top: 2px;       /* Top margin // هامش علوي */
+    }
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer {
+      background: #16243d;   /* Dark blue // أزرق داكن */
+      color: #ffffff;        /* White text // نص أبيض */
+      text-align: center;    /* Centered text // نص وسطي */
+      font-size: 14px;       /* Font size // حجم الخط */
+      padding: 20px;         /* Padding // حشوة */
+    }
+
+    /* ==================== RESPONSIVE // استجابة ==================== */
+    @media (min-width:768px) {
+      .shell { padding: 24px; } /* Larger padding on big screens // حشوة أكبر على الشاشات الكبيرة */
+      .map { height: 220px; }    /* Taller map // خريطة أطول */
+    }
+
+    /* Map Button Styling - Only in info panel // تنسيق زر الخريطة - فقط في لوحة المعلومات */
+    .map-btn {
+      padding: 8px 12px !important; /* Padding with !important to override // حشوة مع !important للتجاوز */
+      border-radius: 8px !important; /* Rounded corners // زوايا دائرية */
+      border: 2px solid #d4af37 !important; /* Gold border // حدود ذهبية */
+      background: linear-gradient(135deg, #d4af37 0%, #f7ef8a 100%) !important; /* Gold gradient // تدرج ذهبي */
+      color: #0f0f10 !important; /* Dark text // نص داكن */
+      cursor: pointer !important; /* Pointer cursor // مؤشر اليد */
+      font-weight: 700 !important; /* Bold // عريض */
+      font-size: 13px !important; /* Font size // حجم الخط */
+      transition: all 0.3s ease !important; /* Smooth transition // انتقال سلس */
+      display: inline-flex !important; /* Inline flex // مرن مضمن */
+      align-items: center !important; /* Center vertically // توسيط عمودي */
+      gap: 6px !important; /* Gap // فجوة */
+      box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3) !important; /* Shadow // ظل */
+    }
+    .map-btn:hover {
+      transform: scale(1.08) !important; /* Slight zoom on hover // تكبير طفيف عند التمرير */
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5) !important; /* Larger shadow // ظل أكبر */
+      background: linear-gradient(135deg, #f7ef8a 0%, #d4af37 100%) !important; /* Reversed gradient // تدرج معكوس */
+    }
+    .map-btn:active {
+      transform: scale(0.96) !important; /* Slight shrink when pressed // تصغير طفيف عند الضغط */
+    }
+
+    /* Plan Button Styling - Only in info panel // تنسيق زر الخطة - فقط في لوحة المعلومات */
+    .plan-btn {
+      padding: 8px 12px !important; /* Padding // حشوة */
+      border-radius: 8px !important; /* Rounded corners // زوايا دائرية */
+      border: 2px solid #3b82f6 !important; /* Blue border // حدود زرقاء */
+      background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%) !important; /* Blue-green gradient // تدرج أزرق-أخضر */
+      color: #ffffff !important; /* White text // نص أبيض */
+      cursor: pointer !important; /* Pointer cursor // مؤشر اليد */
+      font-weight: 700 !important; /* Bold // عريض */
+      font-size: 13px !important; /* Font size // حجم الخط */
+      transition: all 0.3s ease !important; /* Smooth transition // انتقال سلس */
+      display: inline-flex !important; /* Inline flex // مرن مضمن */
+      align-items: center !important; /* Center vertically // توسيط عمودي */
+      gap: 6px !important; /* Gap // فجوة */
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3) !important; /* Shadow // ظل */
+    }
+    .plan-btn:hover {
+      transform: scale(1.08) !important; /* Slight zoom // تكبير طفيف */
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5) !important; /* Larger shadow // ظل أكبر */
+      background: linear-gradient(135deg, #2dd4bf 0%, #3b82f6 100%) !important; /* Reversed gradient // تدرج معكوس */
+    }
+    .plan-btn:active {
+      transform: scale(0.96) !important; /* Slight shrink // تصغير طفيف */
+    }
+
+    /* Error toast notification // إشعار الخطأ */
+    .error-toast {
+      position: fixed;       /* Fixed position // موضع ثابت */
+      top: 20px;             /* Distance from top // مسافة من الأعلى */
+      left: 50%;             /* Center horizontally // توسيط أفقي */
+      transform: translateX(-50%) translateY(-20px); /* Hidden above screen // مخفي فوق الشاشة */
+      background: #ef4444;   /* Red background // خلفية حمراء */
+      color: #ffffff;        /* White text // نص أبيض */
+      padding: 12px 24px;    /* Padding // حشوة */
+      border-radius: 999px;  /* Pill shape // شكل كبسولة */
+      font-weight: 600;      /* Semi-bold // شبه عريض */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Shadow // ظل */
+      opacity: 0;            /* Invisible // غير مرئي */
+      pointer-events: none;  /* Can't click // غير قابل للنقر */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      z-index: 100;          /* High z-index // مؤشر z عالي */
+    }
+    .error-toast.show {
+      transform: translateX(-50%) translateY(0); /* Slide into view // انزلاق للظهور */
+      opacity: 1;            /* Visible // مرئي */
+    }
+  </style>
+
+  <script src="JS/Auth.js"></script>
+  <script src="JS/Places_data.js"></script>
+</head>
+<body>
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand">
+    <!-- Home button (back) // زر الصفحة الرئيسية (رجوع) -->
+    <a href="Home.html" class="home-btn" aria-label="الرئيسية" data-ar="رجوع" data-en="Back">رجوع</a>
+    <!-- Logo in Arabic script // الشعار بالخط العربي -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <!-- Subtitle (English) // العنوان الفرعي (إنجليزي) -->
+    <div class="logo-sub">HAYYAK</div>
+    <!-- Language toggle button // زر تبديل اللغة -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span> <!-- Button text (changes via JS) // نص الزر (يتغير عبر JS) -->
+    </button>
+  </header>
+
+  <!-- Error toast container // حاوية إشعار الخطأ -->
+  <div id="error-toast" class="error-toast"></div>
+
+  <main class="shell"></main>
+
+  <!-- Footer // التذييل -->
+  <footer data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer>
+
+  <!-- ==================== JAVASCRIPT // جافا سكريبت ==================== -->
+  <script>
+    // Language state // حالة اللغة
+    let currentLanguage = 'ar'; // Current language (Arabic by default) // اللغة الحالية (العربية افتراضيًا)
+    let currentCity = 'dubai'; // Currently selected city // المدينة المحددة حاليًا
+    let currentSort = 'nearest'; // Current sorting method // طريقة الترتيب الحالية
+    let currentSearchQuery = ''; // Current search query // استعلام البحث الحالي
+    let filteredPlaces = []; // Array to hold filtered places // مصفوفة لتخزين الأماكن المصفاة
+    let userLocation = {lat: 25.2048, lon: 55.2708}; // User location (default Dubai) // موقع المستخدم (دبي افتراضيًا)
+
+    // 7-City Entertainment Database with English translations // قاعدة بيانات الترفيه لـ 7 مدن مع ترجمات إنجليزية
+    const allPlaces = {
+      dubai: [
+        {city:'dubai', name:'دبي مول', nameEn:'Dubai Mall', lat:25.1988, lon:55.2796, rating:4.8, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 12:00 ص', timeEn:'10:00 AM - 12:00 AM', desc:'أكبر مركز تسوق في العالم', descEn:'The largest shopping center in the world'},
+        {city:'dubai', name:'مول الإمارات', nameEn:'Mall of the Emirates', lat:25.1181, lon:55.2006, rating:4.7, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 12:00 ص', timeEn:'10:00 AM - 12:00 AM', desc:'مول شهير يضم سكي دبي', descEn:'Famous mall with Ski Dubai'},
+        {city:'dubai', name:'سيتي ووك', nameEn:'City Walk', lat:25.2086, lon:55.2625, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'مفتوح', timeEn:'Open 24/7', desc:'منطقة تسوق ومطاعم عصرية', descEn:'Modern shopping and dining area'},
+        {city:'dubai', name:'بوكس بارك', nameEn:'Box Park', lat:25.2154, lon:55.2716, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 12:00 ص', timeEn:'10:00 AM - 12:00 AM', desc:'مجمع متاجر بتصميم الحاويات', descEn:'Container-designed retail complex'},
+        {city:'dubai', name:'دبي فستيفال سيتي مول', nameEn:'Dubai Festival City Mall', lat:25.2217, lon:55.3517, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 12:00 ص', timeEn:'10:00 AM - 12:00 AM', desc:'مول كبير على الخور', descEn:'Large mall on the creek'},
+        {city:'dubai', name:'ابن بطوطة مول', nameEn:'Ibn Battuta Mall', lat:25.0444, lon:55.1194, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر مركز تسوق ذو طابع خاص في العالم', descEn:'The world\'s largest themed shopping mall'},
+        {city:'dubai', name:'ميركاتو مول', nameEn:'Mercato Shopping Mall', lat:25.2177, lon:55.2522, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول بتصميم إيطالي في جميرا', descEn:'Italian-themed mall in Jumeirah'},
+        {city:'dubai', name:'وافي سيتي', nameEn:'Wafi City', lat:25.2294, lon:55.3186, rating:4.4, price:'مرتفع', priceEn:'High', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول بتصميم مصري قديم', descEn:'Ancient Egyptian-themed mall'}
+      ],
+      abudhabi: [
+        {city:'abudhabi', name:'ياس مول', nameEn:'Yas Mall', lat:24.4894, lon:54.6036, rating:4.7, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر مول في أبوظبي بجانب عالم فيراري', descEn:'Largest mall in Abu Dhabi next to Ferrari World'},
+        {city:'abudhabi', name:'الغاليريا جزيرة المارية', nameEn:'The Galleria Al Maryah Island', lat:24.4996, lon:54.3988, rating:4.8, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول فاخر يضم أشهر الماركات', descEn:'Luxury mall with top brands'},
+        {city:'abudhabi', name:'مارينا مول', nameEn:'Marina Mall', lat:24.4764, lon:54.3217, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول مطل على الكورنيش', descEn:'Mall overlooking the Corniche'},
+        {city:'abudhabi', name:'أبوظبي مول', nameEn:'Abu Dhabi Mall', lat:24.4956, lon:54.3833, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول في قلب المدينة يضم أكثر من 200 متجر', descEn:'Mall in the heart of the city with over 200 stores'},
+        {city:'abudhabi', name:'الوحدة مول', nameEn:'Al Wahda Mall', lat:24.4703, lon:54.3722, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'وجهة تسوق شهيرة مع سقف مميز', descEn:'Popular shopping destination with iconic roof'},
+        {city:'abudhabi', name:'دلما مول', nameEn:'Dalma Mall', lat:24.3361, lon:54.5269, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أحد أكبر المولات في أبوظبي', descEn:'One of the largest malls in Abu Dhabi'}
+      ],
+      sharjah: [
+        {city:'sharjah', name:'سيتي سنتر الشارقة', nameEn:'Sharjah City Centre', lat:25.3216, lon:55.3887, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر وأشهر مول في الشارقة', descEn:'Largest and most famous mall in Sharjah'},
+        {city:'sharjah', name:'سيتي سنتر الزاهية', nameEn:'City Centre Al Zahia', lat:25.2979, lon:55.4723, rating:4.7, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول حديث وضخم في منطقة الزاهية', descEn:'Modern and huge mall in Al Zahia area'},
+        {city:'sharjah', name:'صحارى سنتر', nameEn:'Sahara Centre', lat:25.2972, lon:55.3736, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'وجهة تسوق وترفيه عائلية رائدة', descEn:'Leading family shopping and entertainment destination'},
+        {city:'sharjah', name:'ميجا مول الشارقة', nameEn:'Mega Mall Sharjah', lat:25.3433, lon:55.3967, rating:4.4, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول كبير في قلب الشارقة', descEn:'Large mall in the heart of Sharjah'},
+        {city:'sharjah', name:'زيرو 6 مول', nameEn:'Zero 6 Mall', lat:25.3080, lon:55.4480, rating:4.5, price:'مرتفع', priceEn:'High', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'وجهة عصرية للتسوق والترفيه', descEn:'Modern lifestyle destination for shopping and entertainment'}
+      ],
+      ajman: [
+        {city:'ajman', name:'سيتي سنتر عجمان', nameEn:'Ajman City Centre', lat:25.3994, lon:55.4797, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر مول في عجمان ومركز تسوق رئيسي', descEn:'Largest mall in Ajman and main shopping center'},
+        {city:'ajman', name:'السوق الصيني عجمان', nameEn:'China Mall Ajman', lat:25.4278, lon:55.5083, rating:4.3, price:'منخفض', priceEn:'Low', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مجمع تجاري ضخم للمنتجات الصينية', descEn:'Huge complex for Chinese products'},
+        {city:'ajman', name:'سفير مول عجمان', nameEn:'Safeer Mall Ajman', lat:25.4050, lon:55.4500, rating:4.2, price:'منخفض', priceEn:'Low', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'مركز تسوق عائلي بأسعار معقولة', descEn:'Family shopping center with affordable prices'},
+        {city:'ajman', name:'جراند مول عجمان', nameEn:'Grand Mall Ajman', lat:25.4100, lon:55.4400, rating:4.1, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'وجهة تسوق متنوعة', descEn:'Diverse shopping destination'},
+        {city:'ajman', name:'دانة مول', nameEn:'Dana Mall', lat:25.3950, lon:55.4600, rating:4.0, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول هادئ للتسوق السريع', descEn:'Quiet mall for quick shopping'}
+      ],
+      rak: [
+        {city:'rak', name:'الحمراء مول', nameEn:'Al Hamra Mall', lat:25.6989, lon:55.7833, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول رئيسي في رأس الخيمة يضم متاجر متنوعة', descEn:'Main mall in Ras Al Khaimah with various stores'},
+        {city:'rak', name:'منار مول', nameEn:'Manar Mall', lat:25.7958, lon:55.9667, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول مطل على الخور مع ممشى', descEn:'Mall overlooking the creek with promenade'},
+        {city:'rak', name:'راك مول', nameEn:'RAK Mall', lat:25.7700, lon:55.9800, rating:4.4, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'مركز تسوق واسع مع خيارات ترفيهية', descEn:'Spacious shopping center with entertainment options'},
+        {city:'rak', name:'النعيم مول', nameEn:'Al Naeem Mall', lat:25.7850, lon:55.9550, rating:4.3, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول بإطلالة بحرية ومتاجر متنوعة', descEn:'Mall with sea view and various shops'},
+        {city:'rak', name:'جروف فيليج', nameEn:'Grove Village', lat:25.7900, lon:55.9600, rating:4.6, price:'مرتفع', priceEn:'High', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'وجهة تسوق خارجية عصرية', descEn:'Modern outdoor shopping destination'}
+      ],
+      fujairah: [
+        {city:'fujairah', name:'سوق الفجيرة المركزي', nameEn:'Fujairah Central Market', lat:25.1167, lon:56.3500, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'9:00 ص - 10:00 م', timeEn:'9:00 AM - 10:00 PM', desc:'سوق شعبي يضم الملابس والهدايا والتوابل', descEn:'Traditional market for clothes, gifts and spices'},
+        {city:'fujairah', name:'سيتي سنتر الفجيرة', nameEn:'City Centre Fujairah', lat:25.1222, lon:56.3250, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر مول في الفجيرة', descEn:'Largest mall in Fujairah'},
+        {city:'fujairah', name:'الفجيرة مول', nameEn:'Fujairah Mall', lat:25.1300, lon:56.3300, rating:4.4, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 11:00 م', timeEn:'10:00 AM - 11:00 PM', desc:'مركز تسوق حديث', descEn:'Modern shopping center'},
+        {city:'fujairah', name:'سنشري مول', nameEn:'Century Mall', lat:25.1400, lon:56.3400, rating:4.3, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مول يضم سينما ومتاجر متنوعة', descEn:'Mall with cinema and various shops'},
+        {city:'fujairah', name:'لولو مول الفجيرة', nameEn:'Lulu Mall Fujairah', lat:25.1250, lon:56.3350, rating:4.2, price:'منخفض', priceEn:'Low', time:'8:00 ص - 12:00 ص', timeEn:'8:00 AM - 12:00 AM', desc:'تسوق شامل بأسعار جيدة', descEn:'Comprehensive shopping at good prices'}
+      ],
+      uaq: [
+        {city:'uaq', name:'سيتي سنتر أم القيوين', nameEn:'Umm Al Quwain City Centre', lat:25.5933, lon:55.5633, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'أكبر مركز تسوق في أم القيوين يضم متاجر متنوعة', descEn:'Largest shopping center in Umm Al Quwain with various stores'},
+        {city:'uaq', name:'مول أم القيوين', nameEn:'Mall of UAQ', lat:25.5333, lon:55.5500, rating:4.3, price:'متوسط الأسعار', priceEn:'Average Prices', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'مركز تسوق مجتمعي', descEn:'Community shopping center'},
+        {city:'uaq', name:'السوق الصيني أم القيوين', nameEn:'China Mall UAQ', lat:25.5200, lon:55.5400, rating:4.2, price:'منخفض', priceEn:'Low', time:'10:00 ص - 10:00 م', timeEn:'10:00 AM - 10:00 PM', desc:'منتجات صينية متنوعة', descEn:'Various Chinese products'},
+        {city:'uaq', name:'لولو سنتر', nameEn:'Lulu Center', lat:25.5600, lon:55.5550, rating:4.4, price:'منخفض', priceEn:'Low', time:'8:00 ص - 11:00 م', timeEn:'8:00 AM - 11:00 PM', desc:'سوبر ماركت ومتاجر', descEn:'Supermarket and shops'},
+        {city:'uaq', name:'بازار العبرة', nameEn:'Al Abrah Bazar', lat:25.5700, lon:55.5600, rating:4.1, price:'منخفض', priceEn:'Low', time:'9:00 ص - 10:00 م', timeEn:'9:00 AM - 10:00 PM', desc:'سوق شعبي صغير', descEn:'Small traditional market'}
+      ],
+      eastern_region: [
+        {city:'eastern_region', name:'سوق شرق', nameEn:'Souq Sharq', lat:25.3370, lon:56.3540, rating:4.6, price:'متوسط الأسعار', priceEn:'Average Prices', time:'8:00 ص - 11:00 م', timeEn:'8:00 AM - 11:00 PM', desc:'سوق تقليدي بتصميم تراثي يضم متاجر ومطاعم', descEn:'Traditional market with heritage design featuring shops and restaurants'},
+        {city:'eastern_region', name:'جمعية خورفكان التعاونية', nameEn:'Khorfakkan Coop', lat:25.3450, lon:56.3480, rating:4.4, price:'متوسط الأسعار', priceEn:'Average Prices', time:'8:00 ص - 12:00 ص', timeEn:'8:00 AM - 12:00 AM', desc:'سوبر ماركت كبير ومتاجر متنوعة', descEn:'Large supermarket and various stores'},
+        {city:'eastern_region', name:'سفير ماركت', nameEn:'Safeer Market', lat:25.3520, lon:56.3420, rating:4.3, price:'منخفض', priceEn:'Low', time:'9:00 ص - 11:00 م', timeEn:'9:00 AM - 11:00 PM', desc:'مركز تسوق بأسعار معقولة', descEn:'Affordable shopping center'},
+        {city:'eastern_region', name:'سوق الحراي', nameEn:'Al Harai Market', lat:25.3600, lon:56.3500, rating:4.2, price:'منخفض', priceEn:'Low', time:'8:00 ص - 10:00 م', timeEn:'8:00 AM - 10:00 PM', desc:'سوق للخضار والفواكه والمنتجات المحلية', descEn:'Market for vegetables, fruits and local products'},
+        {city:'eastern_region', name:'لولو خورفكان', nameEn:'LULU Khorfakkan', lat:25.3550, lon:56.3450, rating:4.5, price:'متوسط الأسعار', priceEn:'Average Prices', time:'8:00 ص - 12:00 ص', timeEn:'8:00 AM - 12:00 AM', desc:'هايبر ماركت شامل', descEn:'Comprehensive hypermarket'}
+      ]
+    };
+
+    // ---------- GLOBAL SEARCH INDEX (all places, for autocomplete + global search) ----------
+    // فهرس بحث عالمي (جميع الأماكن، للإكمال التلقائي والبحث العالمي)
+    const globalPlaces = []; // Initialize empty array // تهيئة مصفوفة فارغة
+    for (const city in allPlaces) { // Loop through all cities // التكرار على جميع المدن
+      allPlaces[city].forEach(p => { // For each place in the city // لكل مكان في المدينة
+        globalPlaces.push({ // Push a normalized object // إدراج كائن موحد
+          ...p, // Spread original properties // نشر الخصائص الأصلية
+          city: city, // Add city identifier // إضافة معرف المدينة
+          nameAr: p.name, // Arabic name // الاسم بالعربية
+          nameEn: p.nameEn, // English name // الاسم بالإنجليزية
+          type: 'Store', // Simple category // فئة بسيطة
+          page: 'stores.html' // Current page identifier // معرف الصفحة الحالية
+        });
+      });
+    }
+
+    // Translation function // دالة الترجمة
+    function toggleLanguage() {
+      const btn = document.getElementById('translateBtn'); // Get translate button // الحصول على زر الترجمة
+      btn.classList.add('switching'); // Add animation class // إضافة فئة الحركة
+      
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar'; // Toggle language // تبديل اللغة
+      
+      const langText = btn.querySelector('span:last-child'); // Get the button text span // الحصول على امتداد نص الزر
+      langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية'; // Update button text // تحديث نص الزر
+      
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; // Set direction // تعيين الاتجاه
+      document.documentElement.lang = currentLanguage; // Set language attribute // تعيين سمة اللغة
+      
+      document.title = currentLanguage === 'ar' ? 'حياك | متاجر' : 'Hayyak | Stores'; // Update page title // تحديث عنوان الصفحة
+      
+      document.querySelector('meta[name="description"]').setAttribute('content', // Update meta description // تحديث الوصف التعريفي
+        currentLanguage === 'ar' 
+          ? 'أماكن الترفيه في دبي - مع تصفية حسب الموقع والتقييم والسعر والمسافة' 
+          : 'Entertainment places in Dubai - with filtering by location, rating, price and distance'
+      );
+      
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); // Get user profile // الحصول على ملف المستخدم
+      profile.language = currentLanguage; // Save language preference // حفظ تفضيل اللغة
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile)); // Update localStorage // تحديث التخزين المحلي
+      
+      filterAndSort(); // Re-filter and sort places // إعادة تصفية وترتيب الأماكن
+      translateAllContent(); // Translate all static content // ترجمة كل المحتوى الثابت
+      
+      showError(currentLanguage === 'ar' ? 'تم التبديل إلى العربية' : 'Switched to English'); // Show notification // عرض إشعار
+      
+      setTimeout(() => {
+        btn.classList.remove('switching'); // Remove animation class after delay // إزالة فئة الحركة بعد تأخير
+      }, 500);
+    }
+    
+    function translateAllContent() {
+      // Translate all elements with data-ar and data-en attributes // ترجمة جميع العناصر التي تحتوي على سمات data-ar و data-en
+      document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          element.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+        }
+      });
+      
+      // Translate placeholders // ترجمة النصوص المؤقتة
+      document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? element.getAttribute('data-ar-placeholder') : element.getAttribute('data-en-placeholder');
+        }
+      });
+      
+      // Translate aria-labels // ترجمة تسميات aria
+      document.querySelectorAll('[aria-label]').forEach(element => {
+        if (element.hasAttribute('data-ar-label') && element.hasAttribute('data-en-label')) {
+          element.setAttribute('aria-label', currentLanguage === 'ar' ? element.getAttribute('data-ar-label') : element.getAttribute('data-en-label'));
+        }
+      });
+      
+      // Update home button aria-label // تحديث تسمية زر الرئيسية
+      const homeBtn = document.querySelector('.home-btn');
+      if (homeBtn) homeBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'الرئيسية' : 'Home');
+      
+      // Update translate button aria-label // تحديث تسمية زر الترجمة
+      const translateBtn = document.getElementById('translateBtn');
+      if (translateBtn) translateBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'تبديل اللغة' : 'Toggle Language');
+      
+      // Update search input aria-label // تحديث تسمية حقل البحث
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.setAttribute('aria-label', currentLanguage === 'ar' ? 'ابحث في أماكن الترفيه' : 'Search for entertainment places');
+      
+      // Update map iframe title // تحديث عنوان iframe للخريطة
+      const map = document.querySelector('.map');
+      if (map) {
+        map.setAttribute('aria-label', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+        const mapIframe = map.querySelector('iframe');
+        if (mapIframe) mapIframe.setAttribute('title', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+      }
+      
+      // Update city select options // تحديث خيارات تحديد المدينة
+      const citySelect = document.getElementById('city-select');
+      if (citySelect) {
+        Array.from(citySelect.options).forEach(option => {
+          const span = option.querySelector('span');
+          if (span && span.hasAttribute('data-ar') && span.hasAttribute('data-en')) {
+            span.textContent = currentLanguage === 'ar' ? span.getAttribute('data-ar') : span.getAttribute('data-en');
+          }
+        });
+      }
+    }
+
+    function getUserLocation() {
+      // Get user location from profile or use default // الحصول على موقع المستخدم من الملف الشخصي أو استخدام الافتراضي
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (userProfile.latitude && userProfile.longitude) {
+        userLocation = {lat: parseFloat(userProfile.latitude), lon: parseFloat(userProfile.longitude)}; // Use saved coordinates // استخدام الإحداثيات المحفوظة
+      }
+
+      if (userProfile.emirate) {
+        // Map emirate to city key // تعيين الإمارة إلى مفتاح المدينة
+        const map = {
+          'Abu Dhabi': 'abudhabi', 'Dubai': 'dubai', 'Sharjah': 'sharjah',
+          'Ajman': 'ajman', 'Ras Al Khaimah': 'rak', 'Fujairah': 'fujairah',
+          'Umm Al Quwain': 'uaq',
+          'Eastern Region': 'eastern_region'
+        };
+        if (map[userProfile.emirate]) {
+          currentCity = map[userProfile.emirate]; // Set current city // تعيين المدينة الحالية
+          const select = document.getElementById('city-select');
+          if (select) select.value = currentCity; // Update select element // تحديث عنصر التحديد
+        }
+      }
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      // Calculate distance in km between two coordinates using Haversine formula // حساب المسافة بالكيلومترات بين إحداثيتين باستخدام صيغة هافرسين
+      const R = 6371; // Earth radius in km // نصف قطر الأرض بالكيلومتر
+      const dLat = (lat2 - lat1) * Math.PI / 180; // Difference in latitude in radians // فرق خط العرض بالراديان
+      const dLon = (lon2 - lon1) * Math.PI / 180; // Difference in longitude in radians // فرق خط الطول بالراديان
+      const a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)*Math.sin(dLon/2); // Haversine formula // صيغة هافرسين
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); // Central angle // الزاوية المركزية
+      return (R * c).toFixed(1); // Distance in km // المسافة بالكيلومتر
+    }
+
+    function checkIfPlaceUnsuitableForUser(place) {
+      // Check if place conflicts with user's phobias // التحقق مما إذا كان المكان يتعارض مع فوبيا المستخدم
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      const userPhobias = profile.phobias || [];
+      
+      // Mapping of phobias to trigger keywords relevant to stores // تعيين الفوبيا إلى كلمات مفتاحية ذات صلة بالمتاجر
+      const phobiaRestrictions = {
+        '📦 فوبيا الأماكن المغلقة': ['Mall', 'Indoor', 'Center', 'مول', 'مركز', 'مغلق'],
+        '🏙️ فوبيا الأماكن المفتوحة/المزدحمة': ['Mall', 'Souq', 'Market', 'Crowd', 'City Walk', 'مول', 'سوق', 'مزدحم', 'ممشى'],
+        '🧗 فوبيا المرتفعات': ['Floor', 'High', 'طابق', 'عالي']
+      };
+      
+      for (const [phobia, triggers] of Object.entries(phobiaRestrictions)) { // Loop through phobias // التكرار على الفوبيا
+        if (userPhobias.includes(phobia)) { // If user has this phobia // إذا كان المستخدم يعاني من هذه الفوبيا
+          for (const trigger of triggers) { // Check each trigger // التحقق من كل محفز
+            const name = (place.name || '').toLowerCase(); // Arabic name // الاسم بالعربية
+            const nameEn = (place.nameEn || '').toLowerCase(); // English name // الاسم بالإنجليزية
+            const desc = (place.desc || '').toLowerCase(); // Arabic description // الوصف بالعربية
+            const descEn = (place.descEn || '').toLowerCase(); // English description // الوصف بالإنجليزية
+            const t = trigger.toLowerCase(); // Trigger in lowercase // المحفز بأحرف صغيرة
+            
+            if (name.includes(t) || nameEn.includes(t) || desc.includes(t) || descEn.includes(t)) {
+              return true; // Place is unsuitable // المكان غير مناسب
+            }
+          }
+        }
+      }
+      return false; // Place is suitable // المكان مناسب
+    }
+
+    // Main filtering: if search query active → search all cities, else current city
+    // التصفية الرئيسية: إذا كان استعلام البحث نشطًا → البحث في جميع المدن، وإلا المدينة الحالية
+    function filterAndSort() {
+      let places; // Variable to hold places to filter // متغير لتخزين الأماكن المراد تصفيتها
+      if (currentSearchQuery) { // If there is a search query // إذا كان هناك استعلام بحث
+        const q = currentSearchQuery.toLowerCase(); // Convert query to lowercase // تحويل الاستعلام إلى أحرف صغيرة
+        places = globalPlaces.filter(p => // Filter global places // تصفية الأماكن العالمية
+          (p.name && p.name.toLowerCase().includes(q)) || 
+          (p.nameEn && p.nameEn.toLowerCase().includes(q)) ||
+          (p.desc && p.desc.toLowerCase().includes(q)) ||
+          (p.descEn && p.descEn.toLowerCase().includes(q))
+        );
+      } else {
+        places = allPlaces[currentCity] || []; // Use current city's places // استخدام أماكن المدينة الحالية
+      }
+      
+      filteredPlaces = places.map(p => ({ // Map places to include distance // تعيين الأماكن لتضمين المسافة
+        ...p, // Spread original properties // نشر الخصائص الأصلية
+        distance: calculateDistance(userLocation.lat, userLocation.lon, p.lat, p.lon) // Calculate distance // حساب المسافة
+      }));
+
+      // Sort according to currentSort // الترتيب حسب currentSort
+      if (currentSort === 'nearest') filteredPlaces.sort((a,b) => parseFloat(a.distance) - parseFloat(b.distance)); // Nearest first // الأقرب أولاً
+      else if (currentSort === 'rating') filteredPlaces.sort((a,b) => b.rating - a.rating); // Highest rating first // الأعلى تقييماً أولاً
+      else if (currentSort === 'price') filteredPlaces.sort((a,b) => { // Cheapest first // الأرخص أولاً
+        const pa = a.price === 'متفاوت' || a.price === '0' || a.price === 'متوسط الأسعار' ? 999 : parseInt(a.price); // Normalize price // توحيد السعر
+        const pb = b.price === 'متفاوت' || b.price === '0' || b.price === 'متوسط الأسعار' ? 999 : parseInt(b.price);
+        return pa - pb;
+      });
+
+      renderPlaces(filteredPlaces.slice(0, 4)); // Render first 4 places // عرض أول 4 أماكن
+    }
+
+    // Render list items – IMAGE REMOVED per request // عرض عناصر القائمة - تمت إزالة الصورة حسب الطلب
+    function renderPlaces(places) {
+      const list = document.getElementById('places-list'); // Get list container // الحصول على حاوية القائمة
+      list.innerHTML = ''; // Clear list // مسح القائمة
+      places.forEach(p => {
+        const item = document.createElement('article'); // Create article element // إنشاء عنصر مقالة
+        item.className = 'item'; // Add class // إضافة الفئة
+        item.onclick = () => showPlace(p); // Set click handler to show info // تعيين معالج النقر لإظهار المعلومات
+        
+        const name = currentLanguage === 'ar' ? p.name : (p.nameEn || p.name); // Get name in current language // الحصول على الاسم باللغة الحالية
+        const distanceText = currentLanguage === 'ar' ? `${p.distance} كم` : `${p.distance} km`; // Distance text // نص المسافة
+        const ratingText = `⭐ ${p.rating}`; // Rating text // نص التقييم
+        
+        item.innerHTML = `
+          <div class="pin">📍</div>
+          <div class="label">
+            <span>${name}</span>
+            <div style="display:flex; gap:6px; align-items:center; margin-top:4px; flex-wrap:wrap;">
+              <span class="distance-badge">${distanceText}</span>
+              <span class="rating-badge">${ratingText}</span>
+            </div>
+          </div>
+        `;
+        list.appendChild(item); // Add item to list // إضافة العنصر إلى القائمة
+      });
+    }
+
+    function sortPlaces(type) {
+      // Handle sorting button click // معالجة النقر على زر الترتيب
+      currentSort = type; // Update current sort // تحديث الترتيب الحالي
+      document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active')); // Remove active class from all // إزالة الفئة النشطة من الكل
+      event.target.classList.add('active'); // Add active class to clicked button // إضافة الفئة النشطة إلى الزر المضغوط
+      filterAndSort(); // Re-filter and sort // إعادة التصفية والترتيب
+    }
+
+    window.openMap = function(lat, lon, name, price, time, rating){
+      // Open map page with parameters // فتح صفحة الخريطة مع المعاملات
+      try{ 
+        const params = new URLSearchParams({ // Create URL parameters // إنشاء معاملات URL
+          lat: lat, 
+          lon: lon, 
+          name: name, 
+          price: price, 
+          time: time, 
+          rating: rating
+        }); 
+        window.location.href = 'Map.html?' + params.toString(); // Redirect // إعادة التوجيه
+      } catch(e){
+        console.error(e); // Log error // تسجيل الخطأ
+      }    
+    }
+
+    window.addToPlan = function(name) {
+      // Add place to planner queue // إضافة مكان إلى قائمة المخطط
+      let queue = JSON.parse(localStorage.getItem('hayyak_planner_queue') || '[]'); // Get existing queue // الحصول على القائمة الموجودة
+      if (!queue.includes(name)) {
+        queue.push(name); // Add name if not already present // إضافة الاسم إذا لم يكن موجودًا بالفعل
+        localStorage.setItem('hayyak_planner_queue', JSON.stringify(queue)); // Save // حفظ
+        showError(currentLanguage === 'ar' ? 'تمت الإضافة إلى المخطط' : 'Added to planner'); // Show success // عرض نجاح
+      } else {
+        showError(currentLanguage === 'ar' ? 'المكان موجود بالفعل في المخطط' : 'Place already in planner'); // Show warning // عرض تحذير
+      }
+      setTimeout(() => {
+        window.location.href = 'PlanDay.html'; // Redirect to planner after 1 second // إعادة التوجيه إلى المخطط بعد ثانية واحدة
+      }, 1000);
+    }
+
+    function changeCity(city) {
+      // Handle city change // معالجة تغيير المدينة
+      currentCity = city; // Update current city // تحديث المدينة الحالية
+      // Clear any active search when manually changing city // مسح أي بحث نشط عند تغيير المدينة يدويًا
+      currentSearchQuery = ''; // Reset search query // إعادة تعيين استعلام البحث
+      document.getElementById('search-input').value = ''; // Clear search input // مسح حقل البحث
+      filterAndSort(); // Re-filter // إعادة التصفية
+    }
+
+    function showPlace(p) {
+      // Show info panel for a place // إظهار لوحة المعلومات لمكان
+      const panel = document.getElementById('info-panel'); // Get info panel // الحصول على لوحة المعلومات
+      
+      if (panel.dataset.currentPlace === p.name && panel.classList.contains('active')) { // If same place and panel is active // إذا كان نفس المكان واللوحة نشطة
+        panel.classList.remove('active'); // Hide panel // إخفاء اللوحة
+        panel.dataset.currentPlace = ''; // Clear current place // مسح المكان الحالي
+        return;
+      }
+      
+      panel.dataset.currentPlace = p.name; // Store current place // تخزين المكان الحالي
+      const bbox = `${p.lon-0.008},${p.lat-0.008},${p.lon+0.008},${p.lat+0.008}`; // Calculate bounding box for map // حساب المربع المحيط للخريطة
+      document.querySelector('.map iframe').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik`; // Update map // تحديث الخريطة
+      
+      const name = currentLanguage === 'ar' ? p.name : (p.nameEn || p.name); // Name in current language // الاسم باللغة الحالية
+      const desc = currentLanguage === 'ar' ? p.desc : (p.descEn || p.desc); // Description // الوصف
+      const price = currentLanguage === 'ar' ? p.price : (p.priceEn || p.price); // Price // السعر
+      const time = currentLanguage === 'ar' ? p.time : (p.timeEn || p.time); // Hours // الساعات
+      const distanceText = currentLanguage === 'ar' ? `${p.distance} كم` : `${p.distance} km`; // Distance // المسافة
+      const ratingText = `${p.rating}/5`; // Rating // التقييم
+      const rating = p.rating;
+      
+      // Update panel fields // تحديث حقول اللوحة
+      document.getElementById('p-title').innerText = name;
+      document.getElementById('p-rating').innerText = ratingText;
+      document.getElementById('p-distance').innerText = distanceText;
+      document.getElementById('p-time').innerText = time;
+      document.getElementById('p-price').innerText = price === '0' ? (currentLanguage === 'ar' ? 'مجاني' : 'Free') : price;
+      document.getElementById('p-desc').innerText = desc;
+      
+      const actionsDiv = document.getElementById('p-actions'); // Get actions container // الحصول على حاوية الإجراءات
+      if (actionsDiv) {
+        actionsDiv.innerHTML = `
+          <button class="map-btn" onclick="openMap(${p.lat}, ${p.lon}, '${(name).replace(/'/g, "\\'")}', '${price}', '${time}', ${rating})">
+            <span>🗺️</span>
+            <span class="map-btn-text" data-ar="عرض" data-en="Map">${currentLanguage === 'ar' ? 'عرض' : 'Map'}</span>
+          </button>
+          <button class="plan-btn" onclick="addToPlan('${(name).replace(/'/g, "\\'")}')">
+            <span>📅</span>
+            <span class="plan-btn-text" data-ar="خطط" data-en="Plan">${currentLanguage === 'ar' ? 'خطط' : 'Plan'}</span>
+          </button>
+        `;
+      }
+      
+      panel.classList.add('active'); // Show panel // إظهار اللوحة
+
+      // Add to history // إضافة إلى السجل
+      const item = { title: name, lat: p.lat, lon: p.lon, date: new Date().toISOString() };
+      let history = JSON.parse(localStorage.getItem('hayyak_history') || '[]');
+      history = history.filter(i => i.title !== name); // Remove duplicate if any // إزالة التكرار إذا وجد
+      history.unshift(item); // Add to beginning // إضافة إلى البداية
+      if (history.length > 20) history.pop(); // Limit to 20 items // الحد إلى 20 عنصرًا
+      localStorage.setItem('hayyak_history', JSON.stringify(history)); // Save // حفظ
+    }
+
+    // *** NEW: selectPlace function to handle autocomplete selection ***
+    // *** جديد: دالة selectPlace للتعامل مع اختيار الإكمال التلقائي ***
+    function selectPlace(city, placeName) {
+      const place = allPlaces[city].find(p => p.name === placeName); // Find place in database // العثور على المكان في قاعدة البيانات
+      if (!place) return; // Exit if not found // الخروج إذا لم يتم العثور
+      
+      const displayName = currentLanguage === 'ar' ? place.name : place.nameEn; // Get display name // الحصول على اسم العرض
+      searchInput.value = displayName; // Set search input // تعيين حقل البحث
+      autocompleteList.classList.remove('active'); // Hide autocomplete // إخفاء الإكمال التلقائي
+      currentCity = city; // Update current city // تحديث المدينة الحالية
+      currentSearchQuery = ''; // Clear search query // مسح استعلام البحث
+      document.getElementById('city-select').value = city; // Update city select // تحديث تحديد المدينة
+      filterAndSort(); // Re-filter // إعادة التصفية
+      const distance = calculateDistance(userLocation.lat, userLocation.lon, place.lat, place.lon); // Calculate distance // حساب المسافة
+      showPlace({...place, distance}); // Show place info // إظهار معلومات المكان
+    }
+
+    let toastTimeout; // Timer for error toast // مؤقت لإشعار الخطأ
+    function showError(message) {
+      const toast = document.getElementById('error-toast'); // Get toast element // الحصول على عنصر الإشعار
+      if (!toast) { // If toast doesn't exist, create it // إذا لم يكن الإشعار موجودًا، قم بإنشائه
+        const newToast = document.createElement('div');
+        newToast.id = 'error-toast';
+        newToast.className = 'error-toast';
+        document.body.appendChild(newToast);
+      }
+      const toast2 = document.getElementById('error-toast'); // Get toast again // الحصول على الإشعار مرة أخرى
+      toast2.innerText = message; // Set message // تعيين الرسالة
+      toast2.classList.add('show'); // Show toast // إظهار الإشعار
+      clearTimeout(toastTimeout); // Clear previous timeout // مسح المؤقت السابق
+      toastTimeout = setTimeout(() => {
+        toast2.classList.remove('show'); // Hide after 3.5s // إخفاء بعد 3.5 ثانية
+      }, 3500);
+    }
+
+    // ---------- SEARCH (AUTOCOMPLETE + GLOBAL) ----------
+    // البحث (الإكمال التلقائي + العالمي)
+    const searchInput = document.getElementById('search-input'); // Get search input // الحصول على حقل البحث
+    const autocompleteList = document.getElementById('autocomplete-list'); // Get autocomplete list // الحصول على قائمة الإكمال التلقائي
+    
+    searchInput.addEventListener('input', function (e) { // Handle input event // معالجة حدث الإدخال
+      const query = this.value.trim(); // Get trimmed query // الحصول على الاستعلام بعد إزالة المسافات
+      if (query.length === 0) { // If query is empty // إذا كان الاستعلام فارغًا
+        currentSearchQuery = ''; // Clear search query // مسح استعلام البحث
+        filterAndSort(); // Re-filter // إعادة التصفية
+        autocompleteList.classList.remove('active'); // Hide autocomplete // إخفاء الإكمال التلقائي
+      }
+      if (query.length >= 2) { // If query length is at least 2 // إذا كان طول الاستعلام 2 على الأقل
+        showAutocomplete(query); // Show autocomplete // إظهار الإكمال التلقائي
+      } else {
+        autocompleteList.classList.remove('active'); // Hide autocomplete // إخفاء الإكمال التلقائي
+      }
+    });
+
+    searchInput.addEventListener('keypress', function (e) { // Handle keypress // معالجة الضغط على المفتاح
+      if (e.key === 'Enter') { // If Enter key pressed // إذا تم الضغط على Enter
+        const query = this.value.trim(); // Get trimmed query // الحصول على الاستعلام
+        if (query.length >= 2) { // If query length is at least 2 // إذا كان طول الاستعلام 2 على الأقل
+          performSearch(query); // Perform search // تنفيذ البحث
+          autocompleteList.classList.remove('active'); // Hide autocomplete // إخفاء الإكمال التلقائي
+        }
+      }
+    });
+
+    function searchGlobalIndex(query) {
+      // Search global index for query // البحث في الفهرس العالمي عن الاستعلام
+      const q = query.toLowerCase().trim(); // Normalize query // توحيد الاستعلام
+      if (!q) return []; // Return empty if no query // إعادة فارغ إذا لم يكن هناك استعلام
+      return globalPlaces.filter(p => // Filter global places // تصفية الأماكن العالمية
+        (p.name && p.name.toLowerCase().includes(q)) || 
+        (p.nameEn && p.nameEn.toLowerCase().includes(q)) ||
+        (p.desc && p.desc.toLowerCase().includes(q)) ||
+        (p.descEn && p.descEn.toLowerCase().includes(q))
+      );
+    }
+
+    function showAutocomplete(query) {
+      const results = searchGlobalIndex(query).slice(0, 5); // Get first 5 results // الحصول على أول 5 نتائج
+
+      if (results.length === 0) { // If no results // إذا لم تكن هناك نتائج
+        autocompleteList.classList.remove('active'); // Hide autocomplete // إخفاء الإكمال التلقائي
+        return;
+      }
+
+      autocompleteList.innerHTML = results.map(place => { // Generate HTML for each result // توليد HTML لكل نتيجة
+        const displayName = currentLanguage === 'ar' ? place.name : place.nameEn; // Display name in current language // اسم العرض باللغة الحالية
+        return `
+          <div class="autocomplete-item" onclick="selectGlobalPlace('${place.page}', '${place.nameEn}', '${place.name}')">
+            <div class="autocomplete-item-name">${displayName}</div>
+            <div class="autocomplete-item-desc">${place.type}</div>
+          </div>
+        `;
+      }).join('');
+      
+      autocompleteList.classList.add('active'); // Show autocomplete // إظهار الإكمال التلقائي
+    }
+
+    function selectGlobalPlace(page, nameEn, nameAr) {
+      // Handle selection from autocomplete // معالجة الاختيار من الإكمال التلقائي
+      // find the place in globalPlaces // العثور على المكان في globalPlaces
+      const place = globalPlaces.find(p => p.nameEn === nameEn && p.name === nameAr);
+      if (place) {
+        selectPlace(place.city, place.name); // Select place // اختيار المكان
+      } else {
+        performSearch(nameEn || nameAr); // Fallback: perform search // احتياطي: تنفيذ البحث
+      }
+    }
+
+    function performSearch(query) {
+      // Perform search and update results // تنفيذ البحث وتحديث النتائج
+      if (!query || query.trim().length < 2) { // If query too short // إذا كان الاستعلام قصيرًا جدًا
+        currentSearchQuery = ''; // Clear search query // مسح استعلام البحث
+        filterAndSort(); // Re-filter // إعادة التصفية
+        return;
+      }
+      currentSearchQuery = query.trim().toLowerCase(); // Set search query // تعيين استعلام البحث
+      filterAndSort(); // Filter and sort // التصفية والترتيب
+    }
+
+    // Initialize // التهيئة
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage); // Attach language toggle // ربط تبديل اللغة
+      
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); // Get user profile // الحصول على ملف المستخدم
+      if (userProfile.language && userProfile.language !== currentLanguage) { // If saved language differs // إذا كانت اللغة المحفوظة مختلفة
+        currentLanguage = userProfile.language; // Set current language // تعيين اللغة الحالية
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; // Set direction // تعيين الاتجاه
+        document.documentElement.lang = currentLanguage; // Set language // تعيين اللغة
+        const btn = document.getElementById('translateBtn'); // Get button // الحصول على الزر
+        if (btn) {
+          const langText = btn.querySelector('span:last-child'); // Get button text // الحصول على نص الزر
+          if (langText) langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية'; // Update button text // تحديث نص الزر
+        }
+        translateAllContent(); // Translate page // ترجمة الصفحة
+      }
+      
+      if (userProfile.theme === 'dark') { // If dark theme enabled // إذا كانت السمة الداكنة مفعلة
+        document.documentElement.setAttribute('data-theme', 'dark'); // Apply dark theme // تطبيق السمة الداكنة
+      }
+      
+      const citySelect = document.getElementById('city-select'); // Get city select // الحصول على تحديد المدينة
+      citySelect.addEventListener('change', function() { // Handle change // معالجة التغيير
+        changeCity(this.value);
+      });
+      
+      document.querySelectorAll('.sort-btn').forEach(btn => { // Attach click handlers to sort buttons // ربط معالجات النقر لأزرار الترتيب
+        btn.addEventListener('click', function(e) {
+          const type = this.getAttribute('data-ar').includes('الأقرب') ? 'nearest' : // Determine sort type // تحديد نوع الترتيب
+                       this.getAttribute('data-ar').includes('الأعلى') ? 'rating' : 'price';
+          sortPlaces(type);
+        });
+      });
+      
+      const urlParams = new URLSearchParams(window.location.search); // Get URL parameters // الحصول على معاملات URL
+      const searchParam = urlParams.get('search'); // Get 'search' parameter // الحصول على معامل 'search'
+      if (searchParam) {
+        document.getElementById('search-input').value = searchParam; // Set search input // تعيين حقل البحث
+        currentSearchQuery = searchParam.toLowerCase(); // Set search query // تعيين استعلام البحث
+      }
+      
+      getUserLocation();
+      fetchPlacesFromAPI({ category: 'Store' }).then(apiPlaces => {
+        apiPlaces.forEach(p => HAYYAK_PLACES.push({ name: p.name_en||p.name_ar, nameAr: p.name_ar, city: p.city, lat: p.latitude, lon: p.longitude, rating: 0, price: p.price_range||'', time: p.opening_hours||'', category: p.category, desc: p.description_en||p.description_ar||'', phobias: p.phobia_triggers||[], medicalTriggers: p.medical_triggers||[], interestTags: p.interest_tags||[], _apiId: p.id }));
+        filterAndSort();
+      });
+      filterAndSort(); // Initial filter and sort
+    });
+  </script>
+  <script>
+    // Location sorting helper for geolocation-based display
+    // مساعد ترتيب الموقع للعرض المعتمد على الموقع الجغرافي
+    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      // Calculate distance in km using Haversine formula // حساب المسافة بالكيلومتر باستخدام صيغة هافرسين
+      var R = 6371; // Earth radius // نصف قطر الأرض
+      var dLat = deg2rad(lat2-lat1); // Difference in latitude // فرق خط العرض
+      var dLon = deg2rad(lon2-lon1); // Difference in longitude // فرق خط الطول
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2); // Haversine formula // صيغة هافرسين
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); // Central angle // الزاوية المركزية
+      var d = R * c; // Distance // المسافة
+      return d;
+    }
+
+    function deg2rad(deg) { return deg * (Math.PI/180); } // Convert degrees to radians // تحويل الدرجات إلى راديان
+
+    function sortListByLocation(userLat, userLon) {
+        // Sort the list items by distance from user location // ترتيب عناصر القائمة حسب المسافة من موقع المستخدم
+        const list = document.querySelector('.list'); // Get list container // الحصول على حاوية القائمة
+        if(!list) return; // Exit if not found // الخروج إذا لم توجد
+        const items = Array.from(list.querySelectorAll('.item')); // Get all items // الحصول على جميع العناصر
+        items.forEach(item => {
+            const onclick = item.getAttribute('onclick'); // Get onclick attribute // الحصول على سمة onclick
+            const match = onclick.match(/showPlace\s*\(\s*([\d\.]+)\s*,\s*([\d\.]+)/); // Extract coordinates from showPlace call // استخراج الإحداثيات من استدعاء showPlace
+            if (match) item.dataset.distance = getDistanceFromLatLonInKm(userLat, userLon, parseFloat(match[1]), parseFloat(match[2])); // Calculate and store distance // حساب وتخزين المسافة
+            else item.dataset.distance = 99999; // Fallback large distance // مسافة احتياطية كبيرة
+        });
+        items.sort((a, b) => parseFloat(a.dataset.distance) - parseFloat(b.dataset.distance)); // Sort by distance // الترتيب حسب المسافة
+        items.forEach(item => list.appendChild(item)); // Re-append in sorted order // إعادة الإلحاق بالترتيب الجديد
+    }
+
+    if (navigator.geolocation) { // If geolocation is supported // إذا كان تحديد الموقع مدعومًا
+        navigator.geolocation.getCurrentPosition(p => sortListByLocation(p.coords.latitude, p.coords.longitude)); // Get user location and sort // الحصول على موقع المستخدم والترتيب
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // يحدد نوع المستند كـ HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element, language Arabic, direction right-to-left // العنصر الجذري، اللغة العربية، الاتجاه من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // يضبط ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Makes page responsive on mobile devices // يجعل الصفحة متجاوبة مع الأجهزة المحمولة -->
+  <title>HAYYAK | Social Circle</title>
+  <!-- Page title // عنوان الصفحة -->
+  <meta name="description" content="تطبيق حياك لإدارة معارفك وأفراد عائلتك وأصدقائك بسهولة." />
+  <!-- Meta description for SEO // وصف تعريفي لمحركات البحث -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon (browser tab icon) // أيقونة علامة تبويب المتصفح -->
+
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Preconnect to Google Fonts domain // اتصال مسبق بنطاق خطوط جوجل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect with cross-origin attribute // اتصال مسبق مع خاصية عبر المصدر -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Loads Cairo font from Google Fonts // تحميل خط Cairo من خطوط جوجل -->
+
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    /* Afeesh family (local) - defines custom fonts // عائلة Afeesh (محلية) - تعريف خطوط مخصصة */
+    @font-face {
+      font-family: 'Afeesh'; /* Assign font family name // تعيين اسم العائلة */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'), /* WOFF2 format (modern) // تنسيق WOFF2 (حديث) */
+           url('afeesh/Afeesh-Aadi.woff') format('woff'),   /* WOFF format (fallback) // تنسيق WOFF (احتياطي) */
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype'); /* TrueType format (older) // تنسيق TrueType (قديم) */
+      font-weight: 400; /* Normal weight // وزن عادي */
+      font-style: normal; /* Normal style // نمط عادي */
+      font-display: swap; /* Show fallback font while loading custom // عرض خط احتياطي أثناء التحميل */
+    }
+    @font-face {
+      font-family: 'Afeesh'; /* Same family name // نفس اسم العائلة */
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; /* Bold weight // وزن عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; /* Light // خفيف */
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (THEME) // متغيرات CSS (السمة) ==================== */
+    :root {
+      --bg: #f5f5f7;        /* Light mode background // خلفية الوضع الفاتح */
+      --card: #ffffff;       /* Card background // خلفية البطاقة */
+      --ink: #0f0f10;        /* Main text color // لون النص الرئيسي */
+      --muted: #6b7280;      /* Muted text // نص باهت */
+      --line: #0f0f10;       /* Border color // لون الحدود */
+      --radius: 14px;        /* Border radius // نصف قطر الحدود */
+    }
+    [data-theme="dark"] {    /* Dark mode overrides // تجاوزات الوضع الداكن */
+      --bg: #121212;         /* Dark background // خلفية داكنة */
+      --card: #1e1e1e;       /* Dark card // بطاقة داكنة */
+      --ink: #ffffff;        /* Light text // نص فاتح */
+      --muted: #a0a0a0;      /* Muted grey // رمادي باهت */
+      --line: #333333;       /* Dark border // حدود داكنة */
+    }
+
+    /* ==================== GLOBAL RESETS // إعادة تعيين عامة ==================== */
+    * {
+      box-sizing: border-box; /* Include padding/border in width/height // تضمين الحشوة/الحدود في العرض/الارتفاع */
+      margin: 0;              /* Remove default margins // إزالة الهوامش الافتراضية */
+      padding: 0;             /* Remove default padding // إزالة الحشوات الافتراضية */
+    }
+    html, body {
+      min-height: 100vh;      /* Minimum full viewport height // ارتفاع لا يقل عن كامل منفذ العرض */
+      background: var(--bg);  /* Use theme background // استخدام خلفية السمة */
+    }
+    body {
+      display: flex;          /* Enable flexbox layout // تفعيل تخطيط المرن */
+      flex-direction: column; /* Stack children vertically // تكديس العناصر عموديًا */
+      font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* Font stack // مجموعة الخطوط */
+      color: var(--ink);      /* Text color from theme // لون النص من السمة */
+    }
+
+    /* ==================== LAYOUT COMPONENTS // مكونات التخطيط ==================== */
+    .shell {
+      width: 100%;            /* Full width // عرض كامل */
+      max-width: 420px;       /* Limit width on large screens // تحديد العرض على الشاشات الكبيرة */
+      margin: 0 auto;         /* Center horizontally // توسيط أفقي */
+      padding: 16px;          /* Inner spacing // حشوة داخلية */
+      flex: 1;                /* Take remaining space in flex column // أخذ المساحة المتبقية في عمود المرن */
+    }
+    .card {
+      background: var(--card); /* Card background from theme // خلفية البطاقة من السمة */
+      border: 2px solid var(--line); /* Border using theme line color // حدود بلون الخط من السمة */
+      border-radius: var(--radius); /* Rounded corners using variable // زوايا دائرية باستخدام المتغير */
+      box-shadow: 0 2px 0 #0f0f10; /* Small shadow for depth // ظل صغير للعمق */
+    }
+
+    /* ==================== HEADER // الترويسة ==================== */
+    header.brand {
+      text-align: center;      /* Center align text // محاذاة النص للوسط */
+      background: #16243d;     /* Dark blue background // خلفية زرقاء داكنة */
+      color: #ffffff;          /* White text // نص أبيض */
+      padding: 20px;           /* Padding around content // حشوة حول المحتوى */
+      position: relative;      /* For absolute positioning of children // لتحديد موضع العناصر الفرعية بشكل مطلق */
+    }
+    .logo-text {
+      font-family: 'Afeesh', sans-serif; /* Use Afeesh font // استخدام خط Afeesh */
+      font-weight: 700;        /* Bold // عريض */
+      font-size: 48px;         /* Large font // خط كبير */
+      letter-spacing: 2px;      /* Space between letters // مسافة بين الأحرف */
+      color: #d4af37;          /* Gold color // لون ذهبي */
+    }
+    .logo-sub {
+      font-family: 'Afeesh', sans-serif; /* Afeesh font // خط Afeesh */
+      font-weight: 600;        /* Semi-bold // شبه عريض */
+      color: #94a3b8;          /* Greyish blue // أزرق رمادي */
+      font-size: 20px;         /* Font size // حجم الخط */
+      margin-top: 2px;         /* Small top margin // هامش علوي صغير */
+      letter-spacing: 3px;      /* More spacing between letters // مسافة أكبر بين الأحرف */
+    }
+    .home-btn {
+      position: absolute;       /* Position relative to header // تحديد موضع بالنسبة للترويسة */
+      top: 50%;                /* Center vertically // توسيط عمودي */
+      left: 20px;              /* Distance from left // مسافة من اليسار */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      color: #d4af37;          /* Gold text // نص ذهبي */
+      text-decoration: none;    /* Remove underline // إزالة التسطير */
+      font-size: 15px;          /* Font size // حجم الخط */
+      background-color: #0f0f10; /* Dark background // خلفية داكنة */
+      padding: 9px 12px;        /* Padding // حشوة */
+      border-radius: 999px;     /* Pill shape // شكل كبسولة */
+      transition: all 0.3s ease; /* Smooth hover transition // انتقال سلس عند التمرير */
+    }
+    .home-btn:hover {
+      background-color: #d4af37; /* Gold background // خلفية ذهبية */
+      color: #0f0f10;            /* Dark text // نص داكن */
+      transform: translateY(-50%) scale(1.05); /* Slight zoom // تكبير طفيف */
+    }
+
+    /* ==================== TRANSLATE BUTTON // زر الترجمة ==================== */
+    .translate-btn {
+      position: absolute;       /* Absolute positioning inside header // تحديد موضع مطلق داخل الترويسة */
+      top: 50%;                 /* Center vertically // توسيط عمودي */
+      right: 20px;              /* Distance from right // مسافة من اليمين */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      background: #d4af37;       /* Gold background // خلفية ذهبية */
+      border: 2px solid #ffffff; /* White border // حدود بيضاء */
+      border-radius: 20px;       /* Rounded shape // شكل دائري */
+      color: #16243d;            /* Dark blue text // نص أزرق داكن */
+      padding: 6px 14px;         /* Padding // حشوة */
+      font-weight: 700;          /* Bold // عريض */
+      font-size: 13px;           /* Font size // حجم الخط */
+      cursor: pointer;           /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex;             /* Flexbox for icon and text // مرن للأيقونة والنص */
+      align-items: center;       /* Vertically align items // محاذاة عمودية للعناصر */
+      gap: 6px;                  /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3); /* Gold shadow // ظل ذهبي */
+      z-index: 100;              /* Ensure it's above other elements // ضمان أنه فوق العناصر الأخرى */
+    }
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05); /* Zoom on hover // تكبير عند التمرير */
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); /* Stronger shadow // ظل أقوى */
+      background: #f7ef8a;        /* Lighter gold // ذهبي أفتح */
+    }
+    .translate-btn .icon {
+      font-size: 16px;            /* Globe icon size // حجم أيقونة الكرة الأرضية */
+      transition: transform 0.3s ease; /* Smooth rotation // دوران سلس */
+    }
+    .translate-btn:hover .icon {
+      transform: rotate(20deg);   /* Rotate icon on hover // تدوير الأيقونة عند التمرير */
+    }
+    .translate-btn.switching {
+      animation: pulse 0.5s ease; /* Pulse animation when switching language // حركة نبض عند تبديل اللغة */
+    }
+    @keyframes pulse {
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    /* ==================== MAP // الخريطة ==================== */
+    .map {
+      height: 180px;              /* Fixed height // ارتفاع ثابت */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      overflow: hidden;           /* Hide overflow (for iframe) // إخفاء الزيادة (لـ iframe) */
+      position: relative;         /* For any absolute overlays // لأي تراكبات مطلقة */
+      border: 2px solid var(--line); /* Border using theme // حدود باستخدام السمة */
+    }
+    .map iframe {
+      width: 100%;                /* Full width // عرض كامل */
+      height: 100%;               /* Full height // ارتفاع كامل */
+      border: 0;                  /* No border // بلا حدود */
+    }
+
+    /* ==================== SECTION TITLE // عنوان القسم ==================== */
+    .section-title {
+      display: flex;              /* Flex layout // تخطيط مرن */
+      align-items: center;        /* Vertically center // توسيط عمودي */
+      justify-content: center;    /* Horizontally center // توسيط أفقي */
+      gap: 10px;                  /* Gap between emoji and text // فجوة بين الإيموجي والنص */
+      margin: 14px 0 10px;        /* Vertical margins // هوامش رأسية */
+      font-weight: 700;           /* Bold // عريض */
+      font-size: 20px;            /* Font size // حجم الخط */
+    }
+    .section-title .emoji {
+      font-size: 22px;            /* Larger emoji // إيموجي أكبر */
+    }
+
+    /* ==================== CONTACT LIST // قائمة المعارف ==================== */
+    .list {
+      display: grid;              /* Grid layout // تخطيط شبكي */
+      gap: 10px;                  /* Gap between items // فجوة بين العناصر */
+    }
+    .item {
+      display: grid;              /* Grid inside item // شبكة داخل العنصر */
+      grid-template-columns: 40px 1fr; /* Icon column and content column // عمود للأيقونة وعمود للمحتوى */
+      align-items: center;        /* Vertically center items // توسيط عمودي للعناصر */
+      gap: 12px;                  /* Gap between columns // فجوة بين الأعمدة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 16px;        /* Rounded corners // زوايا دائرية */
+      background: var(--card);    /* Background from theme // خلفية من السمة */
+      padding: 12px 16px;         /* Padding // حشوة */
+      cursor: pointer;            /* Pointer cursor // مؤشر اليد */
+      transition: background 0.2s; /* Smooth background change // تغيير خلفية سلس */
+    }
+    .item:hover {
+      background: #f5f5f7;        /* Light grey on hover // رمادي فاتح عند التمرير */
+    }
+    .pin {
+      display: grid;              /* Center the icon // توسيط الأيقونة */
+      place-items: center;        /* Center both axes // توسيط في كلا المحورين */
+      font-size: 24px;            /* Icon size // حجم الأيقونة */
+    }
+    .label {
+      font-weight: 700;           /* Bold name // اسم عريض */
+      font-size: 16px;            /* Font size // حجم الخط */
+      overflow: hidden;            /* Hide overflow // إخفاء الزيادة */
+      text-overflow: ellipsis;    /* Ellipsis for long names // علامة حذف للأسماء الطويلة */
+      white-space: nowrap;        /* Prevent wrapping // منع الالتفاف */
+    }
+
+    /* ==================== ADD BUTTON // زر الإضافة ==================== */
+    .add-btn {
+      display: flex;              /* Flex layout // تخطيط مرن */
+      align-items: center;        /* Vertically center // توسيط عمودي */
+      justify-content: center;    /* Horizontally center // توسيط أفقي */
+      gap: 8px;                   /* Gap between plus and text // فجوة بين الزائد والنص */
+      background: #16243d;        /* Dark blue // أزرق داكن */
+      color: #d4af37;             /* Gold text // نص ذهبي */
+      border: 2px solid #0f0f10;  /* Dark border // حدود داكنة */
+      border-radius: 999px;       /* Pill shape // شكل كبسولة */
+      padding: 14px 24px;         /* Padding // حشوة */
+      font-weight: 700;           /* Bold // عريض */
+      font-size: 16px;            /* Font size // حجم الخط */
+      cursor: pointer;            /* Pointer cursor // مؤشر اليد */
+      margin: 16px 0;             /* Vertical margins // هوامش رأسية */
+      transition: all 0.2s;       /* Smooth transition // انتقال سلس */
+      box-shadow: 0 2px 0 #0f0f10; /* Small shadow // ظل صغير */
+    }
+    .add-btn:hover {
+      background: #1e2f4d;        /* Slightly lighter blue // أزرق أفتح قليلاً */
+      transform: translateY(-1px); /* Lift up // رفع لأعلى */
+      box-shadow: 0 3px 0 #0f0f10; /* Larger shadow // ظل أكبر */
+    }
+    .add-btn:active {
+      transform: translateY(0);    /* Press down // ضغط لأسفل */
+      box-shadow: 0 1px 0 #0f0f10; /* Smaller shadow // ظل أصغر */
+    }
+
+    /* ==================== MODAL // النافذة المنبثقة ==================== */
+    .modal {
+      display: none;              /* Hidden by default // مخفي افتراضيًا */
+      position: fixed;            /* Fixed position relative to viewport // موضع ثابت بالنسبة لمنفذ العرض */
+      top: 0; left: 0; right: 0; bottom: 0; /* Cover whole screen // تغطية الشاشة بالكامل */
+      background: rgba(0,0,0,0.5); /* Semi-transparent overlay // تراكب شبه شفاف */
+      z-index: 1000;              /* High z-index to be on top // مؤشر z عالي ليكون في الأعلى */
+      align-items: center;        /* Center vertically // توسيط عمودي */
+      justify-content: center;    /* Center horizontally // توسيط أفقي */
+      padding: 20px;              /* Padding around // حشوة حول */
+    }
+    .modal.active {
+      display: flex;              /* Show modal when active // إظهار النافذة عند التفعيل */
+    }
+    .modal-content {
+      background: var(--card);    /* Background from theme // خلفية من السمة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      padding: 24px;              /* Inner padding // حشوة داخلية */
+      max-width: 400px;           /* Maximum width // أقصى عرض */
+      width: 100%;                /* Full width up to max // عرض كامل حتى الحد الأقصى */
+      box-shadow: 0 4px 0 #0f0f10; /* Shadow // ظل */
+      animation: fade 0.3s;       /* Fade in animation // حركة ظهور تدريجي */
+    }
+    .modal-title {
+      font-size: 20px;            /* Font size // حجم الخط */
+      font-weight: 700;           /* Bold // عريض */
+      margin-bottom: 16px;        /* Bottom margin // هامش سفلي */
+      text-align: center;         /* Center text // توسيط النص */
+    }
+    .modal-input {
+      width: 100%;                /* Full width // عرض كامل */
+      padding: 12px;              /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 8px;         /* Rounded corners // زوايا دائرية */
+      font: inherit;              /* Inherit font from parent // وراثة الخط من العنصر الأب */
+      margin-bottom: 16px;        /* Bottom margin // هامش سفلي */
+      box-sizing: border-box;     /* Include padding in width // تضمين الحشوة في العرض */
+      background: var(--card);    /* Background from theme // خلفية من السمة */
+      color: var(--ink);          /* Text color // لون النص */
+    }
+    .modal-buttons {
+      display: flex;              /* Flex layout // تخطيط مرن */
+      gap: 12px;                  /* Gap between buttons // فجوة بين الأزرار */
+      justify-content: center;    /* Center buttons // توسيط الأزرار */
+    }
+    .modal-btn {
+      padding: 12px 24px;         /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;       /* Pill shape // شكل كبسولة */
+      font: inherit;              /* Inherit font // وراثة الخط */
+      font-weight: 700;           /* Bold // عريض */
+      cursor: pointer;            /* Pointer cursor // مؤشر اليد */
+      transition: all 0.2s;       /* Smooth transition // انتقال سلس */
+      box-shadow: 0 2px 0 #0f0f10; /* Shadow // ظل */
+    }
+    .modal-btn.primary {
+      background: #16243d;        /* Dark blue // أزرق داكن */
+      color: #d4af37;             /* Gold // ذهبي */
+    }
+    .modal-btn.primary:hover {
+      background: #1e2f4d;        /* Lighter blue // أزرق أفتح */
+    }
+    .modal-btn.secondary {
+      background: var(--card);    /* Card background // خلفية البطاقة */
+      color: var(--ink);          /* Text color // لون النص */
+    }
+    .modal-btn.secondary:hover {
+      background: #f5f5f7;        /* Light grey // رمادي فاتح */
+    }
+    .modal-btn:active {
+      transform: translateY(0);    /* Press effect // تأثير الضغط */
+      box-shadow: 0 1px 0 #0f0f10; /* Smaller shadow // ظل أصغر */
+    }
+
+    /* ==================== DELETE BUTTON // زر الحذف ==================== */
+    .delete-btn {
+      background: #ef4444;         /* Red background // خلفية حمراء */
+      color: #fff;                 /* White text // نص أبيض */
+      border: none;                /* No border // بلا حدود */
+      border-radius: 50%;          /* Circular // دائري */
+      width: 24px;                 /* Fixed width // عرض ثابت */
+      height: 24px;                /* Fixed height // ارتفاع ثابت */
+      font-size: 16px;             /* Font size // حجم الخط */
+      cursor: pointer;             /* Pointer cursor // مؤشر اليد */
+      margin-right: 8px;           /* Right margin (for RTL) // هامش أيمن (لـ RTL) */
+      display: flex;               /* Flex to center X // مرن لتوسيط X */
+      align-items: center;         /* Center vertically // توسيط عمودي */
+      justify-content: center;     /* Center horizontally // توسيط أفقي */
+      transition: all 0.2s;        /* Smooth transition // انتقال سلس */
+      font-weight: 700;            /* Bold // عريض */
+      line-height: 1;              /* Line height // ارتفاع السطر */
+    }
+    .delete-btn:hover {
+      background: #dc2626;         /* Darker red // أحمر أغمق */
+      transform: scale(1.1);       /* Slight zoom // تكبير طفيف */
+    }
+    .delete-btn:active {
+      transform: scale(0.95);      /* Slight shrink // تصغير طفيف */
+    }
+
+    /* ==================== RELATIONSHIP BADGE // شارة العلاقة ==================== */
+    .relation-badge {
+      display: inline-block;       /* Inline block // كتلة مضمنة */
+      background: #16243d;         /* Dark blue // أزرق داكن */
+      color: #d4af37;              /* Gold // ذهبي */
+      padding: 2px 8px;            /* Padding // حشوة */
+      border-radius: 12px;         /* Rounded // دائري */
+      font-size: 11px;             /* Small font // خط صغير */
+      margin-right: 8px;           /* Right margin (RTL) // هامش أيمن (RTL) */
+      font-weight: 600;            /* Semi-bold // شبه عريض */
+    }
+
+    /* ==================== CATEGORY SELECTOR // منتقي الفئة ==================== */
+    .category-group {
+      margin-bottom: 16px;         /* Bottom margin // هامش سفلي */
+    }
+    .category-label {
+      display: block;              /* Block element // عنصر كتلة */
+      font-weight: 600;            /* Semi-bold // شبه عريض */
+      margin-bottom: 8px;          /* Bottom margin // هامش سفلي */
+      font-size: 14px;             /* Font size // حجم الخط */
+    }
+    .category-options {
+      display: grid;               /* Grid layout // تخطيط شبكي */
+      grid-template-columns: 1fr 1fr; /* Two columns // عمودان */
+      gap: 8px;                    /* Gap between buttons // فجوة بين الأزرار */
+      margin-bottom: 12px;         /* Bottom margin // هامش سفلي */
+    }
+    .category-btn {
+      padding: 10px;               /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 8px;          /* Rounded corners // زوايا دائرية */
+      background: var(--card);     /* Background from theme // خلفية من السمة */
+      cursor: pointer;             /* Pointer cursor // مؤشر اليد */
+      text-align: center;          /* Center text // توسيط النص */
+      font-size: 14px;             /* Font size // حجم الخط */
+      transition: all 0.2s;        /* Smooth transition // انتقال سلس */
+      color: var(--ink);           /* Text color // لون النص */
+    }
+    .category-btn:hover {
+      background: #f5f5f7;         /* Light grey on hover // رمادي فاتح عند التمرير */
+    }
+    .category-btn.selected {
+      background: #16243d;         /* Dark blue when selected // أزرق داكن عند الاختيار */
+      color: #d4af37;              /* Gold text // نص ذهبي */
+      border-color: #16243d;       /* Match border // حدود مطابقة */
+    }
+    .custom-input-wrapper {
+      display: none;               /* Hidden by default // مخفي افتراضيًا */
+      margin-top: 8px;             /* Top margin // هامش علوي */
+    }
+    .custom-input-wrapper.active {
+      display: block;              /* Show when active // يظهر عند التفعيل */
+    }
+
+    /* ==================== CONFIRMATION MODAL // نافذة التأكيد ==================== */
+    .confirm-text {
+      font-size: 16px;             /* Font size // حجم الخط */
+      line-height: 1.6;            /* Line height // ارتفاع السطر */
+      margin-bottom: 20px;         /* Bottom margin // هامش سفلي */
+      text-align: center;          /* Center text // توسيط النص */
+      color: var(--ink);           /* Text color // لون النص */
+    }
+    .confirm-name {
+      font-weight: 700;            /* Bold // عريض */
+      color: #ef4444;              /* Red // أحمر */
+    }
+    .modal-btn.danger {
+      background: #ef4444;         /* Red background // خلفية حمراء */
+      color: #fff;                 /* White text // نص أبيض */
+    }
+    .modal-btn.danger:hover {
+      background: #dc2626;         /* Darker red // أحمر أغمق */
+    }
+
+    /* ==================== SEARCH // البحث ==================== */
+    .bottom-search {
+      padding: 12px 0 18px;        /* Vertical padding // حشوة رأسية */
+      position: relative;          /* For autocomplete positioning // لتحديد موضع الإكمال التلقائي */
+    }
+    .search {
+      display: grid;               /* Grid layout // تخطيط شبكي */
+      grid-template-columns: 28px 1fr; /* Icon and input // أيقونة وحقل إدخال */
+      align-items: center;         /* Vertically center // توسيط عمودي */
+      gap: 8px;                    /* Gap // فجوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 999px;        /* Pill shape // شكل كبسولة */
+      padding: 10px 12px;          /* Padding // حشوة */
+      background: var(--card);     /* Background // خلفية */
+    }
+    .glass {
+      text-align: center;          /* Center icon // توسيط الأيقونة */
+    }
+    .search input {
+      appearance: none;            /* Remove default styling // إزالة التنسيق الافتراضي */
+      border: 0;                   /* No border // بلا حدود */
+      outline: 0;                  /* No outline // بلا مخطط */
+      background: transparent;     /* Transparent background // خلفية شفافة */
+      width: 100%;                 /* Full width // عرض كامل */
+      font: inherit;               /* Inherit font // وراثة الخط */
+      color: var(--ink);           /* Text color // لون النص */
+    }
+    .search input:focus-visible {
+      outline: 2px solid var(--ink); /* Focus outline // مخطط عند التركيز */
+      outline-offset: 2px;         /* Offset // إزاحة */
+      border-radius: 4px;          /* Rounded corners // زوايا دائرية */
+    }
+    .search input::placeholder {
+      color: var(--muted);         /* Placeholder color // لون النص المؤقت */
+    }
+
+    /* ==================== AUTOCOMPLETE // الإكمال التلقائي ==================== */
+    .autocomplete-list {
+      display: none;               /* Hidden by default // مخفي افتراضيًا */
+      position: absolute;          /* Absolute positioning // تحديد موضع مطلق */
+      top: 100%;                   /* Below search bar // أسفل شريط البحث */
+      left: 0; right: 0;           /* Full width // عرض كامل */
+      background: var(--card);     /* Background // خلفية */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-top: 0;               /* Remove top border // إزالة الحد العلوي */
+      border-radius: 0 0 var(--radius) var(--radius); /* Rounded bottom corners // زوايا سفلية دائرية */
+      max-height: 200px;           /* Max height // أقصى ارتفاع */
+      overflow-y: auto;            /* Scroll if needed // تمرير إذا لزم */
+      z-index: 100;                /* Above other content // فوق المحتوى الآخر */
+    }
+    .autocomplete-list.active {
+      display: block;              /* Show when active // يظهر عند التفعيل */
+    }
+    .autocomplete-item {
+      padding: 12px;               /* Padding // حشوة */
+      border-bottom: 1px solid var(--line); /* Bottom border // حدود سفلية */
+      cursor: pointer;             /* Pointer cursor // مؤشر اليد */
+      transition: background 0.2s; /* Smooth background // خلفية سلسة */
+    }
+    .autocomplete-item:hover {
+      background: #f5f5f7;         /* Light grey // رمادي فاتح */
+    }
+    [data-theme="dark"] .autocomplete-item:hover {
+      background: #2a2a2a;         /* Dark hover // تمرير داكن */
+    }
+    .autocomplete-item:last-child {
+      border-bottom: none;         /* No border on last // بلا حدود للأخير */
+    }
+    .autocomplete-item-name {
+      font-weight: 700;            /* Bold // عريض */
+      color: var(--ink);           /* Text color // لون النص */
+    }
+    .autocomplete-item-desc {
+      font-size: 12px;             /* Small font // خط صغير */
+      color: var(--muted);         /* Muted color // لون باهت */
+      margin-top: 2px;             /* Top margin // هامش علوي */
+    }
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer {
+      background: #16243d;         /* Dark blue // أزرق داكن */
+      color: #ffffff;              /* White text // نص أبيض */
+      text-align: center;          /* Centered text // نص وسطي */
+      font-size: 14px;             /* Font size // حجم الخط */
+      padding: 20px;               /* Padding // حشوة */
+      margin-top: auto;            /* Push to bottom in flex column // دفع للأسفل في عمود مرن */
+    }
+
+    /* ==================== RESPONSIVE // استجابة ==================== */
+    @media (min-width:768px) {
+      .shell { padding: 24px; }    /* Larger padding on big screens // حشوة أكبر على الشاشات الكبيرة */
+      .map { height: 220px; }       /* Taller map // خريطة أطول */
+    }
+
+    /* ==================== ERROR TOAST // إشعار الخطأ ==================== */
+    .error-toast {
+      position: fixed;              /* Fixed position // موضع ثابت */
+      top: 20px;                    /* Distance from top // مسافة من الأعلى */
+      left: 50%;                    /* Center horizontally // توسيط أفقي */
+      transform: translateX(-50%) translateY(-20px); /* Hidden above screen // مخفي فوق الشاشة */
+      background: #ef4444;          /* Red background // خلفية حمراء */
+      color: #ffffff;               /* White text // نص أبيض */
+      padding: 12px 24px;           /* Padding // حشوة */
+      border-radius: 999px;         /* Pill shape // شكل كبسولة */
+      font-weight: 600;             /* Semi-bold // شبه عريض */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Shadow // ظل */
+      opacity: 0;                   /* Invisible // غير مرئي */
+      pointer-events: none;         /* Can't click // غير قابل للنقر */
+      transition: all 0.3s ease;    /* Smooth transition // انتقال سلس */
+      z-index: 100;                 /* High z-index // مؤشر z عالي */
+    }
+    .error-toast.show {
+      transform: translateX(-50%) translateY(0); /* Slide into view // انزلاق للظهور */
+      opacity: 1;                   /* Visible // مرئي */
+    }
+
+    /* ==================== ANIMATIONS // حركات ==================== */
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand">
+    <!-- Home button (back) // زر الصفحة الرئيسية (رجوع) -->
+    <a href="Home.html" class="home-btn" aria-label="الرئيسية" data-ar="الرجوع" data-en="Back">الرجوع</a>
+    <!-- Logo in Arabic script // الشعار بالخط العربي -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <!-- Subtitle (English) // العنوان الفرعي (إنجليزي) -->
+    <div class="logo-sub">HAYYAK</div>
+    <!-- Language toggle button // زر تبديل اللغة -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span> <!-- Button text (changes via JS) // نص الزر (يتغير عبر JS) -->
+    </button>
+  </header>
+
+  <!-- Error toast notification // إشعار الخطأ -->
+  <div id="error-toast" class="error-toast"></div>
+
+  <!-- Main content container // حاوية المحتوى الرئيسي -->
+  <main class="shell">
+
+    <!-- Map embed // تضمين الخريطة -->
+    <div class="map card" aria-label="خريطة" data-ar-label="خريطة" data-en-label="Map">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=51.50,22.50,56.50,26.20&amp;layer=mapnik" title="Map"></iframe>
+    </div>
+
+    <!-- Section title // عنوان القسم -->
+    <div class="section-title">
+      <span class="emoji" aria-hidden="true">👥</span> <!-- Emoji icon // أيقونة إيموجي -->
+      <span data-ar="العائلة والاصدقاء" data-en="Family & Friends">العائلة والاصدقاء</span> <!-- Title // العنوان -->
+    </div>
+
+    <!-- Add contact button // زر إضافة جهة اتصال -->
+    <button class="add-btn" onclick="openAddModal()" data-ar-text="إضافة اسم محلي" data-en-text="Add Local Contact">
+      <span>➕</span> <!-- Plus sign // علامة زائد -->
+      <span>إضافة اسم محلي</span> <!-- Button text // نص الزر -->
+    </button>
+
+    <!-- Contact list section // قسم قائمة المعارف -->
+    <section class="list" id="family-list">
+      <!-- Example item (static) // عنصر مثال (ثابت) -->
+      <article class="item">
+        <div class="pin">👤</div> <!-- Icon // أيقونة -->
+        <div class="label">راشد سيف الكابوري</div> <!-- Name // الاسم -->
+      </article>
+    </section>
+
+    <!-- ==================== ADD MODAL // نافذة الإضافة ==================== -->
+    <div class="modal" id="add-modal">
+      <div class="modal-content">
+        <div class="modal-title" data-ar="إضافة اسم جديد" data-en="Add New Contact">إضافة اسم جديد</div> <!-- Title // العنوان -->
+        
+        <!-- Name input // حقل إدخال الاسم -->
+        <input type="text" class="modal-input" id="name-input" 
+               placeholder="أدخل الاسم..." 
+               data-ar-placeholder="أدخل الاسم..." 
+               data-en-placeholder="Enter name..." />
+        
+        <!-- Relationship category selector // منتقي فئة العلاقة -->
+        <div class="category-group">
+          <label class="category-label" data-ar="اختر العلاقة:" data-en="Select Relationship:">اختر العلاقة:</label>
+          <div class="category-options">
+            <!-- Buttons for predefined categories // أزرار للفئات المحددة مسبقًا -->
+            <button type="button" class="category-btn" onclick="selectCategory('family', this)" 
+                    data-ar="👨‍👩‍👧‍👦 أفراد العائلة" data-en="👨‍👩‍👧‍👦 Family">👨‍👩‍👧‍👦 أفراد العائلة</button>
+            <button type="button" class="category-btn" onclick="selectCategory('friend', this)"
+                    data-ar="🤝 صديق" data-en="🤝 Friend">🤝 صديق</button>
+            <button type="button" class="category-btn" onclick="selectCategory('coworker', this)"
+                    data-ar="💼 زميل عمل" data-en="💼 Coworker">💼 زميل عمل</button>
+            <button type="button" class="category-btn" onclick="selectCategory('teacher', this)"
+                    data-ar="👨‍🏫 معلم" data-en="👨‍🏫 Teacher">👨‍🏫 معلم</button>
+            <button type="button" class="category-btn" onclick="selectCategory('doctor', this)"
+                    data-ar="⚕️ طبيب" data-en="⚕️ Doctor">⚕️ طبيب</button>
+            <button type="button" class="category-btn" onclick="selectCategory('other', this)"
+                    data-ar="✏️ أخرى" data-en="✏️ Other">✏️ أخرى</button>
+          </div>
+          <!-- Custom relation input (hidden by default) // حقل إدخال علاقة مخصصة (مخفي افتراضيًا) -->
+          <div class="custom-input-wrapper" id="custom-input-wrapper">
+            <input type="text" class="modal-input" id="custom-relation-input" 
+                   placeholder="اكتب نوع العلاقة..." 
+                   data-ar-placeholder="اكتب نوع العلاقة..." 
+                   data-en-placeholder="Enter relationship type..." />
+          </div>
+        </div>
+        
+        <!-- Modal action buttons // أزرار الإجراءات في النافذة -->
+        <div class="modal-buttons">
+          <button class="modal-btn primary" onclick="addName()" data-ar="إضافة" data-en="Add">إضافة</button>
+          <button class="modal-btn secondary" onclick="closeAddModal()" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ==================== CONFIRMATION MODAL (DELETE) // نافذة تأكيد الحذف ==================== -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal-content">
+        <div class="modal-title" data-ar="⚠️ تأكيد الحذف" data-en="⚠️ Confirm Delete">⚠️ تأكيد الحذف</div> <!-- Title // العنوان -->
+        <div class="confirm-text">
+          <!-- Confirmation message // رسالة التأكيد -->
+          <span data-ar="هل أنت متأكد من حذف" data-en="Are you sure you want to delete">هل أنت متأكد من حذف</span> 
+          <span class="confirm-name" id="confirm-name"></span> <!-- Name to delete // الاسم المراد حذفه -->
+          <span data-ar="؟" data-en="?">؟</span>
+          <br><br>
+          <span data-ar="لا يمكن التراجع عن هذا الإجراء." data-en="This action cannot be undone.">لا يمكن التراجع عن هذا الإجراء.</span>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn danger" onclick="confirmDelete()" data-ar="حذف" data-en="Delete">حذف</button>
+          <button class="modal-btn secondary" onclick="closeConfirmModal()" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SEARCH BAR // شريط البحث ==================== -->
+    <div class="bottom-search">
+      <div class="search">
+        <div class="glass">🔍</div> <!-- Search icon // أيقونة البحث -->
+        <input type="search" id="search-input" 
+               placeholder="ابحث عن معارفك" 
+               data-ar-placeholder="ابحث عن معارفك" 
+               data-en-placeholder="Search contacts" 
+               aria-label="ابحث عن معارفك" />
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER // التذييل ==================== -->
+  <footer data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer>
+
+<!-- Firebase SDK (required for user management) // حزمة Firebase SDK (مطلوبة لإدارة المستخدمين) -->
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js"></script>
+
+<!-- Firebase configuration file (external) // ملف تكوين Firebase (خارجي) -->
+<script src="js/Firebase-config.js"></script>
+<!-- User management script (external) // سكريبت إدارة المستخدمين (خارجي) -->
+<script src="js/User-management.js"></script>
+
+<!-- ==================== MAIN APPLICATION SCRIPT // سكريبت التطبيق الرئيسي ==================== -->
+<script>
+    // ==================== CATEGORY MAPPING // تعيين الفئات ====================
+    const categoryMap = { /* Mapping category keys to icons and translations // تعيين مفاتيح الفئات إلى أيقونات وترجمات */
+      'family': { 
+        icon: '👨‍👩‍👧‍👦', 
+        ar: 'أفراد العائلة', // Arabic name // الاسم بالعربية
+        en: 'Family'         // English name // الاسم بالإنجليزية
+      },
+      'friend': { 
+        icon: '🤝', 
+        ar: 'صديق',
+        en: 'Friend'
+      },
+      'coworker': { 
+        icon: '💼', 
+        ar: 'زميل عمل',
+        en: 'Coworker'
+      },
+      'teacher': { 
+        icon: '👨‍🏫', 
+        ar: 'معلم',
+        en: 'Teacher'
+      },
+      'doctor': { 
+        icon: '⚕️', 
+        ar: 'طبيب',
+        en: 'Doctor'
+      }
+    };
+    
+    // ==================== STATE // الحالة ====================
+    let familyMembers = JSON.parse(localStorage.getItem('hayyak_family') || '[]'); // Load from localStorage // تحميل من التخزين المحلي
+    let selectedCategory = null; // Currently selected category // الفئة المحددة حاليًا
+    let deleteIndex = null; // Index of item to delete // فهرس العنصر المراد حذفه
+    let currentLanguage = 'ar'; // Default language // اللغة الافتراضية (العربية)
+    
+    // ==================== TRANSLATION FUNCTIONS // دوال الترجمة ====================
+    function toggleLanguage() {
+      const btn = document.getElementById('translateBtn'); // Get button // الحصول على الزر
+      btn.classList.add('switching'); // Add animation class // إضافة فئة الحركة
+      
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar'; // Toggle language // تبديل اللغة
+      
+      // Update button text // تحديث نص الزر
+      const langText = btn.querySelector('span:last-child');
+      langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+      
+      // Update page direction and lang attribute // تحديث اتجاه الصفحة وسم اللغة
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = currentLanguage;
+      
+      translateAllContent(); // Translate all static content // ترجمة كل المحتوى الثابت
+      displayFamilyMembers(); // Re-render list with new language // إعادة عرض القائمة باللغة الجديدة
+      
+      showNotification(currentLanguage === 'ar' ? 'تم التبديل إلى العربية' : 'Switched to English'); // Show notification // عرض إشعار
+      
+      setTimeout(() => { btn.classList.remove('switching'); }, 500); // Remove animation after 500ms // إزالة الحركة بعد 500 مللي
+    }
+    
+    function translateAllContent() {
+      // Translate elements with data-ar and data-en // ترجمة العناصر التي تحتوي على data-ar و data-en
+      document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          element.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+        }
+      });
+      
+      // Translate placeholders // ترجمة النصوص المؤقتة
+      document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? element.getAttribute('data-ar-placeholder') : element.getAttribute('data-en-placeholder');
+        }
+      });
+      
+      // Translate aria-labels // ترجمة تسميات aria
+      document.querySelectorAll('[data-ar-label], [data-en-label]').forEach(element => {
+        if (element.hasAttribute('data-ar-label') && element.hasAttribute('data-en-label')) {
+          element.setAttribute('aria-label', currentLanguage === 'ar' ? element.getAttribute('data-ar-label') : element.getAttribute('data-en-label'));
+        }
+      });
+      
+      // Update map iframe title // تحديث عنوان iframe للخريطة
+      const mapElement = document.querySelector('.map');
+      if (mapElement) {
+        mapElement.setAttribute('aria-label', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+        const mapIframe = mapElement.querySelector('iframe');
+        if (mapIframe) {
+          mapIframe.setAttribute('title', currentLanguage === 'ar' ? 'خريطة' : 'Map');
+        }
+      }
+      
+      // Translate elements with data-ar-text / data-en-text (for buttons with spans) // ترجمة العناصر ذات data-ar-text / data-en-text (للأزرار التي تحتوي على spans)
+      document.querySelectorAll('[data-ar-text], [data-en-text]').forEach(element => {
+        if (element.hasAttribute('data-ar-text') && element.hasAttribute('data-en-text')) {
+          const textSpan = element.querySelector('span:last-child');
+          if (textSpan) {
+            textSpan.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar-text') : element.getAttribute('data-en-text');
+          }
+        }
+      });
+      
+      // Update specific aria-labels // تحديث تسميات aria محددة
+      const homeBtn = document.querySelector('.home-btn');
+      if (homeBtn) {
+        homeBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'الرئيسية' : 'Home');
+      }
+      
+      const translateBtn = document.getElementById('translateBtn');
+      if (translateBtn) {
+        translateBtn.setAttribute('aria-label', currentLanguage === 'ar' ? 'تبديل اللغة' : 'Toggle Language');
+      }
+      
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.setAttribute('aria-label', currentLanguage === 'ar' ? 'ابحث عن معارفك' : 'Search contacts');
+      }
+      
+      // Update page title // تحديث عنوان الصفحة
+      document.title = currentLanguage === 'ar' ? 'حياك | معارفك' : 'Hayyak | Contacts';
+    }
+    
+    // ==================== DISPLAY FAMILY MEMBERS // عرض أفراد العائلة ====================
+    function displayFamilyMembers() {
+      const list = document.getElementById('family-list');
+      list.innerHTML = ''; // Clear list // مسح القائمة
+      
+      familyMembers.forEach((person, index) => {
+        const article = document.createElement('article');
+        article.className = 'item';
+        
+        // Get icon and relation name based on language // الحصول على الأيقونة واسم العلاقة حسب اللغة
+        let icon = '👤'; // Default icon // أيقونة افتراضية
+        let relationText = person.relation; // Default to stored relation // افتراضيًا العلاقة المخزنة
+        
+        if (categoryMap[person.relation]) { // If it's a predefined category // إذا كانت فئة محددة مسبقًا
+          icon = categoryMap[person.relation].icon;
+          relationText = currentLanguage === 'ar' ? categoryMap[person.relation].ar : categoryMap[person.relation].en;
+        } else if (currentLanguage === 'en') { // If custom relation and English // إذا كانت علاقة مخصصة والإنجليزية
+          // Simple common translations // ترجمات بسيطة شائعة
+          const commonTranslations = {
+            'أخرى': 'Other',
+            'صديق': 'Friend',
+            'عائلة': 'Family',
+            'زميل': 'Colleague',
+            'معلم': 'Teacher',
+            'طبيب': 'Doctor'
+          };
+          relationText = commonTranslations[person.relation] || person.relation; // Use translation if available // استخدم الترجمة إن وجدت
+        }
+        
+        article.innerHTML = `
+          <div class="pin">${icon}</div>
+          <div class="label" style="display:flex; flex-direction:column; align-items:flex-start; width:100%; gap:4px">
+            <div style="display:flex; align-items:center; justify-content:space-between; width:100%">
+              <span style="font-weight:700">${person.name}</span>
+              <button class="delete-btn" onclick="showDeleteConfirmation(${index})" title="${currentLanguage === 'ar' ? 'حذف' : 'Delete'}">✕</button>
+            </div>
+            <span class="relation-badge">${relationText}</span>
+          </div>
+        `;
+        list.appendChild(article);
+      });
+    }
+    
+    // ==================== CATEGORY SELECTION // اختيار الفئة ====================
+    function selectCategory(category, btn) {
+      // Remove 'selected' class from all category buttons // إزالة الفئة 'selected' من جميع أزرار الفئات
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+      
+      btn.classList.add('selected'); // Highlight clicked button // تمييز الزر المضغوط
+      selectedCategory = category; // Store selected category // تخزين الفئة المحددة
+      
+      const customWrapper = document.getElementById('custom-input-wrapper');
+      if (category === 'other') { // If 'other', show custom input // إذا كانت 'أخرى'، أظهر الحقل المخصص
+        customWrapper.classList.add('active');
+        document.getElementById('custom-relation-input').focus();
+      } else {
+        customWrapper.classList.remove('active');
+      }
+    }
+    
+    // ==================== MODAL CONTROLS // التحكم في النوافذ ====================
+    function openAddModal() {
+      document.getElementById('add-modal').classList.add('active');
+      document.getElementById('name-input').focus(); // Focus name input // التركيز على حقل الاسم
+      selectedCategory = null;
+      // Reset selections // إعادة تعيين التحديدات
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+      document.getElementById('custom-input-wrapper').classList.remove('active');
+    }
+    
+    function closeAddModal() {
+      document.getElementById('add-modal').classList.remove('active');
+      document.getElementById('name-input').value = ''; // Clear input // مسح الحقل
+      document.getElementById('custom-relation-input').value = ''; // Clear custom // مسح الحقل المخصص
+      selectedCategory = null;
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+      document.getElementById('custom-input-wrapper').classList.remove('active');
+    }
+    
+    function addName() {
+      const nameInput = document.getElementById('name-input');
+      const name = nameInput.value.trim(); // Get name and trim // الحصول على الاسم وحذف المسافات
+      
+      if (!name) { // Validation // التحقق
+        showError(currentLanguage === 'ar' ? 'الرجاء إدخال اسم صحيح' : 'Please enter a valid name');
+        return;
+      }
+      
+      if (!selectedCategory) { // No category selected // لم يتم اختيار فئة
+        showError(currentLanguage === 'ar' ? 'الرجاء اختيار نوع العلاقة' : 'Please select a relationship type');
+        return;
+      }
+      
+      let relation = selectedCategory; // Default to category key // افتراضيًا مفتاح الفئة
+      
+      if (selectedCategory === 'other') { // If 'other', get custom text // إذا كانت 'أخرى'، احصل على النص المخصص
+        const customInput = document.getElementById('custom-relation-input');
+        const customRelation = customInput.value.trim();
+        
+        if (!customRelation) { // Validation // التحقق
+          showError(currentLanguage === 'ar' ? 'الرجاء كتابة نوع العلاقة' : 'Please enter relationship type');
+          return;
+        }
+        
+        relation = customRelation; // Use custom text // استخدم النص المخصص
+      } else {
+        // Store the relation text in the current language for display // تخزين نص العلاقة باللغة الحالية للعرض
+        relation = currentLanguage === 'ar' ? categoryMap[selectedCategory].ar : categoryMap[selectedCategory].en;
+      }
+      
+      familyMembers.push({ name, relation }); // Add to array // إضافة إلى المصفوفة
+      localStorage.setItem('hayyak_family', JSON.stringify(familyMembers)); // Save to localStorage // حفظ في التخزين المحلي
+      displayFamilyMembers(); // Re-render // إعادة العرض
+      closeAddModal(); // Close modal // إغلاق النافذة
+    }
+    
+    // ==================== DELETE CONFIRMATION // تأكيد الحذف ====================
+    function showDeleteConfirmation(index) {
+      deleteIndex = index; // Store index // تخزين الفهرس
+      const person = familyMembers[index];
+      document.getElementById('confirm-name').textContent = person.name; // Set name in modal // تعيين الاسم في النافذة
+      document.getElementById('confirm-modal').classList.add('active'); // Show modal // إظهار النافذة
+    }
+    
+    function closeConfirmModal() {
+      document.getElementById('confirm-modal').classList.remove('active');
+      deleteIndex = null; // Reset index // إعادة تعيين الفهرس
+    }
+    
+    function confirmDelete() {
+      if (deleteIndex !== null) {
+        familyMembers.splice(deleteIndex, 1); // Remove item // إزالة العنصر
+        localStorage.setItem('hayyak_family', JSON.stringify(familyMembers)); // Save // حفظ
+        displayFamilyMembers(); // Re-render // إعادة العرض
+        closeConfirmModal(); // Close modal // إغلاق النافذة
+      }
+    }
+    
+    // ==================== KEYBOARD SHORTCUTS // اختصارات لوحة المفاتيح ====================
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { // Close modals with Escape // إغلاق النوافذ بـ Escape
+        closeAddModal();
+        closeConfirmModal();
+      }
+      if (e.key === 'Enter' && document.getElementById('add-modal').classList.contains('active')) {
+        addName(); // Add on Enter when add modal is open // إضافة بالضغط على Enter عند فتح نافذة الإضافة
+      }
+    });
+    
+    // ==================== SEARCH FUNCTIONALITY // وظيفة البحث ====================
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase(); // Get search term // الحصول على مصطلح البحث
+      const items = document.querySelectorAll('#family-list .item'); // Get all contact items // الحصول على جميع عناصر المعارف
+      
+      items.forEach(item => {
+        const name = item.querySelector('.label span:first-child').textContent.toLowerCase(); // Get name // الحصول على الاسم
+        if (name.includes(searchTerm)) {
+          item.style.display = 'grid'; // Show if matches // إظهار إذا تطابق
+        } else {
+          item.style.display = 'none'; // Hide if not // إخفاء إذا لم يتطابق
+        }
+      });
+    });
+    
+    // ==================== NOTIFICATION // الإشعار ====================
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #16243d;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 14px;
+        z-index: 1000;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        animation: slideIn 0.3s ease;
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // ==================== INITIALIZATION // التهيئة ====================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Attach click event to translate button // ربط حدث النقر بزر الترجمة
+      document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+      
+      // Initialize Firebase User Manager (external) // تهيئة مدير مستخدمي Firebase (خارجي)
+      initializeUserManager().catch(error => {
+        console.error('Error initializing user manager:', error);
+      });
+      
+      // Load user profile from localStorage // تحميل ملف تعريف المستخدم من التخزين المحلي
+      const userProfile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      if (userProfile.language && userProfile.language !== currentLanguage) {
+        // Apply saved language preference // تطبيق تفضيل اللغة المحفوظ
+        currentLanguage = userProfile.language;
+        document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLanguage;
+        const btn = document.getElementById('translateBtn');
+        if (btn) {
+          const langText = btn.querySelector('span:last-child');
+          if (langText) langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+        }
+        translateAllContent(); // Translate static content // ترجمة المحتوى الثابت
+      }
+      
+      // Apply dark theme if saved // تطبيق السمة الداكنة إذا كانت محفوظة
+      if (userProfile.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      displayFamilyMembers(); // Initial render // العرض الأولي
+      
+      // Add animation styles for notifications (injected once) // إضافة أنماط الحركة للإشعارات (تُحقن مرة واحدة)
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+
+    // ==================== ERROR TOAST // إشعار الخطأ ====================
+    let toastTimeout;
+    function showError(message) {
+      const toast = document.getElementById('error-toast');
+      toast.innerText = message; // Set message // تعيين الرسالة
+      toast.classList.add('show'); // Show toast // إظهار الإشعار
+      clearTimeout(toastTimeout); // Clear previous timeout // مسح المؤقت السابق
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show'); // Hide after 3.5s // إخفاء بعد 3.5 ثانية
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

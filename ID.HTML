@@ -1,0 +1,453 @@
+<!DOCTYPE html> <!-- Defines the document type as HTML5 // يحدد نوع المستند لـ HTML5 -->
+<html lang="ar" dir="rtl"> <!-- Root element: Arabic language, right‑to‑left direction // العنصر الجذر: اللغة العربية، اتجاه النص من اليمين لليسار -->
+<head>
+<meta charset="UTF-8"> <!-- Character encoding supporting Arabic // ترميز الأحرف الذي يدعم العربية -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design settings // إعدادات التصميم المتجاوب -->
+<title>HAYYAK | Digital ID</title> <!-- Page title // عنوان الصفحة -->
+<link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg"> <!-- Favicon (browser tab icon) // أيقونة تبويب المتصفح -->
+<!-- html2canvas library for capturing the ID card as an image // مكتبة html2canvas لالتقاط البطاقة كصورة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoVBL5gI9kLmbG4dGzcPTQsROA4GtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Preconnect to Google Fonts // اتصال مسبق بـ Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Load Cairo font // تحميل خط Cairo -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    @font-face { /* Custom font 'Afeesh' – regular weight // خط مخصص 'Afeesh' – وزن عادي */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-Aadi.woff2') format('woff2'),
+           url('./afeesh/Afeesh-Aadi.woff') format('woff'),
+           url('./afeesh/Afeesh-Aadi.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Bold weight // وزن عريض */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('./afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('./afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face { /* Semi‑bold // شبه عريض */
+      font-family: 'Afeesh';
+      src: url('./afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('./afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('./afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face { /* Light weight // خفيف */
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (Light/Dark themes) // متغيرات CSS (السمات الفاتحة/الداكنة) ==================== */
+    :root { /* Light theme variables // متغيرات السمة الفاتحة */
+      --bg: #f5f5f7; --card: #ffffff; --ink: #0f0f10; --muted: #6b7280; --line: #0f0f10; --radius: 14px;
+      --primary: #16243d; --accent: #d4af37;
+    }
+
+    [data-theme="dark"] { /* Dark theme overrides // تجاوزات السمة الداكنة */
+      --bg: #121212; --card: #1e1e1e; --ink: #ffffff; --muted: #a0a0a0; --line: #333333;
+    }
+
+    /* ==================== GLOBAL BODY STYLES // أنماط الجسم العامة ==================== */
+    body {
+        background-color: var(--bg); /* Background from variable // الخلفية من المتغير */
+        display: flex; /* Flexbox layout // تخطيط مرن */
+        flex-direction: column; /* Stack children vertically // تكديس العناصر عمودياً */
+        min-height: 100vh; /* Full viewport height // ارتفاع كامل لمنفذ العرض */
+        margin: 0; /* Remove default margin // إزالة الهوامش الافتراضية */
+        font-family: 'Cairo', sans-serif; /* Default font // الخط الافتراضي */
+        color: var(--ink); /* Text color from variable // لون النص من المتغير */
+    }
+
+    /* ==================== HEADER STYLES // أنماط الترويسة ==================== */
+    header.brand { text-align: center; background: #16243d; color: #ffffff; padding: 20px; position: relative; } /* Header bar // شريط الترويسة */
+    .logo-text { font-family: 'Afeesh', sans-serif; font-weight: 700; font-size: 48px; letter-spacing: 2px; color: #d4af37; } /* Main logo (Arabic) // الشعار الرئيسي (عربي) */
+    .logo-sub { font-family: 'Afeesh', sans-serif; font-weight: 600; color: #94a3b8; font-size: 20px; margin-top: 2px; letter-spacing: 3px; } /* Sub‑logo (English) // الشعار الفرعي (إنجليزي) */
+    .home-btn { position: absolute; top: 50%; left: 20px; transform: translateY(-50%); color: #d4af37; text-decoration: none; font-size: 15px; background-color: #0f0f10; padding: 9px 12px; border-radius: 999px; } /* Back button // زر الرجوع */
+    
+    /* ==================== ID CARD CONTAINER // حاوية البطاقة الشخصية ==================== */
+    .main-content {
+        flex: 1; /* Take remaining space // أخذ المساحة المتبقية */
+        display: flex; /* Flexbox // تخطيط مرن */
+        justify-content: center; /* Center horizontally // توسيط أفقي */
+        align-items: center; /* Center vertically // توسيط عمودي */
+        padding: 20px; /* Inner spacing // تباعد داخلي */
+        overflow-x: auto; /* Allow horizontal scroll on small screens // السماح بالتمرير الأفقي على الشاشات الصغيرة */
+    }
+
+    .id-card { /* The actual ID card // البطاقة نفسها */
+        background-color: #fff; /* White background // خلفية بيضاء */
+        width: 100%; /* Full width of container // عرض كامل للحاوية */
+        max-width: 900px; /* Maximum width // أقصى عرض */
+        aspect-ratio: 900 / 520; /* Fixed aspect ratio // نسبة أبعاد ثابتة */
+        position: relative; /* For absolute positioning of children // لتحديد موضع العناصر المطلقة داخله */
+        border-radius: 12px; /* Rounded corners // زوايا دائرية */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Subtle shadow // ظل خفيف */
+        overflow: hidden; /* Hide overflowing content // إخفاء المحتوى الزائد */
+        padding: clamp(10px, 3vw, 20px) clamp(15px, 5vw, 40px); /* Responsive padding // تباعد داخلي متجاوب */
+        box-sizing: border-box; /* Include padding in width/height // تضمين الحشوة في العرض/الارتفاع */
+        direction: ltr; /* Force left‑to‑right for English layout // فرض اتجاه من اليسار لليمين للتخطيط الإنجليزي */
+        color: #000; /* Black text // نص أسود */
+    }
+
+    /* ==================== BACKGROUND WATERMARKS // علامات مائية في الخلفية ==================== */
+    .bg-text { /* Large "UAE World" background // خلفية "الإمارات العالمية" الكبيرة */
+        position: absolute;
+        bottom: 0;
+        left: auto;
+        right: 0; /* Aligned to far right // محاذاة إلى أقصى اليمين */
+        transform: none;
+        width: 80%; /* Takes 80% width // يأخذ 80% من العرض */
+        opacity: 0.15; /* Very faint // خافت جداً */
+        z-index: 1; /* Low stacking order // ترتيب منخفض */
+        pointer-events: none; /* Not clickable // غير قابل للنقر */
+    }
+    .camel { /* Camel silhouette // صورة الجمل */
+        position: absolute;
+        bottom: -10px; /* Slightly below // أسفل قليلاً */
+        right: 40px; /* Positioned from right // موضوع من اليمين */
+        width: 250px; /* Fixed width // عرض ثابت */
+        opacity: 1; /* Fully visible // مرئي بالكامل */
+        z-index: 2; /* Above the background // فوق الخلفية */
+        pointer-events: none; /* Not clickable // غير قابل للنقر */
+    }
+
+    .content-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; height: 100%; } /* Wrapper for content above watermarks // حاوية للمحتوى فوق العلامات المائية */
+
+    .header-logo { text-align: center; margin-bottom: 20px; } /* Logo at top // الشعار في الأعلى */
+    .header-logo img { height: 60px; } /* Logo height // ارتفاع الشعار */
+
+    .card-body { display: flex; gap: 40px; flex: 1; } /* Two‑column layout // تخطيط عمودين */
+
+    /* ==================== LEFT COLUMN // العمود الأيسر ==================== */
+    .left-col {
+        width: fit-content; /* Shrink to content // يتقلص حسب المحتوى */
+        text-align: center; /* Center text // توسيط النص */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center children horizontally // توسيط العناصر أفقياً */
+    }
+    .profile-pic { /* Profile image // صورة الملف الشخصي */
+        width: clamp(80px, 17vw, 150px); /* Responsive size // حجم متجاوب */
+        height: clamp(80px, 17vw, 150px);
+        object-fit: cover; /* Cover the area without distortion // تغطية المنطقة دون تشويه */
+        border: 1px solid #ccc; /* Light border // حدود خفيفة */
+        margin-bottom: clamp(20px, 5vw, 45px); /* Bottom margin // هامش سفلي */
+        background: #eee; /* Fallback background // خلفية احتياطية */
+    }
+    .country-text { font-weight: bold; font-size: 16px; margin: 2px 0; color: #000; } /* Arabic country text // نص الدولة بالعربية */
+    .country-text.en { font-weight: normal; font-size: 18px; margin-bottom: 10px; } /* English country text // نص الدولة بالإنجليزية */
+    .copyright { font-size: 14px; color: #555; margin-top: auto; } /* Copyright text // نص حقوق النشر */
+
+    /* ==================== RIGHT COLUMN // العمود الأيمن ==================== */
+    .right-col { flex: 1; display: flex; flex-direction: column; } /* Takes remaining width // يأخذ العرض المتبقي */
+    .name-section { display: flex; align-items: center; gap: clamp(15px, 3.3vw, 30px); margin-bottom: clamp(10px, 2.2vw, 20px); margin-top: 10px; } /* Name + flag // الاسم والعلم */
+    .flag { width: clamp(60px, 11.1vw, 100px); border-radius: 2px; } /* UAE flag // علم الإمارات */
+    .name-details { text-align: center; flex: 1; } /* Name container // حاوية الاسم */
+    .name-ar { font-size: clamp(22px, 4vw, 36px); font-weight: 700; margin: 0 0 5px 0; direction: rtl; color: #000; font-family: 'Afeesh', sans-serif; } /* Arabic name // الاسم بالعربية */
+    .name-en { font-size: clamp(16px, 2.6vw, 24px); font-weight: normal; margin: 0 0 10px 0; color: #000; } /* English name // الاسم بالإنجليزية */
+    .dob { font-size: clamp(14px, 2vw, 18px); margin: 0; color: #333; font-weight: bold; } /* Date of birth // تاريخ الميلاد */
+
+    .health-section { margin-top: 10px; margin-bottom: 0; } /* Health info section // قسم المعلومات الصحية */
+    .health-header { /* Bilingual header // عنوان ثنائي اللغة */
+        border: 1.5px solid #000; /* Black border // حدود سوداء */
+        border-radius: 25px; /* Rounded pill shape // شكل دائري */
+        padding: 8px 20px;
+        display: flex;
+        justify-content: space-between; /* English on left, Arabic on right // إنجليزي يسار، عربي يمين */
+        align-items: center;
+        margin-bottom: 15px;
+        font-weight: bold;
+        background-color: rgba(255,255,255,0.9); /* Slightly transparent white // أبيض شفاف قليلاً */
+        color: #000;
+    }
+    .health-header span { font-size: clamp(10px, 1.5vw, 13px); } /* Smaller text for both languages // نص أصغر لكلتا اللغتين */
+
+    .health-tags { display: flex; flex-wrap: wrap; gap: clamp(5px, 1.1vw, 10px); justify-content: flex-start; } /* Container for tags // حاوية للعلامات */
+    .tag { /* Individual health tag // علامة صحية فردية */
+        border: 1.5px solid #000; border-radius: 20px; padding: clamp(4px, 0.7vw, 6px) clamp(10px, 1.7vw, 15px); 
+        display: flex; justify-content: space-between; align-items: center; gap: clamp(8px, 1.7vw, 15px); 
+        font-size: clamp(11px, 1.6vw, 14px); background-color: rgba(255,255,255,0.9); 
+        min-width: clamp(120px, 22.2vw, 200px); color: #000; opacity: 0; /* Start hidden for animation // يبدأ مخفياً للحركة */
+    }
+    .tag span:last-child { font-weight: bold; direction: rtl; } /* Arabic part // الجزء العربي */
+
+    /* ==================== FOOTER // التذييل ==================== */
+    footer { background: #16243d; color: #ffffff; text-align: center; font-size: 14px; padding: 20px; margin-top: auto; font-family: 'Cairo', sans-serif; }
+
+    /* ==================== ACTION BUTTONS // أزرار الإجراءات ==================== */
+    .download-button { /* Download and fullscreen buttons // أزرار التحميل وتكبير الشاشة */
+        background: #16243d;
+        color: #d4af37;
+        border: 2px solid #0f0f10;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s; /* Smooth transition // انتقال سلس */
+        box-shadow: 0 2px 0 #0f0f10;
+        margin-top: 20px;
+        font-family: 'Cairo', sans-serif;
+    }
+    .download-button:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #0f0f10; } /* Lift on hover // ارتفاع عند التمرير */
+    .download-button:active { transform: translateY(0); box-shadow: 0 1px 0 #0f0f10; } /* Press effect // تأثير الضغط */
+    
+    .actions-container { /* Container for both buttons // حاوية لكلا الزرين */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 20px;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* ==================== FULLSCREEN STYLES // أنماط وضع ملء الشاشة ==================== */
+    .id-card:fullscreen { /* When in fullscreen mode // عند وضع ملء الشاشة */
+        width: 100vw; height: 100vh; max-width: none; border-radius: 0; padding: 20px; display: flex; flex-direction: column; justify-content: center; overflow: auto; background-color: #fff;
+    }
+    .id-card:-webkit-full-screen { /* WebKit fullscreen // ملء الشاشة لمتصفحات WebKit */
+        width: 100vw; height: 100vh; max-width: none; border-radius: 0; padding: 20px; display: flex; flex-direction: column; justify-content: center; overflow: auto; background-color: #fff;
+    }
+
+    /* ==================== ANIMATIONS // الحركات ==================== */
+    @keyframes fadeInUp { /* Fade in and slide up // ظهور مع انزلاق لأعلى */
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in { opacity: 0; animation: fadeInUp 0.6s ease-out forwards; } /* Apply animation // تطبيق الحركة */
+</style>
+</head>
+<body>
+
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand"> <!-- Header container // حاوية الترويسة -->
+    <a href="home.html" class="home-btn">رجوع</a> <!-- Back button // زر الرجوع -->
+    <div class="logo-text">حــــــيــــاك</div> <!-- Arabic logo // الشعار العربي -->
+    <div class="logo-sub">HAYYAK</div> <!-- English sub‑logo // الشعار الفرعي الإنجليزي -->
+  </header>
+
+  <!-- ==================== MAIN CONTENT // المحتوى الرئيسي ==================== -->
+  <div class="main-content"> <!-- Centered container // حاوية مركزية -->
+    <!-- ==================== ID CARD // البطاقة الشخصية ==================== -->
+    <div class="id-card animate-in"> <!-- Card with animation // البطاقة مع حركة -->
+        <!-- UAE_world_big: original size (80% width) but anchored to far right // صورة خلفية "الإمارات" كبيرة، مثبتة إلى اليمين -->
+        <img src="Images/UAE_Word_Big_ID_Page.png" alt="" class="bg-text">
+        <!-- camel remains opaque // الجمل يبقى معتماً -->
+        <img src="Images/Camel_Picture_ID_Page.png" alt="Camel" class="camel">
+
+        <div class="content-wrapper"> <!-- Wrapper for content above watermarks // حاوية المحتوى فوق العلامات المائية -->
+            <div class="header-logo animate-in" style="animation-delay: 0.2s;"> <!-- Logo with delayed animation // الشعار مع حركة مؤجلة -->
+                <img src="Images/HAYYAK_Logo_ID_Page.jpg" alt="Hayyak"> <!-- Hayyak logo // شعار حياك -->
+            </div>
+
+            <div class="card-body"> <!-- Two‑column layout // تخطيط عمودين -->
+                <!-- ==================== LEFT COLUMN // العمود الأيسر ==================== -->
+                <div class="left-col animate-in" style="animation-delay: 0.3s;"> <!-- Left column with animation // العمود الأيسر مع حركة -->
+                    <img id="id-profile-pic" src="Images/Profile_Picture_ID_Page.jpg" alt="Profile" class="profile-pic"> <!-- Profile picture // صورة الملف الشخصي -->
+                    <p class="country-text ar">الامارات العربية المتحدة</p> <!-- Arabic country name // اسم الدولة بالعربية -->
+                    <p class="country-text en">United Arab Emirates</p> <!-- English country name // اسم الدولة بالإنجليزية -->
+                    <p class="copyright">© hayyak</p> <!-- Copyright // حقوق النشر -->
+                </div>
+
+                <!-- ==================== RIGHT COLUMN // العمود الأيمن ==================== -->
+                <div class="right-col animate-in" style="animation-delay: 0.4s;"> <!-- Right column with animation // العمود الأيمن مع حركة -->
+                    <div class="name-section"> <!-- Name and flag // الاسم والعلم -->
+                        <img src="Images/UAE_Flag_ID_Page.PNG" alt="UAE Flag" class="flag"> <!-- UAE flag // علم الإمارات -->
+                        <div class="name-details"> <!-- Name details container // حاوية تفاصيل الاسم -->
+                            <h2 id="id-name-ar" class="name-ar"></h2> <!-- Arabic name (filled by JS) // الاسم بالعربية (يملأ بواسطة JS) -->
+                            <h3 id="id-name-en" class="name-en"></h3> <!-- English name (filled by JS) // الاسم بالإنجليزية (يملأ بواسطة JS) -->
+                            <p id="id-dob" class="dob"></p> <!-- Date of birth (filled by JS) // تاريخ الميلاد (يملأ بواسطة JS) -->
+                        </div>
+                    </div>
+
+                    <div class="health-section"> <!-- Health information section // قسم المعلومات الصحية -->
+                        <div class="health-header"> <!-- Bilingual header // عنوان ثنائي اللغة -->
+                            <span>Allergies and Health/psychological problems</span> <!-- English // إنجليزي -->
+                            <span style="direction: rtl;">الحساسيات والمشاكل الصحية/النفسية</span> <!-- Arabic // عربي -->
+                        </div>
+                        <div id="id-health-tags" class="health-tags"> <!-- Container for health tags // حاوية للعلامات الصحية -->
+                            <!-- Tags will be injected here by JavaScript // سيتم حقن العلامات هنا بواسطة JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- ==================== ACTION BUTTONS // أزرار الإجراءات ==================== -->
+  <div class="actions-container"> <!-- Container for download and fullscreen buttons // حاوية أزرار التحميل وتكبير الشاشة -->
+    <button id="download-btn" class="download-button animate-in" style="animation-delay: 0.6s;"> <!-- Download button // زر التحميل -->
+        <span data-ar="تحميل البطاقة كصورة" data-en="Download ID as Image">تحميل البطاقة كصورة</span> <!-- Text with translation data // نص مع بيانات الترجمة -->
+    </button>
+    <button id="fullscreen-btn" class="download-button animate-in" style="animation-delay: 0.7s;"> <!-- Fullscreen button // زر تكبير الشاشة -->
+        <span data-ar="تكبير الشاشة ⛶" data-en="Fullscreen ⛶">تكبير الشاشة ⛶</span> <!-- Text with translation data // نص مع بيانات الترجمة -->
+    </button>
+  </div>
+
+  <!-- ==================== FOOTER // التذييل ==================== -->
+  <footer>© عبدالله بن ناصر - حياك</footer> <!-- Footer content // محتوى التذييل -->
+
+  <script>
+    // ==================== ALL JAVASCRIPT FOR THIS PAGE // كل جافا سكريبت لهذه الصفحة ====================
+    // Data for translation mapping (copied from index.html) // بيانات لربط الترجمة (منسوخة من index.html)
+    const phobiasData = { // Phobias list in both languages // قائمة الفوبيا باللغتين
+      ar: ["💪 لا يوجد", "👥 الفوبيا الاجتماعية", "🌑 فوبيا الظلام", "🎤 فوبيا التحدث أمام الجمهور", "🧗 فوبيا المرتفعات", "📦 فوبيا الأماكن المغلقة", "✈️ فوبيا الطيران", "🐕 فوبيا الكلاب", "🐍 فوبيا الثعابين", "🌊 فوبيا الماء", "⚡ فوبيا الرعد/البرق", "🦠 فوبيا الجراثيم", "🩸 فوبيا الدم", "🦷 فوبيا أطباء الأسنان", "🏙️ فوبيا الأماكن المفتوحة/المزدحمة", "💀 فوبيا الموت", "🔥 فوبيا النار", "🧼 فوبيا القذارة", "🕳️ فوبيا الثقوب", "⏳ فوبيا الزمن"],
+      en: ["💪 None", "👥 Fear of Social Situations", "🌑 Fear of Darkness", "🎤 Fear of Public Speaking", "🧗 Fear of Heights", "📦 Fear of Enclosed Spaces", "✈️ Fear of Flying", "🐕 Fear of Dogs", "🐍 Fear of Snakes", "🌊 Fear of Water", "⚡ Fear of Thunder/Lightning", "🦠 Fear of Germs", "🩸 Fear of Blood", "🦷 Fear of Dentists", "🏙️ Fear of Open/Crowded Places", "💀 Fear of Death", "🔥 Fear of Fire", "🧼 Fear of Dirt", "🕳️ Fear of Holes", "⏳ Fear of Time"]
+    };
+
+    const allergiesData = { // Allergies list in both languages // قائمة الحساسيات باللغتين
+      ar: ["💪 لا يوجد", "🥛 حليب", "🥚 بيض", "🥜 فول سوداني", "🌰 مكسرات", "🐟 سمك", "🍤 روبيان", "🌾 قمح", "🫘 صويا", "🌰 لوز", "🌰 كاجو", "🌰 جوز", "🌰 فستق", "🌰 بندق", "🍓 فراولة", "🍅 طماطم", "🍫 شوكولاتة", "☕ قهوة", "🍯 عسل", "🐄 حليب بقر"],
+      en: ["💪 None", "🥛 Milk", "🥚 Eggs", "🥜 Peanuts", "🌰 Tree nuts", "🐟 Fish", "🍤 Shrimp", "🌾 Wheat", "🫘 Soy", "🌰 Almonds", "🌰 Cashews", "🌰 Walnuts", "🌰 Pistachios", "🌰 Hazelnuts", "🍓 Strawberries", "🍅 Tomatoes", "🍫 Chocolate", "☕ Coffee", "🍯 Honey", "🐄 Cow milk"]
+    };
+
+    const medicalConditionsData = { // Medical conditions list in both languages // قائمة الحالات الطبية باللغتين
+      ar: ["💪 لا يوجد", "💉 السكري", "🫀 ضغط الدم", "🫁 الربو", "😰 القلق", "👁️ عمى الألوان", "😔 الاكتئاب", "😴 الأرق", "🦴 التهاب المفاصل", "🤕 الصداع النصفي", "💓 أمراض القلب", "⚡ الصرع", "🔙 ألم الظهر", "👓 ضعف النظر", "🩸 فقر الدم", "⚖️ السمنة", "🫘 أمراض الكلى", "🦠 ضعف المناعة"],
+      en: ["💪 None", "💉 Diabetes", "🫀 High Blood Pressure", "🫁 Asthma", "😰 Anxiety", "👁️ Color Blindness", "😔 Depression", "😴 Insomnia", "🦴 Arthritis", "🤕 Migraine", "💓 Heart Disease", "⚡ Epilepsy", "🔙 Back Pain", "👓 Poor Eyesight", "🩸 Anemia", "⚖️ Obesity", "🫘 Kidney Disease", "🦠 Immunodeficiency"]
+    };
+
+    document.addEventListener('DOMContentLoaded', () => { // Run when DOM is ready // يعمل عندما يكون DOM جاهزاً
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); // Load user profile from localStorage // تحميل ملف المستخدم من التخزين المحلي
+        
+        // Apply theme from user profile // تطبيق السمة من ملف المستخدم
+        if (profile.theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark'); // Set dark theme attribute // تعيين سمة السمة الداكنة
+        }
+        
+        // ==================== NAME LOGIC // منطق الاسم ====================
+        const nameArEl = document.getElementById('id-name-ar'); // Arabic name element // عنصر الاسم العربي
+        const nameEnEl = document.getElementById('id-name-en'); // English name element // عنصر الاسم الإنجليزي
+        
+        if (profile.nameAr && profile.nameAr.trim() !== "") { // If Arabic name exists // إذا كان الاسم العربي موجوداً
+            nameArEl.textContent = profile.nameAr; // Set Arabic name // تعيين الاسم العربي
+        } else {
+            nameArEl.style.display = 'none'; // Hide if empty // إخفاء إذا كان فارغاً
+        }
+        
+        if (profile.nameEn && profile.nameEn.trim() !== "") { // If English name exists // إذا كان الاسم الإنجليزي موجوداً
+            nameEnEl.textContent = profile.nameEn; // Set English name // تعيين الاسم الإنجليزي
+        } else {
+            nameEnEl.style.display = 'none'; // Hide if empty // إخفاء إذا كان فارغاً
+        }
+        
+        // Date of Birth // تاريخ الميلاد
+        if (profile.dob) { // If DOB exists // إذا كان تاريخ الميلاد موجوداً
+            document.getElementById('id-dob').textContent = profile.dob; // Set DOB // تعيين تاريخ الميلاد
+        }
+
+        // Profile Picture // صورة الملف الشخصي
+        const avatar = localStorage.getItem('hayyak_user_avatar'); // Get avatar from localStorage // الحصول على الصورة الرمزية من التخزين المحلي
+        if (avatar) { // If avatar exists // إذا كانت الصورة موجودة
+            document.getElementById('id-profile-pic').src = avatar; // Set profile picture // تعيين صورة الملف الشخصي
+        }
+
+        // ==================== HEALTH TAGS // العلامات الصحية ====================
+        const tagsContainer = document.getElementById('id-health-tags'); // Container for tags // حاوية العلامات
+        // Combine all selected items (allergies, medical conditions, phobias) // دمج جميع العناصر المحددة (حساسيات، حالات طبية، فوبيا)
+        const items = [
+            ...(profile.allergies || []),
+            ...(profile.medicalConditions || []),
+            ...(profile.phobias || [])
+        ];
+
+        // Helper function to find translation pair for an item // دالة مساعدة للعثور على زوج الترجمة لعنصر
+        function getPair(item) {
+            const lists = [phobiasData, allergiesData, medicalConditionsData]; // All data lists // جميع قوائم البيانات
+            for (const list of lists) { // Loop through each list // التكرار على كل قائمة
+                const arIndex = list.ar.indexOf(item); // Look for item in Arabic list // البحث عن العنصر في القائمة العربية
+                if (arIndex !== -1) return { ar: list.ar[arIndex], en: list.en[arIndex] }; // Return pair if found // إرجاع الزوج إذا وجد
+                
+                const enIndex = list.en.indexOf(item); // Look for item in English list // البحث عن العنصر في القائمة الإنجليزية
+                if (enIndex !== -1) return { ar: list.ar[enIndex], en: list.en[enIndex] }; // Return pair if found // إرجاع الزوج إذا وجد
+            }
+            // If not found in predefined lists (custom item), return item as both // إذا لم يوجد في القوائم المحددة مسبقاً (عنصر مخصص)، إرجاع العنصر نفسه لكلتا اللغتين
+            return { ar: item, en: item };
+        }
+
+        items.forEach(item => { // Loop through each selected item // التكرار على كل عنصر محدد
+            if (item === "None" || item === "لا يوجد" || item.includes("None") || item.includes("لا يوجد")) return; // Skip "None" entries // تخطي إدخالات "لا يوجد"
+            
+            const pair = getPair(item); // Get translation pair // الحصول على زوج الترجمة
+            // Remove emojis for cleaner ID look (keep only text) // إزالة الرموز التعبيرية لمظهر أنظف (الاحتفاظ بالنص فقط)
+            const cleanEn = pair.en.replace(/^[^\w\s]+/, '').trim(); // English part without leading emoji // الجزء الإنجليزي بدون الرمز التعبيري
+            const cleanAr = pair.ar.replace(/^[^\w\s\u0600-\u06FF]+/, '').trim(); // Arabic part without leading emoji // الجزء العربي بدون الرمز التعبيري
+
+            const tag = document.createElement('div'); // Create a div for the tag // إنشاء div للعلامة
+            tag.className = 'tag'; // Assign class // تعيين الكلاس
+            tag.innerHTML = `<span>${cleanEn}</span><span>${cleanAr}</span>`; // Set bilingual content // تعيين المحتوى ثنائي اللغة
+            tagsContainer.appendChild(tag); // Add to container // إضافة إلى الحاوية
+        });
+
+        // ==================== STAGGERED ANIMATION FOR TAGS // حركة متدرجة للعلامات ====================
+        const tags = document.querySelectorAll('.health-tags .tag'); // Select all tags // تحديد جميع العلامات
+        tags.forEach((tag, index) => { // Loop through tags // التكرار على العلامات
+            tag.style.animation = `fadeInUp 0.5s ease-out forwards ${0.6 + index * 0.08}s`; // Apply animation with delay // تطبيق الحركة مع تأخير
+        });
+    });
+
+    // ==================== DOWNLOAD FUNCTION // دالة التحميل ====================
+    function downloadIdCard() { // Capture the ID card as an image and download // التقاط البطاقة كصورة وتحميلها
+        const card = document.querySelector('.id-card'); // Select the card element // تحديد عنصر البطاقة
+        const btn = document.getElementById('download-btn'); // Download button // زر التحميل
+        const originalText = btn.innerHTML; // Store original button text // تخزين نص الزر الأصلي
+        btn.innerHTML = '<span>...</span>'; // Show loading // إظهار التحميل
+        btn.disabled = true; // Disable button // تعطيل الزر
+
+        html2canvas(card, { // Use html2canvas to render the card // استخدام html2canvas لرسم البطاقة
+            scale: 3, // Higher scale for better quality // مقياس أعلى لجودة أفضل
+            useCORS: true, // Enable CORS for external images // تمكين CORS للصور الخارجية
+            backgroundColor: null // Transparent background // خلفية شفافة
+        }).then(canvas => { // On success // عند النجاح
+            const link = document.createElement('a'); // Create download link // إنشاء رابط تحميل
+            link.download = 'HAYYAK_ID.png'; // Set filename // تعيين اسم الملف
+            link.href = canvas.toDataURL('image/png'); // Convert canvas to PNG data URL // تحويل اللوحة إلى رابط بيانات PNG
+            link.click(); // Trigger download // تشغيل التحميل
+            btn.innerHTML = originalText; // Restore button text // استعادة نص الزر
+            btn.disabled = false; // Re-enable button // إعادة تمكين الزر
+        }).catch(err => { // On error // عند الخطأ
+            console.error('Download failed:', err); // Log error // تسجيل الخطأ
+            btn.innerHTML = '<span>Error!</span>'; // Show error // إظهار الخطأ
+            setTimeout(() => {
+                btn.innerHTML = originalText; // Restore after timeout // الاستعادة بعد مهلة
+                btn.disabled = false;
+            }, 2000);
+        });
+    }
+
+    document.getElementById('download-btn').addEventListener('click', downloadIdCard); // Attach click event // ربط حدث النقر
+    
+    // ==================== FULLSCREEN FUNCTION // دالة ملء الشاشة ====================
+    function toggleFullScreen() { // Toggle fullscreen mode for the card // تبديل وضع ملء الشاشة للبطاقة
+        const card = document.querySelector('.id-card'); // Select the card // تحديد البطاقة
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) { // If not in fullscreen // إذا لم يكن في وضع ملء الشاشة
+            if (card.requestFullscreen) { // Standard fullscreen // ملء الشاشة القياسي
+                card.requestFullscreen();
+            } else if (card.webkitRequestFullscreen) { // WebKit fullscreen // ملء الشاشة لمتصفحات WebKit
+                card.webkitRequestFullscreen();
+            }
+        } else { // If already in fullscreen // إذا كان بالفعل في وضع ملء الشاشة
+            if (document.exitFullscreen) { // Exit fullscreen // الخروج من ملء الشاشة
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // WebKit exit // الخروج لمتصفحات WebKit
+                document.webkitExitFullscreen();
+            }
+        }
+    }
+    
+    document.getElementById('fullscreen-btn').addEventListener('click', toggleFullScreen); // Attach click event // ربط حدث النقر
+  </script>
+</body>
+</html>

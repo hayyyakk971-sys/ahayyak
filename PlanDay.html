@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<!-- Defines the document type as HTML5 // يحدد نوع المستند كـ HTML5 -->
+<html lang="ar" dir="rtl">
+<!-- Root element, language Arabic, direction right-to-left // العنصر الجذري، اللغة العربية، الاتجاه من اليمين لليسار -->
+<head>
+  <meta charset="utf-8" />
+  <!-- Sets character encoding to UTF-8 (supports Arabic) // يضبط ترميز الأحرف إلى UTF-8 (يدعم العربية) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Makes page responsive on mobile devices // يجعل الصفحة متجاوبة مع الأجهزة المحمولة -->
+  <title>HAYYAK | Daily Planner</title>
+  <!-- Page title // عنوان الصفحة -->
+  <link rel="icon" type="image/jpeg" href="Images/Favicon.jpeg">
+  <!-- Favicon (browser tab icon) // أيقونة علامة تبويب المتصفح -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Loads Cairo font from Google Fonts // تحميل خط Cairo من خطوط جوجل -->
+  <script src="js/Places_data.js?v=5"></script>
+  <!-- External JavaScript file containing places data // ملف جافا سكريبت خارجي يحتوي على بيانات الأماكن -->
+  <style>
+    /* ==================== FONT DEFINITIONS // تعريفات الخطوط ==================== */
+    /* Afeesh family (local) - defines custom fonts // عائلة Afeesh (محلية) - تعريف خطوط مخصصة */
+    @font-face {
+      font-family: 'Afeesh'; /* Assigns a name to this font variant // يعين اسمًا لمتغير الخط هذا */
+      src: url('afeesh/Afeesh-Aadi.woff2') format('woff2'), /* WOFF2 format (modern) // تنسيق WOFF2 (حديث) */
+           url('afeesh/Afeesh-Aadi.woff') format('woff'), /* WOFF format (fallback) // تنسيق WOFF (احتياطي) */
+           url('afeesh/Afeesh-Aadi.ttf') format('truetype'); /* TrueType format (older) // تنسيق TrueType (قديم) */
+      font-weight: 400; /* Normal weight // وزن عادي */
+      font-style: normal; /* Normal style // نمط عادي */
+      font-display: swap; /* Shows fallback font while loading custom // عرض خط احتياطي أثناء تحميل الخط المخصص */
+    }
+    @font-face {
+      font-family: 'Afeesh'; /* Same family name // نفس اسم العائلة */
+      src: url('afeesh/Afeesh-Mekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-Mekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-Mekalbaz.ttf') format('truetype');
+      font-weight: 700; /* Bold weight // وزن عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMekalbaz.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMekalbaz.woff') format('woff'),
+           url('afeesh/Afeesh-NosMekalbaz.ttf') format('truetype');
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Afeesh';
+      src: url('afeesh/Afeesh-NosMesalwa.woff2') format('woff2'),
+           url('afeesh/Afeesh-NosMesalwa.woff') format('woff'),
+           url('afeesh/Afeesh-NosMesalwa.ttf') format('truetype');
+      font-weight: 300; /* Light // خفيف */
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==================== CSS VARIABLES (THEME) // متغيرات CSS (السمة) ==================== */
+    :root {
+      --bg: #f5f5f7;        /* Light mode background // خلفية الوضع الفاتح */
+      --card: #ffffff;       /* Card background // خلفية البطاقة */
+      --ink: #0f0f10;        /* Main text color // لون النص الرئيسي */
+      --muted: #6b7280;      /* Muted text // نص باهت */
+      --line: #0f0f10;       /* Border color // لون الحدود */
+      --radius: 14px;        /* Border radius // نصف قطر الحدود */
+      --primary: #16243d;    /* Primary brand color // لون العلامة التجارية الأساسي */
+      --accent: #d4af37;     /* Accent color (gold) // لون مميز (ذهبي) */
+    }
+    [data-theme="dark"] {    /* Dark mode overrides // تجاوزات الوضع الداكن */
+      --bg: #121212;         /* Dark background // خلفية داكنة */
+      --card: #1e1e1e;       /* Dark card // بطاقة داكنة */
+      --ink: #ffffff;        /* Light text // نص فاتح */
+      --muted: #a0a0a0;      /* Muted grey // رمادي باهت */
+      --line: #333333;       /* Dark border // حدود داكنة */
+    }
+
+    /* ==================== GLOBAL STYLES // أنماط عامة ==================== */
+    body {
+      margin: 0; /* Remove default margin // إزالة الهامش الافتراضي */
+      font-family: 'Cairo', sans-serif; /* Font stack // مجموعة الخطوط */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+      color: var(--ink); /* Text color // لون النص */
+      display: flex; /* Enable flexbox layout // تفعيل تخطيط المرن */
+      flex-direction: column; /* Stack children vertically // تكديس العناصر عموديًا */
+      min-height: 100vh; /* Minimum full viewport height // ارتفاع لا يقل عن كامل منفذ العرض */
+      overflow-x: hidden; /* Prevent horizontal scroll // منع التمرير الأفقي */
+    }
+    .shell {
+      width: 100%; /* Full width // عرض كامل */
+      max-width: 480px; /* Limit width on large screens // تحديد العرض على الشاشات الكبيرة */
+      margin: 0 auto; /* Center horizontally // توسيط أفقي */
+      padding: 16px; /* Inner spacing // حشوة داخلية */
+      flex: 1; /* Take remaining space in flex column // أخذ المساحة المتبقية في عمود المرن */
+      overflow-y: auto; /* Allow vertical scrolling // السماح بالتمرير العمودي */
+    }
+
+    /* ==================== HEADER // الترويسة ==================== */
+    header.brand {
+      text-align: center; /* Center align text // محاذاة النص للوسط */
+      background: #16243d; /* Dark blue background // خلفية زرقاء داكنة */
+      color: #ffffff; /* White text // نص أبيض */
+      padding: 20px; /* Padding around content // حشوة حول المحتوى */
+      position: relative; /* For absolute positioning of children // لتحديد موضع العناصر الفرعية بشكل مطلق */
+    }
+    .logo-text {
+      font-family: 'Afeesh', sans-serif; /* Use Afeesh font // استخدام خط Afeesh */
+      font-weight: 700; /* Bold // عريض */
+      font-size: 48px; /* Large font // خط كبير */
+      letter-spacing: 2px; /* Space between letters // مسافة بين الأحرف */
+      color: #d4af37; /* Gold color // لون ذهبي */
+    }
+    .logo-sub {
+      font-family: 'Afeesh', sans-serif; /* Afeesh font // خط Afeesh */
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      color: #94a3b8; /* Greyish blue // أزرق رمادي */
+      font-size: 20px; /* Font size // حجم الخط */
+      margin-top: 2px; /* Small top margin // هامش علوي صغير */
+      letter-spacing: 3px; /* More spacing between letters // مسافة أكبر بين الأحرف */
+    }
+    .home-btn {
+      position: absolute; /* Absolute positioning inside header // تحديد موضع مطلق داخل الترويسة */
+      top: 50%; /* Center vertically // توسيط عمودي */
+      left: 20px; /* Distance from left (RTL) // مسافة من اليسار (RTL) */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      color: #d4af37; /* Gold text // نص ذهبي */
+      text-decoration: none; /* Remove underline // إزالة التسطير */
+      font-size: 15px; /* Font size // حجم الخط */
+      background-color: #0f0f10; /* Dark background // خلفية داكنة */
+      padding: 9px 12px; /* Padding // حشوة */
+      border-radius: 999px; /* Pill shape // شكل كبسولة */
+    }
+    .translate-btn {
+      position: absolute; /* Absolute positioning // تحديد موضع مطلق */
+      top: 50%; /* Center vertically // توسيط عمودي */
+      right: 20px; /* Distance from right (RTL) // مسافة من اليمين (RTL) */
+      transform: translateY(-50%); /* Perfect vertical centering // توسيط عمودي مثالي */
+      background: #d4af37; /* Gold background // خلفية ذهبية */
+      border: 2px solid #ffffff; /* White border // حدود بيضاء */
+      border-radius: 20px; /* Rounded shape // شكل دائري */
+      color: #16243d; /* Dark blue text // نص أزرق داكن */
+      padding: 6px 14px; /* Padding // حشوة */
+      font-weight: 700; /* Bold // عريض */
+      font-size: 13px; /* Font size // حجم الخط */
+      cursor: pointer; /* Pointer cursor on hover // مؤشر اليد عند التمرير */
+      display: flex; /* Flexbox for icon and text // مرن للأيقونة والنص */
+      align-items: center; /* Vertically align items // محاذاة عمودية للعناصر */
+      gap: 6px; /* Gap between icon and text // فجوة بين الأيقونة والنص */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3); /* Gold shadow // ظل ذهبي */
+      z-index: 100; /* Ensure it's above other elements // ضمان أنه فوق العناصر الأخرى */
+    }
+    .translate-btn:hover {
+      transform: translateY(-50%) scale(1.05); /* Zoom on hover // تكبير عند التمرير */
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5); /* Stronger shadow // ظل أقوى */
+      background: #f7ef8a; /* Lighter gold // ذهبي أفتح */
+    }
+    .translate-btn .icon {
+      font-size: 16px; /* Globe icon size // حجم أيقونة الكرة الأرضية */
+      transition: transform 0.3s ease; /* Smooth rotation // دوران سلس */
+    }
+    .translate-btn:hover .icon {
+      transform: rotate(20deg); /* Rotate icon on hover // تدوير الأيقونة عند التمرير */
+    }
+    .translate-btn.switching {
+      animation: pulse 0.5s ease; /* Pulse animation when switching language // حركة نبض عند تبديل اللغة */
+    }
+    @keyframes pulse {
+      0% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(0.9); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    /* ==================== CARD STYLES // أنماط البطاقات ==================== */
+    .card {
+      background: var(--card); /* Card background // خلفية البطاقة */
+      border: 2px solid var(--line); /* Border using theme line color // حدود بلون الخط من السمة */
+      border-radius: var(--radius); /* Rounded corners using variable // زوايا دائرية باستخدام المتغير */
+      padding: 20px; /* Inner padding // حشوة داخلية */
+      margin-bottom: 16px; /* Bottom margin // هامش سفلي */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Shadow for depth // ظل للعمق */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+    }
+    .card:hover {
+      transform: translateY(-2px); /* Slight lift on hover // رفع طفيف عند التمرير */
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); /* Larger shadow on hover // ظل أكبر عند التمرير */
+    }
+    .btn {
+      width: 100%; /* Full width // عرض كامل */
+      padding: 14px; /* Padding // حشوة */
+      background: linear-gradient(135deg, var(--primary) 0%, #1f3a52 100%); /* Gradient background // خلفية متدرجة */
+      color: var(--accent); /* Accent text // نص مميز */
+      border: none; /* No border // بلا حدود */
+      border-radius: 12px; /* Rounded corners // زوايا دائرية */
+      font-weight: 700; /* Bold // عريض */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      font-size: 16px; /* Font size // حجم الخط */
+      margin-top: 10px; /* Top margin // هامش علوي */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      box-shadow: 0 4px 0 rgba(0,0,0,0.1); /* Shadow for 3D effect // ظل لتأثير ثلاثي الأبعاد */
+    }
+    .btn:hover {
+      transform: translateY(-2px); /* Lift on hover // رفع عند التمرير */
+      box-shadow: 0 6px 0 rgba(0,0,0,0.15); /* Larger shadow // ظل أكبر */
+    }
+    .btn:active {
+      transform: translateY(0); /* Press down // ضغط لأسفل */
+      box-shadow: 0 2px 0 rgba(0,0,0,0.1); /* Smaller shadow // ظل أصغر */
+    }
+
+    /* ==================== TIMELINE STYLES // أنماط الخط الزمني ==================== */
+    .timeline {
+      position: relative; /* For pseudo-element positioning // لتحديد موضع العناصر الزائفة */
+      padding-right: 20px; /* Right padding (RTL) // حشوة يمنى (RTL) */
+      border-right: 3px solid var(--accent); /* Right border as timeline line // حد أيمن كخط زمني */
+      margin-right: 10px; /* Right margin // هامش أيمن */
+    }
+    .timeline-item {
+      margin-bottom: 24px; /* Bottom margin // هامش سفلي */
+      position: relative; /* For dot positioning // لتحديد موضع النقطة */
+      animation: slideIn 0.5s ease-out; /* Slide-in animation // حركة انزلاق للداخل */
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .timeline-item::before {
+      content: ''; /* Empty content for dot // محتوى فارغ للنقطة */
+      position: absolute; /* Absolute positioning // تحديد موضع مطلق */
+      right: -26px; /* Position dot on the timeline line // وضع النقطة على الخط الزمني */
+      top: 0; /* Align to top // محاذاة للأعلى */
+      width: 14px; /* Dot width // عرض النقطة */
+      height: 14px; /* Dot height // ارتفاع النقطة */
+      background: linear-gradient(135deg, var(--accent) 0%, #c9960e 100%); /* Gradient background // خلفية متدرجة */
+      border-radius: 50%; /* Circular // دائري */
+      border: 3px solid var(--card); /* White border to create ring // حدود بيضاء لتشكيل حلقة */
+      box-shadow: 0 0 0 3px var(--line); /* Outer border // حدود خارجية */
+    }
+    .time-label {
+      font-size: 12px; /* Small font // خط صغير */
+      color: var(--accent); /* Accent color // لون مميز */
+      font-weight: 700; /* Bold // عريض */
+      margin-bottom: 6px; /* Bottom margin // هامش سفلي */
+      text-transform: uppercase; /* Uppercase text // نص بأحرف كبيرة */
+      letter-spacing: 0.5px; /* Spacing between letters // مسافة بين الأحرف */
+    }
+    .activity-card {
+      background: linear-gradient(135deg, var(--bg) 0%, rgba(212, 175, 55, 0.05) 100%); /* Gradient background // خلفية متدرجة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 10px; /* Rounded corners // زوايا دائرية */
+      padding: 14px; /* Padding // حشوة */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+    }
+    .activity-card:hover {
+      border-color: var(--accent); /* Accent border on hover // حدود مميزة عند التمرير */
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.2); /* Glow effect // تأثير توهج */
+      transform: translateX(4px); /* Slide right on hover (RTL) // انزلاق لليمين عند التمرير (RTL) */
+    }
+    .activity-title {
+      font-weight: 700; /* Bold // عريض */
+      font-size: 16px; /* Font size // حجم الخط */
+      margin-bottom: 6px; /* Bottom margin // هامش سفلي */
+      color: var(--ink); /* Text color // لون النص */
+    }
+    .activity-desc {
+      font-size: 13px; /* Font size // حجم الخط */
+      color: var(--muted); /* Muted color // لون باهت */
+      line-height: 1.4; /* Line height // ارتفاع السطر */
+    }
+
+    /* ==================== PLANNER UI STYLES // أنماط واجهة المخطط ==================== */
+    .planner-container {
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 20px; /* Gap between elements // فجوة بين العناصر */
+      height: 100%; /* Full height // ارتفاع كامل */
+    }
+    .library-panel {
+      background: var(--card); /* Card background // خلفية البطاقة */
+      padding: 15px; /* Padding // حشوة */
+      border-radius: 12px; /* Rounded corners // زوايا دائرية */
+      border: 2px solid var(--line); /* Border // حدود */
+      max-height: 300px; /* Maximum height // أقصى ارتفاع */
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+    }
+    .library-header {
+      display: flex; /* Flex // مرن */
+      justify-content: space-between; /* Space between items // مسافة بين العناصر */
+      align-items: center; /* Center vertically // توسيط عمودي */
+      margin-bottom: 10px; /* Bottom margin // هامش سفلي */
+    }
+    .library-filters {
+      display: flex; /* Flex // مرن */
+      gap: 5px; /* Gap between filters // فجوة بين عوامل التصفية */
+      overflow-x: auto; /* Horizontal scroll if needed // تمرير أفقي إذا لزم */
+      padding-bottom: 5px; /* Bottom padding // حشوة سفلية */
+      margin-bottom: 10px; /* Bottom margin // هامش سفلي */
+    }
+    .filter-tag {
+      padding: 4px 10px; /* Padding // حشوة */
+      background: var(--bg); /* Background from theme // خلفية من السمة */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 15px; /* Rounded // دائري */
+      font-size: 12px; /* Font size // حجم الخط */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      white-space: nowrap; /* Prevent wrapping // منع الالتفاف */
+    }
+    .filter-tag.active {
+      background: var(--primary); /* Primary background when active // خلفية أساسية عند التفعيل */
+      color: var(--accent); /* Accent text // نص مميز */
+      border-color: var(--primary); /* Match border // حدود مطابقة */
+    }
+    .library-list {
+      overflow-y: auto; /* Vertical scroll // تمرير عمودي */
+      display: grid; /* Grid layout // تخطيط شبكي */
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Responsive columns // أعمدة متجاوبة */
+      gap: 8px; /* Gap between items // فجوة بين العناصر */
+    }
+
+    .draggable-item {
+      background: var(--bg); /* Background // خلفية */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 8px; /* Rounded corners // زوايا دائرية */
+      padding: 8px; /* Padding // حشوة */
+      cursor: grab; /* Grab cursor for dragging // مؤشر للسحب */
+      font-size: 12px; /* Font size // حجم الخط */
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 4px; /* Gap between lines // فجوة بين الأسطر */
+      transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover // تمرير سلس */
+    }
+    .draggable-item:hover {
+      transform: translateY(-2px); /* Lift on hover // رفع عند التمرير */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow // ظل */
+    }
+    .draggable-item:active {
+      cursor: grabbing; /* Grabbing cursor while dragging // مؤشر أثناء السحب */
+    }
+    .d-name {
+      font-weight: 700; /* Bold // عريض */
+    }
+    .d-cat {
+      font-size: 10px; /* Small font // خط صغير */
+      color: var(--muted); /* Muted color // لون باهت */
+    }
+
+    .timeline-editor {
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 15px; /* Gap between zones // فجوة بين المناطق الزمنية */
+    }
+    .time-zone {
+      background: var(--card); /* Card background // خلفية البطاقة */
+      border: 2px dashed var(--line); /* Dashed border // حدود متقطعة */
+      border-radius: 12px; /* Rounded corners // زوايا دائرية */
+      padding: 10px; /* Padding // حشوة */
+      transition: border-color 0.3s; /* Smooth border color // تغيير لون الحدود بسلاسة */
+    }
+    .time-zone.drag-over {
+      border-color: var(--accent); /* Highlight when dragging over // تمييز عند السحب فوق */
+      background: rgba(212, 175, 55, 0.05); /* Light background // خلفية فاتحة */
+    }
+    .zone-header {
+      display: flex; /* Flex // مرن */
+      justify-content: space-between; /* Space between // مسافة بين */
+      align-items: center; /* Center vertically // توسيط عمودي */
+      margin-bottom: 10px; /* Bottom margin // هامش سفلي */
+      padding-bottom: 5px; /* Bottom padding // حشوة سفلية */
+      border-bottom: 1px solid var(--line); /* Bottom border // حد سفلي */
+    }
+    .zone-inputs {
+      display: flex; /* Flex // مرن */
+      gap: 8px; /* Gap between inputs // فجوة بين الحقول */
+      align-items: center; /* Center vertically // توسيط عمودي */
+      flex: 1; /* Take remaining space // أخذ المساحة المتبقية */
+    }
+    .zone-time {
+      width: 80px; /* Fixed width // عرض ثابت */
+      padding: 4px; /* Padding // حشوة */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 4px; /* Rounded corners // زوايا دائرية */
+      font-size: 12px; /* Font size // حجم الخط */
+    }
+    .zone-title {
+      flex: 1; /* Take remaining space // أخذ المساحة المتبقية */
+      padding: 4px; /* Padding // حشوة */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 4px; /* Rounded corners // زوايا دائرية */
+      font-weight: 700; /* Bold // عريض */
+      font-size: 14px; /* Font size // حجم الخط */
+    }
+    .zone-actions button {
+      background: none; /* No background // بلا خلفية */
+      border: none; /* No border // بلا حدود */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      font-size: 16px; /* Font size // حجم الخط */
+      color: #ef4444; /* Red color // لون أحمر */
+    }
+
+    .zone-items {
+      min-height: 50px; /* Minimum height // أدنى ارتفاع */
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+      gap: 8px; /* Gap between items // فجوة بين العناصر */
+    }
+    .plan-item {
+      background: linear-gradient(135deg, var(--bg) 0%, rgba(212, 175, 55, 0.05) 100%); /* Gradient background // خلفية متدرجة */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 8px; /* Rounded corners // زوايا دائرية */
+      padding: 10px; /* Padding // حشوة */
+      display: flex; /* Flex // مرن */
+      justify-content: space-between; /* Space between content and remove // مسافة بين المحتوى وزر الحذف */
+      align-items: center; /* Center vertically // توسيط عمودي */
+    }
+    .item-info {
+      display: flex; /* Flex column // عمود مرن */
+      flex-direction: column; /* Stack vertically // تكديس رأسي */
+    }
+    .item-remove {
+      color: #ef4444; /* Red color // لون أحمر */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      font-weight: bold; /* Bold // عريض */
+      padding: 0 5px; /* Horizontal padding // حشوة أفقية */
+    }
+
+    .add-zone-btn {
+      width: 100%; /* Full width // عرض كامل */
+      padding: 12px; /* Padding // حشوة */
+      border: 2px dashed var(--muted); /* Dashed border // حدود متقطعة */
+      background: transparent; /* Transparent // شفاف */
+      color: var(--muted); /* Muted color // لون باهت */
+      border-radius: 12px; /* Rounded corners // زوايا دائرية */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      font-weight: 700; /* Bold // عريض */
+      transition: all 0.3s; /* Smooth transition // انتقال سلس */
+    }
+    .add-zone-btn:hover {
+      border-color: var(--primary); /* Primary border on hover // حدود أساسية عند التمرير */
+      color: var(--primary); /* Primary text // نص أساسي */
+      background: rgba(22, 36, 61, 0.05); /* Light background // خلفية فاتحة */
+    }
+
+    .search-bar {
+      width: 100%; /* Full width // عرض كامل */
+      padding: 8px 12px; /* Padding // حشوة */
+      border: 1px solid var(--line); /* Border // حدود */
+      border-radius: 8px; /* Rounded corners // زوايا دائرية */
+      margin-bottom: 8px; /* Bottom margin // هامش سفلي */
+      font-family: inherit; /* Inherit font // وراثة الخط */
+    }
+
+    /* Hide scrollbar for clean look // إخفاء شريط التمرير لمظهر نظيف */
+    .library-filters::-webkit-scrollbar { height: 4px; }
+    .library-filters::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+    .library-list::-webkit-scrollbar { width: 4px; }
+    .library-list::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+    .loading {
+      text-align: center; /* Center text // توسيط النص */
+      padding: 40px; /* Padding // حشوة */
+      display: none; /* Hidden by default // مخفي افتراضيًا */
+    }
+    .loading p {
+      font-size: 16px; /* Font size // حجم الخط */
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      color: var(--primary); /* Primary color // اللون الأساسي */
+    }
+    .spinner {
+      font-size: 48px; /* Large font // خط كبير */
+      animation: spin 2s infinite linear; /* Spinning animation // حركة دوران */
+      display: inline-block; /* Inline block // كتلة مضمنة */
+      margin-bottom: 20px; /* Bottom margin // هامش سفلي */
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .form-input {
+      width: 100%; /* Full width // عرض كامل */
+      padding: 12px; /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      border-radius: 10px; /* Rounded corners // زوايا دائرية */
+      font-family: inherit; /* Inherit font // وراثة الخط */
+      margin-bottom: 12px; /* Bottom margin // هامش سفلي */
+      background: var(--bg); /* Background // خلفية */
+      color: var(--ink); /* Text color // لون النص */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+    }
+    .form-input:focus {
+      outline: none; /* Remove default outline // إزالة المخطط الافتراضي */
+      border-color: var(--accent); /* Accent border // حدود مميزة */
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); /* Glow effect // تأثير توهج */
+      background: var(--card); /* Light background // خلفية فاتحة */
+    }
+
+    /* Dark mode overrides for timeline // تجاوزات الوضع الداكن للخط الزمني */
+    [data-theme="dark"] .timeline { border-right-color: var(--accent); }
+    [data-theme="dark"] .activity-card { background: linear-gradient(135deg, #2a2a2a 0%, rgba(212, 175, 55, 0.03) 100%); }
+    [data-theme="dark"] .activity-card:hover { box-shadow: 0 0 12px rgba(212, 175, 55, 0.15); }
+
+    /* Error toast notification // إشعار الخطأ */
+    .error-toast {
+      position: fixed; /* Fixed position // موضع ثابت */
+      top: 20px; /* Distance from top // مسافة من الأعلى */
+      left: 50%; /* Center horizontally // توسيط أفقي */
+      transform: translateX(-50%) translateY(-20px); /* Hidden above screen // مخفي فوق الشاشة */
+      background: #ef4444; /* Red background // خلفية حمراء */
+      color: #ffffff; /* White text // نص أبيض */
+      padding: 12px 24px; /* Padding // حشوة */
+      border-radius: 999px; /* Pill shape // شكل كبسولة */
+      font-weight: 600; /* Semi-bold // شبه عريض */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Shadow // ظل */
+      opacity: 0; /* Invisible // غير مرئي */
+      pointer-events: none; /* Can't click // غير قابل للنقر */
+      transition: all 0.3s ease; /* Smooth transition // انتقال سلس */
+      z-index: 100; /* High z-index // مؤشر z عالي */
+    }
+    .error-toast.show {
+      transform: translateX(-50%) translateY(0); /* Slide into view // انزلاق للظهور */
+      opacity: 1; /* Visible // مرئي */
+    }
+
+    /* Headings // عناوين */
+    h2, h3 { color: var(--ink); margin: 0 0 10px 0; }
+    h2 {
+      font-size: 24px; /* Font size // حجم الخط */
+      background: linear-gradient(135deg, var(--primary), var(--accent)); /* Gradient text // نص متدرج */
+      -webkit-background-clip: text; /* Clip background to text // قص الخلفية للنص */
+      -webkit-text-fill-color: transparent; /* Transparent text fill // تعبئة نص شفافة */
+      background-clip: text; /* Standard property // خاصية قياسية */
+    }
+    h3 { font-size: 18px; } /* Font size // حجم الخط */
+    p {
+      margin: 0 0 12px 0; /* Margin // هامش */
+      line-height: 1.5; /* Line height // ارتفاع السطر */
+    }
+
+    /* Intro card // بطاقة المقدمة */
+    .intro-card {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(22, 36, 61, 0.05) 100%); /* Gradient background // خلفية متدرجة */
+      border: 2px solid var(--accent); /* Accent border // حدود مميزة */
+    }
+    .intro-card:hover {
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15); /* Shadow on hover // ظل عند التمرير */
+    }
+
+    /* Footer // التذييل */
+    footer {
+      background: #16243d; /* Dark blue // أزرق داكن */
+      color: #ffffff; /* White text // نص أبيض */
+      text-align: center; /* Centered text // نص وسطي */
+      font-size: 14px; /* Font size // حجم الخط */
+      padding: 20px; /* Padding // حشوة */
+    }
+
+    /* Modal Styles // أنماط النوافذ المنبثقة */
+    .modal {
+      display: none; /* Hidden by default // مخفي افتراضيًا */
+      position: fixed; /* Fixed position // موضع ثابت */
+      top: 0; left: 0; right: 0; bottom: 0; /* Cover whole screen // تغطية الشاشة بالكامل */
+      background: rgba(0,0,0,0.5); /* Semi-transparent overlay // تراكب شبه شفاف */
+      z-index: 3000; /* High z-index // مؤشر z عالي */
+      align-items: center; /* Center vertically // توسيط عمودي */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+      padding: 20px; /* Padding // حشوة */
+    }
+    .modal.active {
+      display: flex; /* Show modal when active // إظهار النافذة عند التفعيل */
+    }
+    .modal-content {
+      background: var(--card); /* Card background // خلفية البطاقة */
+      width: 100%; /* Full width // عرض كامل */
+      max-width: 400px; /* Maximum width // أقصى عرض */
+      border-radius: var(--radius); /* Rounded corners // زوايا دائرية */
+      padding: 20px; /* Padding // حشوة */
+      border: 2px solid var(--line); /* Border // حدود */
+      animation: slideIn 0.3s ease; /* Slide-in animation // حركة انزلاق */
+    }
+
+    /* AI Chat Styles // أنماط الدردشة مع الذكاء الاصطناعي */
+    .chat-bubble {
+      padding: 10px 15px; /* Padding // حشوة */
+      border-radius: 15px; /* Rounded corners // زوايا دائرية */
+      max-width: 85%; /* Maximum width // أقصى عرض */
+      line-height: 1.4; /* Line height // ارتفاع السطر */
+      font-size: 14px; /* Font size // حجم الخط */
+      margin-bottom: 8px; /* Bottom margin // هامش سفلي */
+      animation: slideIn 0.3s ease; /* Slide-in animation // حركة انزلاق */
+    }
+    .chat-bubble.ai {
+      background: var(--card); /* Card background // خلفية البطاقة */
+      border: 1px solid var(--line); /* Border // حدود */
+      align-self: flex-start; /* Align left (RTL) // محاذاة لليسار (RTL) */
+      border-bottom-right-radius: 2px; /* Small corner // زاوية صغيرة */
+      color: var(--ink); /* Text color // لون النص */
+    }
+    .chat-bubble.user {
+      background: var(--primary); /* Primary background // خلفية أساسية */
+      color: var(--accent); /* Accent text // نص مميز */
+      align-self: flex-end; /* Align right (RTL) // محاذاة لليمين (RTL) */
+      border-bottom-left-radius: 2px; /* Small corner // زاوية صغيرة */
+    }
+    .ai-typing {
+      font-style: italic; /* Italic // مائل */
+      color: var(--muted); /* Muted color // لون باهت */
+      font-size: 12px; /* Font size // حجم الخط */
+      margin-left: 10px; /* Left margin (RTL) // هامش أيسر (RTL) */
+    }
+
+    /* Pulse Animation // حركة النبض */
+    @keyframes ai-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); transform: scale(1); }
+      70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); transform: scale(1.05); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); transform: scale(1); }
+    }
+
+    /* AI Floating Button // زر الذكاء الاصطناعي العائم */
+    .ai-fab {
+      position: fixed; /* Fixed position // موضع ثابت */
+      bottom: 80px; /* Moved up to be more visible // رفع للأعلى ليكون أكثر وضوحًا */
+      left: 20px; /* Default for RTL layout // افتراضي للتخطيط RTL */
+      background: var(--primary); /* Primary background // خلفية أساسية */
+      color: var(--accent); /* Accent text // نص مميز */
+      height: 60px; /* Fixed height // ارتفاع ثابت */
+      border-radius: 30px; /* Pill shape // شكل كبسولة */
+      display: flex; /* Flex // مرن */
+      align-items: center; /* Center vertically // توسيط عمودي */
+      padding: 0; /* No padding // بلا حشوة */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Shadow // ظل */
+      cursor: pointer; /* Pointer cursor // مؤشر اليد */
+      transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth width change // تغيير عرض سلس */
+      z-index: 2000; /* High z-index // مؤشر z عالي */
+      overflow: hidden; /* Hide overflow // إخفاء الزيادة */
+      width: 60px; /* Collapsed width // عرض مصغر */
+      border: 2px solid var(--accent); /* Accent border // حدود مميزة */
+      animation: ai-pulse 2s infinite; /* Pulse animation // حركة نبض */
+    }
+
+    [dir="ltr"] .ai-fab { left: auto; right: 20px; } /* Adjust for LTR // تعديل لـ LTR */
+
+    /* Keep button near content on large screens // إبقاء الزر قريبًا من المحتوى على الشاشات الكبيرة */
+    @media (min-width: 520px) {
+      .ai-fab { left: calc(50% - 240px + 20px); } /* Position relative to content // تحديد موضع نسبة للمحتوى */
+      [dir="ltr"] .ai-fab { left: auto; right: calc(50% - 240px + 20px); }
+    }
+
+    .ai-fab:hover {
+      width: 300px; /* Expand on hover // توسع عند التمرير */
+      animation: none; /* Stop pulse // إيقاف النبض */
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); /* Stronger shadow // ظل أقوى */
+    }
+    .ai-fab .icon {
+      font-size: 28px; /* Icon size // حجم الأيقونة */
+      min-width: 60px; /* Fixed width for icon area // عرض ثابت لمنطقة الأيقونة */
+      text-align: center; /* Center text // توسيط النص */
+      display: flex; /* Flex // مرن */
+      justify-content: center; /* Center horizontally // توسيط أفقي */
+    }
+    .ai-fab .text {
+      white-space: nowrap; /* Prevent wrapping // منع الالتفاف */
+      opacity: 0; /* Hidden by default // مخفي افتراضيًا */
+      font-weight: bold; /* Bold // عريض */
+      font-size: 13px; /* Font size // حجم الخط */
+      transition: opacity 0.2s; /* Fade in // ظهور تدريجي */
+      color: #fff; /* White text // نص أبيض */
+    }
+    .ai-fab:hover .text {
+      opacity: 1; /* Show text on hover // إظهار النص عند التمرير */
+      transition-delay: 0.1s; /* Delay before showing // تأخير قبل الإظهار */
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== HEADER // الترويسة ==================== -->
+  <header class="brand">
+    <!-- Home button (back) // زر الصفحة الرئيسية (رجوع) -->
+    <a href="Home.html" class="home-btn" aria-label="الرئيسية" data-ar="رجوع" data-en="Back">رجوع</a>
+    <!-- Logo in Arabic script // الشعار بالخط العربي -->
+    <div class="logo-text">حــــــيــــاك</div>
+    <!-- Subtitle (English) // العنوان الفرعي (إنجليزي) -->
+    <div class="logo-sub">HAYYAK</div>
+    <!-- Language toggle button // زر تبديل اللغة -->
+    <button class="translate-btn" id="translateBtn" aria-label="تبديل اللغة">
+      <span class="icon">🌐</span> <!-- Globe icon // أيقونة الكرة الأرضية -->
+      <span>English</span> <!-- Button text (changes via JS) // نص الزر (يتغير عبر JS) -->
+    </button>
+  </header>
+
+  <!-- Error toast container // حاوية إشعار الخطأ -->
+  <div id="error-toast" class="error-toast"></div>
+
+  <main class="shell">
+    <!-- Intro card with manual planning button // بطاقة المقدمة مع زر التخطيط اليدوي -->
+    <div class="card intro-card">
+      <h2 style="margin-top:0" data-ar="✨ اصنع يومك المثالي" data-en="✨ Create Your Perfect Day">✨ اصنع يومك المثالي</h2>
+      <p style="color:var(--muted); font-size:14px;" data-ar="خطط ليومك بنفسك باستخدام أدواتنا السهلة." data-en="Plan your day yourself using our easy tools.">خطط ليومك بنفسك باستخدام أدواتنا السهلة.</p>
+      <button class="btn" onclick="initPlanner()" style="background:linear-gradient(135deg, var(--accent) 0%, #c9960e 100%); color:var(--primary); margin-top:10px;" data-ar="📝 ابدأ التخطيط اليدوي" data-en="📝 Start Manual Planning">📝 ابدأ التخطيط اليدوي</button>
+    </div>
+
+    <!-- AI Interface // واجهة الذكاء الاصطناعي -->
+    <div id="ai-interface" class="card" style="display:none; flex-direction: column;">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 5px;">
+        <button onclick="cancelAIPlanning()" style="background: none; border: none; font-size: 14px; cursor: pointer; color: var(--muted); display: flex; align-items: center; gap: 5px;">
+          <span data-ar="إلغاء" data-en="Cancel">إلغاء</span> ✕
+        </button>
+      </div>
+      <!-- Chat history container // حاوية سجل المحادثة -->
+      <div id="ai-chat-history" style="flex: 1; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; min-height: 200px; max-height: 400px;"></div>
+      <!-- AI options container (buttons) // حاوية خيارات الذكاء الاصطناعي (أزرار) -->
+      <div id="ai-options-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+      <!-- AI text input container // حاوية إدخال النص للذكاء الاصطناعي -->
+      <div id="ai-input-container" style="display: none; gap: 10px; margin-top: 10px;">
+        <input type="text" id="ai-user-text" class="form-input" style="margin-bottom: 0;" placeholder="..." onkeypress="if(event.key==='Enter') submitAIInput()">
+        <button class="btn" style="width: auto; margin-top: 0;" onclick="submitAIInput()">➤</button>
+      </div>
+    </div>
+
+    <!-- Saved Custom Plans // الخطط المخصصة المحفوظة -->
+    <div id="saved-plans-section" class="card" style="display:none;">
+      <h2 data-ar="خططي المخصصة" data-en="My Custom Plans">خططي المخصصة</h2>
+      <div id="saved-plans-list">
+        <!-- Saved plans will be injected here // سيتم حقن الخطط المحفوظة هنا -->
+      </div>
+    </div>
+
+    <!-- AI Floating Button // زر الذكاء الاصطناعي العائم -->
+    <div class="ai-fab" onclick="startAIPlanning()">
+      <div class="icon">✨</div>
+      <div class="text" data-ar="تحتاج مساعدة؟ دع الذكاء الاصطناعي يرشدك بثقة" data-en="Need help? Let AI guide you with confidence">تحتاج مساعدة؟ دع الذكاء الاصطناعي يرشدك بثقة</div>
+    </div>
+
+    <!-- Advanced Planner UI // واجهة المخطط المتقدمة -->
+    <div id="planner-ui" style="display:none;" class="planner-container">
+      
+      <!-- Library Panel // لوحة المكتبة -->
+      <div class="library-panel">
+        <div class="library-header" style="gap: 10px;">
+          <h3 style="margin:0; font-size:16px;" data-ar="مكتبة الأماكن" data-en="Places Library">مكتبة الأماكن</h3>
+          <div style="flex: 1;"></div>
+          <div style="display:flex; gap:5px;">
+            <!-- Help button // زر المساعدة -->
+            <button onclick="showHelpModal()" style="background:none; border:none; cursor:pointer; font-size:16px;" title="Help">ℹ️</button>
+            <!-- Clear queue button // زر مسح قائمة الانتظار -->
+            <button onclick="clearLibraryQueue()" style="background:none; border:none; cursor:pointer; font-size:14px;" title="Clear Queue">🗑️</button>
+            <!-- Close planner button // زر إغلاق المخطط -->
+            <button onclick="closePlanner()" style="background:none; border:none; cursor:pointer;">❌</button>
+          </div>
+        </div>
+        <!-- Search input for library // إدخال البحث في المكتبة -->
+        <input type="text" id="library-search" class="search-bar" placeholder="بحث..." onkeyup="renderLibrary()">
+        <!-- Filter tags // علامات التصفية -->
+        <div class="library-filters" id="library-filters">
+          <div class="filter-tag active" onclick="filterLibrary('all', this)" data-ar="الكل" data-en="All">الكل</div>
+          <div class="filter-tag" onclick="filterLibrary('restaurant', this)" data-ar="مطاعم" data-en="Restaurants">مطاعم</div>
+          <div class="filter-tag" onclick="filterLibrary('entertainment', this)" data-ar="ترفيه" data-en="Entertainment">ترفيه</div>
+          <div class="filter-tag" onclick="filterLibrary('tourism', this)" data-ar="سياحة" data-en="Tourism">سياحة</div>
+          <div class="filter-tag" onclick="filterLibrary('store', this)" data-ar="متاجر" data-en="Stores">متاجر</div>
+          <div class="filter-tag" onclick="filterLibrary('hotel', this)" data-ar="فنادق" data-en="Hotels">فنادق</div>
+          <div class="filter-tag" onclick="filterLibrary('farm', this)" data-ar="مزارع" data-en="Farms">مزارع</div>
+          <div class="filter-tag" onclick="filterLibrary('health', this)" data-ar="صحة" data-en="Health">صحة</div>
+        </div>
+        <!-- Library list container // حاوية قائمة المكتبة -->
+        <div id="library-list" class="library-list">
+          <!-- Draggable items will be here // العناصر القابلة للسحب ستكون هنا -->
+        </div>
+      </div>
+
+      <!-- Timeline Editor // محرر الخط الزمني -->
+      <div class="timeline-editor" id="timeline-editor">
+        <!-- Time zones will be generated here // المناطق الزمنية ستُنشأ هنا -->
+      </div>
+      
+      <!-- Add new time zone button // زر إضافة منطقة زمنية جديدة -->
+      <button class="add-zone-btn" onclick="addTimeZone()" data-ar="+ إضافة وقت جديد" data-en="+ Add New Time Slot">+ إضافة وقت جديد</button>
+      
+      <!-- Action buttons // أزرار الإجراءات -->
+      <div style="display:flex; gap:10px; margin-top:10px; flex-wrap: wrap;">
+        <button class="btn" style="flex: 1; min-width: 120px;" onclick="openSavePlanModal()" data-ar="💾 حفظ الخطة" data-en="💾 Save Plan">💾 حفظ الخطة</button>
+        <button class="btn" style="flex: 1; min-width: 120px; background:#ef4444; color:white;" onclick="clearPlan()" data-ar="🗑️ مسح الكل" data-en="🗑️ Clear All">🗑️ مسح الكل</button>
+      </div>
+    </div>
+
+    <!-- Loading indicator // مؤشر التحميل -->
+    <div id="loading" class="loading">
+      <div class="spinner">⏳</div>
+      <p data-ar="جاري تحضير أفضل خطة لك..." data-en="Preparing your best plan...">جاري تحضير أفضل خطة لك...</p>
+    </div>
+
+    <!-- Plan result container (timeline) // حاوية نتيجة الخطة (الخط الزمني) -->
+    <div id="plan-result" style="display:none;">
+      <div class="timeline" id="timeline-container">
+        <!-- Plan items will go here // عناصر الخطة ستكون هنا -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Save Plan Modal // نافذة حفظ الخطة -->
+  <div id="save-plan-modal" class="modal">
+    <div class="modal-content">
+      <h3 data-ar="حفظ الخطة" data-en="Save Plan" style="margin-top:0; text-align:center;">حفظ الخطة</h3>
+      <input type="text" id="plan-name-input" class="form-input" placeholder="اسم الخطة (مثال: رحلة نهاية الأسبوع)" data-ar-placeholder="اسم الخطة (مثال: رحلة نهاية الأسبوع)" data-en-placeholder="Plan Name (e.g., Weekend Trip)">
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button class="btn" onclick="confirmSavePlan()" data-ar="حفظ" data-en="Save">حفظ</button>
+        <button class="btn" style="background:#6b7280;" onclick="closeSavePlanModal()" data-ar="إلغاء" data-en="Cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Modal // نافذة المساعدة -->
+  <div id="help-modal" class="modal">
+    <div class="modal-content">
+      <h3 data-ar="كيف يعمل المخطط؟" data-en="How it works?" style="margin-top:0; text-align:center;">كيف يعمل المخطط؟</h3>
+      <ol style="text-align: start; padding-inline-start: 20px; line-height: 1.6; margin-bottom: 20px;">
+        <li data-ar="تصفح الأقسام (مطاعم، سياحة، إلخ)." data-en="Browse categories (Restaurants, Tourism, etc.).">تصفح الأقسام (مطاعم، سياحة، إلخ).</li>
+        <li data-ar="اختر مكاناً واضغط على زر 'خطط'." data-en="Select a place and click the 'Plan' button.">اختر مكاناً واضغط على زر 'خطط'.</li>
+        <li data-ar="اسحب المكان من المكتبة وأفلته في الوقت المناسب." data-en="Drag the place from the library and drop it into a time slot.">اسحب المكان من المكتبة وأفلته في الوقت المناسب.</li>
+      </ol>
+      <button class="btn" onclick="closeHelpModal()" data-ar="فهمت" data-en="Got it">فهمت</button>
+    </div>
+  </div>
+
+  <!-- Footer // التذييل -->
+  <footer data-ar="© عبدالله بن ناصر - حياك" data-en="© Abdullah bin Nasser - Hayyak">© عبدالله بن ناصر - حياك</footer>
+
+  <script>
+    // ==================== DATA SOURCES ====================
+    // مصادر البيانات
+    
+    // Initialize placesDB from consolidated data // تهيئة placesDB من البيانات المجمعة
+    const placesDB = {};
+    
+    // Use HAYYAK_PLACES from places_data.js // استخدام HAYYAK_PLACES من places_data.js
+    const combinedPlaces = typeof HAYYAK_PLACES !== 'undefined' ? HAYYAK_PLACES : [];
+    
+    // Remove duplicates based on name // إزالة التكرارات بناءً على الاسم
+    const uniquePlaces = [];
+    const seenNames = new Set();
+    
+    combinedPlaces.forEach(p => {
+        const key = (p.name || p.nameAr) + (p.city || '');
+        if (!seenNames.has(key)) {
+            seenNames.add(key);
+            uniquePlaces.push(p);
+        }
+    });
+
+    // Organize places by city // تنظيم الأماكن حسب المدينة
+    uniquePlaces.forEach(p => {
+            const city = p.city || 'dubai'; // Default to Dubai if city missing // افتراضي دبي إذا كانت المدينة مفقودة
+            if (!placesDB[city]) placesDB[city] = [];
+            placesDB[city].push(p);
+    });
+
+    // ==================== LOGIC ====================
+    // المنطق الرئيسي
+    
+    // Default plan zones (time slots) // المناطق الزمنية الافتراضية
+    let planZones = [
+      { id: 1, title: 'الصباح', titleEn: 'Morning', time: '09:00', items: [] },
+      { id: 2, title: 'الغداء', titleEn: 'Lunch', time: '13:00', items: [] },
+      { id: 3, title: 'بعد الظهر', titleEn: 'Afternoon', time: '16:00', items: [] },
+      { id: 4, title: 'المساء', titleEn: 'Evening', time: '20:00', items: [] }
+    ];
+
+    // Load and Save plan state to localStorage to prevent losing work
+    // تحميل وحفظ حالة الخطة في التخزين المحلي لمنع فقدان العمل
+    function saveCurrentPlanState() {
+        localStorage.setItem('hayyak_unfinished_plan', JSON.stringify(planZones));
+    }
+
+    function loadCurrentPlanState() {
+        const unfinishedPlan = localStorage.getItem('hayyak_unfinished_plan');
+        if (unfinishedPlan) {
+            try {
+                const savedZones = JSON.parse(unfinishedPlan);
+                // Validate it's an array and has expected structure // التحقق من أنها مصفوفة ولها البنية المتوقعة
+                if (Array.isArray(savedZones) && savedZones.every(z => z.hasOwnProperty('id'))) {
+                    planZones = savedZones;
+                }
+            } catch (e) {
+                console.error("Error loading unfinished plan:", e);
+                localStorage.removeItem('hayyak_unfinished_plan'); // Clear corrupted data // مسح البيانات التالفة
+            }
+        }
+    }
+    loadCurrentPlanState(); // Load on startup // التحميل عند البدء
+
+    let toastTimeout; // Timer for error toast // مؤقت لإشعار الخطأ
+
+    function showError(message) {
+      const toast = document.getElementById('error-toast');
+      if (!toast) return;
+      toast.innerText = message; // Set message // تعيين الرسالة
+      toast.classList.add('show'); // Show toast // إظهار الإشعار
+      clearTimeout(toastTimeout); // Clear previous timeout // مسح المؤقت السابق
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show'); // Hide after 3.5s // إخفاء بعد 3.5 ثانية
+      }, 3500);
+    }
+
+    // Fetch weather data from API or simulate // جلب بيانات الطقس من API أو محاكاة
+    async function getWeatherData() {
+      try {
+        const controller = new AbortController(); // For timeout // للمهلة
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout // مهلة 5 ثوان
+        const response = await fetch('api/data.php', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const data = await response.json();
+        if (data.success) {
+          return { ...data.data, source: 'live' };
+        }
+        throw new Error('API Error');
+      } catch (e) {
+        const lang = (JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}').language || 'ar');
+        showError(lang === 'ar' ? 'فشل الاتصال بالخادم، سيتم استخدام بيانات محاكاة.' : 'Server connection failed, using simulated data.');
+        return simulateWeather();
+      }
+    }
+
+    function simulateWeather() {
+      const rand = Math.random() * 100; // Random number 0-100 // رقم عشوائي 0-100
+      // 66% Perfect, 15% Cold, 15% Hot, 4% Bad
+      if (rand < 66) {
+        return { temperature: 24, humidity: 45, aqi: 30, condition: 'perfect', source: 'simulated' };
+      } else if (rand < 81) { // 66 + 15
+        return { temperature: 15, humidity: 40, aqi: 40, condition: 'cold', source: 'simulated' };
+      } else if (rand < 96) { // 81 + 15
+        return { temperature: 38, humidity: 60, aqi: 80, condition: 'hot', source: 'simulated' };
+      } else {
+        return { temperature: 42, humidity: 85, aqi: 160, condition: 'bad', source: 'simulated' };
+      }
+    }
+
+    // ==================== AI PLANNING LOGIC ====================
+    // منطق التخطيط بالذكاء الاصطناعي
+    let aiContext = []; // Store conversation context // تخزين سياق المحادثة
+    let aiQuestionCount = 0; // Count questions asked // عدد الأسئلة المطروحة
+    const MAX_AI_QUESTIONS = 3; // Hard limit on questions // الحد الأقصى للأسئلة
+
+    // Start AI planning flow // بدء تدفق التخطيط بالذكاء الاصطناعي
+    async function startAIPlanning() {
+      aiQuestionCount = 0; // Reset question count // إعادة تعيين عدد الأسئلة
+      document.querySelector('.intro-card').style.display = 'none'; // Hide intro card // إخفاء بطاقة المقدمة
+      document.getElementById('planner-ui').style.display = 'none'; // Hide planner UI // إخفاء واجهة المخطط
+      document.querySelector('.ai-fab').style.display = 'none'; // Hide AI button // إخفاء زر الذكاء الاصطناعي
+      document.getElementById('ai-interface').style.display = 'flex'; // Show AI interface // إظهار واجهة الذكاء الاصطناعي
+      
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}'); // Get user profile // الحصول على ملف المستخدم
+      const lang = profile.language || 'ar'; // Get language // الحصول على اللغة
+      const isAr = lang === 'ar';
+      
+      addChatMessage('ai', isAr ? 'مرحباً! جاري تحليل ملفك الشخصي لاقتراح أفضل الأنشطة...' : 'Hello! Analyzing your profile to suggest the best activities...');
+      
+      const userContext = {
+        city: profile.emirate || 'Dubai',
+        food: profile.foodPreferences || [],
+        phobias: profile.phobias || [],
+        allergies: profile.allergies || []
+      };
+
+      // Prompt to get 2 common suggestions // مطالبة للحصول على اقتراحين شائعين
+      const prompt = `Ctx:${userContext.city},Likes:${userContext.food},Phobia:${userContext.phobias}.
+Suggest 2 activity themes in ${userContext.city}.
+Output ONLY:Theme1|Theme2`;
+
+      const websiteContext = { 
+          availablePlaces: uniquePlaces.map(p => ({ name: p.name, desc: p.desc, cat: p.category||p.type }))
+      };
+
+      try {
+        const resp = await fetch('api/assistant.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: prompt, userContext: userContext, websiteContext: websiteContext })
+        });
+        if (!resp.ok) throw new Error('API Error: ' + resp.status);
+        const data = await resp.json();
+        const suggestions = (data.reply || '').split('|').map(s => s.trim()).filter(s => s);
+        
+        const opt1 = suggestions[0] || (isAr ? 'يوم شاطئي' : 'Beach Day');
+        const opt2 = suggestions[1] || (isAr ? 'جولة تسوق' : 'Shopping Spree');
+        
+        const greeting = isAr ? 
+            `بناءً على اهتماماتك في ${userContext.city}، ماذا تود أن تفعل اليوم؟` : 
+            `Based on your interests in ${userContext.city}, what would you like to do today?`;
+            
+        addChatMessage('ai', greeting);
+        renderAIOptions(opt1, opt2);
+        
+      } catch (e) {
+        console.error(e);
+        renderAIOptions('Option 1', 'Option 2');
+      }
+    }
+
+    // Cancel AI planning and return to main UI // إلغاء تخطيط الذكاء الاصطناعي والعودة إلى الواجهة الرئيسية
+    function cancelAIPlanning() {
+      document.getElementById('ai-interface').style.display = 'none'; // Hide AI interface // إخفاء واجهة الذكاء الاصطناعي
+      document.getElementById('planner-ui').style.display = 'flex'; // Show planner // إظهار المخطط
+      document.querySelector('.ai-fab').style.display = 'flex'; // Show AI button // إظهار زر الذكاء الاصطناعي
+    }
+
+    // Add a message to the chat history // إضافة رسالة إلى سجل المحادثة
+    function addChatMessage(role, text) {
+      const container = document.getElementById('ai-chat-history');
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble ${role}`;
+      bubble.textContent = text;
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight; // Auto-scroll to bottom // تمرير تلقائي للأسفل
+    }
+
+    // Render AI options as buttons // عرض خيارات الذكاء الاصطناعي كأزرار
+    function renderAIOptions(opt1, opt2) {
+      const container = document.getElementById('ai-options-container');
+      const isAr = currentLanguage === 'ar';
+      container.innerHTML = `
+        <button class="btn" style="margin:0; font-size:13px;" onclick="handleOption('${opt1}')">${opt1}</button>
+        <button class="btn" style="margin:0; font-size:13px;" onclick="handleOption('${opt2}')">${opt2}</button>
+        <button class="btn" style="margin:0; font-size:13px; background:var(--accent); color:var(--primary);" onclick="handleOption('Surprise Me')">${isAr ? 'فاجئني ✨' : 'Surprise Me ✨'}</button>
+        <button class="btn" style="margin:0; font-size:13px; background:transparent; border:1px solid var(--line); color:var(--ink);" onclick="showAIInput()">${isAr ? 'شيء آخر...' : 'Other...'}</button>
+      `;
+      document.getElementById('ai-input-container').style.display = 'none'; // Hide text input // إخفاء حقل النص
+      document.getElementById('ai-options-container').style.display = 'grid'; // Show options // إظهار الخيارات
+    }
+
+    // Show text input for custom response // إظهار حقل النص لإجابة مخصصة
+    function showAIInput() {
+      document.getElementById('ai-options-container').style.display = 'none'; // Hide options // إخفاء الخيارات
+      document.getElementById('ai-input-container').style.display = 'flex'; // Show input // إظهار حقل الإدخال
+      document.getElementById('ai-user-text').focus(); // Focus input // التركيز على الحقل
+    }
+
+    // Handle option button click // معالجة النقر على زر الخيار
+    function handleOption(choice) {
+      document.getElementById('ai-options-container').style.display = 'none'; // Hide options // إخفاء الخيارات
+      submitAIInput(choice); // Submit the choice as if typed // إرسال الخيار كما لو كان مكتوبًا
+    }
+
+    // Fallback plan generator when AI exceeds question limit or user says "Surprise Me"
+    // مولد الخطة الاحتياطي عندما يتجاوز الذكاء الاصطناعي حد الأسئلة أو يقول المستخدم "فاجئني"
+    function generateFallbackPlan() {
+      // Hide AI interface and show loading // إخفاء واجهة الذكاء الاصطناعي وإظهار التحميل
+      document.getElementById('ai-interface').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
+      
+      // Reuse the existing generatePlan function which populates planZones based on profile
+      // إعادة استخدام دالة generatePlan الموجودة التي تملأ planZones بناءً على الملف الشخصي
+      generatePlan().then(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.querySelector('.ai-fab').style.display = 'flex';
+        initPlanner(); // This will show the planner with the generated plan // هذا سيظهر المخطط بالخطة المولدة
+      }).catch(() => {
+        document.getElementById('loading').style.display = 'none';
+        // Even if error, try to show planner with default zones // حتى لو حدث خطأ، حاول إظهار المخطط بالمناطق الافتراضية
+        initPlanner();
+      });
+    }
+
+    // Submit AI input (text or option) // إرسال إدخال الذكاء الاصطناعي (نص أو خيار)
+    async function submitAIInput(textOverride = null) {
+      const inputEl = document.getElementById('ai-user-text');
+      const text = textOverride || inputEl.value.trim();
+      if (!text) return;
+      
+      if (!textOverride) inputEl.value = ''; // Clear input if typed // مسح الحقل إذا كان مكتوبًا
+      addChatMessage('user', text);
+      
+      // Check for "Surprise Me" - immediate plan generation // التحقق من "فاجئني" - توليد خطة فورية
+      if (text.toLowerCase().includes('surprise')) {
+        addChatMessage('ai', currentLanguage === 'ar' ? 'رائع! سأقوم بإنشاء خطة مميزة لك...' : 'Great! I\'ll create a special plan for you...');
+        generateFallbackPlan();
+        return;
+      }
+      
+      aiQuestionCount++; // Increment question count // زيادة عدد الأسئلة
+      
+      // If we've reached the maximum number of questions, force plan generation
+      // إذا وصلنا إلى الحد الأقصى لعدد الأسئلة، فرض توليد الخطة
+      if (aiQuestionCount >= MAX_AI_QUESTIONS) {
+        addChatMessage('ai', currentLanguage === 'ar' ? 'لدينا معلومات كافية الآن، سأقوم بإنشاء خطتك المثالية...' : 'We have enough information now, I\'ll create your perfect plan...');
+        generateFallbackPlan();
+        return;
+      }
+      
+      // Show typing indicator // إظهار مؤشر الكتابة
+      const typing = document.createElement('div');
+      typing.className = 'ai-typing';
+      typing.textContent = currentLanguage === 'ar' ? 'جاري التفكير...' : 'Thinking...';
+      document.getElementById('ai-chat-history').appendChild(typing);
+
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      const context = { city: profile.emirate || 'Dubai', food: profile.foodPreferences || [] };
+      
+      // Prompt to generate plan or ask question with limit
+      // مطالبة لتوليد خطة أو طرح سؤال مع حد
+      const prompt = `In:"${text}".Ctx:${context.city},Food:${context.food}.Step:${aiQuestionCount}/${MAX_AI_QUESTIONS}.
+If Step>=${MAX_AI_QUESTIONS} OR "Surprise Me" OR clear:GENERATE PLAN.
+Plan MUST have 2+ meals.
+JSON:{"plan":[{"time":"HH:MM","title":"...","desc":"..."}]}
+ELSE:Ask short Q. 2 options.
+Fmt:Q|OPT1|OPT2`;
+
+      const websiteContext = { 
+          availablePlaces: uniquePlaces.map(p => ({ name: p.name, desc: p.desc, cat: p.category||p.type }))
+      };
+
+      try {
+        const resp = await fetch('api/assistant.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: prompt, userContext: context, websiteContext: websiteContext })
+        });
+        if (!resp.ok) throw new Error('API Error: ' + resp.status);
+        const data = await resp.json();
+        typing.remove(); // Remove typing indicator // إزالة مؤشر الكتابة
+        
+        const reply = data.reply || '';
+        
+        // Check if response contains JSON plan // التحقق مما إذا كانت الاستجابة تحتوي على خطة JSON
+        const jsonMatch = reply.match(/\{[\s\S]*"plan"[\s\S]*\}/);
+        
+        if (jsonMatch) {
+            try {
+                const planData = JSON.parse(jsonMatch[0]);
+                processAIPlan(planData.plan); // Process the plan // معالجة الخطة
+            } catch (e) {
+                addChatMessage('ai', reply); // Fallback if JSON parse fails // احتياطي إذا فشل تحليل JSON
+                // Still, if we're at max questions, force plan // لا يزال، إذا وصلنا إلى الحد الأقصى، فرض الخطة
+                if (aiQuestionCount >= MAX_AI_QUESTIONS) {
+                    generateFallbackPlan();
+                } else {
+                    document.getElementById('ai-input-container').style.display = 'flex';
+                }
+            }
+        } else {
+            // Check for pipe format QUESTION|OPT1|OPT2 // التحقق من تنسيق السؤال|خيار1|خيار2
+            const parts = reply.split('|');
+            if (parts.length >= 3 && aiQuestionCount < MAX_AI_QUESTIONS) {
+                addChatMessage('ai', parts[0].trim());
+                renderAIOptions(parts[1].trim(), parts[2].trim());
+            } else {
+                // Fallback: if no pipe but we're at max questions, force plan
+                // احتياطي: إذا لم يكن هناك أنابيب لكننا وصلنا للحد الأقصى، فرض الخطة
+                if (aiQuestionCount >= MAX_AI_QUESTIONS) {
+                    generateFallbackPlan();
+                } else {
+                    addChatMessage('ai', reply);
+                    document.getElementById('ai-input-container').style.display = 'flex';
+                }
+            }
+        }
+      } catch (e) {
+        typing.remove();
+        addChatMessage('ai', currentLanguage === 'ar' ? 'حدث خطأ. حاول مرة أخرى.' : 'Error occurred. Try again.');
+        // Even on error, if we've reached max questions, force plan // حتى مع الخطأ، إذا وصلنا للحد الأقصى، فرض الخطة
+        if (aiQuestionCount >= MAX_AI_QUESTIONS) {
+            generateFallbackPlan();
+        } else {
+            document.getElementById('ai-input-container').style.display = 'flex';
+        }
+      }
+    }
+
+    // Process AI-generated plan and update planZones // معالجة الخطة المولدة بواسطة الذكاء الاصطناعي وتحديث planZones
+    function processAIPlan(planItems) {
+        if (!Array.isArray(planItems)) return;
+        // Reset all zones // إعادة تعيين جميع المناطق
+        planZones.forEach(z => z.items = []);
+        
+        planItems.forEach(item => {
+            const hour = item.time ? parseInt(String(item.time).split(':')[0]) : 9; // Extract hour // استخراج الساعة
+            let zoneIdx = 0;
+            if (hour >= 12 && hour < 15) zoneIdx = 1; // Lunch // غداء
+            else if (hour >= 15 && hour < 19) zoneIdx = 2; // Afternoon // بعد الظهر
+            else if (hour >= 19) zoneIdx = 3; // Evening // مساء
+            
+            planZones[zoneIdx].items.push({
+                name: item.title,
+                nameAr: item.title, // Fallback
+                desc: item.desc || '',
+                descAr: item.desc || ''
+            });
+        });
+        
+        // Hide AI interface, show planner // إخفاء واجهة الذكاء الاصطناعي، إظهار المخطط
+        document.getElementById('ai-interface').style.display = 'none';
+        document.querySelector('.ai-fab').style.display = 'flex';
+        saveCurrentPlanState(); // Save state // حفظ الحالة
+        initPlanner(); // Initialize planner // تهيئة المخطط
+    }
+
+    // Generate a plan based on user profile and weather // توليد خطة بناءً على ملف المستخدم والطقس
+    async function generatePlan() {
+      document.getElementById('plan-result').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
+
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      const lang = profile.language || 'ar';
+      const isAr = lang === 'ar';
+
+      // Weather Logic // منطق الطقس
+      const weather = await getWeatherData(); // This calls api/data.php which needs path update
+      let weatherNote = '';
+      let avoidOutdoor = false;
+      let outfitSuggestion = '';
+
+      // Determine weather condition // تحديد حالة الطقس
+      if (weather.source === 'live') {
+         if (weather.aqi > 100 || weather.temperature > 40) weather.condition = 'bad';
+         else if (weather.temperature > 33) weather.condition = 'hot';
+         else if (weather.temperature < 15) weather.condition = 'cold';
+         else weather.condition = 'perfect';
+      }
+
+      // Generate weather notes // توليد ملاحظات الطقس
+      if (weather.condition === 'bad') {
+        avoidOutdoor = true;
+        weatherNote = isAr ? '⚠️ الجو سيء، تم اختيار أنشطة داخلية.' : '⚠️ Weather is bad, indoor activities selected.';
+        outfitSuggestion = isAr ? '🏠 ملابس مريحة للأماكن المغلقة.' : '🏠 Comfortable indoor clothing.';
+      } else if (weather.condition === 'hot') {
+        avoidOutdoor = true;
+        weatherNote = isAr ? '☀️ الجو حار، تم تفضيل الأماكن المغلقة.' : '☀️ It\'s hot, preferring indoors.';
+        outfitSuggestion = isAr ? '👕 ملابس خفيفة، نظارة شمسية، وقبعة.' : '👕 Light clothes, sunglasses, and a hat.';
+      } else if (weather.condition === 'cold') {
+        weatherNote = isAr ? '❄️ الجو بارد، استمتع ولكن ارتدِ ملابس دافئة.' : '❄️ It\'s cold, enjoy but dress warmly.';
+        outfitSuggestion = isAr ? '🧥 جاكيت، وشاح، وملابس دافئة.' : '🧥 Jacket, scarf, and warm clothes.';
+      } else {
+        weatherNote = isAr ? '✨ الجو رائع للأنشطة الخارجية!' : '✨ Weather is perfect for outdoors!';
+        outfitSuggestion = isAr ? '👟 ملابس كاجوال مريحة.' : '👟 Casual comfortable wear.';
+      }
+      
+      // 1. Determine City // تحديد المدينة
+      const cityMap = {
+        'Abu Dhabi': 'abudhabi', 'Dubai': 'dubai', 'Sharjah': 'sharjah',
+        'Ajman': 'ajman', 'Umm Al Quwain': 'uaq', 'Ras Al Khaimah': 'rak', 'Fujairah': 'fujairah', 'Eastern Region': 'eastern_region'
+      };
+      const userCity = cityMap[profile.emirate] || 'dubai';
+
+      // 2. Get Restaurants for City // الحصول على مطاعم المدينة
+      let availableRestaurants = (placesDB[userCity] || placesDB['dubai'] || []).filter(p => !p.category || (p.category && p.category.toLowerCase() === 'restaurant') || p.type);
+
+      // 3. Filter by Allergies // التصفية حسب الحساسية
+      if (profile.allergies && profile.allergies.length > 0) {
+        const userAllergies = profile.allergies.map(a => a.toLowerCase());
+        availableRestaurants = availableRestaurants.filter(r => {
+          if (!r.allergens) return true;
+          // Check if restaurant has any allergen that matches user's allergies
+          // التحقق مما إذا كان المطعم يحتوي على أي مسبب حساسية يطابق حساسية المستخدم
+          const hasConflict = r.allergens.some(allergen => {
+             return userAllergies.some(ua => 
+               ua.includes(allergen) || allergen.includes(ua) || 
+               (ua.includes('Milk') && allergen.includes('ألبان')) ||
+               (ua.includes('Nuts') && allergen.includes('مكسرات')) ||
+               (ua.includes('Seafood') && (allergen.includes('سمك') || allergen.includes('جمبري')))
+             );
+          });
+          return !hasConflict;
+        });
+      }
+
+      // 4. Filter by Diseases (Medical Conditions) // التصفية حسب الأمراض (الحالات الصحية)
+      if (profile.medicalConditions && profile.medicalConditions.length > 0) {
+        const conditions = profile.medicalConditions.map(c => c.toLowerCase());
+        
+        // Diabetes Logic: Avoid Fast Food, Sweets // منطق السكري: تجنب الوجبات السريعة والحلويات
+        if (conditions.some(c => c.includes('diabetes') || c.includes('السكري'))) {
+           availableRestaurants = availableRestaurants.filter(r => 
+             r.type !== 'fast_food' && 
+             !r.desc.toLowerCase().includes('sweet') && 
+             !r.descAr.includes('حلويات')
+           );
+           // Prioritize healthy // تفضيل الصحي
+           availableRestaurants.sort((a, b) => (b.type === 'healthy' ? 1 : 0) - (a.type === 'healthy' ? 1 : 0));
+        }
+
+        // High Blood Pressure: Avoid Fast Food (High Sodium) // ضغط الدم المرتفع: تجنب الوجبات السريعة (عالية الصوديوم)
+        if (conditions.some(c => c.includes('pressure') || c.includes('ضغط'))) {
+           availableRestaurants = availableRestaurants.filter(r => r.type !== 'fast_food');
+        }
+      }
+
+      // 5. Prioritize by Food Preferences // التفضيل حسب تفضيلات الطعام
+      if (profile.foodPreferences && profile.foodPreferences.length > 0) {
+        const prefs = profile.foodPreferences.map(p => p.toLowerCase());
+        availableRestaurants.sort((a, b) => {
+          const aScore = prefs.some(p => (a.desc + a.descAr).toLowerCase().includes(p)) ? 1 : 0;
+          const bScore = prefs.some(p => (b.desc + b.descAr).toLowerCase().includes(p)) ? 1 : 0;
+          return bScore - aScore;
+        });
+      }
+
+      // 6. Select Restaurants (Lunch & Dinner) // اختيار المطاعم (غداء وعشاء)
+      // Fallback if filtered list is empty // احتياطي إذا كانت القائمة المصفاة فارغة
+      if (availableRestaurants.length === 0) {
+        availableRestaurants = (placesDB[userCity] || placesDB['dubai'] || []).filter(p => !p.category || (p.category && p.category.toLowerCase() === 'restaurant') || p.type);
+      }
+      
+      const lunchSpot = availableRestaurants[0];
+      // Try to find a different one for dinner // محاولة العثور على مطعم مختلف للعشاء
+      const dinnerSpot = availableRestaurants.length > 1 ? availableRestaurants[1] : availableRestaurants[0];
+
+      // 7. Select Activities (Entertainment, Tourism, etc.) // اختيار الأنشطة (ترفيه، سياحة، إلخ)
+      const allCityPlaces = placesDB[userCity] || placesDB['dubai'] || [];
+      const cityActs = {
+        morning: allCityPlaces.filter(p => p.category && (p.category.toLowerCase() === 'tourism' || p.category.toLowerCase() === 'farm' || p.category.toLowerCase() === 'health')),
+        afternoon: allCityPlaces.filter(p => p.category && (p.category.toLowerCase() === 'store' || p.category.toLowerCase() === 'entertainment')),
+        evening: allCityPlaces.filter(p => p.category && (p.category.toLowerCase() === 'entertainment' || p.category.toLowerCase() === 'tourism'))
+      };
+      
+      const morningOptions = filterActs(cityActs.morning);
+      const afternoonOptions = filterActs(cityActs.afternoon);
+      const eveningOptions = filterActs(cityActs.evening);
+
+      const morningAct = morningOptions[Math.floor(Math.random() * morningOptions.length)];
+      const afternoonAct = afternoonOptions[Math.floor(Math.random() * afternoonOptions.length)];
+      const eveningAct = eveningOptions[Math.floor(Math.random() * eveningOptions.length)];
+
+      // --- NEW LOGIC: Populate planner zones and open editor ---
+      // منطق جديد: ملء مناطق المخطط وفتح المحرر
+      planZones = [
+          { id: 1, title: 'الصباح', titleEn: 'Morning', time: '09:00', items: [] },
+          { id: 2, title: 'الغداء', titleEn: 'Lunch', time: '13:00', items: [] },
+          { id: 3, title: 'بعد الظهر', titleEn: 'Afternoon', time: '16:00', items: [] },
+          { id: 4, title: 'المساء', titleEn: 'Evening', time: '20:00', items: [] }
+      ];
+
+      if (morningAct) planZones[0].items.push({ name: morningAct.name, nameAr: morningAct.nameAr, desc: morningAct.desc, descAr: morningAct.descAr });
+      if (lunchSpot) planZones[1].items.push({ name: lunchSpot.name, nameAr: lunchSpot.nameAr, desc: lunchSpot.desc, descAr: lunchSpot.descAr });
+      if (afternoonAct) planZones[2].items.push({ name: afternoonAct.name, nameAr: afternoonAct.nameAr, desc: afternoonAct.desc, descAr: afternoonAct.descAr });
+      if (eveningAct) planZones[3].items.push({ name: eveningAct.name, nameAr: eveningAct.nameAr, desc: eveningAct.desc, descAr: eveningAct.descAr });
+      if (dinnerSpot) planZones[3].items.push({ name: dinnerSpot.name, nameAr: dinnerSpot.nameAr, desc: dinnerSpot.desc, descAr: dinnerSpot.descAr });
+
+      document.getElementById('loading').style.display = 'none'; // Hide loading // إخفاء التحميل
+      saveCurrentPlanState(); // Save state // حفظ الحالة
+      initPlanner(); // Initialize planner // تهيئة المخطط
+    }
+
+    // Helper to filter activities and provide fallback // مساعد لتصفية الأنشطة وتوفير احتياطي
+    function filterActs(acts) {
+      if (!acts || acts.length === 0) return [{name: 'Free Time', nameAr: 'وقت حر', desc: 'Relax', descAr: 'استرخاء'}];
+      return acts;
+    }
+
+    // ==================== LANGUAGE TOGGLE ====================
+    // تبديل اللغة
+    let currentLanguage = 'ar'; // Default language // اللغة الافتراضية
+
+    // Translate the page based on current language // ترجمة الصفحة بناءً على اللغة الحالية
+    function translatePage() {
+      document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+        if (element.hasAttribute('data-ar') && element.hasAttribute('data-en')) {
+          element.textContent = currentLanguage === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+        }
+      });
+      
+      document.querySelectorAll('[data-ar-placeholder], [data-en-placeholder]').forEach(element => {
+        if (element.hasAttribute('data-ar-placeholder') && element.hasAttribute('data-en-placeholder')) {
+          element.placeholder = currentLanguage === 'ar' ? element.getAttribute('data-ar-placeholder') : element.getAttribute('data-en-placeholder');
+        }
+      });
+      
+      document.documentElement.lang = currentLanguage; // Set language attribute // تعيين سمة اللغة
+      document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr'; // Set direction // تعيين الاتجاه
+    }
+
+    // Toggle between Arabic and English // التبديل بين العربية والإنجليزية
+    function toggleLanguage() {
+      const btn = document.getElementById('translateBtn');
+      btn.classList.add('switching'); // Add animation class // إضافة فئة الحركة
+      currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      profile.language = currentLanguage; // Save language preference // حفظ تفضيل اللغة
+      localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+      const langText = btn.querySelector('span:last-child');
+      langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية'; // Update button text // تحديث نص الزر
+      translatePage(); // Translate page // ترجمة الصفحة
+      setTimeout(() => btn.classList.remove('switching'), 500); // Remove animation // إزالة الحركة
+    }
+
+    // Initialize language from profile // تهيئة اللغة من الملف الشخصي
+    const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+    if (profile.language) {
+      currentLanguage = profile.language;
+      const btn = document.getElementById('translateBtn');
+      if (btn) btn.querySelector('span:last-child').textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+      translatePage();
+    }
+
+    // Language toggle button listener // مستمع زر تبديل اللغة
+    document.getElementById('translateBtn').addEventListener('click', toggleLanguage);
+
+    // Apply Theme // تطبيق السمة
+    if (profile.theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    // ==================== PLANNER UI LOGIC ====================
+    // منطق واجهة المخطط
+    let draggedItem = null; // Currently dragged item // العنصر المسحوب حاليًا
+    let draggedSource = null; // Source zone and index if moving from a zone // المصدر إذا كان من منطقة
+    let prioritizedItems = []; // List of items to prioritize in library // قائمة العناصر ذات الأولوية في المكتبة
+
+    // Initialize the planner UI // تهيئة واجهة المخطط
+    function initPlanner() {
+      document.getElementById('planner-ui').style.display = 'flex'; // Show planner // إظهار المخطط
+      document.getElementById('plan-result').style.display = 'none'; // Hide plan result // إخفاء نتيجة الخطة
+      document.querySelector('.intro-card').style.display = 'none'; // Hide intro card // إخفاء بطاقة المقدمة
+      const fab = document.querySelector('.ai-fab');
+      if(fab) fab.style.display = 'flex'; // Show AI button // إظهار زر الذكاء الاصطناعي
+      renderLibrary(); // Render library // عرض المكتبة
+      renderTimeline(); // Render timeline // عرض الخط الزمني
+    }
+
+    // Close the planner and return to intro // إغلاق المخطط والعودة إلى المقدمة
+    function closePlanner() {
+      document.getElementById('planner-ui').style.display = 'none';
+      document.querySelector('.intro-card').style.display = 'block';
+    }
+
+    // Check if a place is unsuitable for the user based on phobias/allergies
+    // التحقق مما إذا كان المكان غير مناسب للمستخدم بناءً على الفوبيا/الحساسية
+    function checkIfPlaceUnsuitableForUser(place) {
+      const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+      const userPhobias = profile.phobias || [];
+      const userAllergies = profile.allergies || [];
+      const placeAllergens = place.allergens || [];
+      
+      // Mapping of phobias to trigger keywords // تعيين الفوبيا إلى كلمات مفتاحية محفزة
+      const phobiaRestrictions = {
+        '🧗 فوبيا المرتفعات': ['At.mosphere', 'Burj Khalifa', 'Jebel Jais', 'Zipline', 'Frame', 'Sky', 'مرتفعات', 'جبل', 'برج', 'High'],
+        '🌊 فوبيا الماء': ['Ossiano', 'Underwater', 'Beach', 'Sea', 'Aquarium', 'Water', 'Island', 'بحري', 'بحر', 'شاطئ', 'جزيرة', 'مائي', 'غوص', 'Diving', 'Boat'],
+        '📦 فوبيا الأماكن المغلقة': ['Underground', 'Basement', 'Escape Room', 'Cave', 'Indoor', 'مغلق', 'كهف', 'داخلي'],
+        '🏙️ فوبيا الأماكن المفتوحة/المزدحمة': ['Global Village', 'Mall', 'Souq', 'Festival', 'Crowd', 'مزدحم', 'سوق', 'مول', 'قرية', 'Beach Club', 'Open Air', 'مفتوح'],
+        '🎤 فوبيا التحدث أمام الجمهور': ['Karaoke', 'Stage', 'Theater', 'Amphitheatre', 'مسرح', 'مدرج', 'Concert', 'Music', 'Live Performance', 'موسيقى', 'حفلة'],
+        '🐍 فوبيا الزواحف': ['Zoo', 'Safari', 'Desert', 'Reptile', 'حيوانات', 'سفاري', 'صحراء'],
+        '🐕 فوبيا الكلاب': ['Dog', 'Pet', 'Farm', 'مزرعة', 'كلب'],
+        '✈️ فوبيا الطيران': ['Flying', 'Sky', 'Zipline', 'طيران']
+      };
+      
+      // Check each phobia // التحقق من كل فوبيا
+      for (const [phobia, triggers] of Object.entries(phobiaRestrictions)) {
+        if (userPhobias.includes(phobia)) {
+          for (const trigger of triggers) {
+            const name = (place.name || '').toLowerCase();
+            const nameAr = (place.nameAr || '').toLowerCase();
+            const desc = (place.desc || '').toLowerCase();
+            const descAr = (place.descAr || '').toLowerCase();
+            const t = trigger.toLowerCase();
+            
+            if (name.includes(t) || nameAr.includes(t) || desc.includes(t) || descAr.includes(t)) {
+              return true; // Place is unsuitable // المكان غير مناسب
+            }
+          }
+        }
+      }
+      
+      // Check for allergen conflicts // التحقق من تضارب الحساسية
+      for (const userAllergen of userAllergies) {
+        for (const placeAllergen of placeAllergens) {
+            if (userAllergen.includes(placeAllergen) || placeAllergen.includes(userAllergen)) {
+                return true;
+            }
+        }
+      }
+      
+      return false; // Place is suitable // المكان مناسب
+    }
+
+    // Render the library items // عرض عناصر المكتبة
+    function renderLibrary(filter = 'all') {
+      const list = document.getElementById('library-list');
+      const search = document.getElementById('library-search').value.toLowerCase();
+      list.innerHTML = ''; // Clear list // مسح القائمة
+      
+      // Use all places from the website, not just from the user's city
+      // استخدام جميع الأماكن من الموقع، ليس فقط من مدينة المستخدم
+      let places = [...uniquePlaces];
+
+      // Inject prioritized items if they are not in the current list
+      // إدراج العناصر ذات الأولوية إذا لم تكن في القائمة الحالية
+      if (prioritizedItems && prioritizedItems.length > 0) {
+        prioritizedItems.forEach(pName => {
+            const exists = places.some(p => p.name === pName || p.nameAr === pName);
+            if (!exists) {
+                let found = null;
+                for (const city in placesDB) {
+                    if (!Array.isArray(placesDB[city])) continue;
+                    found = placesDB[city].find(p => p.name === pName || p.nameAr === pName);
+                    if (found) break;
+                }
+                if (found) {
+                    places.push(found);
+                } else {
+                    places.push({ name: pName, nameAr: pName, category: 'other', desc: '', descAr: '' });
+                }
+            }
+        });
+      }
+
+      // Sort: Prioritized items first, then Suitable, then Unsuitable
+      // الترتيب: العناصر ذات الأولوية أولاً، ثم المناسبة، ثم غير المناسبة
+      places.sort((a, b) => {
+          const aPrio = prioritizedItems.includes(a.name) || prioritizedItems.includes(a.nameAr);
+          const bPrio = prioritizedItems.includes(b.name) || prioritizedItems.includes(b.nameAr);
+          if (aPrio && !bPrio) return -1;
+          if (!aPrio && bPrio) return 1;
+          
+          const aUnsuitable = checkIfPlaceUnsuitableForUser(a);
+          const bUnsuitable = checkIfPlaceUnsuitableForUser(b);
+          if (aUnsuitable && !bUnsuitable) return 1;
+          if (!aUnsuitable && bUnsuitable) return -1;
+          
+          return 0;
+      });
+
+      // Create DOM elements for each place // إنشاء عناصر DOM لكل مكان
+      places.forEach(p => {
+        const name = currentLanguage === 'ar' ? (p.nameAr || p.name) : p.name;
+        const cat = (p.category ? p.category.toLowerCase() : '') || (p.type ? 'restaurant' : 'other');
+        
+        // Show prioritized items regardless of filter // إظهار العناصر ذات الأولوية بغض النظر عن الفلتر
+        const isPrioritized = prioritizedItems.includes(p.name) || prioritizedItems.includes(p.nameAr);
+        
+        if (filter !== 'all' && cat !== filter && !isPrioritized) return; // Apply filter // تطبيق الفلتر
+        if (search && !name.toLowerCase().includes(search)) return; // Apply search // تطبيق البحث
+
+        const isUnsuitable = checkIfPlaceUnsuitableForUser(p); // Check suitability // التحقق من المناسبة
+
+        const el = document.createElement('div');
+        el.className = 'draggable-item';
+        
+        if (isUnsuitable) {
+            el.style.opacity = '0.6'; // Dim unsuitable items // تعتيم العناصر غير المناسبة
+            el.style.cursor = 'not-allowed'; // Show not-allowed cursor // إظهار مؤشر غير مسموح
+            el.draggable = false; // Disable dragging // تعطيل السحب
+        } else {
+            el.draggable = true; // Enable dragging // تمكين السحب
+            el.ondragstart = (e) => {
+              draggedItem = { name: p.name, nameAr: p.nameAr, desc: p.desc, descAr: p.descAr }; // Store dragged item // تخزين العنصر المسحوب
+              draggedSource = null; // Not from a zone // ليس من منطقة
+              e.dataTransfer.effectAllowed = 'copy'; // Set effect // تعيين التأثير
+            };
+        }
+
+        // Highlight prioritized items // تمييز العناصر ذات الأولوية
+        if (prioritizedItems.includes(p.name) || prioritizedItems.includes(p.nameAr)) {
+            el.style.border = '2px solid var(--accent)';
+            el.style.background = 'rgba(212, 175, 55, 0.1)';
+        }
+        
+        const warning = isUnsuitable ? `<div style="color:#ef4444; font-size:10px; margin-top:2px;">${currentLanguage === 'ar' ? 'غير مناسب ❌' : 'Not appropriate ❌'}</div>` : '';
+        el.innerHTML = `<div class="d-name">${name}</div><div class="d-cat">${cat}</div>${warning}`;
+        
+        list.appendChild(el);
+      });
+    }
+
+    // Filter library by category // تصفية المكتبة حسب الفئة
+    function filterLibrary(cat, btn) {
+      document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderLibrary(cat);
+    }
+
+    // Clear the prioritized items queue // مسح قائمة العناصر ذات الأولوية
+    function clearLibraryQueue() {
+      if(confirm(currentLanguage === 'ar' ? 'هل تريد مسح قائمة الانتظار؟' : 'Clear library queue?')) {
+        prioritizedItems = [];
+        renderLibrary();
+      }
+    }
+
+    // Render the timeline editor // عرض محرر الخط الزمني
+    function renderTimeline() {
+      const container = document.getElementById('timeline-editor');
+      container.innerHTML = ''; // Clear // مسح
+      
+      planZones.forEach((zone, idx) => {
+        const el = document.createElement('div');
+        el.className = 'time-zone';
+        el.innerHTML = `
+          <div class="zone-header">
+            <div class="zone-inputs">
+              <input type="time" class="zone-time" value="${zone.time}" onchange="updateZone(${idx}, 'time', this.value)">
+              <input type="text" class="zone-title" value="${currentLanguage === 'ar' ? (zone.title || zone.titleEn) : (zone.titleEn || zone.title)}" onchange="updateZone(${idx}, 'title', this.value)">
+            </div>
+            <div class="zone-actions">
+              <button onclick="removeZone(${idx})">🗑️</button>
+            </div>
+          </div>
+          <div class="zone-items" ondragover="allowDrop(event)" ondrop="dropItem(event, ${idx})" ondragleave="leaveDrop(event)">
+            ${zone.items.length === 0 ? `<div style="color:var(--muted); font-size:12px; text-align:center; padding:10px;">${currentLanguage === 'ar' ? 'اسحب الأماكن هنا' : 'Drag places here'}</div>` : ''}
+            ${zone.items.map((item, iIdx) => `
+              <div class="plan-item" draggable="true" ondragstart="dragStartZoneItem(event, ${idx}, ${iIdx})">
+                <div class="item-info">
+                  <span style="font-weight:700; font-size:13px;">${currentLanguage === 'ar' ? (item.nameAr || item.name) : item.name}</span>
+                </div>
+                <span class="item-remove" onclick="removeItem(${idx}, ${iIdx})">×</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    // Add a new time zone // إضافة منطقة زمنية جديدة
+    function addTimeZone() {
+      planZones.push({ id: Date.now(), title: 'New Slot', titleEn: 'New Slot', time: '12:00', items: [] });
+      saveCurrentPlanState(); // Save state // حفظ الحالة
+      renderTimeline(); // Re-render // إعادة العرض
+    }
+
+    // Remove a time zone // إزالة منطقة زمنية
+    function removeZone(idx) {
+      planZones.splice(idx, 1);
+      saveCurrentPlanState();
+      renderTimeline();
+    }
+
+    // Update zone properties (time or title) // تحديث خصائص المنطقة (الوقت أو العنوان)
+    function updateZone(idx, field, val) {
+      planZones[idx][field] = val;
+      if(field === 'title') planZones[idx].titleEn = val; // Sync // مزامنة
+      saveCurrentPlanState();
+    }
+
+    // Drag start handler for items inside zones // معالج بدء السحب للعناصر داخل المناطق
+    function dragStartZoneItem(e, zoneIdx, itemIdx) {
+      const item = planZones[zoneIdx].items[itemIdx];
+      draggedItem = { ...item }; // Copy item // نسخ العنصر
+      draggedSource = { zoneIdx, itemIdx }; // Remember source // تذكر المصدر
+      e.dataTransfer.effectAllowed = 'move'; // Set effect // تعيين التأثير
+    }
+
+    // Allow drop on zones // السماح بالإفلات على المناطق
+    function allowDrop(e) {
+      e.preventDefault();
+      e.currentTarget.parentElement.classList.add('drag-over'); // Highlight // تمييز
+    }
+
+    // Remove highlight when dragging leaves // إزالة التمييز عند مغادرة السحب
+    function leaveDrop(e) {
+      e.currentTarget.parentElement.classList.remove('drag-over');
+    }
+
+    // Handle drop on a zone // معالج الإفلات على منطقة
+    function dropItem(e, zoneIdx) {
+      e.preventDefault();
+      e.currentTarget.parentElement.classList.remove('drag-over');
+      if (draggedItem) {
+        if (draggedSource) {
+          // If moving from another zone, remove from source // إذا كان النقل من منطقة أخرى، إزالة من المصدر
+          planZones[draggedSource.zoneIdx].items.splice(draggedSource.itemIdx, 1);
+        }
+        
+        planZones[zoneIdx].items.push({ ...draggedItem }); // Add to target // إضافة إلى الهدف
+        draggedItem = null; // Reset // إعادة تعيين
+        draggedSource = null;
+        saveCurrentPlanState(); // Save // حفظ
+        renderTimeline(); // Re-render // إعادة العرض
+      }
+    }
+
+    // Remove an item from a zone // إزالة عنصر من منطقة
+    function removeItem(zoneIdx, itemIdx) {
+      planZones[zoneIdx].items.splice(itemIdx, 1);
+      saveCurrentPlanState();
+      renderTimeline();
+    }
+
+    // Clear all items from all zones // مسح جميع العناصر من جميع المناطق
+    function clearPlan() {
+      if(confirm(currentLanguage === 'ar' ? 'هل أنت متأكد؟' : 'Are you sure?')) {
+        planZones.forEach(z => z.items = []);
+        saveCurrentPlanState();
+        renderTimeline();
+      }
+    }
+
+    // Open save plan modal // فتح نافذة حفظ الخطة
+    function openSavePlanModal() {
+        document.getElementById('save-plan-modal').classList.add('active');
+    }
+
+    // Close save plan modal // إغلاق نافذة حفظ الخطة
+    function closeSavePlanModal() {
+        document.getElementById('save-plan-modal').classList.remove('active');
+    }
+
+    // Confirm and save the plan // تأكيد وحفظ الخطة
+    function confirmSavePlan() {
+        const name = document.getElementById('plan-name-input').value;
+        if (!name) {
+            alert(currentLanguage === 'ar' ? 'الرجاء إدخال اسم للخطة' : 'Please enter a plan name');
+            return;
+        }
+        
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        if (!profile.myPlans) profile.myPlans = [];
+        
+        profile.myPlans.push({
+            id: Date.now(),
+            name: name,
+            zones: planZones,
+            date: new Date().toISOString()
+        });
+        
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        localStorage.removeItem('hayyak_unfinished_plan'); // Clear the temp plan // مسح الخطة المؤقتة
+        closeSavePlanModal();
+        alert(currentLanguage === 'ar' ? 'تم حفظ الخطة بنجاح' : 'Plan saved successfully');
+        loadSavedPlans(); // Refresh saved plans section // تحديث قسم الخطط المحفوظة
+    }
+
+    // Load and display saved plans // تحميل وعرض الخطط المحفوظة
+    function loadSavedPlans() {
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const container = document.getElementById('saved-plans-list');
+        const section = document.getElementById('saved-plans-section');
+        
+        if (profile.myPlans && profile.myPlans.length > 0) {
+            section.style.display = 'block'; // Show section // إظهار القسم
+            container.innerHTML = profile.myPlans.map((plan, idx) => `
+                <div class="card" style="padding:15px; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div style="font-weight:bold;">${plan.name}</div>
+                        <div style="font-size:12px; color:var(--muted);">${new Date(plan.date).toLocaleDateString()}</div>
+                    </div>
+                    <div>
+                        <button onclick="loadPlan(${idx})" style="background:var(--primary); color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">${currentLanguage === 'ar' ? 'عرض' : 'View'}</button>
+                        <button onclick="deleteSavedPlan(${idx})" style="background:#ef4444; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            section.style.display = 'none'; // Hide section // إخفاء القسم
+        }
+    }
+
+    // Load a saved plan into the planner // تحميل خطة محفوظة إلى المخطط
+    function loadPlan(idx) {
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        const plan = profile.myPlans[idx];
+        if (plan) {
+            planZones = plan.zones;
+            saveCurrentPlanState(); // Save as current // حفظ كحالية
+            initPlanner(); // Open planner // فتح المخطط
+        }
+    }
+
+    // Delete a saved plan // حذف خطة محفوظة
+    function deleteSavedPlan(idx) {
+        if (!confirm(currentLanguage === 'ar' ? 'هل أنت متأكد؟' : 'Are you sure?')) return;
+        const profile = JSON.parse(localStorage.getItem('hayyak_user_profile') || '{}');
+        profile.myPlans.splice(idx, 1);
+        localStorage.setItem('hayyak_user_profile', JSON.stringify(profile));
+        loadSavedPlans(); // Refresh // تحديث
+    }
+
+    // Show help modal // إظهار نافذة المساعدة
+    function showHelpModal() {
+        document.getElementById('help-modal').classList.add('active');
+    }
+
+    // Close help modal // إغلاق نافذة المساعدة
+    function closeHelpModal() {
+        document.getElementById('help-modal').classList.remove('active');
+    }
+
+    // Check for queue on load // التحقق من قائمة الانتظار عند التحميل
+    document.addEventListener('DOMContentLoaded', () => {
+        const queue = JSON.parse(localStorage.getItem('hayyak_planner_queue') || '[]');
+        const autoPlanName = localStorage.getItem('hayyak_auto_plan_name');
+        const unfinishedPlan = localStorage.getItem('hayyak_unfinished_plan');
+        
+        if (queue.length > 0) {
+             initPlanner(); // Show planner UI // إظهار واجهة المخطط
+             localStorage.removeItem('hayyak_planner_queue'); // Clear queue // مسح القائمة
+             
+             if (autoPlanName) {
+                 document.getElementById('plan-name-input').value = autoPlanName; // Pre-fill name // ملء الاسم مسبقًا
+                 localStorage.removeItem('hayyak_auto_plan_name');
+                 const isAr = currentLanguage === 'ar';
+                 showError(isAr ? 'تم إضافة الأماكن للمكتبة. رتب يومك ثم احفظ الخطة.' : 'Places added to library. Arrange your day then save.');
+             }
+        } else if (unfinishedPlan) {
+             // Auto-open planner if there is unsaved work // فتح المخطط تلقائيًا إذا كان هناك عمل غير محفوظ
+             try {
+                 const savedZones = JSON.parse(unfinishedPlan);
+                 // Check if it has content worth showing (items or modified structure)
+                 if (savedZones.some(z => z.items.length > 0) || savedZones.length !== 4) {
+                     initPlanner();
+                     showError(currentLanguage === 'ar' ? 'تم استعادة خطتك غير المكتملة' : 'Unfinished plan restored');
+                 }
+             } catch(e) {}
+        }
+        
+        // Load saved plans regardless of UI state // تحميل الخطط المحفوظة بغض النظر عن حالة الواجهة
+        loadSavedPlans();
+    });
+  </script>
+</body>
+</html>
